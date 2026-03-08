@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+here<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
             text-transform: uppercase;
         }
 
-        .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
         h1 { 
             font-size: clamp(1.4rem, 5vw, 2.2rem); 
             margin-bottom: 30px; 
@@ -39,20 +39,21 @@
             opacity: 0.8;
         }
 
-        /* The "Appear & Stay" Slider */
+        /* Fixed JavaScript Slider Wrapper */
         .slider-wrapper {
             width: 100%;
             max-width: 500px;
             overflow: hidden;
             position: relative;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
         }
 
         .slider-track {
             display: flex;
+            transition: transform 1.2s cubic-bezier(0.45, 0, 0.55, 1); /* Smooth sliding effect */
             width: max-content;
-            /* 10 second total cycle: 8s stay + 2s movement */
-            animation: slideAndPause 10s ease-in-out infinite;
         }
 
         .quote-card {
@@ -60,32 +61,27 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
-            padding: 20px;
-            margin: 0 10px;
-            border-radius: 20px;
+            padding: 25px;
+            border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: clamp(280px, 90vw, 480px);
+            width: clamp(300px, 90vw, 480px);
+            margin: 0 10px; /* Space between cards */
+            flex-shrink: 0;
         }
 
         .quote-card img {
-            width: 65px;
-            height: 65px;
-            border-radius: 15px;
-            margin-right: 15px;
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            margin-right: 20px;
             border: 2px solid #00BFFF;
             object-fit: cover;
         }
 
         .quote-text { text-align: left; white-space: normal; }
-        .quote-text p { font-size: 0.95rem; font-style: italic; color: #e2e8f0; line-height: 1.4; margin-bottom: 5px; }
-        .quote-text b { font-size: 0.9rem; color: #00BFFF; text-transform: uppercase; }
+        .quote-text p { font-size: 1rem; font-style: italic; color: #e2e8f0; line-height: 1.5; margin-bottom: 8px; }
+        .quote-text b { font-size: 0.9rem; color: #00BFFF; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Animation: Slide In, Stay for 8s, Slide Out */
-        @keyframes slideAndPause {
-            0% { transform: translateX(0); }
-            80% { transform: translateX(0); } /* Holds for 80% of the 10s (8 seconds) */
-            100% { transform: translateX(-500px); } /* Slides to next card */
-        }
     </style>
 </head>
 <body>
@@ -106,7 +102,7 @@
 </section>
 
 <script>
-    // --- STAR BACKGROUND ---
+    // --- STAR BACKGROUND LOGIC ---
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -137,27 +133,45 @@
         { name: "David Ogilvy", text: "The consumer is not a moron; she is your wife.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400" }
     ];
 
+    // --- SMART SLIDER LOGIC ---
+    const track = document.getElementById('quoteTrack');
+    let currentIndex = 0;
+
     function fillQuotes() {
-        const track = document.getElementById('quoteTrack');
         let content = "";
-        // Repeating 20 times for infinite-feel, but showing one at a time via wrapper
-        for (let i = 0; i < 20; i++) { 
-            quotes.forEach(q => {
-                content += `
-                    <div class="quote-card">
-                        <img src="${q.img}" alt="${q.name}">
-                        <div class="quote-text">
-                            <p>"${q.text}"</p>
-                            <b>— ${q.name}</b>
-                        </div>
-                    </div>`;
-            });
-        }
+        quotes.forEach(q => {
+            content += `
+                <div class="quote-card">
+                    <img src="${q.img}" alt="${q.name}">
+                    <div class="quote-text">
+                        <p>"${q.text}"</p>
+                        <b>— ${q.name}</b>
+                    </div>
+                </div>`;
+        });
         track.innerHTML = content;
     }
 
+    function slideQuotes() {
+        currentIndex++;
+        if (currentIndex >= quotes.length) {
+            currentIndex = 0; // Loop back to start
+        }
+        
+        // Calculate the exact width to move (card + margin)
+        const cardWidth = document.querySelector('.quote-card').offsetWidth + 20; 
+        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+
+    // Initialize everything
     window.addEventListener('resize', initStars);
-    initStars(); animateStars(); fillQuotes();
+    initStars(); 
+    animateStars(); 
+    fillQuotes();
+
+    // Set the 8-second timer for the slide
+    setInterval(slideQuotes, 8000); 
+
 </script>
 </body>
-        </html>
+    </html>
