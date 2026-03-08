@@ -3,34 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn | Official Home</title>
+    <title>MOCHEARN | Official website</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #020617; color: white; overflow-x: hidden; }
+        body { background: #020617; color: white; overflow-x: hidden; text-align: center; }
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 20px; border-radius: 40px; max-width: 550px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
-        h1 { font-size: 2.8rem; font-weight: 900; background: linear-gradient(to bottom, #ffffff, #00BFFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; letter-spacing: -1px; }
-        p { color: #94a3b8; font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
-        .cta-btn { background: #00BFFF; color: #020617; text-decoration: none; padding: 16px 30px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; transition: 0.3s; display: inline-block; }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3); }
+        
+        .logo { 
+            margin-top: 60px; 
+            font-size: 4rem; 
+            font-weight: 900; 
+            letter-spacing: 8px; 
+            background: linear-gradient(to right, #fff, #00BFFF, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        h1 { font-size: 2.5rem; margin-bottom: 50px; font-weight: 800; letter-spacing: -1px; }
+
+        /* The Moving Slider */
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 60s linear infinite;
+        }
+
+        .quote-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            margin: 0 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 450px;
+        }
+
+        .quote-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin-right: 20px;
+            border: 2px solid #00BFFF;
+            object-fit: cover;
+        }
+
+        .quote-text { text-align: left; white-space: normal; }
+        .quote-text p { font-size: 1rem; font-style: italic; color: #e2e8f0; line-height: 1.4; margin-bottom: 5px; }
+        .quote-text b { font-size: 1.1rem; color: #00BFFF; text-transform: uppercase; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body>
 <canvas id="starCanvas"></canvas>
+
+<div class="logo">MOCHEARN</div>
+
 <section class="hero">
-    <div class="glass-card">
-        <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; color: #00BFFF; font-weight: bold;">Mochearn Ecosystem 🦅</p>
-        <h1>WELCOME TO THE FUTURE</h1>
-        <p>Step into the elite circle of the Billionaire Brotherhood. We build the systems, you reap the rewards.</p>
-        <a href="pay.html" class="cta-btn">ENTER THE PORTAL</a>
+    <h1>WELCOME TO THE FUTURE</h1>
+
+    <div class="slider-wrapper">
+        <div class="slider-track" id="quoteTrack">
+            </div>
     </div>
 </section>
+
 <script>
+    // --- STAR BACKGROUND LOGIC ---
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
-    function init() {
+    function initStars() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         stars = [];
@@ -38,20 +95,47 @@
             stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.5, speed: Math.random() * 0.4 + 0.1 });
         }
     }
-    function animate() {
+    function animateStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'white';
         stars.forEach(star => {
-            ctx.beginPath();
-            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-            ctx.fill();
-            star.y -= star.speed;
-            if (star.y < 0) star.y = canvas.height;
+            ctx.beginPath(); ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2); ctx.fill();
+            star.y -= star.speed; if (star.y < 0) star.y = canvas.height;
         });
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateStars);
     }
-    window.addEventListener('resize', init);
-    init(); animate();
+
+    // --- 100 QUOTES LOGIC ---
+    const quotes = [
+        { name: "Dan Kennedy", text: "The only way to predict the future is to build it yourself.", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" },
+        { name: "Gary Halbert", text: "Marketing is not about tools, it is about deep human connection.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400" },
+        { name: "Grant Cardone", text: "Success is your duty, obligation, and responsibility.", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400" },
+        { name: "Seth Godin", text: "Be the purple cow in a field of brown cows.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" },
+        { name: "Ogilvy", text: "The consumer is not a moron; she is your wife.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400" }
+    ];
+
+    const track = document.getElementById('quoteTrack');
+    
+    // Function to generate 100 items (Repeating our elite list)
+    function fillQuotes() {
+        let content = "";
+        for (let i = 0; i < 20; i++) { // Repeating 5 elite quotes 20 times = 100
+            quotes.forEach(q => {
+                content += `
+                    <div class="quote-card">
+                        <img src="${q.img}" alt="${q.name}">
+                        <div class="quote-text">
+                            <p>"${q.text}"</p>
+                            <b>— ${q.name}</b>
+                        </div>
+                    </div>`;
+            });
+        }
+        track.innerHTML = content + content; // Double it for seamless looping
+    }
+
+    window.addEventListener('resize', initStars);
+    initStars(); animateStars(); fillQuotes();
 </script>
 </body>
-  </html>
+    </html>
