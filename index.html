@@ -1,17 +1,19 @@
-here<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOCHEARN | Official Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #020617; color: white; overflow-x: hidden; text-align: center; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         
-        /* Elite Text Logo */
+        /* Logo Section */
         .logo-container { margin-top: 50px; margin-bottom: 20px; }
         .logo { 
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(2.5rem, 10vw, 4.5rem); 
             font-weight: 900; 
             letter-spacing: 6px; 
@@ -19,7 +21,6 @@ here<!DOCTYPE html>
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            line-height: 1;
         }
         .subtitle {
             font-size: clamp(0.7rem, 3vw, 1rem);
@@ -31,30 +32,44 @@ here<!DOCTYPE html>
         }
 
         .hero { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px 20px; }
-        h1 { font-size: clamp(1.4rem, 5vw, 2.2rem); margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; opacity: 0.8; }
 
-        /* Fixed JavaScript Slider */
-        .slider-wrapper { width: 100%; max-width: 500px; overflow: hidden; position: relative; margin: 0 auto; display: flex; justify-content: center; }
+        /* The 20-Quote Slider */
+        .slider-wrapper { width: 100%; max-width: 500px; overflow: hidden; margin: 0 auto; display: flex; justify-content: center; }
         .slider-track { display: flex; transition: transform 1.2s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
-        .quote-card { display: flex; align-items: center; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); padding: 25px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.1); width: clamp(300px, 90vw, 480px); margin: 0 10px; flex-shrink: 0; }
-        .quote-card img { width: 70px; height: 70px; border-radius: 18px; margin-right: 20px; border: 2px solid #00BFFF; object-fit: cover; }
-        .quote-text { text-align: left; white-space: normal; }
-        .quote-text p { font-size: 1rem; font-style: italic; color: #e2e8f0; line-height: 1.5; margin-bottom: 8px; }
-        .quote-text b { font-size: 0.9rem; color: #00BFFF; text-transform: uppercase; letter-spacing: 1px; }
+        .quote-card { 
+            display: flex; align-items: center; background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(10px); padding: 25px; border-radius: 25px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); width: clamp(300px, 90vw, 480px); 
+            margin: 0 10px; flex-shrink: 0; 
+        }
+        .quote-card img { width: 65px; height: 65px; border-radius: 50%; margin-right: 15px; border: 2px solid #00BFFF; object-fit: cover; }
+        .quote-text { text-align: left; }
+        .quote-text p { font-size: 0.9rem; font-style: italic; color: #e2e8f0; line-height: 1.4; }
+        .quote-text b { font-size: 0.8rem; color: #00BFFF; text-transform: uppercase; }
 
-        /* RESCUE SECTION STYLE */
-        .rescue-section { padding: 80px 20px; background: rgba(0, 191, 255, 0.02); border-top: 1px solid rgba(0, 191, 255, 0.1); margin-top: 50px; }
-        .truth-tag { color: #FF4500; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-size: 0.8rem; }
-        .rescue-h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 25px; line-height: 1.2; color: #fff; }
-        .rescue-p { max-width: 700px; margin: 0 auto 40px; color: #94a3b8; line-height: 1.8; font-size: 1.1rem; }
-        .feature-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .feature-card { background: rgba(255,255,255,0.05); padding: 30px 20px; border-radius: 20px; width: 280px; border-left: 4px solid #00BFFF; text-align: left; transition: 0.3s; }
-        .feature-card:hover { background: rgba(0, 191, 255, 0.1); transform: translateY(-5px); }
-        .feature-card h3 { color: #00BFFF; margin-bottom: 10px; font-size: 1.2rem; }
-        .feature-card p { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; }
+        /* NEW WHITE RESCUE SECTION */
+        .rescue-section { 
+            background: #ffffff; color: #1a202c; padding: 100px 24px; 
+            margin-top: 80px; border-radius: 40px 40px 0 0; 
+        }
+        .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 15px; }
+        .rescue-h2 { 
+            font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 7vw, 2.8rem); 
+            color: #020617; line-height: 1.1; margin-bottom: 30px; 
+        }
+        .rescue-p { max-width: 650px; margin: 0 auto 60px; color: #4a5568; line-height: 1.8; font-size: 1.1rem; }
+        
+        .system-content { max-width: 600px; margin: 0 auto; text-align: left; }
+        .sub-block { margin-bottom: 40px; }
+        .sub-block h3 { 
+            font-family: 'Montserrat', sans-serif; font-size: 1.5rem; 
+            color: #00BFFF; margin-bottom: 10px; text-transform: uppercase; 
+        }
+        .sub-block p { color: #2d3748; font-size: 1rem; line-height: 1.6; }
     </style>
 </head>
 <body>
+
 <canvas id="starCanvas"></canvas>
 
 <div class="logo-container">
@@ -63,48 +78,43 @@ here<!DOCTYPE html>
 </div>
 
 <section class="hero">
-    <h1>WELCOME TO THE FUTURE</h1>
     <div class="slider-wrapper">
         <div class="slider-track" id="quoteTrack"></div>
     </div>
 </section>
 
 <section class="rescue-section">
-    <div class="truth-tag">The Hard Truth 🇳🇬</div>
+    <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
     <h2 class="rescue-h2">The Economy is Changing.<br>Are You?</h2>
-    <p class="rescue-p">
-        In an era of rising inflation and currency shifts, traditional methods are failing. You don't need a job; you need a <b>System</b>. 
-        The <b>J-SYSTEM DIGITAL ACCELERATION</b> was built to bridge the gap between where you are and where the global wealth is moving.
-    </p>
+    <p class="rescue-p">Traditional methods are failing. You don't need a job; you need a system that works while you sleep.</p>
     
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>SHIELD</h3>
-            <p>Protect your purchasing power. Stop letting inflation eat your hard-earned value.</p>
+    <div class="system-content">
+        <div class="sub-block">
+            <h3>Shield</h3>
+            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate.</p>
         </div>
-        <div class="feature-card">
-            <h3>ACCELERATE</h3>
-            <p>Skip the 5-year traditional grind. The J-System fast-tracks your digital mastery.</p>
+        
+        <div class="sub-block">
+            <h3>Acceleration</h3>
+            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time.</p>
         </div>
     </div>
 </section>
 
 <script>
-    // --- STAR BACKGROUND ---
+    // --- STARS ---
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
     function initStars() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         stars = [];
         for (let i = 0; i < 150; i++) {
             stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.5, speed: Math.random() * 0.4 + 0.1 });
         }
     }
     function animateStars() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'white';
+        ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'white';
         stars.forEach(star => {
             ctx.beginPath(); ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2); ctx.fill();
             star.y -= star.speed; if (star.y < 0) star.y = canvas.height;
@@ -112,36 +122,47 @@ here<!DOCTYPE html>
         requestAnimationFrame(animateStars);
     }
 
-    // --- QUOTES LOGIC ---
+    // --- 20 QUOTES DATA ---
     const quotes = [
-        { name: "Dan Kennedy", text: "The only way to predict the future is to build it yourself.", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" },
-        { name: "Gary Halbert", text: "Marketing is not about tools, it is about deep human connection.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400" },
-        { name: "Grant Cardone", text: "Success is your duty, obligation, and responsibility.", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400" },
-        { name: "Seth Godin", text: "Be the purple cow in a field of brown cows.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" },
-        { name: "David Ogilvy", text: "The consumer is not a moron; she is your wife.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400" }
+        { name: "Aliko Dangote", text: "Endeavor to work hard. Success is not by accident.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=1" },
+        { name: "Jonard Bethuel", text: "The only way to predict the future is to build it.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=2" },
+        { name: "Grant Cardone", text: "Success is your duty and responsibility.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=3" },
+        { name: "Steve Jobs", text: "Innovation distinguishes between a leader and a follower.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=4" },
+        { name: "Brian Tracy", text: "Move out of your comfort zone. You can only grow if you're awkward.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=5" },
+        { name: "Gary Halbert", text: "Movement is the key to life and marketing.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=6" },
+        { name: "Elon Musk", text: "Persistence is very important. You should not give up.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=7" },
+        { name: "Jim Rohn", text: "Formal education makes a living; self-education makes a fortune.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=8" },
+        { name: "Jeff Bezos", text: "Your brand is what people say when you're not in the room.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=9" },
+        { name: "Warren Buffet", text: "Never depend on a single income.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=10" },
+        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=11" },
+        { name: "Robert Kiyosaki", text: "Don't work for money, make money work for you.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=12" },
+        { name: "Zig Ziglar", text: "You don't have to be great to start, but you have to start to be great.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=13" },
+        { name: "Tony Robbins", text: "Where focus goes, energy flows.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=14" },
+        { name: "Seth Godin", text: "Be a purple cow.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=15" },
+        { name: "Vusi Thembekwayo", text: "The future belongs to the bold.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=16" },
+        { name: "Strive Masiyiwa", text: "Identify a human need and reach out to fill it.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=17" },
+        { name: "Jack Ma", text: "Today is hard, tomorrow will be worse, but the day after will be sunshine.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=18" },
+        { name: "Mark Zuckerberg", text: "The biggest risk is not taking any risk.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=19" },
+        { name: "Jonard Bethuel", text: "Master the system, or be mastered by it.", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=20" }
     ];
 
     const track = document.getElementById('quoteTrack');
     let currentIndex = 0;
 
     function fillQuotes() {
-        let content = "";
-        quotes.forEach(q => {
-            content += `
-                <div class="quote-card">
-                    <img src="${q.img}" alt="${q.name}">
-                    <div class="quote-text">
-                        <p>"${q.text}"</p>
-                        <b>— ${q.name}</b>
-                    </div>
-                </div>`;
-        });
-        track.innerHTML = content;
+        track.innerHTML = quotes.map(q => `
+            <div class="quote-card">
+                <img src="${q.img}" alt="${q.name}">
+                <div class="quote-text">
+                    <p>"${q.text}"</p>
+                    <b>— ${q.name}</b>
+                </div>
+            </div>
+        `).join('');
     }
 
     function slideQuotes() {
-        currentIndex++;
-        if (currentIndex >= quotes.length) currentIndex = 0;
+        currentIndex = (currentIndex + 1) % quotes.length;
         const cardWidth = document.querySelector('.quote-card').offsetWidth + 20; 
         track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     }
@@ -151,4 +172,4 @@ here<!DOCTYPE html>
     setInterval(slideQuotes, 8000); 
 </script>
 </body>
-    </html>
+        </html>
