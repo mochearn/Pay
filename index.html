@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOCHEARN | Official Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         
-        /* Logo & Welcome Section */
+        /* Professional Gradient Logo */
         .logo-container { margin-top: 40px; margin-bottom: 10px; }
-        .logo { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; letter-spacing: 5px; color: #fff; text-transform: uppercase; line-height: 1; }
-        .subtitle { font-size: 0.9rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 5px; text-transform: uppercase; }
+        .logo { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: clamp(2.5rem, 10vw, 4.2rem); 
+            font-weight: 900; 
+            letter-spacing: 5px; 
+            background: linear-gradient(135deg, #ffffff 30%, #00BFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase; 
+            line-height: 1; 
+        }
+        .subtitle { 
+            font-size: 0.9rem; 
+            color: #00BFFF; 
+            letter-spacing: 4px; 
+            font-weight: 800; /* Bolder as requested */
+            margin-top: 8px; 
+            text-transform: uppercase; 
+        }
         
         .welcome-msg { max-width: 320px; margin: 25px auto; font-size: 1rem; color: #cbd5e1; line-height: 1.6; }
 
-        /* Fixed Loop Alignment */
+        /* Smooth 20-Quote Slider */
         .slider-wrapper { width: 100%; overflow: hidden; margin: 20px auto; display: flex; justify-content: center; }
         .slider-track { display: flex; transition: transform 1.2s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
         .quote-card { 
@@ -34,15 +51,17 @@
         /* White Section Update */
         .rescue-section { 
             background: #ffffff; color: #1a202c; padding: 60px 24px; 
-            margin-top: 30px; /* Reduced gap */
-            border-radius: 0; /* Removed curve */
+            margin-top: 30px; border-radius: 0; 
         }
         .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 10px; }
         .rescue-h2 { 
             font-family: 'Montserrat', sans-serif; font-size: 1.9rem; 
             color: #020617; line-height: 1.2; margin-bottom: 25px; 
         }
-        .rescue-p { max-width: 650px; margin: 0 auto 40px; color: #4a5568; line-height: 1.8; font-size: 1rem; text-align: justify; }
+        .rescue-p { 
+            max-width: 650px; margin: 0 auto 40px; color: #4a5568; 
+            line-height: 1.8; font-size: 1rem; text-align: center;
+        }
         
         .system-content { max-width: 600px; margin: 0 auto; text-align: left; }
         .sub-block h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #00BFFF; margin-bottom: 8px; text-transform: uppercase; }
@@ -59,7 +78,7 @@
 </div>
 
 <div class="welcome-msg">
-    Welcome to the digital frontier where financial freedom isn't a dream—it's a system. We provide the tools you need to outpace inflation and dominate the new economy.
+    Welcome to the digital frontier where financial freedom is a system. We provide the tools you need to outpace inflation and dominate.
 </div>
 
 <section class="slider-wrapper">
@@ -71,18 +90,27 @@
     <h2 class="rescue-h2">The Economy is Changing.<br>Are You?</h2>
     
     <p class="rescue-p">
-        Nigeria is currently navigating one of its toughest economic chapters in history. From the sudden removal of fuel subsidies to the relentless devaluation of the Naira against global currencies, the average citizen is feeling the heat. Prices of essential goods are skyrocketing daily, and traditional monthly salaries no longer provide the security they once did. Many are watching their savings lose value while standing still. The reality is clear: relying on a single, local income stream is no longer a risk—it is a danger. To survive and thrive today, you must bridge the gap between local challenges and global opportunities. You need a vehicle that accelerates your progress while others are forced to slow down.
+        Nigeria is currently navigating its toughest economic chapter in history. 
+        From fuel subsidy removals to the relentless devaluation of the Naira, the heat is real. 
+        Prices of essential goods skyrocket daily, making traditional salaries completely insufficient. 
+        Savings are losing value while you stand still, making local income streams a major risk. 
+        To thrive, you must bridge the gap between local challenges and global opportunities. 
+        The J-System is the vehicle designed to accelerate your progress while others slow down. 
+        Stop letting the economy dictate your future and start building your own digital fortress. 
+        The world is moving forward—don't get left behind in the old way of doing things. 
+        This is your chance to leverage digital mastery and protect your purchasing power today. 
+        Wealth is shifting; the only question is whether you are positioned to catch it.
     </p>
     
     <div class="system-content">
         <div class="sub-block">
             <h3>SHIELD</h3>
-            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate.</p>
+            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and devaluation.</p>
         </div>
         
         <div class="sub-block">
             <h3>ACCELERATION</h3>
-            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time.</p>
+            <p>Fast-track your learning and earning potential to join the top 1% of the digital economy.</p>
         </div>
     </div>
 </section>
@@ -108,12 +136,26 @@
     }
 
     const quotes = [
-        { name: "Aliko Dangote", text: "Endeavor to work hard. Success is not by accident.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" },
-        { name: "Warren Buffet", text: "Never depend on a single income.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150" },
-        { name: "Elon Musk", text: "Persistence is very important. You should not give up.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150" },
-        { name: "Strive Masiyiwa", text: "Identify a human need and reach out to fill it.", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150" },
-        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150" }
-        // ... (remaining 15 quotes populate here)
+        { name: "Aliko Dangote", text: "Success is not by accident. Work hard.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" },
+        { name: "Jonard Bethuel", text: "Never depend on a single income.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150" },
+        { name: "Elon Musk", text: "Persistence is very important.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150" },
+        { name: "Strive Masiyiwa", text: "Identify a human need and fill it.", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150" },
+        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150" },
+        { name: "Jeff Bezos", text: "Focus on the customer.", img: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150" },
+        { name: "Steve Jobs", text: "Stay hungry, stay foolish.", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150" },
+        { name: "Bill Gates", text: "Patience is a key element of success.", img: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=150" },
+        { name: "Mark Zuckerberg", text: "Move fast and break things.", img: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150" },
+        { name: "Oprah Winfrey", text: "Turn your wounds into wisdom.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" },
+        { name: "Richard Branson", text: "Business opportunities are like buses.", img: "https://images.unsplash.com/photo-1521119989659-a83eee488004?w=150" },
+        { name: "Larry Page", text: "Always deliver more than expected.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" },
+        { name: "Jack Ma", text: "Never give up.", img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" },
+        { name: "Robert Kiyosaki", text: "Mind your own business.", img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150" },
+        { name: "Tony Robbins", text: "Identify your problems, but give your power to solutions.", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150" },
+        { name: "Jim Rohn", text: "Formal education makes a living; self-education makes a fortune.", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150" },
+        { name: "Brian Tracy", text: "Your greatest asset is your earning ability.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" },
+        { name: "Zig Ziglar", text: "You were born to win.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150" },
+        { name: "Sara Blakely", text: "Failure is not the outcome.", img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150" },
+        { name: "Grant Cardone", text: "Be obsessed or be average.", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150" }
     ];
 
     const track = document.getElementById('quoteTrack');
@@ -133,7 +175,7 @@
 
     function slideQuotes() {
         currentIndex = (currentIndex + 1) % quotes.length;
-        const cardWidth = 300; // Exact card + margin
+        const cardWidth = 300; 
         track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     }
 
@@ -142,4 +184,4 @@
     setInterval(slideQuotes, 8000); 
 </script>
 </body>
-                            </html>
+    </html>
