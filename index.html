@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+here<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,16 +30,19 @@
             border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; 
             margin: 0 10px; flex-shrink: 0; 
         }
-        .quote-card img { width: 65px; height: 65px; border-radius: 50%; margin-right: 15px; border: 2px solid #00BFFF; object-fit: cover; }
+        .quote-card img { width: 65px; height: 65px; border-radius: 50%; margin-right: 15px; border: 2px solid #00BFFF; object-fit: cover; background: #1a202c; }
         .quote-text { text-align: left; }
         .quote-text p { font-size: 0.8rem; font-style: italic; color: #e2e8f0; line-height: 1.3; }
-        .quote-text b { font-size: 0.7rem; color: #00BFFF; text-transform: uppercase; display: block; margin-top: 5px; }
+        
+        /* Verified Badge Style */
+        .name-row { display: flex; align-items: center; gap: 5px; margin-top: 5px; }
+        .quote-text b { font-size: 0.7rem; color: #00BFFF; text-transform: uppercase; }
+        .verified-icon { width: 12px; height: 12px; }
 
         /* White Section Content */
         .rescue-section { background: #ffffff; color: #1a202c; padding: 60px 24px; margin-top: 30px; }
         .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 10px; }
         
-        /* THE 2-LINE HEADER FIX */
         .rescue-h2 { 
             font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; 
             line-height: 1.1; margin: 0 auto 25px; max-width: 280px; text-transform: uppercase;
@@ -94,7 +97,6 @@
 </section>
 
 <script>
-    // --- STARS ---
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -114,18 +116,13 @@
         requestAnimationFrame(animateStars);
     }
 
-    // --- REAL PEOPLE QUOTES ---
     const quotes = [
-        { name: "Aliko Dangote", text: "Endeavor to work hard. Success is not by accident.", img: "https://pbs.twimg.com/profile_images/1131110543668334592/B30r3G99_400x400.jpg" },
-        { name: "Warren Buffett", text: "Never depend on a single income.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6A_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" },
-        { name: "Elon Musk", text: "Persistence is very important.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x1qB87zP07XU-PzL9T67vP98Tj_vD9qf0A&s" },
+        { name: "Aliko Dangote", text: "Endeavor to work hard. Success is not by accident.", img: "https://www.premiumtimesng.com/wp-content/files/2023/05/Aliko-Dangote.jpg" },
+        { name: "Elon Musk", text: "Persistence is very important.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Elon_Musk_Royal_Society_crop.jpg/400px-Elon_Musk_Royal_Society_crop.jpg" },
+        { name: "Warren Buffett", text: "Never depend on a single income.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit.jpg/400px-Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit.jpg" },
         { name: "Strive Masiyiwa", text: "Identify a human need and fill it.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaH6W-M27Gz_4j3G2q9S_U1X0L3H2F_B9f0A&s" },
-        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6A_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" },
-        { name: "Jeff Bezos", text: "Your brand is what people say when you're not in the room.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" },
-        { name: "Steve Jobs", text: "Stay hungry, stay foolish.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" },
-        { name: "Bill Gates", text: "Patience is a key element of success.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" },
-        { name: "Mark Zuckerberg", text: "The biggest risk is not taking any risk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" },
-        { name: "Oprah Winfrey", text: "Turn your wounds into wisdom.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_v4m40YqFwUunY6o7-K7oX22eM9Vatf0A&s" }
+        { name: "Steve Jobs", text: "Stay hungry, stay foolish.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Steve_Jobs_Headshot_2010-edit.jpg/400px-Steve_Jobs_Headshot_2010-edit.jpg" },
+        { name: "Jeff Bezos", text: "Focus on the customer.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jeff_Bezos_at_the_2017_Blue_Origin_New_Glenn_Press_Conference.jpg/400px-Jeff_Bezos_at_the_2017_Blue_Origin_New_Glenn_Press_Conference.jpg" }
     ];
 
     const track = document.getElementById('quoteTrack');
@@ -135,8 +132,14 @@
         const items = [...quotes, ...quotes]; 
         track.innerHTML = items.map(q => `
             <div class="quote-card">
-                <img src="${q.img}" alt="${q.name}">
-                <div class="quote-text"><p>"${q.text}"</p><b>— ${q.name}</b></div>
+                <img src="${q.img}" alt="${q.name}" onerror="this.src='https://ui-avatars.com/api/?name=${q.name}&background=00BFFF&color=fff'">
+                <div class="quote-text">
+                    <p>"${q.text}"</p>
+                    <div class="name-row">
+                        <b>— ${q.name}</b>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" class="verified-icon">
+                    </div>
+                </div>
             </div>
         `).join('');
     }
