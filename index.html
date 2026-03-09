@@ -6,10 +6,36 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* General Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
+        body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; padding-top: 70px; }
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        
+
+        /* 1. Sticky Header Styling */
+        .sticky-header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(15px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 25px; z-index: 1000; border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+        }
+        .header-logo { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 900; color: #ffffff; letter-spacing: 2px; }
+        .header-logo span { color: #00BFFF; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .menu-btn div { width: 28px; height: 3px; background-color: #00BFFF; border-radius: 5px; }
+
+        /* 2. Sidebar Styling */
+        .sidebar {
+            position: fixed; top: 0; right: -280px; width: 280px; height: 100%;
+            background: #020617; border-left: 1px solid #00BFFF; z-index: 2000;
+            transition: 0.4s; padding: 100px 30px; text-align: left;
+        }
+        .sidebar.active { right: 0; }
+        .sidebar a { display: block; color: white; text-decoration: none; font-size: 1.2rem; margin-bottom: 25px; font-weight: 600; }
+        .sidebar a:hover { color: #00BFFF; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; z-index: 1500; }
+        .overlay.active { display: block; }
+
+        /* 3. Hero & Content */
         .logo-container { margin-top: 40px; margin-bottom: 10px; }
         .logo { 
             font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; 
@@ -19,14 +45,13 @@
         .subtitle { font-size: 0.9rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 8px; text-transform: uppercase; }
         .welcome-msg { max-width: 320px; margin: 25px auto; font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; }
 
-        /* CENTERED LOOP */
+        /* 4. Centered Loop Slider */
         .slider-wrapper { width: 100vw; overflow: hidden; margin: 25px 0; position: relative; display: flex; justify-content: flex-start; }
         .slider-track { display: flex; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
         .quote-card { 
             display: flex; align-items: center; background: rgba(255, 255, 255, 0.07); 
             backdrop-filter: blur(12px); padding: 20px; border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; 
-            margin: 0 10px; flex-shrink: 0; 
+            border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; margin: 0 10px; flex-shrink: 0; 
         }
         .profile-pic { width: 65px; height: 65px; border-radius: 50%; margin-right: 15px; border: 2px solid #00BFFF; object-fit: cover; background: #0f172a; }
         .quote-text { text-align: left; }
@@ -35,12 +60,11 @@
         .quote-text b { font-size: 0.65rem; color: #00BFFF; text-transform: uppercase; letter-spacing: 1px; }
         .verified-icon { width: 14px; height: 14px; flex-shrink: 0; }
 
-        /* SHARP EDGE SECTION */
-        .rescue-section { background: #ffffff; color: #1a202c; padding: 60px 24px; margin-top: 30px; border-radius: 0; }
+        /* 5. Sharp White Section */
+        .rescue-section { background: #ffffff; color: #1a202c; padding: 60px 24px; margin-top: 30px; border-radius: 0; text-align: center; }
         .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 10px; }
         .rescue-h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; line-height: 1.1; margin: 0 auto 25px; max-width: 280px; text-transform: uppercase; }
-        .rescue-p { max-width: 500px; margin: 0 auto 40px; color: #4a5568; line-height: 1.6; font-size: 0.95rem; text-align: center; }
-        
+        .rescue-p { max-width: 500px; margin: 0 auto 40px; color: #4a5568; line-height: 1.6; font-size: 0.95rem; }
         .system-content { max-width: 600px; margin: 0 auto; text-align: left; }
         .sub-block h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #00BFFF; margin-bottom: 8px; text-transform: uppercase; }
         .sub-block p { color: #2d3748; font-size: 0.95rem; line-height: 1.6; margin-bottom: 35px; }
@@ -49,6 +73,22 @@
 <body>
 
 <canvas id="starCanvas"></canvas>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+<nav class="sidebar" id="sidebar">
+    <a href="#">Home</a>
+    <a href="#">The J-System</a>
+    <a href="#">Academy</a>
+    <a href="#">Community</a>
+    <a href="#">Contact Us</a>
+</nav>
+
+<header class="sticky-header">
+    <div class="header-logo">MOCH<span>EARN</span></div>
+    <div class="menu-btn" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+    </div>
+</header>
 
 <div class="logo-container">
     <div class="logo">MOCHEARN</div>
@@ -66,22 +106,22 @@
 <section class="rescue-section">
     <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
     <h2 class="rescue-h2">The Economy is Changing. Are You?</h2>
-    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Prices skyrocket daily, making traditional salaries insufficient. Your savings lose value while you stand still. Protect your purchasing power and build your digital fortress today.</p>
+    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Prices skyrocket daily, making traditional salaries insufficient. Protect your purchasing power and build your digital fortress today.</p>
     
     <div class="system-content">
         <div class="sub-block">
             <h3>SHIELD</h3>
-            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate, ensuring your purchasing power remains untouched by local volatility.</p>
+            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate.</p>
         </div>
-        
         <div class="sub-block">
             <h3>ACCELERATION</h3>
-            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time. We provide the shortcuts to global wealth that traditional education ignores.</p>
+            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time.</p>
         </div>
     </div>
 </section>
 
 <script>
+    // Star Background
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -101,28 +141,34 @@
         requestAnimationFrame(animateStars);
     }
 
-    // UPDATED INNER CIRCLE LIST (20 MEMBERS)
+    // Sidebar Function
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+
+    // Inner Circle List (20 Members)
     const members = [
-        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704d" },
-        { name: "Jonard Bethuel", text: "The J-System is built for your financial security.", img: "https://i.pravatar.cc/150?u=a04258114e29026708c" },
-        { name: "Odeyemi Boluwatife", text: "Mastering the digital space changed my life.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704a" },
-        { name: "John Richard", text: "Don't wait for luck; build your own acceleration.", img: "https://i.pravatar.cc/150?u=a04258114e29026302d" },
-        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=a042581f4e29026701d" },
-        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=a042581f4e29026702a" },
-        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=a04258114e29026702c" },
-        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704b" },
-        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=a04258114e29026702d" },
-        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704c" },
-        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=a04258114e29026702e" },
-        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704d" },
-        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=a04258114e29026702f" },
-        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704e" },
-        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=a04258114e29026702g" },
-        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704f" },
-        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=a04258114e29026702h" },
-        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704g" },
-        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=a04258114e29026702i" },
-        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704h" }
+        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=a1" },
+        { name: "Jonard Bethuel", text: "The J-System is built for your financial security.", img: "https://i.pravatar.cc/150?u=a2" },
+        { name: "Odeyemi Boluwatife", text: "Mastering the digital space changed my life.", img: "https://i.pravatar.cc/150?u=a3" },
+        { name: "John Richard", text: "Don't wait for luck; build your own acceleration.", img: "https://i.pravatar.cc/150?u=a4" },
+        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=a5" },
+        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=a6" },
+        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=a7" },
+        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=a8" },
+        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=a9" },
+        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=b1" },
+        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=b2" },
+        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=b3" },
+        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=b4" },
+        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=b5" },
+        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=b6" },
+        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=b7" },
+        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=b8" },
+        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=b9" },
+        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=c1" },
+        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=c2" }
     ];
 
     const track = document.getElementById('quoteTrack');
@@ -142,7 +188,6 @@
                 </div>
             </div>
         `).join('');
-        
         const centerOffset = (window.innerWidth / 2) - 150;
         track.style.transform = `translateX(${centerOffset}px)`;
     }
@@ -152,13 +197,8 @@
         const centerOffset = (window.innerWidth / 2) - 150;
         track.style.transition = "transform 0.8s ease-in-out";
         track.style.transform = `translateX(${centerOffset - (index * 300)}px)`;
-
         if (index >= members.length) {
-            setTimeout(() => {
-                track.style.transition = "none";
-                index = 0;
-                track.style.transform = `translateX(${centerOffset}px)`;
-            }, 800);
+            setTimeout(() => { track.style.transition = "none"; index = 0; track.style.transform = `translateX(${centerOffset}px)`; }, 800);
         }
     }
 
