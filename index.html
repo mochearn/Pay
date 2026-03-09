@@ -19,20 +19,20 @@
         .subtitle { font-size: 0.9rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 8px; text-transform: uppercase; }
         .welcome-msg { max-width: 320px; margin: 25px auto; font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; }
 
-        .slider-wrapper { width: 100vw; overflow: hidden; margin: 20px 0; position: relative; display: flex; justify-content: center; }
-        .slider-track { display: flex; transition: transform 0.8s ease-in-out; width: max-content; }
+        /* CENTERED LOOP TRICK */
+        .slider-wrapper { width: 100vw; overflow: hidden; margin: 25px 0; position: relative; display: flex; justify-content: flex-start; }
+        .slider-track { display: flex; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
         .quote-card { 
-            display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; 
+            display: flex; align-items: center; background: rgba(255, 255, 255, 0.07); 
+            backdrop-filter: blur(12px); padding: 20px; border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; 
             margin: 0 10px; flex-shrink: 0; 
         }
-        .profile-pic { width: 65px; height: 65px; border-radius: 50%; margin-right: 15px; border: 2px solid #00BFFF; object-fit: cover; background: #1a202c; }
+        .profile-pic { width: 65px; height: 65px; border-radius: 50%; margin-right: 15px; border: 2px solid #00BFFF; object-fit: cover; background: #0f172a; }
         .quote-text { text-align: left; }
-        .quote-text p { font-size: 0.75rem; font-style: italic; color: #e2e8f0; line-height: 1.3; }
-        
-        .name-row { display: flex; align-items: center; margin-top: 5px; gap: 4px; }
-        .quote-text b { font-size: 0.65rem; color: #00BFFF; text-transform: uppercase; }
+        .quote-text p { font-size: 0.75rem; font-style: italic; color: #f1f5f9; line-height: 1.3; }
+        .name-row { display: flex; align-items: center; margin-top: 6px; gap: 4px; }
+        .quote-text b { font-size: 0.65rem; color: #00BFFF; text-transform: uppercase; letter-spacing: 1px; }
         .verified-icon { width: 14px; height: 14px; flex-shrink: 0; }
 
         .rescue-section { background: #ffffff; color: #1a202c; padding: 60px 24px; margin-top: 30px; }
@@ -65,9 +65,7 @@
 <section class="rescue-section">
     <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
     <h2 class="rescue-h2">The Economy is Changing. Are You?</h2>
-    <p class="rescue-p">
-        Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Prices skyrocket daily, making traditional salaries insufficient. Your savings lose value while you stand still. Protect your purchasing power and build your digital fortress today.
-    </p>
+    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Prices skyrocket daily, making traditional salaries insufficient. Your savings lose value while you stand still. Protect your purchasing power and build your digital fortress today.</p>
     
     <div class="system-content">
         <div class="sub-block">
@@ -103,36 +101,26 @@
     }
 
     const quotes = [
-        { name: "Aliko Dangote", text: "Success is not by accident. Work hard.", img: "https://randomuser.me/api/portraits/men/1.jpg" },
-        { name: "Elon Musk", text: "Persistence is very important.", img: "https://randomuser.me/api/portraits/men/2.jpg" },
-        { name: "Warren Buffett", text: "Never depend on a single income.", img: "https://randomuser.me/api/portraits/men/3.jpg" },
-        { name: "Strive Masiyiwa", text: "Identify a human need and fill it.", img: "https://randomuser.me/api/portraits/men/4.jpg" },
-        { name: "Jeff Bezos", text: "Focus on the customer first.", img: "https://randomuser.me/api/portraits/men/5.jpg" },
-        { name: "Tony Elumelu", text: "Hard work and luck go hand in hand.", img: "https://randomuser.me/api/portraits/men/6.jpg" },
-        { name: "Oprah Winfrey", text: "Turn your wounds into wisdom.", img: "https://randomuser.me/api/portraits/women/1.jpg" },
-        { name: "Bill Gates", text: "Patience is a key element of success.", img: "https://randomuser.me/api/portraits/men/7.jpg" },
-        { name: "Mark Zuckerberg", text: "The biggest risk is not taking any risk.", img: "https://randomuser.me/api/portraits/men/8.jpg" },
-        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://randomuser.me/api/portraits/men/9.jpg" },
-        { name: "Jim Rohn", text: "Self-education makes a fortune.", img: "https://randomuser.me/api/portraits/men/10.jpg" },
-        { name: "Brian Tracy", text: "Your greatest asset is your earning ability.", img: "https://randomuser.me/api/portraits/men/11.jpg" },
-        { name: "Grant Cardone", text: "Be obsessed or be average.", img: "https://randomuser.me/api/portraits/men/12.jpg" },
-        { name: "Robert Kiyosaki", text: "Mind your own business.", img: "https://randomuser.me/api/portraits/men/13.jpg" },
-        { name: "Steve Jobs", text: "Stay hungry, stay foolish.", img: "https://randomuser.me/api/portraits/men/14.jpg" },
-        { name: "Jack Ma", text: "Never give up.", img: "https://randomuser.me/api/portraits/men/15.jpg" },
-        { name: "Richard Branson", text: "Opportunities are like buses.", img: "https://randomuser.me/api/portraits/men/16.jpg" },
-        { name: "Sara Blakely", text: "Failure is not the outcome.", img: "https://randomuser.me/api/portraits/women/2.jpg" },
-        { name: "Zig Ziglar", text: "You were born to win.", img: "https://randomuser.me/api/portraits/men/17.jpg" },
-        { name: "Tony Robbins", text: "Setting goals is the first step.", img: "https://randomuser.me/api/portraits/men/18.jpg" }
+        { name: "Aliko Dangote", text: "Endeavor to work hard. Success is not by accident.", img: "https://pbs.twimg.com/profile_images/1131110543668334592/B30r3G99_400x400.jpg" },
+        { name: "Tony Elumelu", text: "Hard work and luck go hand in hand.", img: "https://pbs.twimg.com/profile_images/1544665476331589632/H-R-X5t9_400x400.jpg" },
+        { name: "Elon Musk", text: "Persistence is very important.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Elon_Musk_Royal_Society_crop.jpg/400px-Elon_Musk_Royal_Society_crop.jpg" },
+        { name: "Warren Buffett", text: "Never depend on a single income.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit.jpg/400px-Warren_Buffett_at_the_2015_SelectUSA_Investment_Summit.jpg" },
+        { name: "Strive Masiyiwa", text: "Identify a human need and fill it.", img: "https://pbs.twimg.com/profile_images/1136952774027415552/6J97U4vP_400x400.jpg" },
+        { name: "Jeff Bezos", text: "Focus on the customer first.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jeff_Bezos_at_the_2017_Blue_Origin_New_Glenn_Press_Conference.jpg/400px-Jeff_Bezos_at_the_2017_Blue_Origin_New_Glenn_Press_Conference.jpg" },
+        { name: "Steve Jobs", text: "Stay hungry, stay foolish.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Steve_Jobs_Headshot_2010-edit.jpg/400px-Steve_Jobs_Headshot_2010-edit.jpg" },
+        { name: "Oprah Winfrey", text: "Turn your wounds into wisdom.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Oprah_Winfrey_at_the_2011_Santa_Barbara_International_Film_Festival.jpg/400px-Oprah_Winfrey_at_the_2011_Santa_Barbara_International_Film_Festival.jpg" },
+        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://pbs.twimg.com/profile_images/1256035506136625152/fO7SPh6Z_400x400.jpg" },
+        { name: "Jack Ma", text: "Never give up. Today is hard, tomorrow is harder.", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Jack_Ma_2017.jpg/400px-Jack_Ma_2017.jpg" }
     ];
 
     const track = document.getElementById('quoteTrack');
     let index = 0;
 
     function setupSlider() {
-        const items = [...quotes, ...quotes]; 
-        track.innerHTML = items.map(q => `
+        const fullList = [...quotes, ...quotes]; // Cloned for infinite loop
+        track.innerHTML = fullList.map(q => `
             <div class="quote-card">
-                <img class="profile-pic" src="${q.img}" alt="${q.name}">
+                <img class="profile-pic" src="${q.img}" alt="${q.name}" onerror="this.src='https://ui-avatars.com/api/?name=${q.name}&background=00BFFF&color=fff'">
                 <div class="quote-text">
                     <p>"${q.text}"</p>
                     <div class="name-row">
@@ -143,29 +131,29 @@
             </div>
         `).join('');
         
-        const startPos = (window.innerWidth / 2) - 150;
-        track.style.transform = `translateX(${startPos}px)`;
+        // Initial center alignment
+        const centerOffset = (window.innerWidth / 2) - 150;
+        track.style.transform = `translateX(${centerOffset}px)`;
     }
 
     function slide() {
         index++;
-        const cardWidth = 300; 
-        const startPos = (window.innerWidth / 2) - 150;
+        const centerOffset = (window.innerWidth / 2) - 150;
         track.style.transition = "transform 0.8s ease-in-out";
-        track.style.transform = `translateX(${startPos - (index * cardWidth)}px)`;
+        track.style.transform = `translateX(${centerOffset - (index * 300)}px)`;
 
         if (index >= quotes.length) {
             setTimeout(() => {
                 track.style.transition = "none";
                 index = 0;
-                track.style.transform = `translateX(${startPos}px)`;
+                track.style.transform = `translateX(${centerOffset}px)`;
             }, 800);
         }
     }
 
     window.addEventListener('resize', () => { initStars(); setupSlider(); });
     initStars(); animateStars(); setupSlider();
-    setInterval(slide, 6000); 
+    setInterval(slide, 7000); 
 </script>
 </body>
     </html>
