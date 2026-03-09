@@ -218,6 +218,58 @@
 .user-name { font-weight: 800; font-size: 0.9rem; color: #020617; }
 .user-tag { font-size: 0.7rem; color: #00BFFF; font-weight: 600; }
 .testimony-text { font-size: 0.85rem; color: #4a5568; line-height: 1.6; font-style: italic; }
+   /* FAQ Section */
+.faq-section {
+    padding: 80px 24px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 40px auto 0;
+    text-align: left;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border: 1.5px solid #f1f5f9;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-question {
+    padding: 20px;
+    background: #f8fafc;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #020617;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: white;
+    padding: 0 20px;
+    color: #4a5568;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 20px;
+}
+
+.faq-item.active {
+    border-color: #00BFFF;
+        }
     </style>
 </head>
 <body>
@@ -389,6 +441,27 @@
         </div>
     </div>
     </section>
+    <section class="faq-section">
+    <h2 style="color:#020617; font-family:'Montserrat';">GOT QUESTIONS?</h2>
+    <p style="color:#64748b; font-size: 0.9rem;">Everything you need to know about the J-System</p>
+
+    <div class="faq-container">
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">What exactly is the J-System? <span>+</span></div>
+            <div class="faq-answer">The J-System is a digital infrastructure built to protect wealth from inflation and accelerate income growth through automated affiliate and vendor systems.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">How do I earn as a Catalyst? <span>+</span></div>
+            <div class="faq-answer">As a Catalyst, you represent the Mochearn ecosystem. You earn high-velocity rewards by connecting the right audience to the right digital solutions.</div>
+        </div>
+
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">Is this suitable for beginners? <span>+</span></div>
+            <div class="faq-answer">Correct! The Digital Acceleration path is designed specifically to take someone from zero knowledge to elite status in record time.</div>
+        </div>
+    </div>
+    </section
 
 <script>
     const canvas = document.getElementById('starCanvas');
