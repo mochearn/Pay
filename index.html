@@ -35,7 +35,8 @@
         .quote-text b { font-size: 0.65rem; color: #00BFFF; text-transform: uppercase; letter-spacing: 1px; }
         .verified-icon { width: 14px; height: 14px; flex-shrink: 0; }
 
-        .rescue-section { background: #ffffff; color: #1a202c; padding: 60px 24px; margin-top: 30px; border-radius: 40px 40px 0 0; }
+        /* SHARP EDGE SECTION */
+        .rescue-section { background: #ffffff; color: #1a202c; padding: 60px 24px; margin-top: 30px; border-radius: 0; }
         .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 10px; }
         .rescue-h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; line-height: 1.1; margin: 0 auto 25px; max-width: 280px; text-transform: uppercase; }
         .rescue-p { max-width: 500px; margin: 0 auto 40px; color: #4a5568; line-height: 1.6; font-size: 0.95rem; text-align: center; }
@@ -100,41 +101,42 @@
         requestAnimationFrame(animateStars);
     }
 
-    const quotes = [
-        { name: "Aliko Dangote", text: "Endeavor to work hard. Success is not by accident.", img: "https://xsgames.co/randomusers/assets/avatars/male/1.jpg" },
-        { name: "Tony Elumelu", text: "Hard work and luck go hand in hand.", img: "https://xsgames.co/randomusers/assets/avatars/male/2.jpg" },
-        { name: "Elon Musk", text: "Persistence is very important.", img: "https://xsgames.co/randomusers/assets/avatars/male/3.jpg" },
-        { name: "Warren Buffett", text: "Never depend on a single income.", img: "https://xsgames.co/randomusers/assets/avatars/male/4.jpg" },
-        { name: "Strive Masiyiwa", text: "Identify a human need and fill it.", img: "https://xsgames.co/randomusers/assets/avatars/male/5.jpg" },
-        { name: "Jeff Bezos", text: "Focus on the customer first.", img: "https://xsgames.co/randomusers/assets/avatars/male/6.jpg" },
-        { name: "Steve Jobs", text: "Stay hungry, stay foolish.", img: "https://xsgames.co/randomusers/assets/avatars/male/7.jpg" },
-        { name: "Oprah Winfrey", text: "Turn your wounds into wisdom.", img: "https://xsgames.co/randomusers/assets/avatars/female/1.jpg" },
-        { name: "Naval Ravikant", text: "Code and media are the new leverage.", img: "https://xsgames.co/randomusers/assets/avatars/male/8.jpg" },
-        { name: "Jack Ma", text: "Never give up.", img: "https://xsgames.co/randomusers/assets/avatars/male/9.jpg" },
-        { name: "Bill Gates", text: "Patience is a key element.", img: "https://xsgames.co/randomusers/assets/avatars/male/10.jpg" },
-        { name: "Mark Zuckerberg", text: "Take risks now.", img: "https://xsgames.co/randomusers/assets/avatars/male/11.jpg" },
-        { name: "Jim Rohn", text: "Work on yourself.", img: "https://xsgames.co/randomusers/assets/avatars/male/12.jpg" },
-        { name: "Brian Tracy", text: "Master your time.", img: "https://xsgames.co/randomusers/assets/avatars/male/13.jpg" },
-        { name: "Grant Cardone", text: "Be obsessed.", img: "https://xsgames.co/randomusers/assets/avatars/male/14.jpg" },
-        { name: "Sara Blakely", text: "Embrace failure.", img: "https://xsgames.co/randomusers/assets/avatars/female/2.jpg" },
-        { name: "Richard Branson", text: "Screw it, let's do it.", img: "https://xsgames.co/randomusers/assets/avatars/male/15.jpg" },
-        { name: "Tony Robbins", text: "Decision is power.", img: "https://xsgames.co/randomusers/assets/avatars/male/16.jpg" },
-        { name: "Robert Kiyosaki", text: "Assets over liabilities.", img: "https://xsgames.co/randomusers/assets/avatars/male/17.jpg" },
-        { name: "Zig Ziglar", text: "Born to win.", img: "https://xsgames.co/randomusers/assets/avatars/male/18.jpg" }
+    // UPDATED INNER CIRCLE LIST (20 MEMBERS)
+    const members = [
+        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704d" },
+        { name: "Jonard Bethuel", text: "The J-System is built for your financial security.", img: "https://i.pravatar.cc/150?u=a04258114e29026708c" },
+        { name: "Odeyemi Boluwatife", text: "Mastering the digital space changed my life.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704a" },
+        { name: "John Richard", text: "Don't wait for luck; build your own acceleration.", img: "https://i.pravatar.cc/150?u=a04258114e29026302d" },
+        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=a042581f4e29026701d" },
+        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=a042581f4e29026702a" },
+        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=a04258114e29026702c" },
+        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704b" },
+        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=a04258114e29026702d" },
+        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704c" },
+        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=a04258114e29026702e" },
+        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704d" },
+        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=a04258114e29026702f" },
+        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704e" },
+        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=a04258114e29026702g" },
+        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704f" },
+        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=a04258114e29026702h" },
+        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704g" },
+        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=a04258114e29026702i" },
+        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=a042581f4e29026704h" }
     ];
 
     const track = document.getElementById('quoteTrack');
     let index = 0;
 
     function setupSlider() {
-        const fullList = [...quotes, ...quotes]; 
-        track.innerHTML = fullList.map(q => `
+        const fullList = [...members, ...members]; 
+        track.innerHTML = fullList.map(m => `
             <div class="quote-card">
-                <img class="profile-pic" src="${q.img}" alt="${q.name}">
+                <img class="profile-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://ui-avatars.com/api/?name=${m.name}&background=00BFFF&color=fff'">
                 <div class="quote-text">
-                    <p>"${q.text}"</p>
+                    <p>"${m.text}"</p>
                     <div class="name-row">
-                        <b>— ${q.name}</b>
+                        <b>— ${m.name}</b>
                         <img src="https://img.icons8.com/color/48/verified-badge.png" class="verified-icon">
                     </div>
                 </div>
@@ -151,7 +153,7 @@
         track.style.transition = "transform 0.8s ease-in-out";
         track.style.transform = `translateX(${centerOffset - (index * 300)}px)`;
 
-        if (index >= quotes.length) {
+        if (index >= members.length) {
             setTimeout(() => {
                 track.style.transition = "none";
                 index = 0;
