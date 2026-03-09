@@ -88,6 +88,71 @@
         .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
         .more-content.open { max-height: 600px; }
         .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
+             /* Role Selection Section */
+.role-section {
+    padding: 80px 24px;
+    background: #ffffff; /* White background like Valpulse to make it pop */
+    text-align: center;
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .role-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.role-card {
+    padding: 40px 25px;
+    background: #f8fafc;
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.2); /* Soft purple border */
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.role-card:hover {
+    transform: translateY(-10px);
+    border-color: #00BFFF;
+    box-shadow: 0 15px 40px rgba(0, 191, 255, 0.1);
+}
+
+.role-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: #020617;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.role-card p {
+    color: #4a5568;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.role-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-blue { border: 2px solid #00BFFF; color: #00BFFF; }
+.btn-green { border: 2px solid #2ecc71; color: #2ecc71; }
+.btn-purple { border: 2px solid #A855F7; color: #A855F7; }
+
+.role-btn:hover { background: #020617; color: white; border-color: #020617; }             
     </style>
 </head>
 <body>
@@ -175,6 +240,33 @@
         EXPLORE FULL J-SYSTEM →
     </button>
 </section>
+    <section class="role-section">
+    <h2 style="color:#020617; font-family:'Montserrat'; margin-bottom:15px; font-size: 1.6rem;">CHOOSE YOUR PATH</h2>
+    <p style="color:#64748b; margin-bottom:50px; font-size: 0.9rem;">How do you want to interact with the J-System ecosystem?</p>
+
+    <div class="role-grid">
+        <div class="role-card">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🚀</div>
+            <h3>The Catalyst</h3>
+            <p>Represent the brand and trigger growth. Use our blueprints to scale the ecosystem and earn high-velocity rewards as a partner.</p>
+            <a href="#" class="role-btn btn-blue">BECOME A CATALYST</a>
+        </div>
+
+        <div class="role-card">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🛠️</div>
+            <h3>The Architect</h3>
+            <p>The creator path. Bring your products into our ecosystem and let the J-System infrastructure scale your vision to the masses.</p>
+            <a href="#" class="role-btn btn-purple">BECOME A VENDOR</a>
+        </div>
+
+        <div class="role-card">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">💎</div>
+            <h3>The Learner</h3>
+            <p>The foundation path. Access the Digital Acceleration modules to build your personal skills and protect your financial future.</p>
+            <a href="#" class="role-btn btn-green">START LEARNING</a>
+        </div>
+    </div>
+    </section>
 
 <script>
     const canvas = document.getElementById('starCanvas');
