@@ -6,39 +6,6 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-       /* 1. New Color Palette & Animations */
-:root {
-    --j-blue: #00BFFF;
-    --j-green: #2ecc71; /* Success Green */
-}
-
-.process-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
-
-.step-card {
-    padding: 30px; background: white; border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: all 0.5s ease; opacity: 0; transform: translateY(30px); /* For Scroll Animation */
-    border-bottom: 4px solid var(--j-blue);
-}
-
-.step-card.reveal { opacity: 1; transform: translateY(0); }
-
-.step-card:nth-child(odd) { border-bottom-color: var(--j-green); }
-
-/* 2. The Expandable Text Logic */
-.more-content {
-    max-height: 0; overflow: hidden; transition: max-height 0.5s ease;
-    text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px;
-}
-
-.more-content.open { max-height: 500px; }
-
-.see-more-btn {
-    background: none; border: none; color: var(--j-blue);
-    font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.85rem;
-}
-
-.see-more-btn.green { color: var(--j-green); }
         /* General Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
@@ -51,20 +18,16 @@
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 25px; z-index: 1000; border-bottom: 1px solid rgba(0, 191, 255, 0.1);
         }
-
-        /* The Logo: Magic Fade Transition */
         .header-logo { 
             font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 900; 
             color: #ffffff; letter-spacing: 1px; opacity: 0; transition: opacity 0.4s ease; 
         }
         .header-logo.visible { opacity: 1; }
         .header-logo span { color: #00BFFF; }
-
-        /* The Menu Button: ALWAYS VISIBLE */
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 10px; z-index: 1100; }
         .menu-btn div { width: 22px; height: 1.2px; background-color: #00BFFF; border-radius: 1px; }
 
-        /* 2. Google-Style Sidebar (Fixed Visibility) */
+        /* 2. Sidebar Update */
         .sidebar {
             position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
             background: #020617; border-top-left-radius: 40px;
@@ -72,22 +35,14 @@
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 40px 30px; text-align: left;
         }
-        /* Fix: Reveal full menu centered on screen */
         .sidebar.active { transform: translateX(-100%); } 
-        
         .close-area { text-align: right; margin-bottom: 50px; }
-        .close-btn { color: #00BFFF; font-size: 1.8rem; cursor: pointer; background: none; border: none; font-weight: 200; }
-
-        .sidebar a {
-            display: block; color: #f1f5f9; text-decoration: none; font-size: 1.1rem;
-            margin-bottom: 35px; font-weight: 500; letter-spacing: 1px; transition: 0.3s;
-        }
-        .sidebar a:hover { color: #00BFFF; padding-left: 8px; }
-        
+        .close-btn { color: #00BFFF; font-size: 1.8rem; cursor: pointer; background: none; border: none; }
+        .sidebar a { display: block; color: #f1f5f9; text-decoration: none; font-size: 1.1rem; margin-bottom: 35px; font-weight: 500; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; z-index: 1500; }
         .overlay.active { display: block; }
 
-        /* 3. Main Hero Content */
+        /* 3. Hero Content */
         .logo-container { padding-top: 100px; margin-bottom: 10px; }
         .logo { 
             font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; 
@@ -97,7 +52,7 @@
         .subtitle { font-size: 0.85rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 8px; text-transform: uppercase; }
         .welcome-msg { max-width: 310px; margin: 25px auto; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; }
 
-        /* 4. Elite 20 Slider */
+        /* 4. Elite Slider */
         .slider-wrapper { width: 100vw; overflow: hidden; margin: 40px 0; position: relative; }
         .slider-track { display: flex; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
         .quote-card { 
@@ -105,21 +60,36 @@
             backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; 
             border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; margin: 0 12px; flex-shrink: 0; 
         }
-        .profile-pic { width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; border: 1.5px solid #00BFFF; object-fit: cover; }
-        .quote-text { text-align: left; }
-        .quote-text p { font-size: 0.75rem; font-style: italic; color: #f1f5f9; line-height: 1.3; }
-        .name-row { display: flex; align-items: center; margin-top: 6px; gap: 4px; }
-        .quote-text b { font-size: 0.65rem; color: #00BFFF; text-transform: uppercase; letter-spacing: 1px; }
-        .verified-icon { width: 14px; height: 14px; }
+        .profile-pic { width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid #00BFFF; object-fit: cover; }
 
-        /* 5. Rescue Section */
+        /* 5. Solutions Section (Process) */
+        .process-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
+        .process-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; margin-bottom: 50px; text-transform: uppercase; }
+        .process-grid { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 1000px; margin: 0 auto; }
+        @media (min-width: 768px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        /* BOX WITH PURPLE OUTLINE */
+        .step-card {
+            padding: 30px; background: white; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1.5px solid #A855F7; /* Sharp Purple Line */
+            transition: all 0.5s ease; opacity: 0; transform: translateY(30px);
+            position: relative;
+        }
+        .step-card.reveal { opacity: 1; transform: translateY(0); }
+        .step-card h4 { font-family: 'Montserrat', sans-serif; margin-bottom: 15px; }
+        .step-card p { color: #4a5568; font-size: 0.9rem; line-height: 1.6; }
+
+        /* Expandable Content */
+        .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
+        .more-content.open { max-height: 500px; }
+        .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; }
+        .see-more-btn.green { color: #2ecc71; }
+
+        /* 6. Rescue Section */
         .rescue-section { background: #ffffff; color: #1a202c; padding: 70px 24px; border-radius: 0; }
         .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 12px; }
         .rescue-h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; line-height: 1.1; margin-bottom: 25px; text-transform: uppercase; }
-        .rescue-p { max-width: 500px; margin: 0 auto 50px; color: #4a5568; line-height: 1.7; font-size: 0.95rem; }
-        .system-content { max-width: 550px; margin: 0 auto; text-align: left; }
-        .sub-block h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #00BFFF; margin-bottom: 10px; text-transform: uppercase; }
-        .sub-block p { color: #2d3748; font-size: 0.95rem; line-height: 1.7; margin-bottom: 40px; }
     </style>
 </head>
 <body>
@@ -133,7 +103,6 @@
     <a href="#">THE J-SYSTEM</a>
     <a href="#">ACADEMY</a>
     <a href="#">COMMUNITY</a>
-    <a href="#">CONTACT US</a>
 </nav>
 
 <header class="sticky-header">
@@ -149,7 +118,7 @@
 </div>
 
 <div class="welcome-msg">
-    The digital frontier is here. We provide the elite tools you need to outpace inflation and dominate the new economy. 🚀
+    The digital frontier is here. We provide the elite tools you need to outpace inflation and dominate the new economy.
 </div>
 
 <section class="slider-wrapper">
@@ -159,95 +128,43 @@
 <section class="rescue-section">
     <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
     <h2 class="rescue-h2">The Economy is Changing. Are You?</h2>
-    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Protect your purchasing power and build your digital fortress today. 🔥</p>
-    
-    <div class="system-content">
-        <div class="sub-block">
-            <h3>SHIELD</h3>
-            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate. 🛡️</p>
-        </div>
-        <div class="sub-block">
-            <h3>ACCELERATION</h3>
-            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time. ⚡</p>
-        </div>
-    </div>
-    </section>
-    <section class="process-section">
+    <p style="color:#4a5568; margin-bottom:30px;">Nigeria is facing its toughest economic chapter yet. Don't let your wealth disappear in the hands of inflation. Secure it now.</p>
+</section>
+
+<section class="process-section">
     <h2 class="process-title" style="color:#020617">The J-System Solutions</h2>
-    
     <div class="process-grid">
         <div class="step-card">
-            <div class="step-icon">🛡️</div>
-            <h4 style="color: var(--j-blue)">THE SHIELD</h4>
-            <p>The J-System is your ultimate defense against the falling Naira. In an economy where prices double overnight, standing still is losing. We provide the infrastructure to lock your wealth in appreciating assets.</p>
-            
+            <div style="font-size: 2.5rem; margin-bottom:15px;">🛡️</div>
+            <h4 style="color: #00BFFF">THE SHIELD</h4>
+            <p>The J-System is your ultimate defense against the falling Naira. In an economy where prices double overnight, standing still is losing. We provide infrastructure to lock your wealth in appreciating assets.</p>
             <div class="more-content" id="content1">
                 <p>• Protects against 100%+ inflation rates.<br>
                    • Automated wealth preservation tools.<br>
-                   • Direct access to global market stability.<br>
-                   • Secure, decentralized asset management.</p>
+                   • Direct access to global market stability.</p>
             </div>
             <button class="see-more-btn" onclick="toggleText('content1', this)">SEE MORE +</button>
         </div>
 
         <div class="step-card">
-            <div class="step-icon">📈</div>
-            <h4 style="color: var(--j-green)">ACCELERATION</h4>
+            <div style="font-size: 2.5rem; margin-bottom:15px;">📈</div>
+            <h4 style="color: #2ecc71">ACCELERATION</h4>
             <p>Traditional education is too slow for the modern world. Our system fast-tracks your digital competence, moving you from beginner to elite earner in months, not years. This is true speed.</p>
-            
             <div class="more-content" id="content2">
                 <p>• High-income skill acquisition.<br>
-                   • Mentorship from top 1% digital earners.<br>
-                   • Real-time market analysis modules.<br>
+                   • Mentorship from top earners.<br>
                    • Proven blueprints for rapid scaling.</p>
             </div>
             <button class="see-more-btn green" onclick="toggleText('content2', this)">SEE MORE +</button>
         </div>
     </div>
-
-    <button class="see-more-btn" style="margin-top: 60px; font-size: 1.2rem; border: 2px solid var(--j-blue); padding: 10px 30px; border-radius: 50px;">
-        EXPLORE THE FULL ECOSYSTEM →
-    </button>
-    </section>
-    <section class="process-section">
-    <h2 class="process-title" style="color:#020617">The J-System Solutions</h2>
     
-    <div class="process-grid">
-        <div class="step-card">
-            <div class="step-icon">🛡️</div>
-            <h4 style="color: var(--j-blue)">THE SHIELD</h4>
-            <p>The J-System is your ultimate defense against the falling Naira. In an economy where prices double overnight, standing still is losing. We provide the infrastructure to lock your wealth in appreciating assets.</p>
-            
-            <div class="more-content" id="content1">
-                <p>• Protects against 100%+ inflation rates.<br>
-                   • Automated wealth preservation tools.<br>
-                   • Direct access to global market stability.<br>
-                   • Secure, decentralized asset management.</p>
-            </div>
-            <button class="see-more-btn" onclick="toggleText('content1', this)">SEE MORE +</button>
-        </div>
-
-        <div class="step-card">
-            <div class="step-icon">📈</div>
-            <h4 style="color: var(--j-green)">ACCELERATION</h4>
-            <p>Traditional education is too slow for the modern world. Our system fast-tracks your digital competence, moving you from beginner to elite earner in months, not years. This is true speed.</p>
-            
-            <div class="more-content" id="content2">
-                <p>• High-income skill acquisition.<br>
-                   • Mentorship from top 1% digital earners.<br>
-                   • Real-time market analysis modules.<br>
-                   • Proven blueprints for rapid scaling.</p>
-            </div>
-            <button class="see-more-btn green" onclick="toggleText('content2', this)">SEE MORE +</button>
-        </div>
-    </div>
-
-    <button class="see-more-btn" style="margin-top: 60px; font-size: 1.2rem; border: 2px solid var(--j-blue); padding: 10px 30px; border-radius: 50px;">
+    <button class="see-more-btn" style="margin-top: 60px; font-size: 1.1rem; border: 2px solid #00BFFF; padding: 12px 35px; border-radius: 50px;">
         EXPLORE THE FULL ECOSYSTEM →
     </button>
-    </section>
+</section>
+
 <script>
-    // Star Background
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -267,15 +184,11 @@
         requestAnimationFrame(animateStars);
     }
 
-    // Sidebar Toggle
     function toggleMenu() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        sidebar.classList.toggle('active');
-        overlay.classList.toggle('active');
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
     }
 
-    // Magic Logo Fade Transition
     window.addEventListener('scroll', () => {
         const hLogo = document.getElementById('headerLogo');
         const mainLogoSection = document.querySelector('.logo-container');
@@ -286,51 +199,45 @@
         }
     });
 
-    // 20 Professional Profiles
+    // Toggle Expandable Text
+    function toggleText(id, btn) {
+        const content = document.getElementById(id);
+        content.classList.toggle('open');
+        btn.innerHTML = content.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +";
+    }
+
+    // Scroll Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
+
     const members = [
         { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=1" },
-        { name: "Jonard Bethuel", text: "The J-System is built for your financial security.", img: "https://i.pravatar.cc/150?u=2" },
-        { name: "Odeyemi Boluwatife", text: "Mastering the digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" },
-        { name: "John Richard", text: "Don't wait for luck; build your own acceleration.", img: "https://i.pravatar.cc/150?u=4" },
-        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=5" },
-        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=6" },
-        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=7" },
-        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=8" },
-        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=9" },
-        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=10" },
-        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=11" },
-        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=12" },
-        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=13" },
-        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=14" },
-        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=15" },
-        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=16" },
-        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=17" },
-        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=18" },
-        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=19" },
-        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=20" }
+        { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "https://i.pravatar.cc/150?u=2" },
+        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" },
+        { name: "John Richard", text: "Build your own acceleration.", img: "https://i.pravatar.cc/150?u=4" }
     ];
 
     const track = document.getElementById('quoteTrack');
     let index = 0;
-
     function setupSlider() {
         const fullList = [...members, ...members]; 
         track.innerHTML = fullList.map(m => `
             <div class="quote-card">
                 <img class="profile-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://ui-avatars.com/api/?name=${m.name}&background=00BFFF&color=fff'">
-                <div class="quote-text">
-                    <p>"${m.text}"</p>
-                    <div class="name-row">
-                        <b>— ${m.name}</b>
-                        <img src="https://img.icons8.com/color/48/verified-badge.png" class="verified-icon">
-                    </div>
+                <div style="text-align:left;">
+                    <p style="font-size:0.7rem; font-style:italic;">"${m.text}"</p>
+                    <b style="font-size:0.6rem; color:#00BFFF;">— ${m.name}</b>
                 </div>
             </div>
         `).join('');
-        const centerOffset = (window.innerWidth / 2) - 152;
-        track.style.transform = `translateX(${centerOffset}px)`;
+        track.style.transform = `translateX(${(window.innerWidth / 2) - 152}px)`;
     }
-
     function slide() {
         index++;
         const centerOffset = (window.innerWidth / 2) - 152;
@@ -341,26 +248,8 @@
         }
     }
 
-    window.addEventListener('resize', () => { initStars(); setupSlider(); });
     initStars(); animateStars(); setupSlider();
-    setInterval(slide, 7000); 
-    // Function to expand/collapse text
-function toggleText(id, btn) {
-    const content = document.getElementById(id);
-    content.classList.toggle('open');
-    btn.innerHTML = content.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +";
-}
-
-// Scroll Animation Logic
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('reveal');
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
-    </script>
+    setInterval(slide, 7000);
+</script>
 </body>
     </html>
