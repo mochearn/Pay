@@ -6,62 +6,39 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* 3-Step Process Section */
-.process-section {
-    padding: 80px 24px;
-    background: #f8fafc; /* Very light grey to separate from the white section above */
-    text-align: center;
+       /* 1. New Color Palette & Animations */
+:root {
+    --j-blue: #00BFFF;
+    --j-green: #2ecc71; /* Success Green */
 }
 
-.process-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
-    color: #020617;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-}
-
-.process-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-/* Tablet & Desktop Layout */
-@media (min-width: 768px) {
-    .process-grid { grid-template-columns: repeat(3, 1fr); }
-}
+.process-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
 
 .step-card {
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
+    padding: 30px; background: white; border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+    transition: all 0.5s ease; opacity: 0; transform: translateY(30px); /* For Scroll Animation */
+    border-bottom: 4px solid var(--j-blue);
 }
 
-.step-card:hover { transform: translateY(-10px); }
+.step-card.reveal { opacity: 1; transform: translateY(0); }
 
-.step-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    display: inline-block;
+.step-card:nth-child(odd) { border-bottom-color: var(--j-green); }
+
+/* 2. The Expandable Text Logic */
+.more-content {
+    max-height: 0; overflow: hidden; transition: max-height 0.5s ease;
+    text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px;
 }
 
-.step-card h4 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
-    color: #00BFFF;
-    margin-bottom: 15px;
+.more-content.open { max-height: 500px; }
+
+.see-more-btn {
+    background: none; border: none; color: var(--j-blue);
+    font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.85rem;
 }
 
-.step-card p {
-    color: #4a5568;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    }
+.see-more-btn.green { color: var(--j-green); }
         /* General Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
@@ -194,31 +171,81 @@
             <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time. ⚡</p>
         </div>
     </div>
-</section>
+    </section>
     <section class="process-section">
-    <h2 class="process-title">The J-System Blueprint</h2>
+    <h2 class="process-title" style="color:#020617">The J-System Solutions</h2>
     
     <div class="process-grid">
         <div class="step-card">
-            <div class="step-icon">🔗</div>
-            <h4>Connect</h4>
-            <p>Join our elite ecosystem and get plugged into the J-System infrastructure. No more wandering the digital space alone.</p>
+            <div class="step-icon">🛡️</div>
+            <h4 style="color: var(--j-blue)">THE SHIELD</h4>
+            <p>The J-System is your ultimate defense against the falling Naira. In an economy where prices double overnight, standing still is losing. We provide the infrastructure to lock your wealth in appreciating assets.</p>
+            
+            <div class="more-content" id="content1">
+                <p>• Protects against 100%+ inflation rates.<br>
+                   • Automated wealth preservation tools.<br>
+                   • Direct access to global market stability.<br>
+                   • Secure, decentralized asset management.</p>
+            </div>
+            <button class="see-more-btn" onclick="toggleText('content1', this)">SEE MORE +</button>
         </div>
 
         <div class="step-card">
-            <div class="step-icon">📚</div>
-            <h4>Learn</h4>
-            <p>Gain access to the Digital Acceleration modules. We teach you exactly how to build assets that outrun inflation.</p>
-        </div>
-
-        <div class="step-card">
-            <div class="step-icon">💰</div>
-            <h4>Dominate</h4>
-            <p>Deploy your system and start securing your purchasing power. This is where your financial shield becomes unbreakable.</p>
+            <div class="step-icon">📈</div>
+            <h4 style="color: var(--j-green)">ACCELERATION</h4>
+            <p>Traditional education is too slow for the modern world. Our system fast-tracks your digital competence, moving you from beginner to elite earner in months, not years. This is true speed.</p>
+            
+            <div class="more-content" id="content2">
+                <p>• High-income skill acquisition.<br>
+                   • Mentorship from top 1% digital earners.<br>
+                   • Real-time market analysis modules.<br>
+                   • Proven blueprints for rapid scaling.</p>
+            </div>
+            <button class="see-more-btn green" onclick="toggleText('content2', this)">SEE MORE +</button>
         </div>
     </div>
-    </section>
 
+    <button class="see-more-btn" style="margin-top: 60px; font-size: 1.2rem; border: 2px solid var(--j-blue); padding: 10px 30px; border-radius: 50px;">
+        EXPLORE THE FULL ECOSYSTEM →
+    </button>
+    </section>
+    <section class="process-section">
+    <h2 class="process-title" style="color:#020617">The J-System Solutions</h2>
+    
+    <div class="process-grid">
+        <div class="step-card">
+            <div class="step-icon">🛡️</div>
+            <h4 style="color: var(--j-blue)">THE SHIELD</h4>
+            <p>The J-System is your ultimate defense against the falling Naira. In an economy where prices double overnight, standing still is losing. We provide the infrastructure to lock your wealth in appreciating assets.</p>
+            
+            <div class="more-content" id="content1">
+                <p>• Protects against 100%+ inflation rates.<br>
+                   • Automated wealth preservation tools.<br>
+                   • Direct access to global market stability.<br>
+                   • Secure, decentralized asset management.</p>
+            </div>
+            <button class="see-more-btn" onclick="toggleText('content1', this)">SEE MORE +</button>
+        </div>
+
+        <div class="step-card">
+            <div class="step-icon">📈</div>
+            <h4 style="color: var(--j-green)">ACCELERATION</h4>
+            <p>Traditional education is too slow for the modern world. Our system fast-tracks your digital competence, moving you from beginner to elite earner in months, not years. This is true speed.</p>
+            
+            <div class="more-content" id="content2">
+                <p>• High-income skill acquisition.<br>
+                   • Mentorship from top 1% digital earners.<br>
+                   • Real-time market analysis modules.<br>
+                   • Proven blueprints for rapid scaling.</p>
+            </div>
+            <button class="see-more-btn green" onclick="toggleText('content2', this)">SEE MORE +</button>
+        </div>
+    </div>
+
+    <button class="see-more-btn" style="margin-top: 60px; font-size: 1.2rem; border: 2px solid var(--j-blue); padding: 10px 30px; border-radius: 50px;">
+        EXPLORE THE FULL ECOSYSTEM →
+    </button>
+    </section>
 <script>
     // Star Background
     const canvas = document.getElementById('starCanvas');
@@ -317,6 +344,23 @@
     window.addEventListener('resize', () => { initStars(); setupSlider(); });
     initStars(); animateStars(); setupSlider();
     setInterval(slide, 7000); 
-</script>
+    // Function to expand/collapse text
+function toggleText(id, btn) {
+    const content = document.getElementById(id);
+    content.classList.toggle('open');
+    btn.innerHTML = content.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +";
+}
+
+// Scroll Animation Logic
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('reveal');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.step-card').forEach(card => observer.observe(card));
+    </script>
 </body>
     </html>
