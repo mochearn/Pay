@@ -4,223 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOCHEARN | Official Website</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* 1. CORE RESET */
+        /* General Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #020617; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.5; }
-        #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
+        #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* 2. HEADER & UNIVERSAL MENU */
+        /* 1. Header & Sidebar */
         .sticky-header {
-            position: fixed; top: 0; left: 0; width: 100%; 
-            background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(10px);
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 20px; z-index: 1000; border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+            padding: 0 25px; z-index: 1000; border-bottom: 1px solid rgba(0, 191, 255, 0.1);
         }
-        .header-logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem; letter-spacing: 2px; }
+        .header-logo { 
+            font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 900; 
+            color: #ffffff; letter-spacing: 1px; opacity: 0; transition: opacity 0.4s ease; 
+        }
+        .header-logo.visible { opacity: 1; }
         .header-logo span { color: #00BFFF; }
-        
-        /* The Menu Button - Now works on ALL screens */
-        .menu-btn { background: none; border: none; color: #00BFFF; font-size: 1.6rem; cursor: pointer; display: block; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 10px; z-index: 1100; }
+        .menu-btn div { width: 22px; height: 1.2px; background-color: #00BFFF; border-radius: 1px; }
 
-        /* Sidebar Overlay */
         .sidebar {
-            position: fixed; top: 0; right: -100%; width: 280px; height: 100%;
-            background: #020617; z-index: 1001; transition: 0.4s;
-            padding: 40px 25px; border-left: 1px solid #00BFFF;
+            position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
+            background: #020617; border-top-left-radius: 40px;
+            border-left: 1px solid rgba(0, 191, 255, 0.3); z-index: 2000;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 40px 30px; text-align: left;
         }
-        .sidebar.active { right: 0; }
-        .sidebar a { display: block; color: white; text-decoration: none; font-size: 1.1rem; margin-bottom: 25px; font-weight: 700; font-family: 'Montserrat'; }
-        .close-btn { color: #00BFFF; font-size: 2rem; cursor: pointer; margin-bottom: 30px; display: block; text-align: right; }
+        .sidebar.active { transform: translateX(-100%); } 
+        .close-area { text-align: right; margin-bottom: 50px; }
+        .close-btn { color: #00BFFF; font-size: 1.8rem; cursor: pointer; background: none; border: none; }
+        .sidebar a { display: block; color: #f1f5f9; text-decoration: none; font-size: 1.1rem; margin-bottom: 35px; font-weight: 500; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; z-index: 1500; }
+        .overlay.active { display: block; }
 
-        /* 3. HERO & SECTIONS (Tighter Spacing) */
-        section { padding: 50px 20px; } /* Reduced from 80px/100px to bring sections closer */
-        
-        .hero { padding-top: 100px; text-align: center; }
-        .truth-tag { background: rgba(46, 204, 113, 0.1); color: #2ecc71; padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; border: 1px solid #2ecc71; margin-bottom: 15px; display: inline-block; }
-        h1, h2 { font-family: 'Montserrat', sans-serif; font-weight: 900; text-transform: uppercase; }
-        .hero h1 { font-size: 2rem; margin-bottom: 15px; line-height: 1.1; }
+        /* 2. Hero Content */
+        .logo-container { padding-top: 100px; margin-bottom: 10px; }
+        .logo { 
+            font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; 
+            letter-spacing: 5px; background: linear-gradient(135deg, #ffffff 30%, #00BFFF 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; 
+        }
+        .subtitle { font-size: 0.85rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 8px; text-transform: uppercase; }
+        .welcome-msg { max-width: 310px; margin: 25px auto; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; }
 
-        /* 4. THE LOOPS / SOLUTIONS */
-        .product-section { background: #f8fafc; color: #020617; text-align: center; }
-        .product-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 1000px; margin: 30px auto 0; }
+        /* 3. Slider Wrapper */
+        .slider-wrapper { width: 100vw; overflow: hidden; margin: 40px 0; position: relative; }
+        .slider-track { display: flex; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
+        .quote-card { 
+            display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; margin: 0 12px; flex-shrink: 0; 
+        }
+        .profile-pic { width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid #00BFFF; object-fit: cover; margin-right: 15px; }
+
+        /* 4. The Hard Truth Section (White) */
+        .rescue-section { background: #ffffff; color: #1a202c; padding: 70px 24px; text-align: center; }
+        .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 12px; }
+        .rescue-h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; line-height: 1.1; margin-bottom: 25px; text-transform: uppercase; }
+        .rescue-p { max-width: 500px; margin: 0 auto 50px; color: #4a5568; line-height: 1.7; font-size: 0.95rem; }
+        .system-content { max-width: 550px; margin: 0 auto; text-align: left; }
+        .sub-block h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #00BFFF; margin-bottom: 10px; text-transform: uppercase; }
+        .sub-block p { color: #2d3748; font-size: 0.95rem; line-height: 1.7; margin-bottom: 40px; }
+
+        /* 5. Product Solutions Section (Purple Boxes) */
+        .product-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
+        .product-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1000px; margin: 0 auto; }
         @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-        .product-card { background: white; padding: 30px; border-radius: 20px; border: 1.5px solid #e2e8f0; text-align: left; position: relative; }
-        .product-card h4 { color: #00BFFF; margin-bottom: 10px; font-size: 0.95rem; }
-        .more-content { max-height: 0; overflow: hidden; transition: 0.4s ease-out; font-size: 0.85rem; color: #4a5568; }
-        .more-content.open { max-height: 300px; margin-top: 10px; }
 
-        /* 5. ROLE PATHS */
-        .role-section { background: #fff; color: #020617; text-align: center; }
-        .role-card { padding: 30px; background: #f8fafc; border-radius: 20px; border: 1px solid rgba(168, 85, 247, 0.2); margin-bottom: 20px; transition: 0.3s; }
-        .role-btn { display: inline-block; padding: 12px 25px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; text-decoration: none; margin-top: 15px; border: 2px solid #00BFFF; color: #00BFFF; }
+        .product-card {
+            padding: 30px; background: white; border-radius: 20px;
+            border: 1.5px solid #A855F7; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            opacity: 0; transform: translateY(30px); transition: all 0.6s ease;
+        }
+        .product-card.reveal { opacity: 1; transform: translateY(0); }
+        .product-card h4 { font-family: 'Montserrat', sans-serif; margin-bottom: 12px; font-size: 1.2rem; }
+        .product-card p { color: #4a5568; font-size: 0.9rem; line-height: 1.6; }
 
-        /* 6. STATS (Dark Bar) */
-        .stats-bar { background: #020617; display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 40px 20px; border-top: 1px solid rgba(0, 191, 255, 0.1); }
-        .stat-box { text-align: center; min-width: 100px; }
-        .stat-num { display: block; color: #00BFFF; font-weight: 900; font-size: 1.8rem; font-family: 'Montserrat'; }
-        .stat-lab { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* 7. FAQ (Interactive) */
-        .faq-item { margin-bottom: 10px; border: 1px solid #f1f5f9; border-radius: 12px; text-align: left; }
-        .faq-q { padding: 15px; background: #f8fafc; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; font-size: 0.85rem; color: #020617; }
-        .faq-a { max-height: 0; overflow: hidden; transition: 0.3s; padding: 0 15px; font-size: 0.8rem; color: #64748b; }
-        .faq-item.active .faq-a { max-height: 150px; padding: 15px; }
-
-        /* 8. HEAVY FOOTER */
-        footer { background: #020617; padding: 60px 20px 30px; border-top: 1px solid rgba(0, 191, 255, 0.1); color: #94a3b8; }
-        .footer-grid { display: grid; gap: 40px; max-width: 1100px; margin: 0 auto; }
-        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
-        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
-        .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; transition: 0.3s; font-size: 1.2rem; }
-        .social-icon:hover { background: #00BFFF; transform: translateY(-3px); }
-        .disclaimer { font-size: 0.7rem; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
+        .more-content.open { max-height: 600px; }
+        .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <canvas id="starCanvas"></canvas>
+<canvas id="starCanvas"></canvas>
 
-    <header class="sticky-header">
-        <div class="header-logo">MO-<span>CHEARN</span></div>
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    </header>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+<nav class="sidebar" id="sidebar">
+    <div class="close-area"><button class="close-btn" onclick="toggleMenu()">✕</button></div>
+    <a href="#">HOME</a>
+    <a href="#">THE J-SYSTEM</a>
+    <a href="#">ACADEMY</a>
+    <a href="#">COMMUNITY</a>
+    <a href="#">CONTACT US</a>
+</nav>
 
-    <div class="sidebar" id="mainSidebar">
-        <span class="close-btn" onclick="toggleMenu()">×</span>
-        <a href="#" onclick="toggleMenu()">HOME</a>
-        <a href="#" onclick="toggleMenu()">THE J-SYSTEM</a>
-        <a href="#" onclick="toggleMenu()">ACADEMY</a>
-        <a href="#" onclick="toggleMenu()">CATALYST HUB</a>
-        <a href="#" onclick="toggleMenu()">LEGAL</a>
+<header class="sticky-header">
+    <div class="header-logo" id="headerLogo">MOCH<span>EARN</span></div>
+    <button class="menu-btn" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+    </button>
+</header>
+
+<div class="logo-container">
+    <div class="logo">MOCHEARN</div>
+    <div class="subtitle">ECOSYSTEM</div>
+</div>
+
+<div class="welcome-msg">
+    The digital frontier is here. We provide the elite tools you need to outpace inflation and dominate the new economy.
+</div>
+
+<section class="slider-wrapper">
+    <div class="slider-track" id="quoteTrack"></div>
+</section>
+
+<section class="rescue-section">
+    <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
+    <h2 class="rescue-h2">The Economy is Changing. Are You?</h2>
+    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Protect your purchasing power and build your digital fortress today.</p>
+    
+    <div class="system-content">
+        <div class="sub-block">
+            <h3>SHIELD</h3>
+            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate.</p>
+        </div>
+        <div class="sub-block">
+            <h3>ACCELERATION</h3>
+            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time.</p>
+        </div>
+    </div>
+</section>
+
+<section class="product-section">
+    <h2 style="color:#020617; font-family:'Montserrat'; margin-bottom:40px;">THE J-SYSTEM SOLUTIONS</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <div style="font-size: 2rem; margin-bottom:10px;">🛡️</div>
+            <h4 style="color:#00BFFF">WEALTH SHIELD</h4>
+            <p>This is where we secure your value. The Wealth Shield is designed to convert local struggles into global stability. We use the J-System to ensure your money never loses its power again.</p>
+            <div class="more-content" id="m1">
+                <p>• Automated inflation protection.<br>
+                   • Real-time asset monitoring.<br>
+                   • Diversified dollar-backed portfolios.<br>
+                   • 24/7 wealth preservation support.</p>
+            </div>
+            <button class="see-more-btn" onclick="toggleText('m1', this)">SEE MORE +</button>
+        </div>
+
+        <div class="product-card">
+            <div style="font-size: 2rem; margin-bottom:10px;">⚡</div>
+            <h4 style="color:#2ecc71">DIGITAL VELOCITY</h4>
+            <p>Speed is the new currency. We provide the high-income blueprints that move you from zero to elite status. No fluff, just the exact steps to dominate the modern digital market.</p>
+            <div class="more-content" id="m2">
+                <p>• High-ticket sales architecture.<br>
+                   • Advanced funnel systems.<br>
+                   • Lead generation mastery.<br>
+                   • Global scaling strategies.</p>
+            </div>
+            <button class="see-more-btn" style="color:#2ecc71" onclick="toggleText('m2', this)">SEE MORE +</button>
+        </div>
     </div>
 
-    <section class="hero">
-        <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
-        <h1>THE ECONOMY IS CHANGING.<br>ARE YOU?</h1>
-        <p style="font-size: 0.9rem; color: #94a3b8; max-width: 500px; margin: 0 auto;">Nigeria is facing a massive shift. The J-System is built to be your digital shield against inflation.</p>
-    </section>
+    <button class="see-more-btn" style="margin-top: 60px; font-size: 1rem; border: 2.5px solid #00BFFF; padding: 12px 35px; border-radius: 50px; color:#020617">
+        EXPLORE FULL J-SYSTEM →
+    </button>
+</section>
 
-    <section class="product-section">
-        <h2>THE J-SYSTEM SOLUTIONS</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <h4>🛡️ WEALTH SHIELD</h4>
-                <p style="font-size: 0.85rem;">Secure your value in a falling economy.</p>
-                <div id="m1" class="more-content">
-                    • Automated inflation protection.<br>
-                    • Dollar-backed asset monitoring.
+<script>
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function initStars() {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        stars = [];
+        for (let i = 0; i < 150; i++) {
+            stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.5, speed: Math.random() * 0.4 + 0.1 });
+        }
+    }
+    function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'white';
+        stars.forEach(star => {
+            ctx.beginPath(); ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2); ctx.fill();
+            star.y -= star.speed; if (star.y < 0) star.y = canvas.height;
+        });
+        requestAnimationFrame(animateStars);
+    }
+
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+    window.addEventListener('scroll', () => {
+        const hLogo = document.getElementById('headerLogo');
+        const mainLogo = document.querySelector('.logo-container');
+        if (window.scrollY > mainLogo.offsetHeight) hLogo.classList.add('visible');
+        else hLogo.classList.remove('visible');
+    });
+
+    function toggleText(id, btn) {
+        const content = document.getElementById(id);
+        content.classList.toggle('open');
+        btn.innerHTML = content.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +";
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+
+    // RESTORED FULL 20 MEMBERS
+    const members = [
+        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=1" },
+        { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "https://i.pravatar.cc/150?u=2" },
+        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" },
+        { name: "John Richard", text: "Build your own acceleration.", img: "https://i.pravatar.cc/150?u=4" },
+        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=5" },
+        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=6" },
+        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=7" },
+        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=8" },
+        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=9" },
+        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=10" },
+        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=11" },
+        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=12" },
+        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=13" },
+        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=14" },
+        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=15" },
+        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=16" },
+        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=17" },
+        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=18" },
+        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=19" },
+        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=20" }
+    ];
+
+    const track = document.getElementById('quoteTrack');
+    let index = 0;
+    function setupSlider() {
+        const fullList = [...members, ...members]; 
+        track.innerHTML = fullList.map(m => `
+            <div class="quote-card">
+                <img class="profile-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://ui-avatars.com/api/?name=${m.name}&background=00BFFF&color=fff'">
+                <div style="text-align:left;">
+                    <p style="font-size:0.75rem; font-style:italic;">"${m.text}"</p>
+                    <div style="display:flex; align-items:center; gap:4px; margin-top:5px;">
+                        <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name}</b>
+                        <img src="https://img.icons8.com/color/48/verified-badge.png" style="width:12px; height:12px;">
+                    </div>
                 </div>
-                <button style="background:none; border:none; color:#00BFFF; font-weight:800; cursor:pointer; margin-top:10px;" onclick="toggleText('m1')">SEE MORE +</button>
             </div>
-            <div class="product-card">
-                <h4>⚡ ACCELERATION</h4>
-                <p style="font-size: 0.85rem;">High-ticket blueprints for fast growth.</p>
-                <div id="m2" class="more-content">
-                    • Sales funnel automation.<br>
-                    • Global scaling strategies.
-                </div>
-                <button style="background:none; border:none; color:#00BFFF; font-weight:800; cursor:pointer; margin-top:10px;" onclick="toggleText('m2')">SEE MORE +</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="role-section">
-        <h2>CHOOSE YOUR PATH</h2>
-        <div class="role-card">
-            <h3>🚀 The Catalyst</h3>
-            <p style="font-size: 0.8rem; margin-top: 10px;">Scale the ecosystem and earn rewards.</p>
-            <a href="#" class="role-btn">BECOME A CATALYST</a>
-        </div>
-        <div class="role-card">
-            <h3>🛠️ The Architect</h3>
-            <p style="font-size: 0.8rem; margin-top: 10px;">Deploy your products into our system.</p>
-            <a href="#" class="role-btn" style="border-color:#A855F7; color:#A855F7;">BECOME A VENDOR</a>
-        </div>
-    </section>
-
-    <div class="stats-bar">
-        <div class="stat-box"><span class="stat-num">5,000+</span><span class="stat-lab">Members</span></div>
-        <div class="stat-box"><span class="stat-num">24/7</span><span class="stat-lab">Uptime</span></div>
-        <div class="stat-box"><span class="stat-num">100%</span><span class="stat-lab">Secure</span></div>
-    </div>
-
-    <section style="background:#fff; color:#020617; text-align:center;">
-        <h2>GOT QUESTIONS?</h2>
-        <div style="max-width: 600px; margin: 30px auto;">
-            <div class="faq-item" onclick="this.classList.toggle('active')">
-                <div class="faq-q">What is the J-System? <span>+</span></div>
-                <div class="faq-a">A digital infrastructure built for financial acceleration.</div>
-            </div>
-            <div class="faq-item" onclick="this.classList.toggle('active')">
-                <div class="faq-q">Can beginners join? <span>+</span></div>
-                <div class="faq-a">Correct! We take you from zero to elite level.</div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <h4 style="color:white; margin-bottom:15px;">MOCHEARN</h4>
-                <p style="font-size:0.8rem;">The J-System is built to protect your future.</p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 style="color:white; margin-bottom:15px;">LEGAL</h4>
-                <p style="font-size:0.8rem;">• Privacy Policy<br>• Cookies<br>• Disclaimer</p>
-            </div>
-            <div>
-                <h4 style="color:white; margin-bottom:15px;">SUPPORT</h4>
-                <p style="font-size:0.8rem;">• Help Center<br>• Academy<br>• Contact Us</p>
-            </div>
-        </div>
-        <div class="disclaimer">
-            &copy; 2026 Mochearn Ecosystem | Powered by The J-System 🦾🚀
-        </div>
-    </footer>
-
-    <script>
-        // BACKGROUND STARS
-        const canvas = document.getElementById('starCanvas');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
-        function initStars() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            stars = [];
-            for (let i = 0; i < 100; i++) {
-                stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, size: Math.random()*1.5, speed: Math.random()*0.3 });
-            }
+        `).join('');
+        track.style.transform = `translateX(${(window.innerWidth / 2) - 152}px)`;
+    }
+    function slide() {
+        index++;
+        const centerOffset = (window.innerWidth / 2) - 152;
+        track.style.transition = "transform 0.8s ease-in-out";
+        track.style.transform = `translateX(${centerOffset - (index * 304)}px)`;
+        if (index >= members.length) {
+            setTimeout(() => { track.style.transition = "none"; index = 0; track.style.transform = `translateX(${centerOffset}px)`; }, 800);
         }
-        function animateStars() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = '#fff';
-            stars.forEach(s => {
-                ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI*2); ctx.fill();
-                s.y += s.speed; if(s.y > canvas.height) s.y = 0;
-            });
-            requestAnimationFrame(animateStars);
-        }
-        initStars(); animateStars(); window.onresize = initStars;
+    }
 
-        // MENU TOGGLE
-        function toggleMenu() {
-            document.getElementById('mainSidebar').classList.toggle('active');
-        }
-
-        // TOGGLE TEXT
-        function toggleText(id) {
-            document.getElementById(id).classList.toggle('open');
-        }
-    </script>
+    initStars(); animateStars(); setupSlider();
+    setInterval(slide, 7000);
+</script>
 </body>
-    </html>
+        </html>
