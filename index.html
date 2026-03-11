@@ -6,54 +6,79 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-       /* TELEGRAM FLOATING BUTTON - LEFT SIDE & SMALLER */
+  /* DRAGGABLE & MODAL STYLING */
 .floating-tg-btn {
     position: fixed;
     bottom: 25px;
-    left: 20px; /* Moved to the left side */
+    left: 20px;
     z-index: 9999;
-    text-decoration: none;
-    transition: transform 0.3s ease;
+    touch-action: none; /* Required for mobile dragging */
 }
 
 .tg-btn-content {
-    background: #0088cc; 
+    background: #0088cc;
     display: flex;
     align-items: center;
-    padding: 8px 15px; /* Smaller padding */
+    padding: 8px 15px;
     border-radius: 50px;
     box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    border: 1.5px solid white;
 }
 
-.tg-btn-content img {
-    width: 18px; /* Smaller icon */
-    height: 18px;
-    margin-right: 8px;
-}
+.tg-btn-content img { width: 18px; height: 18px; margin-right: 8px; }
 
-.tg-btn-content span {
+.tg-btn-content span { color: white; font-weight: 800; font-size: 0.65rem; font-family: 'Poppins', sans-serif; }
+
+.close-tg {
+    position: absolute;
+    top: -8px;
+    right: -5px;
+    background: #ff4757;
     color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* POP-UP MODAL DESIGN */
+.tg-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(2, 6, 23, 0.9);
+    z-index: 10001;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    width: 85%;
+    max-width: 350px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-btn {
+    display: block;
+    background: #0088cc;
+    color: white;
+    padding: 14px;
+    border-radius: 50px;
+    text-decoration: none;
     font-weight: 800;
-    font-size: 0.65rem; /* Smaller text */
-    letter-spacing: 0.5px;
-    font-family: 'Poppins', sans-serif;
+    margin: 20px 0;
 }
 
-/* Same pulse animation */
-.floating-tg-btn {
-    animation: tg-pulse 2s infinite;
-}
-
-@keyframes tg-pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.6); }
-    70% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(0, 136, 204, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 136, 204, 0); }
-}
-
-.floating-tg-btn:active {
-    transform: scale(0.9);
-        }
+.not-now { background: none; border: none; color: #64748b; font-size: 0.8rem; cursor: pointer; }
 /* THE BULLETPROOF MARKETPLACE CSS */
 
 .marketplace-preview {
@@ -608,12 +633,60 @@
 
     initStars(); animateStars(); setupSlider();
     setInterval(slide, 7000);
+    // 1. POP-UP LOGIC
+function showTgPopup(e) {
+    e.stopPropagation();
+    document.getElementById('tgModal').style.display = 'flex';
+}
+
+function closeTgModal() {
+    document.getElementById('tgModal').style.display = 'none';
+    document.getElementById('dragContainer').style.display = 'none';
+}
+
+// 2. MOBILE DRAG LOGIC
+const dragItem = document.querySelector("#dragContainer");
+let active = false;
+let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+dragItem.addEventListener("touchstart", (e) => {
+    initialX = e.touches[0].clientX - xOffset;
+    initialY = e.touches[0].clientY - yOffset;
+    if (e.target.tagName !== 'BUTTON') active = true;
+}, false);
+
+dragItem.addEventListener("touchend", () => {
+    initialX = currentX; initialY = currentY;
+    active = false;
+}, false);
+
+dragItem.addEventListener("touchmove", (e) => {
+    if (active) {
+        e.preventDefault();
+        currentX = e.touches[0].clientX - initialX;
+        currentY = e.touches[0].clientY - initialY;
+        xOffset = currentX; yOffset = currentY;
+        dragItem.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    }
+}, false);
 </script>
-    <a href="https://t.me/YOUR_CHANNEL_USERNAME" class="floating-tg-btn" target="_blank">
-    <div class="tg-btn-content">
-        <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram">
-        <span>JOIN COMMUNITY</span>
-    </div>
+    <div id="dragContainer" class="floating-tg-btn">
+    <button class="close-tg" onclick="showTgPopup(event)">×</button>
+    <a href="https://t.me/YOUR_CHANNEL_USERNAME" class="tg-link" target="_blank">
+        <div class="tg-btn-content">
+            <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram">
+            <span>JOIN COMMUNITY</span>
+        </div>
     </a>
+</div>
+
+<div id="tgModal" class="tg-modal">
+    <div class="modal-content">
+        <h3>WAIT! DON'T MISS OUT 🚀</h3>
+        <p>The J-System is built for speed. Join 1,000+ members receiving weekly blueprints and the Sunday Blessing updates.</p>
+        <a href="https://t.me/YOUR_CHANNEL_USERNAME" class="modal-btn">JOIN TELEGRAM NOW</a>
+        <button class="not-now" onclick="closeTgModal()">I'll join later</button>
+    </div>
+</div>
 </body>
     </html>
