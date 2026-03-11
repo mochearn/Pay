@@ -6,6 +6,89 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Product Preview Section */
+.marketplace-preview {
+    padding: 80px 20px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.product-scroll-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hides scrollbar on Firefox */
+}
+
+.product-scroll-container::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
+
+.mini-product-card {
+    min-width: 280px;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #f1f5f9;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+    text-align: left;
+}
+
+.prod-tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #00BFFF;
+    background: rgba(0, 191, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.prod-price {
+    font-weight: 900;
+    color: #020617;
+    margin-top: 15px;
+    display: block;
+}
+
+/* NEW ANIMATION: Slide in from Right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 1s ease-out;
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+        /* Live Stats Bar */
+.live-stats {
+    background: #020617;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    border-top: 1px solid rgba(0, 191, 255, 0.1);
+}
+.stat-item { text-align: center; min-width: 120px; }
+.stat-val { display: block; font-family: 'Montserrat'; font-size: 2rem; font-weight: 900; color: #00BFFF; }
+.stat-lab { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+
+/* How It Works Section */
+.how-it-works { padding: 80px 20px; background: #f8fafc; text-align: center; color: #020617; }
+.steps-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1100px; margin: 50px auto 0; }
+@media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+.step-card { padding: 30px; position: relative; }
+.step-num { font-size: 4rem; font-weight: 900; color: rgba(0, 191, 255, 0.1); position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+.step-content { position: relative; z-index: 2; }
+.step-content h3 { font-family: 'Montserrat'; font-size: 1.1rem; margin-bottom: 15px; }
+
+/* Sunday Blessing Section */
+.payout-section { padding: 60px 20px; background: linear-gradient(135deg, #020617 0%, #0f172a 100%); text-align: center; }
+.payout-card { max-width: 700px; margin: 0 auto; border: 2px dashed #2ecc71; padding: 40px; border-radius: 20px; background: rgba(46, 204, 113, 0.05); }
         /* Triple Role Section */
 .roles-container {
     padding: 60px 20px;
@@ -269,6 +352,74 @@
             <h3>THE LEARNER</h3>
             <p>The seeker of knowledge. Access world-class modules designed to give you high-income skills in today's economy.</p>
             <a href="#" class="role-action-btn" style="background:#2ecc71;">BROWSE COURSES</a>
+        </div>
+    </div>
+    </section>
+    <section class="live-stats">
+    <div class="stat-item"><span class="stat-val">10,000+</span><span class="stat-lab">Catalysts</span></div>
+    <div class="stat-item"><span class="stat-val">₦50M+</span><span class="stat-lab">Total Payouts</span></div>
+    <div class="stat-item"><span class="stat-val">50+</span><span class="stat-lab">Digital Products</span></div>
+</section>
+
+<section class="how-it-works">
+    <h2 style="font-family:'Montserrat';">3 STEPS TO DOMINATE</h2>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-content">
+                <h3>REGISTER</h3>
+                <p style="font-size:0.85rem; color:#64748b;">Secure your access to the J-System ecosystem and set up your master profile.</p>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-content">
+                <h3>SELECT & DEPLOY</h3>
+                <p style="font-size:0.85rem; color:#64748b;">Choose a high-demand product from our marketplace and get your unique link.</p>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-content">
+                <h3>WITHDRAW</h3>
+                <p style="font-size:0.85rem; color:#64748b;">Request your commissions every Saturday and receive your alert on Sunday.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="payout-section">
+    <div class="payout-card">
+        <h2 style="color:#2ecc71; font-family:'Montserrat'; margin-bottom:15px;">THE SUNDAY BLESSING 💸</h2>
+        <p style="color:#cbd5e1; font-size:0.9rem; line-height:1.6;">At J-System, we don't hold your sweat. Request your earnings on <strong>Saturdays</strong> and wake up to a direct bank alert every <strong>Sunday</strong>. No stories, just velocity.</p>
+    </div>
+</section>
+    <section class="marketplace-preview">
+    <div style="text-align: left; max-width: 1100px; margin: 0 auto 30px;">
+        <h2 style="font-family:'Montserrat'; font-size: 1.5rem;">HOT PRODUCTS 🔥</h2>
+        <p style="color:#64748b; font-size: 0.85rem;">Top selling modules in the J-System marketplace.</p>
+    </div>
+
+    <div class="product-scroll-container reveal-right">
+        <div class="mini-product-card">
+            <span class="prod-tag">MARKETING</span>
+            <h4 style="font-size: 0.95rem;">WhatsApp Automation Mastery</h4>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">Learn to close sales while you sleep with AI automation.</p>
+            <span class="prod-price">₦25,000</span>
+        </div>
+
+        <div class="mini-product-card">
+            <span class="prod-tag">FINANCE</span>
+            <h4 style="font-size: 0.95rem;">Dollar Income Blueprint</h4>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">Earning in USD from the comfort of your home in Nigeria.</p>
+            <span class="prod-price">₦40,000</span>
+        </div>
+
+        <div class="mini-product-card">
+            <span class="prod-tag">SALES</span>
+            <h4 style="font-size: 0.95rem;">The J-System Accelerator</h4>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">The ultimate guide to becoming a Top Catalyst.</p>
+            <span class="prod-price">₦15,000</span>
         </div>
     </div>
     </section>
