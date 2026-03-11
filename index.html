@@ -6,71 +6,36 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
- /* THE BULLETPROOF J-SYSTEM STYLING */
-
-.floating-tg-btn {
-    position: fixed; bottom: 25px; left: 20px; z-index: 9999; touch-action: none;
+ .floating-tg-btn {
+    position: fixed; bottom: 25px; left: 20px; z-index: 9999;
+    touch-action: none; transition: opacity 0.5s ease, transform 0.3s ease;
+    display: flex; align-items: center;
 }
 
-/* 1. BUTTON CONTAINMENT: Correct blue background and rounded 'pipping' */
 .tg-btn-content-pro {
-    background: #0088cc; /* Official Telegram Blue */
-    display: flex; align-items: center; justify-content: center;
-    padding: 10px 20px;
-    border-radius: 50px;
-    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.5);
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    background: #0088cc !important; /* Forces the blue background */
+    display: flex; align-items: center;
+    padding: 8px 16px; border-radius: 50px;
+    box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
+    border: 2px solid white;
 }
 
-/* 2. Remove Underline */
+.tg-icon-img { width: 20px; height: 20px; margin-right: 8px; border: none; }
+
+.tg-text-pro { color: white !important; font-weight: 800; font-size: 0.7rem; text-decoration: none !important; letter-spacing: 0.5px; }
+
 .tg-link-no-underline { text-decoration: none !important; }
 
-/* 3. ICON FIX: Define the placeholder */
-.tg-icon-img {
-    width: 22px; height: 22px; margin-right: 12px;
-}
-
-/* 4. TEXT FIX: White text, no outline/underline on text itself */
-.tg-text-pro {
-    color: white !important; font-weight: 800; font-size: 0.75rem; font-family: 'Poppins', sans-serif; text-transform: uppercase; letter-spacing: 1px;
-}
-
-/* 'X' BUTTON: Pro style */
 .close-tg-x {
-    position: absolute; top: -10px; right: -5px;
-    background: #ff4757; color: white; border: 2px solid white; border-radius: 50%;
-    width: 24px; height: 24px; font-size: 14px; font-weight: bold; cursor: pointer; z-index: 10000;
+    position: absolute; top: -10px; right: -5px; background: #ff4757;
+    color: white; border: 2px solid white; border-radius: 50%;
+    width: 22px; height: 22px; font-size: 14px; cursor: pointer; z-index: 10000;
 }
 
-/* --- MODAL (POP-UP) FIXES --- */
-
-.tg-modal {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(2, 6, 23, 0.85); z-index: 10001; align-items: center; justify-content: center; backdrop-filter: blur(8px);
-}
-
-.modal-content-pro {
-    background: white; padding: 40px 30px; border-radius: 30px; width: 85%; max-width: 380px; text-align: center;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.rocket-icon { font-size: 2.5rem; margin-bottom: 20px; }
-
-.modal-content-pro h3 { font-size: 1.2rem; color: #020617; font-weight: 800; margin-bottom: 10px; }
-
-/* 5. MODAL BODY TEXT FIX: Pro dark-grey color, regular weight */
-.modal-body-text {
-    font-size: 0.85rem; color: #475569; line-height: 1.6; font-weight: 400; margin-bottom: 25px;
-}
-
-.modal-btn-pro {
-    display: block; background: #0088cc; color: white; padding: 15px; border-radius: 50px;
-    text-decoration: none; font-weight: 800; margin: 20px 0 15px;
-}
-
-.not-now-pro {
-    background: none; border: none; color: #64748b; font-size: 0.8rem; cursor: pointer;
-    }
+/* Modal styling stays the same as previous */
+.tg-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10001; align-items: center; justify-content: center; }
+.modal-content-pro { background: white; padding: 30px; border-radius: 20px; width: 80%; max-width: 350px; text-align: center; }
+.modal-btn-pro { display: block; background: #0088cc; color: white; padding: 12px; border-radius: 50px; text-decoration: none; margin: 15px 0; font-weight: bold; }
 /* THE BULLETPROOF MARKETPLACE CSS */
 
 .marketplace-preview {
@@ -625,48 +590,26 @@
 
     initStars(); animateStars(); setupSlider();
     setInterval(slide, 7000);
-  // 1. POP-UP & MODAL LOGIC (Updated for New Names)
-function showTgPopup(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    document.getElementById('tgModal').style.display = 'flex';
-}
+  <div id="dragContainer" class="floating-tg-btn">
+    <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
+    <a href="https://t.me/YOUR_CHANNEL_USERNAME" class="tg-link-no-underline" target="_blank">
+        <div class="tg-btn-content-pro">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="TG" class="tg-icon-img">
+            <span class="tg-text-pro">JOIN COMMUNITY</span>
+        </div>
+    </a>
+</div>
 
-function closeTgModal() {
-    document.getElementById('tgModal').style.display = 'none';
-    document.getElementById('dragContainer').style.display = 'none';
-}
-
-// 2. MOBILE DRAG LOGIC (Bulletproof for J-System)
-const dragItem = document.querySelector("#dragContainer");
-let active = false;
-let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
-
-dragItem.addEventListener("touchstart", (e) => {
-    // This makes sure clicking 'X' doesn't start a drag
-    if (e.target.classList.contains('close-tg-x')) return;
-
-    initialX = e.touches[0].clientX - xOffset;
-    initialY = e.touches[0].clientY - yOffset;
-    active = true;
-}, {passive: false});
-
-dragItem.addEventListener("touchend", () => {
-    initialX = currentX; 
-    initialY = currentY;
-    active = false;
-}, false);
-
-dragItem.addEventListener("touchmove", (e) => {
-    if (active) {
-        e.preventDefault();
-        currentX = e.touches[0].clientX - initialX;
-        currentY = e.touches[0].clientY - initialY;
-        xOffset = currentX; 
-        yOffset = currentY;
-        dragItem.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-    }
-}, {passive: false});
+<div id="tgModal" class="tg-modal">
+    <div class="modal-content-pro">
+        <div class="rocket-icon">🚀</div>
+        <h3>WAIT! DON'T MISS OUT</h3>
+        <p class="modal-body-text">The J-System is built for velocity. Join 1,000+ members getting weekly Sunday Blessing blueprints to dominate.</p>
+        <a href="https://t.me/YOUR_CHANNEL_USERNAME" class="modal-btn-pro">JOIN TELEGRAM NOW</a>
+        <button class="not-now-pro" onclick="closeTgModal()">I'll join later</button>
+    </div>
+</div>
+  
 </script>
     <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
