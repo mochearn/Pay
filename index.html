@@ -6,6 +6,63 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Product Preview Section */
+.marketplace-preview {
+    padding: 80px 20px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.product-scroll-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hides scrollbar on Firefox */
+}
+
+.product-scroll-container::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
+
+.mini-product-card {
+    min-width: 280px;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #f1f5f9;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+    text-align: left;
+}
+
+.prod-tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #00BFFF;
+    background: rgba(0, 191, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.prod-price {
+    font-weight: 900;
+    color: #020617;
+    margin-top: 15px;
+    display: block;
+}
+
+/* NEW ANIMATION: Slide in from Right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 1s ease-out;
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+        }
         /* Live Stats Bar */
 .live-stats {
     background: #020617;
@@ -337,6 +394,35 @@
         <p style="color:#cbd5e1; font-size:0.9rem; line-height:1.6;">At J-System, we don't hold your sweat. Request your earnings on <strong>Saturdays</strong> and wake up to a direct bank alert every <strong>Sunday</strong>. No stories, just velocity.</p>
     </div>
                                </section>
+    <section class="marketplace-preview">
+    <div style="text-align: left; max-width: 1100px; margin: 0 auto 30px;">
+        <h2 style="font-family:'Montserrat'; font-size: 1.5rem;">HOT PRODUCTS 🔥</h2>
+        <p style="color:#64748b; font-size: 0.85rem;">Top selling modules in the J-System marketplace.</p>
+    </div>
+
+    <div class="product-scroll-container reveal-right">
+        <div class="mini-product-card">
+            <span class="prod-tag">MARKETING</span>
+            <h4 style="font-size: 0.95rem;">WhatsApp Automation Mastery</h4>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">Learn to close sales while you sleep with AI automation.</p>
+            <span class="prod-price">₦25,000</span>
+        </div>
+
+        <div class="mini-product-card">
+            <span class="prod-tag">FINANCE</span>
+            <h4 style="font-size: 0.95rem;">Dollar Income Blueprint</h4>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">Earning in USD from the comfort of your home in Nigeria.</p>
+            <span class="prod-price">₦40,000</span>
+        </div>
+
+        <div class="mini-product-card">
+            <span class="prod-tag">SALES</span>
+            <h4 style="font-size: 0.95rem;">The J-System Accelerator</h4>
+            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">The ultimate guide to becoming a Top Catalyst.</p>
+            <span class="prod-price">₦15,000</span>
+        </div>
+    </div>
+    </section>
 
 <script>
     const canvas = document.getElementById('starCanvas');
