@@ -11,220 +11,167 @@
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* 1. Header & Sidebar */
+        /* Header & Sidebar */
         .sticky-header {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 25px; z-index: 1000; border-bottom: 1px solid rgba(0, 191, 255, 0.1);
         }
-        .header-logo { 
-            font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 900; 
-            color: #ffffff; letter-spacing: 1px; opacity: 0; transition: opacity 0.4s ease; 
-        }
+        .header-logo { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 900; color: #ffffff; opacity: 0; transition: opacity 0.4s ease; }
         .header-logo.visible { opacity: 1; }
         .header-logo span { color: #00BFFF; }
-        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 10px; z-index: 1100; }
-        .menu-btn div { width: 22px; height: 1.2px; background-color: #00BFFF; border-radius: 1px; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 1100; }
+        .menu-btn div { width: 22px; height: 1.2px; background-color: #00BFFF; }
 
         .sidebar {
             position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
-            background: #020617; border-top-left-radius: 40px;
-            border-left: 1px solid rgba(0, 191, 255, 0.3); z-index: 2000;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 40px 30px; text-align: left;
+            background: #020617; border-left: 1px solid rgba(0, 191, 255, 0.3); z-index: 2000;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); padding: 40px 30px; text-align: left;
         }
         .sidebar.active { transform: translateX(-100%); } 
-        .close-area { text-align: right; margin-bottom: 50px; }
-        .close-btn { color: #00BFFF; font-size: 1.8rem; cursor: pointer; background: none; border: none; }
-        .sidebar a { display: block; color: #f1f5f9; text-decoration: none; font-size: 1.1rem; margin-bottom: 35px; font-weight: 500; }
+        .sidebar a { display: block; color: #f1f5f9; text-decoration: none; font-size: 1.1rem; margin-bottom: 35px; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; z-index: 1500; }
         .overlay.active { display: block; }
 
-        /* 2. Hero Content */
-        .logo-container { padding-top: 100px; margin-bottom: 10px; }
-        .logo { 
-            font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; 
-            letter-spacing: 5px; background: linear-gradient(135deg, #ffffff 30%, #00BFFF 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; 
-        }
-        .subtitle { font-size: 0.85rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 8px; text-transform: uppercase; }
-        .welcome-msg { max-width: 310px; margin: 25px auto; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; }
+        /* Hero */
+        .logo-container { padding-top: 100px; }
+        .logo { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; background: linear-gradient(135deg, #ffffff 30%, #00BFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 0.85rem; color: #00BFFF; letter-spacing: 4px; font-weight: 800; margin-top: 8px; }
 
-        /* 3. Slider Wrapper */
-        .slider-wrapper { width: 100vw; overflow: hidden; margin: 40px 0; position: relative; }
-        .slider-track { display: flex; transition: transform 0.8s cubic-bezier(0.45, 0, 0.55, 1); width: max-content; }
-        .quote-card { 
-            display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; margin: 0 12px; flex-shrink: 0; 
-        }
-        .profile-pic { width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid #00BFFF; object-fit: cover; margin-right: 15px; }
+        /* Slider */
+        .slider-wrapper { width: 100vw; overflow: hidden; margin: 40px 0; }
+        .slider-track { display: flex; width: max-content; }
+        .quote-card { display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); width: 280px; margin: 0 12px; }
+        .profile-pic { width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid #00BFFF; margin-right: 15px; }
 
-        /* 4. Sections Styling */
-        .rescue-section { background: #ffffff; color: #1a202c; padding: 70px 24px; text-align: center; }
-        .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 12px; }
-        .rescue-h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; line-height: 1.1; margin-bottom: 25px; text-transform: uppercase; }
-        .rescue-p { max-width: 500px; margin: 0 auto 50px; color: #4a5568; line-height: 1.7; font-size: 0.95rem; }
-        .system-content { max-width: 550px; margin: 0 auto; text-align: left; }
-        .sub-block h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #00BFFF; margin-bottom: 10px; text-transform: uppercase; }
-        .sub-block p { color: #2d3748; font-size: 0.95rem; line-height: 1.7; margin-bottom: 40px; }
+        /* Rescue Section */
+        .rescue-section { background: #ffffff; color: #1a202c; padding: 70px 24px; }
+        .rescue-h2 { font-family: 'Montserrat'; font-size: 1.8rem; color: #020617; margin-bottom: 25px; }
+        .rescue-p { max-width: 500px; margin: 0 auto 50px; color: #4a5568; line-height: 1.7; }
 
-        .product-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
-        .product-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1000px; margin: 0 auto; }
-        @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
-        .product-card { padding: 30px; background: white; border-radius: 20px; border: 1.5px solid #A855F7; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        /* Product Solutions */
+        .product-section { padding: 80px 24px; background: #f8fafc; color: #020617; }
+        .product-card { padding: 30px; background: white; border-radius: 20px; border: 1.5px solid #A855F7; margin-bottom: 20px; text-align: left; }
+        .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .more-content.open { max-height: 500px; margin-top: 15px; }
 
-        /* Roles & Stats */
-        .roles-container { padding: 60px 20px; background: #ffffff; text-align: center; }
-        .roles-grid { display: grid; grid-template-columns: 1fr; gap: 25px; max-width: 1100px; margin: 40px auto 0; }
-        @media (min-width: 768px) { .roles-grid { grid-template-columns: repeat(3, 1fr); } }
-        .role-card { background: #f8fafc; padding: 40px 25px; border-radius: 24px; border: 1.5px solid #e2e8f0; text-align: center; }
-        .role-action-btn { display: inline-block; padding: 12px 24px; background: #020617; color: white; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 0.75rem; }
+        /* Roles Section - FIXED CONTRAST */
+        .roles-container { padding: 80px 20px; background: #ffffff; color: #020617; }
+        .role-card { background: #f8fafc; padding: 40px 25px; border-radius: 24px; border: 1.5px solid #e2e8f0; margin-bottom: 20px; }
+        .role-card h3 { font-family: 'Montserrat'; font-weight: 900; color: #020617; margin-bottom: 15px; }
+        .role-card p { color: #334155; font-weight: 500; } /* Darker text for visibility */
 
-        .live-stats { background: #020617; padding: 40px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; border-top: 1px solid rgba(0, 191, 255, 0.1); }
-        .stat-val { display: block; font-family: 'Montserrat'; font-size: 2rem; font-weight: 900; color: #00BFFF; }
-        .stat-lab { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        /* Stats & How it Works */
+        .live-stats { background: #020617; padding: 60px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+        .stat-val { display: block; font-family: 'Montserrat'; font-size: 2.2rem; font-weight: 900; color: #00BFFF; }
+        .how-it-works { padding: 80px 20px; background: #f8fafc; color: #020617; }
+        .step-num { font-size: 4rem; font-weight: 900; color: rgba(0, 191, 255, 0.1); position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
 
-        /* How It Works & Payouts */
-        .how-it-works { padding: 80px 20px; background: #f8fafc; text-align: center; color: #020617; }
-        .steps-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1100px; margin: 50px auto 0; }
-        @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
-        .step-num { font-size: 4rem; font-weight: 900; color: rgba(0, 191, 255, 0.1); position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
-        .step-content { position: relative; z-index: 2; }
+        /* Payouts */
+        .payout-section { padding: 80px 20px; background: linear-gradient(135deg, #020617 0%, #0f172a 100%); }
+        .payout-card { border: 2px dashed #2ecc71; padding: 40px; border-radius: 20px; }
 
-        .payout-section { padding: 60px 20px; background: linear-gradient(135deg, #020617 0%, #0f172a 100%); text-align: center; }
-        .payout-card { max-width: 700px; margin: 0 auto; border: 2px dashed #2ecc71; padding: 40px; border-radius: 20px; background: rgba(46, 204, 113, 0.05); }
-
-        /* Marketplace Preview */
-        .marketplace-preview { padding: 80px 20px; background: #ffffff; text-align: center; }
-        .product-scroll-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px 10px; scroll-behavior: smooth; scrollbar-width: none; }
-        .product-scroll-container::-webkit-scrollbar { display: none; }
-        .mini-product-card { min-width: 280px; background: #fff; border-radius: 20px; border: 1px solid #f1f5f9; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); text-align: left; }
-        .prod-tag { font-size: 0.65rem; font-weight: 800; color: #00BFFF; background: rgba(0, 191, 255, 0.1); padding: 4px 10px; border-radius: 50px; display: inline-block; margin-bottom: 12px; }
-        .prod-price { font-weight: 900; color: #020617; margin-top: 15px; display: block; }
-        
-        .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
-        .reveal-right.active { opacity: 1; transform: translateX(0); }
-        .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
-        .more-content.open { max-height: 600px; }
-        .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
+        /* Marketplace */
+        .marketplace-preview { padding: 80px 20px; background: #ffffff; color: #020617; }
+        .product-scroll-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px 0; scrollbar-width: none; }
+        .mini-product-card { min-width: 280px; background: #fff; border-radius: 20px; border: 1.5px solid #f1f5f9; padding: 25px; text-align: left; }
     </style>
 </head>
 <body>
-
 <canvas id="starCanvas"></canvas>
-
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 <nav class="sidebar" id="sidebar">
-    <div class="close-area"><button class="close-btn" onclick="toggleMenu()">✕</button></div>
-    <a href="#">HOME</a>
-    <a href="#">THE J-SYSTEM</a>
-    <a href="#">ACADEMY</a>
-    <a href="#">COMMUNITY</a>
-    <a href="#">CONTACT US</a>
+    <a href="#">HOME</a><a href="#">THE J-SYSTEM</a><a href="#">ACADEMY</a><a href="#">COMMUNITY</a>
 </nav>
-
 <header class="sticky-header">
     <div class="header-logo" id="headerLogo">MOCH<span>EARN</span></div>
-    <button class="menu-btn" onclick="toggleMenu()">
-        <div></div><div></div><div></div>
-    </button>
+    <button class="menu-btn" onclick="toggleMenu()"><div></div><div></div><div></div></button>
 </header>
 
 <div class="logo-container">
     <div class="logo">MOCHEARN</div>
     <div class="subtitle">ECOSYSTEM</div>
 </div>
+<div class="welcome-msg" style="max-width:310px; margin:25px auto; color:#cbd5e1;">The digital frontier is here. We provide elite tools to outpace inflation and dominate the new economy.</div>
 
-<div class="welcome-msg">
-    The digital frontier is here. We provide the elite tools you need to outpace inflation and dominate the new economy.
-</div>
-
-<section class="slider-wrapper">
-    <div class="slider-track" id="quoteTrack"></div>
-</section>
+<section class="slider-wrapper"><div class="slider-track" id="quoteTrack"></div></section>
 
 <section class="rescue-section">
-    <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
+    <div style="color:#FF4500; font-weight:800; font-size:0.75rem;">THE HARD TRUTH 🇳🇬</div>
     <h2 class="rescue-h2">The Economy is Changing. Are You?</h2>
-    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. Protect your purchasing power and build your digital fortress today.</p>
-    <div class="system-content">
-        <div class="sub-block">
-            <h3>SHIELD</h3>
-            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and Naira devaluation.</p>
-        </div>
-        <div class="sub-block">
-            <h3>ACCELERATION</h3>
-            <p>Our Digital Acceleration system fast-tracks your learning and moves you into the top 1% record time.</p>
-        </div>
+    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Protect your purchasing power and build your digital fortress today.</p>
+    <div style="text-align:left; max-width:550px; margin:0 auto;">
+        <h3 style="color:#00BFFF; font-family:'Montserrat';">SHIELD</h3>
+        <p style="margin-bottom:30px;">The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate.</p>
+        <h3 style="color:#00BFFF; font-family:'Montserrat';">ACCELERATION</h3>
+        <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% in record time.</p>
     </div>
 </section>
 
 <section class="product-section">
-    <h2 style="color:#020617; font-family:'Montserrat'; margin-bottom:40px;">THE J-SYSTEM SOLUTIONS</h2>
-    <div class="product-grid">
-        <div class="product-card">
-            <div style="font-size: 2rem; margin-bottom:10px;">🛡️</div>
-            <h4 style="color:#00BFFF">WEALTH SHIELD</h4>
-            <p>Secure your value. The Wealth Shield converts local struggles into global stability using the J-System.</p>
-            <div class="more-content" id="m1">
-                <p>• Automated inflation protection.<br>• Dollar-backed asset monitoring.</p>
-            </div>
-            <button class="see-more-btn" onclick="toggleText('m1', this)">SEE MORE +</button>
-        </div>
-        <div class="product-card">
-            <div style="font-size: 2rem; margin-bottom:10px;">⚡</div>
-            <h4 style="color:#2ecc71">DIGITAL VELOCITY</h4>
-            <p>Speed is the new currency. We provide blueprints to move you from zero to elite status instantly.</p>
-            <div class="more-content" id="m2">
-                <p>• High-ticket sales architecture.<br>• Advanced funnel systems.</p>
-            </div>
-            <button class="see-more-btn" style="color:#2ecc71" onclick="toggleText('m2', this)">SEE MORE +</button>
-        </div>
+    <h2 style="font-family:'Montserrat'; margin-bottom:40px;">THE J-SYSTEM SOLUTIONS</h2>
+    <div class="product-card">
+        <h4 style="color:#00BFFF; font-family:'Montserrat';">WEALTH SHIELD</h4>
+        <p>This is where we secure your value. The Wealth Shield is designed to convert local struggles into global stability. We use the J-System to ensure your money never loses its power again.</p>
+        <div class="more-content" id="m1"><p>• Automated inflation protection.<br>• Real-time asset monitoring.<br>• Dollar-backed portfolios.</p></div>
+        <button onclick="toggleText('m1', this)" style="background:none; border:none; color:#00BFFF; font-weight:800; cursor:pointer; margin-top:10px;">SEE MORE +</button>
     </div>
 </section>
 
 <section class="roles-container">
-    <h2 style="color:#020617; font-family:'Montserrat';">CHOOSE YOUR PATH</h2>
-    <div class="roles-grid">
-        <div class="role-card"><h3>THE CATALYST</h3><p>Earn massive commissions paid out every Sunday.</p><a href="#" class="role-action-btn">START EARNING</a></div>
-        <div class="role-card"><h3>THE VENDOR</h3><p>List your products and scale your sales to the moon.</p><a href="#" class="role-action-btn">LIST PRODUCT</a></div>
-        <div class="role-card"><h3>THE LEARNER</h3><p>Access modules designed for high-income skills.</p><a href="#" class="role-action-btn" style="background:#2ecc71;">BROWSE COURSES</a></div>
+    <h2 style="font-family:'Montserrat'; margin-bottom:10px;">CHOOSE YOUR PATH</h2>
+    <p style="color:#64748b; margin-bottom:40px;">How do you want to dominate the J-System ecosystem?</p>
+    <div class="role-card">
+        <span style="font-size:3rem;">🚀</span>
+        <h3>THE CATALYST</h3>
+        <p>The engine of growth. Promote high-demand digital products and earn massive commissions paid out every Sunday.</p>
+        <a href="#" class="role-action-btn" style="margin-top:20px;">START EARNING</a>
+    </div>
+    <div class="role-card">
+        <span style="font-size:3rem;">🛠️</span>
+        <h3>THE VENDOR</h3>
+        <p>The creator. List your digital courses or e-books and let our army of Catalysts scale your sales to the moon.</p>
+        <a href="#" class="role-action-btn" style="margin-top:20px;">LIST PRODUCT</a>
+    </div>
+    <div class="role-card">
+        <span style="font-size:3rem;">💎</span>
+        <h3>THE LEARNER</h3>
+        <p>The seeker of knowledge. Access world-class modules designed to give you high-income skills in today's economy.</p>
+        <a href="#" class="role-action-btn" style="margin-top:20px; background:#2ecc71;">BROWSE COURSES</a>
     </div>
 </section>
 
 <section class="live-stats">
-    <div class="stat-item"><span class="stat-val">10,000+</span><span class="stat-lab">Catalysts</span></div>
-    <div class="stat-item"><span class="stat-val">₦50M+</span><span class="stat-lab">Total Payouts</span></div>
-    <div class="stat-item"><span class="stat-val">50+</span><span class="stat-lab">Digital Products</span></div>
+    <div class="stat-item"><span class="stat-val">10,000+</span><span style="color:#94a3b8; font-size:0.7rem;">Catalysts</span></div>
+    <div class="stat-item"><span class="stat-val">₦50M+</span><span style="color:#94a3b8; font-size:0.7rem;">Total Payouts</span></div>
+    <div class="stat-item"><span class="stat-val">50+</span><span style="color:#94a3b8; font-size:0.7rem;">Products</span></div>
 </section>
 
 <section class="how-it-works">
     <h2 style="font-family:'Montserrat';">3 STEPS TO DOMINATE</h2>
-    <div class="steps-grid">
-        <div class="step-card"><div class="step-num">01</div><div class="step-content"><h3>REGISTER</h3><p>Secure your access to the J-System ecosystem.</p></div></div>
-        <div class="step-card"><div class="step-num">02</div><div class="step-content"><h3>SELECT</h3><p>Choose a high-demand product and get your link.</p></div></div>
-        <div class="step-card"><div class="step-num">03</div><div class="step-content"><h3>WITHDRAW</h3><p>Receive your commissions alert every Sunday.</p></div></div>
+    <div style="position:relative; padding:40px 0;">
+        <div class="step-num">01</div>
+        <h3 style="position:relative; z-index:2;">REGISTER</h3>
+        <p style="color:#64748b; font-size:0.85rem;">Secure your access to the J-System ecosystem and set up your master profile.</p>
     </div>
 </section>
 
 <section class="payout-section">
     <div class="payout-card">
         <h2 style="color:#2ecc71; font-family:'Montserrat'; margin-bottom:15px;">THE SUNDAY BLESSING 💸</h2>
-        <p style="color:#cbd5e1; font-size:0.9rem; line-height:1.6;">Request your earnings on <strong>Saturdays</strong> and wake up to a direct alert every <strong>Sunday</strong>.</p>
+        <p style="color:#cbd5e1; line-height:1.6;">At J-System, we don't hold your sweat. Request your earnings on <strong>Saturdays</strong> and wake up to a direct bank alert every <strong>Sunday</strong>. No stories, just velocity.</p>
     </div>
 </section>
 
 <section class="marketplace-preview">
-    <div style="text-align: left; max-width: 1100px; margin: 0 auto 30px;">
-        <h2 style="font-family:'Montserrat'; font-size: 1.5rem;">HOT PRODUCTS 🔥</h2>
-        <p style="color:#64748b; font-size: 0.85rem;">Top selling modules in the J-System marketplace.</p>
-    </div>
-    <div class="product-scroll-container" id="scrollContainer">
-        <div class="mini-product-card"><span class="prod-tag">MARKETING</span><h4>WhatsApp Automation</h4><span class="prod-price">₦25,000</span></div>
-        <div class="mini-product-card"><span class="prod-tag">FINANCE</span><h4>Dollar Income Blueprint</h4><span class="prod-price">₦40,000</span></div>
-        <div class="mini-product-card"><span class="prod-tag">SALES</span><h4>J-System Accelerator</h4><span class="prod-price">₦15,000</span></div>
+    <h2 style="font-family:'Montserrat'; text-align:left;">HOT PRODUCTS 🔥</h2>
+    <div class="product-scroll-container">
+        <div class="mini-product-card">
+            <span style="color:#00BFFF; font-weight:800; font-size:0.7rem; background:rgba(0,191,255,0.1); padding:5px 10px; border-radius:50px;">MARKETING</span>
+            <h4 style="margin:10px 0;">WhatsApp Automation Mastery</h4>
+            <span style="font-weight:900; color:#020617;">₦25,000</span>
+        </div>
     </div>
 </section>
 
@@ -234,63 +181,60 @@
     let stars = [];
     function initStars() {
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        stars = [];
-        for (let i = 0; i < 150; i++) {
-            stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.5, speed: Math.random() * 0.4 + 0.1 });
-        }
+        for (let i = 0; i < 150; i++) stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, size: Math.random()*1.5, speed: Math.random()*0.4+0.1 });
     }
     function animateStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'white';
-        stars.forEach(star => {
-            ctx.beginPath(); ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2); ctx.fill();
-            star.y -= star.speed; if (star.y < 0) star.y = canvas.height;
-        });
+        stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI*2); ctx.fill(); s.y -= s.speed; if (s.y < 0) s.y = canvas.height; });
         requestAnimationFrame(animateStars);
     }
-    function toggleMenu() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
-    }
-    window.addEventListener('scroll', () => {
-        const hLogo = document.getElementById('headerLogo');
-        const mainLogo = document.querySelector('.logo-container');
-        if (window.scrollY > mainLogo.offsetHeight) hLogo.classList.add('visible');
-        else hLogo.classList.remove('visible');
-    });
-    function toggleText(id, btn) {
-        const content = document.getElementById(id);
-        content.classList.toggle('open');
-        btn.innerHTML = content.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +";
-    }
+    function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
+    function toggleText(id, btn) { const c = document.getElementById(id); c.classList.toggle('open'); btn.innerText = c.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +"; }
 
     const members = [
-        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=1" },
-        { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "https://i.pravatar.cc/150?u=2" },
-        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" }
+        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "1" },
+        { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "2" },
+        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "3" },
+        { name: "John Richard", text: "Build your own acceleration.", img: "4" },
+        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "5" },
+        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "6" },
+        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "7" },
+        { name: "Blessing Temitope", text: "Start small, but think global.", img: "8" },
+        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "9" },
+        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "10" },
+        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "11" },
+        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "12" },
+        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "13" },
+        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "14" },
+        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "15" },
+        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "16" },
+        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "17" },
+        { name: "Faith Eze", text: "The future belongs to the curious.", img: "18" },
+        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "19" },
+        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "20" }
     ];
 
     const track = document.getElementById('quoteTrack');
+    let index = 0;
     function setupSlider() {
-        const fullList = [...members, ...members]; 
+        const fullList = [...members, ...members];
         track.innerHTML = fullList.map(m => `
             <div class="quote-card">
-                <img class="profile-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://ui-avatars.com/api/?name=${m.name}&background=00BFFF&color=fff'">
+                <img class="profile-pic" src="https://i.pravatar.cc/150?u=${m.img}">
                 <div style="text-align:left;">
-                    <p style="font-size:0.75rem;">"${m.text}"</p>
-                    <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name}</b>
+                    <p style="font-size:0.75rem; font-style:italic;">"${m.text}"</p>
+                    <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name} <img src="https://img.icons8.com/color/48/verified-badge.png" style="width:12px; vertical-align:middle;"></b>
                 </div>
             </div>
         `).join('');
     }
-    
-    // VARIETY ANIMATION (Slide in)
-    const observeMarket = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.1 });
-    document.querySelector('.product-scroll-container').classList.add('reveal-right');
-    observeMarket.observe(document.querySelector('.product-scroll-container'));
-
-    initStars(); animateStars(); setupSlider();
+    function slide() {
+        index++; const center = (window.innerWidth / 2) - 152;
+        track.style.transition = "transform 0.8s ease-in-out";
+        track.style.transform = `translateX(${center - (index * 304)}px)`;
+        if (index >= members.length) { setTimeout(() => { track.style.transition = "none"; index = 0; track.style.transform = `translateX(${center}px)`; }, 800); }
+    }
+    initStars(); animateStars(); setupSlider(); setInterval(slide, 5000);
 </script>
 </body>
     </html>
