@@ -451,60 +451,88 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 
-    // RESTORED FULL 20 MEMBERS
-    const members = [
-        { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=1" },
-        { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "https://i.pravatar.cc/150?u=2" },
-        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" },
-        { name: "John Richard", text: "Build your own acceleration.", img: "https://i.pravatar.cc/150?u=4" },
-        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=5" },
-        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=6" },
-        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=7" },
-        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=8" },
-        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=9" },
-        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=10" },
-        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=11" },
-        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=12" },
-        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=13" },
-        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=14" },
-        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=15" },
-        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=16" },
-        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=17" },
-        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=18" },
-        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=19" },
-        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=20" }
-    ];
+// RESTORE MENU & SIDEBAR
+function toggleMenu() { 
+    document.getElementById('sidebar').classList.toggle('active'); 
+    document.getElementById('overlay').classList.toggle('active'); 
+}
 
-    const track = document.getElementById('quoteTrack');
-    let index = 0;
-    function setupSlider() {
-        const fullList = [...members, ...members]; 
-        track.innerHTML = fullList.map(m => `
-            <div class="quote-card">
-                <img class="profile-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://ui-avatars.com/api/?name=${m.name}&background=00BFFF&color=fff'">
-                <div style="text-align:left;">
-                    <p style="font-size:0.75rem; font-style:italic;">"${m.text}"</p>
-                    <div style="display:flex; align-items:center; gap:4px; margin-top:5px;">
-                        <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name}</b>
-                        <img src="https://img.icons8.com/color/48/verified-badge.png" style="width:12px; height:12px;">
-                    </div>
-                </div>
+// RESTORE LOGO VISIBILITY ON SCROLL
+window.onscroll = function() {
+    const headerLogo = document.getElementById('headerLogo');
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        headerLogo.classList.add('visible');
+    } else {
+        headerLogo.classList.remove('visible');
+    }
+};
+
+// RESTORE NAME LOOP (The 20 People)
+const members = [
+    { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "1" },
+    { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "2" },
+    { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "3" },
+    { name: "John Richard", text: "Build your own acceleration.", img: "4" },
+    { name: "David Chuku", text: "Consistency beats talent every single time.", img: "5" },
+    { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "6" },
+    { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "7" },
+    { name: "Blessing Temitope", text: "Start small, but think global.", img: "8" },
+    { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "9" },
+    { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "10" },
+    { name: "Victor Nelson", text: "Secure your future with the right system.", img: "11" },
+    { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "12" },
+    { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "13" },
+    { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "14" },
+    { name: "Daniel Smith", text: "Discipline equals freedom.", img: "15" },
+    { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "16" },
+    { name: "Paul Usman", text: "Success is a choice you make daily.", img: "17" },
+    { name: "Faith Eze", text: "The future belongs to the curious.", img: "18" },
+    { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "19" },
+    { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "20" }
+];
+
+const track = document.getElementById('quoteTrack');
+let slideIndex = 0;
+
+function setupSlider() {
+    if(!track) return;
+    const fullList = [...members, ...members];
+    track.innerHTML = fullList.map(m => `
+        <div class="quote-card">
+            <img class="profile-pic" src="https://i.pravatar.cc/150?u=${m.img}">
+            <div style="text-align:left;">
+                <p style="font-size:0.75rem; font-style:italic;">"${m.text}"</p>
+                <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name} <img src="https://img.icons8.com/color/48/verified-badge.png" style="width:12px; vertical-align:middle;"></b>
             </div>
-        `).join('');
-        track.style.transform = `translateX(${(window.innerWidth / 2) - 152}px)`;
-    }
-    function slide() {
-        index++;
-        const centerOffset = (window.innerWidth / 2) - 152;
-        track.style.transition = "transform 0.8s ease-in-out";
-        track.style.transform = `translateX(${centerOffset - (index * 304)}px)`;
-        if (index >= members.length) {
-            setTimeout(() => { track.style.transition = "none"; index = 0; track.style.transform = `translateX(${centerOffset}px)`; }, 800);
-        }
-    }
+        </div>
+    `).join('');
+}
 
-    initStars(); animateStars(); setupSlider();
-    setInterval(slide, 7000);
+function slide() {
+    slideIndex++; 
+    const center = (window.innerWidth / 2) - 152;
+    track.style.transition = "transform 0.8s ease-in-out";
+    track.style.transform = `translateX(${center - (slideIndex * 304)}px)`;
+    if (slideIndex >= members.length) { 
+        setTimeout(() => { 
+            track.style.transition = "none"; 
+            slideIndex = 0; 
+            track.style.transform = `translateX(${center}px)`; 
+        }, 800); 
+    }
+}
+
+// RESTORE J-SYSTEM SOLUTIONS TOGGLE
+function toggleText(id, btn) { 
+    const c = document.getElementById(id); 
+    c.classList.toggle('open'); 
+    btn.innerText = c.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +"; 
+}
+
+// INITIALIZE EVERYTHING
+setupSlider();
+setInterval(slide, 5000);
+
     // AUTO-SCROLL HINT ANIMATION
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
