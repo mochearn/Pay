@@ -6,6 +6,54 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* TELEGRAM FLOATING BUTTON STYLING */
+.floating-tg-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    z-index: 9999;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.tg-btn-content {
+    background: #0088cc; /* Official Telegram Blue */
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.tg-btn-content img {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+}
+
+.tg-btn-content span {
+    color: white;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Pulse animation to grab attention */
+.floating-tg-btn {
+    animation: tg-pulse 2s infinite;
+}
+
+@keyframes tg-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 136, 204, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(0, 136, 204, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 136, 204, 0); }
+}
+
+.floating-tg-btn:active {
+    transform: scale(0.9);
+          }
 /* THE BULLETPROOF MARKETPLACE CSS */
 
 .marketplace-preview {
@@ -561,5 +609,11 @@
     initStars(); animateStars(); setupSlider();
     setInterval(slide, 7000);
 </script>
+    <a href="https://t.me/YOUR_CHANNEL_USERNAME" class="floating-tg-btn" target="_blank">
+    <div class="tg-btn-content">
+        <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram">
+        <span>JOIN COMMUNITY</span>
+    </div>
+    </a>
 </body>
     </html>
