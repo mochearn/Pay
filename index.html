@@ -6,6 +6,76 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Triple Role Section */
+.roles-container {
+    padding: 60px 20px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+@media (min-width: 768px) {
+    .roles-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.role-card {
+    background: #f8fafc;
+    padding: 40px 25px;
+    border-radius: 24px;
+    border: 1.5px solid #e2e8f0;
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.role-card:hover {
+    transform: translateY(-12px);
+    border-color: #00BFFF;
+    box-shadow: 0 20px 40px rgba(0, 191, 255, 0.1);
+}
+
+.role-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.role-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #020617;
+    margin-bottom: 15px;
+}
+
+.role-card p {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.role-action-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #020617;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    transition: 0.3s;
+}
+
+.role-card:hover .role-action-btn {
+    background: #00BFFF;
+    }
         /* General Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
@@ -175,6 +245,33 @@
         EXPLORE FULL J-SYSTEM →
     </button>
 </section>
+    <section class="roles-container">
+    <h2 style="color:#020617; font-family:'Montserrat';">CHOOSE YOUR PATH</h2>
+    <p style="color:#64748b; font-size: 0.9rem;">How do you want to dominate the J-System ecosystem?</p>
+
+    <div class="roles-grid">
+        <div class="role-card">
+            <span class="role-icon">🚀</span>
+            <h3>THE CATALYST</h3>
+            <p>The engine of growth. Promote high-demand digital products and earn massive commissions paid out every Sunday.</p>
+            <a href="#" class="role-action-btn">START EARNING</a>
+        </div>
+
+        <div class="role-card">
+            <span class="role-icon">🛠️</span>
+            <h3>THE VENDOR</h3>
+            <p>The creator. List your digital courses or e-books and let our army of Catalysts scale your sales to the moon.</p>
+            <a href="#" class="role-action-btn">LIST PRODUCT</a>
+        </div>
+
+        <div class="role-card" style="border-color: rgba(46, 204, 113, 0.2);">
+            <span class="role-icon">💎</span>
+            <h3>THE LEARNER</h3>
+            <p>The seeker of knowledge. Access world-class modules designed to give you high-income skills in today's economy.</p>
+            <a href="#" class="role-action-btn" style="background:#2ecc71;">BROWSE COURSES</a>
+        </div>
+    </div>
+    </section>
 
 <script>
     const canvas = document.getElementById('starCanvas');
