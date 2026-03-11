@@ -6,159 +6,6 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Product Preview Section */
-.marketplace-preview {
-    padding: 80px 20px;
-    background: #ffffff;
-    text-align: center;
-}
-
-.product-scroll-container {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 20px 10px;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Hides scrollbar on Firefox */
-}
-
-.product-scroll-container::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
-
-.mini-product-card {
-    min-width: 280px;
-    background: #fff;
-    border-radius: 20px;
-    border: 1px solid #f1f5f9;
-    padding: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.02);
-    text-align: left;
-}
-
-.prod-tag {
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: #00BFFF;
-    background: rgba(0, 191, 255, 0.1);
-    padding: 4px 10px;
-    border-radius: 50px;
-    display: inline-block;
-    margin-bottom: 12px;
-}
-
-.prod-price {
-    font-weight: 900;
-    color: #020617;
-    margin-top: 15px;
-    display: block;
-}
-
-/* NEW ANIMATION: Slide in from Right */
-.reveal-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: all 1s ease-out;
-}
-
-.reveal-right.active {
-    opacity: 1;
-    transform: translateX(0);
-        }
-        /* Live Stats Bar */
-.live-stats {
-    background: #020617;
-    padding: 40px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    border-top: 1px solid rgba(0, 191, 255, 0.1);
-}
-.stat-item { text-align: center; min-width: 120px; }
-.stat-val { display: block; font-family: 'Montserrat'; font-size: 2rem; font-weight: 900; color: #00BFFF; }
-.stat-lab { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
-
-/* How It Works Section */
-.how-it-works { padding: 80px 20px; background: #f8fafc; text-align: center; color: #020617; }
-.steps-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1100px; margin: 50px auto 0; }
-@media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
-.step-card { padding: 30px; position: relative; }
-.step-num { font-size: 4rem; font-weight: 900; color: rgba(0, 191, 255, 0.1); position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
-.step-content { position: relative; z-index: 2; }
-.step-content h3 { font-family: 'Montserrat'; font-size: 1.1rem; margin-bottom: 15px; }
-
-/* Sunday Blessing Section */
-.payout-section { padding: 60px 20px; background: linear-gradient(135deg, #020617 0%, #0f172a 100%); text-align: center; }
-.payout-card { max-width: 700px; margin: 0 auto; border: 2px dashed #2ecc71; padding: 40px; border-radius: 20px; background: rgba(46, 204, 113, 0.05); }
-        /* Triple Role Section */
-.roles-container {
-    padding: 60px 20px;
-    background: #ffffff;
-    text-align: center;
-}
-
-.roles-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-    max-width: 1100px;
-    margin: 40px auto 0;
-}
-
-@media (min-width: 768px) {
-    .roles-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.role-card {
-    background: #f8fafc;
-    padding: 40px 25px;
-    border-radius: 24px;
-    border: 1.5px solid #e2e8f0;
-    transition: all 0.4s ease;
-    text-align: center;
-}
-
-.role-card:hover {
-    transform: translateY(-12px);
-    border-color: #00BFFF;
-    box-shadow: 0 20px 40px rgba(0, 191, 255, 0.1);
-}
-
-.role-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    display: inline-block;
-}
-
-.role-card h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
-    font-size: 1.3rem;
-    color: #020617;
-    margin-bottom: 15px;
-}
-
-.role-card p {
-    font-size: 0.85rem;
-    color: #64748b;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.role-action-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background: #020617;
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 0.75rem;
-    transition: 0.3s;
-}
-
-.role-card:hover .role-action-btn {
-    background: #00BFFF;
-        }
         /* General Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
@@ -214,7 +61,7 @@
         }
         .profile-pic { width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid #00BFFF; object-fit: cover; margin-right: 15px; }
 
-        /* 4. The Hard Truth Section (White) */
+        /* 4. Sections Styling */
         .rescue-section { background: #ffffff; color: #1a202c; padding: 70px 24px; text-align: center; }
         .truth-tag { color: #FF4500; font-weight: 800; letter-spacing: 1.5px; font-size: 0.75rem; margin-bottom: 12px; }
         .rescue-h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #020617; line-height: 1.1; margin-bottom: 25px; text-transform: uppercase; }
@@ -223,21 +70,42 @@
         .sub-block h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: #00BFFF; margin-bottom: 10px; text-transform: uppercase; }
         .sub-block p { color: #2d3748; font-size: 0.95rem; line-height: 1.7; margin-bottom: 40px; }
 
-        /* 5. Product Solutions Section (Purple Boxes) */
         .product-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
         .product-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1000px; margin: 0 auto; }
         @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+        .product-card { padding: 30px; background: white; border-radius: 20px; border: 1.5px solid #A855F7; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
-        .product-card {
-            padding: 30px; background: white; border-radius: 20px;
-            border: 1.5px solid #A855F7; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            opacity: 0; transform: translateY(30px); transition: all 0.6s ease;
-        }
-        .product-card.reveal { opacity: 1; transform: translateY(0); }
-        .product-card h4 { font-family: 'Montserrat', sans-serif; margin-bottom: 12px; font-size: 1.2rem; }
-        .product-card p { color: #4a5568; font-size: 0.9rem; line-height: 1.6; }
+        /* Roles & Stats */
+        .roles-container { padding: 60px 20px; background: #ffffff; text-align: center; }
+        .roles-grid { display: grid; grid-template-columns: 1fr; gap: 25px; max-width: 1100px; margin: 40px auto 0; }
+        @media (min-width: 768px) { .roles-grid { grid-template-columns: repeat(3, 1fr); } }
+        .role-card { background: #f8fafc; padding: 40px 25px; border-radius: 24px; border: 1.5px solid #e2e8f0; text-align: center; }
+        .role-action-btn { display: inline-block; padding: 12px 24px; background: #020617; color: white; text-decoration: none; border-radius: 50px; font-weight: 800; font-size: 0.75rem; }
 
+        .live-stats { background: #020617; padding: 40px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; border-top: 1px solid rgba(0, 191, 255, 0.1); }
+        .stat-val { display: block; font-family: 'Montserrat'; font-size: 2rem; font-weight: 900; color: #00BFFF; }
+        .stat-lab { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* How It Works & Payouts */
+        .how-it-works { padding: 80px 20px; background: #f8fafc; text-align: center; color: #020617; }
+        .steps-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1100px; margin: 50px auto 0; }
+        @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+        .step-num { font-size: 4rem; font-weight: 900; color: rgba(0, 191, 255, 0.1); position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+        .step-content { position: relative; z-index: 2; }
+
+        .payout-section { padding: 60px 20px; background: linear-gradient(135deg, #020617 0%, #0f172a 100%); text-align: center; }
+        .payout-card { max-width: 700px; margin: 0 auto; border: 2px dashed #2ecc71; padding: 40px; border-radius: 20px; background: rgba(46, 204, 113, 0.05); }
+
+        /* Marketplace Preview */
+        .marketplace-preview { padding: 80px 20px; background: #ffffff; text-align: center; }
+        .product-scroll-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px 10px; scroll-behavior: smooth; scrollbar-width: none; }
+        .product-scroll-container::-webkit-scrollbar { display: none; }
+        .mini-product-card { min-width: 280px; background: #fff; border-radius: 20px; border: 1px solid #f1f5f9; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); text-align: left; }
+        .prod-tag { font-size: 0.65rem; font-weight: 800; color: #00BFFF; background: rgba(0, 191, 255, 0.1); padding: 4px 10px; border-radius: 50px; display: inline-block; margin-bottom: 12px; }
+        .prod-price { font-weight: 900; color: #020617; margin-top: 15px; display: block; }
+        
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
         .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
         .more-content.open { max-height: 600px; }
         .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
@@ -280,16 +148,15 @@
 <section class="rescue-section">
     <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
     <h2 class="rescue-h2">The Economy is Changing. Are You?</h2>
-    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. From fuel subsidy removal to Naira devaluation, the heat is real. Protect your purchasing power and build your digital fortress today.</p>
-    
+    <p class="rescue-p">Nigeria is facing its toughest economic chapter yet. Protect your purchasing power and build your digital fortress today.</p>
     <div class="system-content">
         <div class="sub-block">
             <h3>SHIELD</h3>
-            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and the constant devaluation of the Naira. We build assets that stand firm regardless of the economic climate.</p>
+            <p>The J-System acts as a digital fortress, protecting your wealth from inflation and Naira devaluation.</p>
         </div>
         <div class="sub-block">
             <h3>ACCELERATION</h3>
-            <p>Why wait years for slow growth? Our Digital Acceleration system fast-tracks your learning and earning potential, moving you into the top 1% of the digital economy in record time.</p>
+            <p>Our Digital Acceleration system fast-tracks your learning and moves you into the top 1% record time.</p>
         </div>
     </div>
 </section>
@@ -300,62 +167,34 @@
         <div class="product-card">
             <div style="font-size: 2rem; margin-bottom:10px;">🛡️</div>
             <h4 style="color:#00BFFF">WEALTH SHIELD</h4>
-            <p>This is where we secure your value. The Wealth Shield is designed to convert local struggles into global stability. We use the J-System to ensure your money never loses its power again.</p>
+            <p>Secure your value. The Wealth Shield converts local struggles into global stability using the J-System.</p>
             <div class="more-content" id="m1">
-                <p>• Automated inflation protection.<br>
-                   • Real-time asset monitoring.<br>
-                   • Diversified dollar-backed portfolios.<br>
-                   • 24/7 wealth preservation support.</p>
+                <p>• Automated inflation protection.<br>• Dollar-backed asset monitoring.</p>
             </div>
             <button class="see-more-btn" onclick="toggleText('m1', this)">SEE MORE +</button>
         </div>
-
         <div class="product-card">
             <div style="font-size: 2rem; margin-bottom:10px;">⚡</div>
             <h4 style="color:#2ecc71">DIGITAL VELOCITY</h4>
-            <p>Speed is the new currency. We provide the high-income blueprints that move you from zero to elite status. No fluff, just the exact steps to dominate the modern digital market.</p>
+            <p>Speed is the new currency. We provide blueprints to move you from zero to elite status instantly.</p>
             <div class="more-content" id="m2">
-                <p>• High-ticket sales architecture.<br>
-                   • Advanced funnel systems.<br>
-                   • Lead generation mastery.<br>
-                   • Global scaling strategies.</p>
+                <p>• High-ticket sales architecture.<br>• Advanced funnel systems.</p>
             </div>
             <button class="see-more-btn" style="color:#2ecc71" onclick="toggleText('m2', this)">SEE MORE +</button>
         </div>
     </div>
-
-    <button class="see-more-btn" style="margin-top: 60px; font-size: 1rem; border: 2.5px solid #00BFFF; padding: 12px 35px; border-radius: 50px; color:#020617">
-        EXPLORE FULL J-SYSTEM →
-    </button>
 </section>
-    <section class="roles-container">
+
+<section class="roles-container">
     <h2 style="color:#020617; font-family:'Montserrat';">CHOOSE YOUR PATH</h2>
-    <p style="color:#64748b; font-size: 0.9rem;">How do you want to dominate the J-System ecosystem?</p>
-
     <div class="roles-grid">
-        <div class="role-card">
-            <span class="role-icon">🚀</span>
-            <h3>THE CATALYST</h3>
-            <p>The engine of growth. Promote high-demand digital products and earn massive commissions paid out every Sunday.</p>
-            <a href="#" class="role-action-btn">START EARNING</a>
-        </div>
-
-        <div class="role-card">
-            <span class="role-icon">🛠️</span>
-            <h3>THE VENDOR</h3>
-            <p>The creator. List your digital courses or e-books and let our army of Catalysts scale your sales to the moon.</p>
-            <a href="#" class="role-action-btn">LIST PRODUCT</a>
-        </div>
-
-        <div class="role-card" style="border-color: rgba(46, 204, 113, 0.2);">
-            <span class="role-icon">💎</span>
-            <h3>THE LEARNER</h3>
-            <p>The seeker of knowledge. Access world-class modules designed to give you high-income skills in today's economy.</p>
-            <a href="#" class="role-action-btn" style="background:#2ecc71;">BROWSE COURSES</a>
-        </div>
+        <div class="role-card"><h3>THE CATALYST</h3><p>Earn massive commissions paid out every Sunday.</p><a href="#" class="role-action-btn">START EARNING</a></div>
+        <div class="role-card"><h3>THE VENDOR</h3><p>List your products and scale your sales to the moon.</p><a href="#" class="role-action-btn">LIST PRODUCT</a></div>
+        <div class="role-card"><h3>THE LEARNER</h3><p>Access modules designed for high-income skills.</p><a href="#" class="role-action-btn" style="background:#2ecc71;">BROWSE COURSES</a></div>
     </div>
-    </section>
-    <section class="live-stats">
+</section>
+
+<section class="live-stats">
     <div class="stat-item"><span class="stat-val">10,000+</span><span class="stat-lab">Catalysts</span></div>
     <div class="stat-item"><span class="stat-val">₦50M+</span><span class="stat-lab">Total Payouts</span></div>
     <div class="stat-item"><span class="stat-val">50+</span><span class="stat-lab">Digital Products</span></div>
@@ -364,66 +203,30 @@
 <section class="how-it-works">
     <h2 style="font-family:'Montserrat';">3 STEPS TO DOMINATE</h2>
     <div class="steps-grid">
-        <div class="step-card">
-            <div class="step-num">01</div>
-            <div class="step-content">
-                <h3>REGISTER</h3>
-                <p style="font-size:0.85rem; color:#64748b;">Secure your access to the J-System ecosystem and set up your master profile.</p>
-            </div>
-        </div>
-        <div class="step-card">
-            <div class="step-num">02</div>
-            <div class="step-content">
-                <h3>SELECT & DEPLOY</h3>
-                <p style="font-size:0.85rem; color:#64748b;">Choose a high-demand product from our marketplace and get your unique link.</p>
-            </div>
-        </div>
-        <div class="step-card">
-            <div class="step-num">03</div>
-            <div class="step-content">
-                <h3>WITHDRAW</h3>
-                <p style="font-size:0.85rem; color:#64748b;">Request your commissions every Saturday and receive your alert on Sunday.</p>
-            </div>
-        </div>
+        <div class="step-card"><div class="step-num">01</div><div class="step-content"><h3>REGISTER</h3><p>Secure your access to the J-System ecosystem.</p></div></div>
+        <div class="step-card"><div class="step-num">02</div><div class="step-content"><h3>SELECT</h3><p>Choose a high-demand product and get your link.</p></div></div>
+        <div class="step-card"><div class="step-num">03</div><div class="step-content"><h3>WITHDRAW</h3><p>Receive your commissions alert every Sunday.</p></div></div>
     </div>
 </section>
 
 <section class="payout-section">
     <div class="payout-card">
         <h2 style="color:#2ecc71; font-family:'Montserrat'; margin-bottom:15px;">THE SUNDAY BLESSING 💸</h2>
-        <p style="color:#cbd5e1; font-size:0.9rem; line-height:1.6;">At J-System, we don't hold your sweat. Request your earnings on <strong>Saturdays</strong> and wake up to a direct bank alert every <strong>Sunday</strong>. No stories, just velocity.</p>
+        <p style="color:#cbd5e1; font-size:0.9rem; line-height:1.6;">Request your earnings on <strong>Saturdays</strong> and wake up to a direct alert every <strong>Sunday</strong>.</p>
     </div>
-</div>
- </section>
-    <section class="marketplace-preview">
+</section>
+
+<section class="marketplace-preview">
     <div style="text-align: left; max-width: 1100px; margin: 0 auto 30px;">
         <h2 style="font-family:'Montserrat'; font-size: 1.5rem;">HOT PRODUCTS 🔥</h2>
         <p style="color:#64748b; font-size: 0.85rem;">Top selling modules in the J-System marketplace.</p>
     </div>
-
-    <div class="product-scroll-container reveal-right">
-        <div class="mini-product-card">
-            <span class="prod-tag">MARKETING</span>
-            <h4 style="font-size: 0.95rem;">WhatsApp Automation Mastery</h4>
-            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">Learn to close sales while you sleep with AI automation.</p>
-            <span class="prod-price">₦25,000</span>
-        </div>
-
-        <div class="mini-product-card">
-            <span class="prod-tag">FINANCE</span>
-            <h4 style="font-size: 0.95rem;">Dollar Income Blueprint</h4>
-            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">Earning in USD from the comfort of your home in Nigeria.</p>
-            <span class="prod-price">₦40,000</span>
-        </div>
-
-        <div class="mini-product-card">
-            <span class="prod-tag">SALES</span>
-            <h4 style="font-size: 0.95rem;">The J-System Accelerator</h4>
-            <p style="font-size:0.75rem; color:#64748b; margin-top:8px;">The ultimate guide to becoming a Top Catalyst.</p>
-            <span class="prod-price">₦15,000</span>
-        </div>
+    <div class="product-scroll-container" id="scrollContainer">
+        <div class="mini-product-card"><span class="prod-tag">MARKETING</span><h4>WhatsApp Automation</h4><span class="prod-price">₦25,000</span></div>
+        <div class="mini-product-card"><span class="prod-tag">FINANCE</span><h4>Dollar Income Blueprint</h4><span class="prod-price">₦40,000</span></div>
+        <div class="mini-product-card"><span class="prod-tag">SALES</span><h4>J-System Accelerator</h4><span class="prod-price">₦15,000</span></div>
     </div>
-    </section>
+</section>
 
 <script>
     const canvas = document.getElementById('starCanvas');
@@ -444,7 +247,6 @@
         });
         requestAnimationFrame(animateStars);
     }
-
     function toggleMenu() {
         document.getElementById('sidebar').classList.toggle('active');
         document.getElementById('overlay').classList.toggle('active');
@@ -455,72 +257,40 @@
         if (window.scrollY > mainLogo.offsetHeight) hLogo.classList.add('visible');
         else hLogo.classList.remove('visible');
     });
-
     function toggleText(id, btn) {
         const content = document.getElementById(id);
         content.classList.toggle('open');
         btn.innerHTML = content.classList.contains('open') ? "SHOW LESS -" : "SEE MORE +";
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
-
-    // RESTORED FULL 20 MEMBERS
     const members = [
         { name: "Michael Adeyemi", text: "Freedom starts when you own a system.", img: "https://i.pravatar.cc/150?u=1" },
         { name: "Jonard Bethuel", text: "The J-System is built for security.", img: "https://i.pravatar.cc/150?u=2" },
-        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" },
-        { name: "John Richard", text: "Build your own acceleration.", img: "https://i.pravatar.cc/150?u=4" },
-        { name: "David Chuku", text: "Consistency beats talent every single time.", img: "https://i.pravatar.cc/150?u=5" },
-        { name: "Sarah Williams", text: "Digital assets are the new oil.", img: "https://i.pravatar.cc/150?u=6" },
-        { name: "Emmanuel Okafor", text: "The economy favors the prepared.", img: "https://i.pravatar.cc/150?u=7" },
-        { name: "Blessing Temitope", text: "Start small, but think global.", img: "https://i.pravatar.cc/150?u=8" },
-        { name: "Samuel Ike", text: "Knowledge is the highest ROI.", img: "https://i.pravatar.cc/150?u=9" },
-        { name: "Grace Ajayi", text: "Your phone is either a toy or a tool.", img: "https://i.pravatar.cc/150?u=10" },
-        { name: "Victor Nelson", text: "Secure your future with the right system.", img: "https://i.pravatar.cc/150?u=11" },
-        { name: "Esther Sunday", text: "Passive income is no longer optional.", img: "https://i.pravatar.cc/150?u=12" },
-        { name: "Isaac Peters", text: "The best time to start was yesterday.", img: "https://i.pravatar.cc/150?u=13" },
-        { name: "Kemi Balogun", text: "Focus on assets, not liabilities.", img: "https://i.pravatar.cc/150?u=14" },
-        { name: "Daniel Smith", text: "Discipline equals freedom.", img: "https://i.pravatar.cc/150?u=15" },
-        { name: "Ruth Moses", text: "Build a life you don't need a vacation from.", img: "https://i.pravatar.cc/150?u=16" },
-        { name: "Paul Usman", text: "Success is a choice you make daily.", img: "https://i.pravatar.cc/150?u=17" },
-        { name: "Faith Eze", text: "The future belongs to the curious.", img: "https://i.pravatar.cc/150?u=18" },
-        { name: "Joshua King", text: "Leverage is the secret of the wealthy.", img: "https://i.pravatar.cc/150?u=19" },
-        { name: "Precious Adeniyi", text: "Your network is your net worth.", img: "https://i.pravatar.cc/150?u=20" }
+        { name: "Odeyemi Boluwatife", text: "Digital space changed my life.", img: "https://i.pravatar.cc/150?u=3" }
     ];
 
     const track = document.getElementById('quoteTrack');
-    let index = 0;
     function setupSlider() {
         const fullList = [...members, ...members]; 
         track.innerHTML = fullList.map(m => `
             <div class="quote-card">
                 <img class="profile-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://ui-avatars.com/api/?name=${m.name}&background=00BFFF&color=fff'">
                 <div style="text-align:left;">
-                    <p style="font-size:0.75rem; font-style:italic;">"${m.text}"</p>
-                    <div style="display:flex; align-items:center; gap:4px; margin-top:5px;">
-                        <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name}</b>
-                        <img src="https://img.icons8.com/color/48/verified-badge.png" style="width:12px; height:12px;">
-                    </div>
+                    <p style="font-size:0.75rem;">"${m.text}"</p>
+                    <b style="font-size:0.65rem; color:#00BFFF;">— ${m.name}</b>
                 </div>
             </div>
         `).join('');
-        track.style.transform = `translateX(${(window.innerWidth / 2) - 152}px)`;
     }
-    function slide() {
-        index++;
-        const centerOffset = (window.innerWidth / 2) - 152;
-        track.style.transition = "transform 0.8s ease-in-out";
-        track.style.transform = `translateX(${centerOffset - (index * 304)}px)`;
-        if (index >= members.length) {
-            setTimeout(() => { track.style.transition = "none"; index = 0; track.style.transform = `translateX(${centerOffset}px)`; }, 800);
-        }
-    }
+    
+    // VARIETY ANIMATION (Slide in)
+    const observeMarket = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelector('.product-scroll-container').classList.add('reveal-right');
+    observeMarket.observe(document.querySelector('.product-scroll-container'));
 
     initStars(); animateStars(); setupSlider();
-    setInterval(slide, 7000);
 </script>
 </body>
-        </html>
+    </html>
