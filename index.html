@@ -894,6 +894,48 @@ window.addEventListener('load', () => {
     setTimeout(runJSCounterStable, 800); 
 });
 </script>
+    <script>
+const textElement = document.getElementById("typing-text");
+const phrases = [
+    "WELCOME TO THE FUTURE",
+    "WELCOME TO THE FRONTIER",
+    "WELCOME TO ELITE SUCCESS",
+    "WELCOME TO THE ECOSYSTEM"
+];
+
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 150;
+
+function type() {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+        textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 100;
+    } else {
+        textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 150;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        typeSpeed = 2000; // Pause at the end
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+    }
+
+    setTimeout(type, typeSpeed);
+}
+
+// Start the typing effect when the page loads
+document.addEventListener("DOMContentLoaded", type);
+    </script>
    <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
     <a href="https://t.me/YOUR_CHANNEL_USERNAME" style="text-decoration:none !important;">
