@@ -6,24 +6,54 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        .stats-container {
-    display: flex; justify-content: space-around; padding: 40px 10px;
-    background: #020617; text-align: center; font-family: 'Montserrat', sans-serif;
+     /* MASTER GALLERY & STATS FIX */
+.jsystem-success-zone {
+    background: #020617 !important;
+    padding: 40px 0;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
 }
-.stat-item h3 { color: #0088cc; font-size: 1.8rem; margin: 0; }
-.stat-item p { color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
 
-/* Testimonial Track speed adjustment for 10 cards */
-.testimonial-track {
+.js-stats-row {
     display: flex;
-    width: calc(290px * 11); 
-    animation: scrollLoop 40s linear infinite; /* Slower for readability */
+    justify-content: space-around;
+    padding: 20px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px;
 }
 
-@keyframes scrollLoop {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-290px * 10)); }
+.js-stat-box { text-align: center; flex: 1; }
+.js-stat-box h3 { color: #0088cc; font-size: 1.4rem; margin: 0; }
+.js-stat-box p { color: #94a3b8; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
+
+.js-track {
+    display: flex;
+    gap: 15px;
+    animation: jsLoop 30s linear infinite;
+    width: max-content;
 }
+
+.js-card {
+    width: 240px;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 15px;
+    flex-shrink: 0;
+}
+
+.js-user { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.js-circle { width: 30px; height: 30px; background: #0088cc; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: bold; }
+.js-name { color: white; font-size: 0.8rem; font-weight: 700; }
+.js-check { color: #0088cc; font-size: 12px; }
+.js-card p { color: #cbd5e1; font-size: 0.75rem; line-height: 1.4; font-style: italic; }
+
+@keyframes jsLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Halfway because of duplicates */
+        }
 /* THE SMOOTH LOOP ANIMATION */
 @keyframes scrollLoop {
     0% { transform: translateX(0); }
@@ -561,45 +591,6 @@
 
     </div>
     </section>
-    <section class="success-gallery">
-    <h2 class="section-title">SUCCESS GALLERY 🏆</h2>
-    <div class="testimonial-slider">
-        <div class="testimonial-track">
-            <div class="testimony-card">
-                <div class="user-info">
-                    <div class="user-img-placeholder">JB</div> <span class="user-name">Jonard Bethuel</span>
-                    <span class="verified-check">✔</span>
-                </div>
-                <p>"The J-System velocity is real. I automated my first $500 week!"</p>
-            </div>
-            <div class="testimony-card">
-                <div class="user-info">
-                    <div class="user-img-placeholder">JR</div>
-                    <span class="user-name">John Richard</span>
-                    <span class="verified-check">✔</span>
-                </div>
-                <p>"Sunday Blessing blueprints are the cheat code for Nigeria right now."</p>
-            </div>
-            <div class="testimony-card">
-                <div class="user-info">
-                    <div class="user-img-placeholder">OB</div>
-                    <span class="user-name">Odeyemi Boluwatife</span>
-                    <span class="verified-check">✔</span>
-                </div>
-                <p>"Finally a system that works on mobile. Digital sales simplified!"</p>
-            </div>
-            <div class="testimony-card">
-                <div class="user-info"><div class="user-img-placeholder">JB</div><span class="user-name">Jonard Bethuel</span><span class="verified-check">✔</span></div>
-                <p>"The J-System velocity is real. I automated my first $500 week!"</p>
-            </div>
-            <div class="testimony-card">
-                <div class="user-info"><div class="user-img-placeholder">JR</div><span class="user-name">John Richard</span><span class="verified-check">✔</span></div>
-                <p>"Sunday Blessing blueprints are the cheat code for Nigeria right now."</p>
-            </div>
-        </div>
-    </div>
-                                                                   </section>
-
 <script>
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
@@ -784,37 +775,6 @@ observer.observe(document.querySelector('.stats-container'));
         <button class="not-now-pro" onclick="closeTgModal()">I'll join later</button>
     </div>
 </div>
-    <div class="stats-container">
-    <div class="stat-item">
-        <h3 class="counter" data-target="1250">0</h3>
-        <p>Active Members</p>
-    </div>
-    <div class="stat-item">
-        <h3 class="counter" data-target="5000">0</h3>
-        <p>Sunday Blueprints</p>
-    </div>
-    <div class="stat-item">
-        <h3 class="counter" data-target="100">0</h3>
-        <p>Daily Wins</p>
-    </div>
-</div>
-
-<section class="success-gallery">
-    <div class="testimonial-slider">
-        <div class="testimonial-track">
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">JB</div><span class="user-name">Jonard Bethuel</span><span class="verified-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">JR</div><span class="user-name">John Richard</span><span class="verified-check">✔</span></div><p>"Sunday Blessing blueprints are a cheat code."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">OB</div><span class="user-name">Odeyemi Boluwatife</span><span class="verified-check">✔</span></div><p>"Digital sales finally made simple."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">AA</div><span class="user-name">Adebayo Ayomide</span><span class="verified-check">✔</span></div><p>"The funnel structure is top-notch."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">CE</div><span class="user-name">Chidi Emeka</span><span class="verified-check">✔</span></div><p>"I closed 3 clients in 48 hours. Velocity!"</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">FS</div><span class="user-name">Fatima Saliu</span><span class="verified-check">✔</span></div><p>"J-System is the best investment I've made."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">KO</div><span class="user-name">Kelechi Okafor</span><span class="verified-check">✔</span></div><p>"Finally, a system that works on mobile."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">TO</div><span class="user-name">Tunde Olaniyi</span><span class="verified-check">✔</span></div><p>"The Sunday Blessing is my weekly fuel."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">BN</div><span class="user-name">Blessing Nwosu</span><span class="verified-check">✔</span></div><p>"Scaling my e-book was so easy here."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">SU</div><span class="user-name">Samuel Udoh</span><span class="verified-check">✔</span></div><p>"100% legit. The J-System doesn't play."</p></div>
-            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">JB</div><span class="user-name">Jonard Bethuel</span><span class="verified-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
-        </div>
-    </div>
-                                            </section>
+</section>
 </body>
     </html>
