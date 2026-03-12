@@ -721,39 +721,53 @@
 
 function showTgPopup(e) { e.preventDefault(); document.getElementById('tgModal').style.display = 'flex'; }
 function closeTgModal() { document.getElementById('tgModal').style.display = 'none'; document.getElementById('dragContainer').style.display = 'none'; }
-  /* J-SYSTEM STATS BRAIN */
-const startJSCounter = () => {
+/* J-SYSTEM STATS BRAIN - FORCE START */
+function initJSCounter() {
     const counters = document.querySelectorAll('.js-stat-box h3');
-    const speed = 150; 
-
+    
     counters.forEach(counter => {
-        const target = parseInt(counter.innerText.replace(/,/g, '').replace('+', ''));
-        const originalText = counter.innerText.includes('+') ? '+' : '';
-        let count = 0;
+        // Get the target number from the text (e.g., "1,250+" becomes 1250)
+        const target = parseInt(counter.innerText.replace(/[^0-9]/g, ''));
+        const suffix = counter.innerText.includes('+') ? '+' : (counter.innerText.includes('%') ? '%' : '');
+        
+        let start = 0;
+        const duration = 2000; // 2 seconds to finish counting
+        const startTime = performance.now();
 
-        const updateCount = () => {
-            const inc = target / speed;
-            if (count < target) {
-                count += inc;
-                counter.innerText = Math.ceil(count).toLocaleString() + originalText;
-                setTimeout(updateCount, 15);
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smooth "ease-out" math
+            const currentCount = Math.floor(progress * target);
+            counter.innerText = currentCount.toLocaleString() + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
             } else {
-                counter.innerText = target.toLocaleString() + originalText;
+                counter.innerText = target.toLocaleString() + suffix;
             }
-        };
-        updateCount();
+        }
+        
+        requestAnimationFrame(update);
     });
-};
+}
 
-// Start counting only when visible
+/* J-SYSTEM VIEWPORT CHECK */
 const jsObserver = new IntersectionObserver((entries) => {
-    if(entries[0].isIntersecting) {
-        startJSCounter();
-        jsObserver.disconnect(); 
-    }
-}, { threshold: 0.5 });
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            initJSCounter();
+            jsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
 
-jsObserver.observe(document.querySelector('.js-stats-row'));
+// Target the stats row to start the magic
+const statsRow = document.querySelector('.js-stats-row');
+if (statsRow) {
+    jsObserver.observe(statsRow);
+    }
 </script>
    <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
