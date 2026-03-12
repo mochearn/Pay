@@ -6,40 +6,24 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        .success-gallery { padding: 60px 0; background: #020617; overflow: hidden; }
-.section-title { text-align: center; color: white; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; margin-bottom: 30px; letter-spacing: 2px; }
+        .stats-container {
+    display: flex; justify-content: space-around; padding: 40px 10px;
+    background: #020617; text-align: center; font-family: 'Montserrat', sans-serif;
+}
+.stat-item h3 { color: #0088cc; font-size: 1.8rem; margin: 0; }
+.stat-item p { color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
 
-.testimonial-slider { width: 100%; display: flex; position: relative; }
-
-/* This track moves the cards */
+/* Testimonial Track speed adjustment for 10 cards */
 .testimonial-track {
     display: flex;
-    width: calc(280px * 10); /* Wide enough for all cards */
-    animation: scrollLoop 25s linear infinite;
+    width: calc(290px * 11); 
+    animation: scrollLoop 40s linear infinite; /* Slower for readability */
 }
 
-.testimony-card {
-    width: 260px;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 20px;
-    margin: 0 15px;
-    flex-shrink: 0;
+@keyframes scrollLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-290px * 10)); }
 }
-
-.user-img-placeholder {
-    width: 35px; height: 35px; background: #0088cc; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: bold; font-size: 12px; margin-right: 10px;
-}
-
-.user-name { color: #fff; font-weight: 700; font-size: 0.85rem; }
-.verified-check { color: #0088cc; margin-left: 5px; font-size: 14px; }
-
-.testimony-card p { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; margin-top: 10px; font-style: italic; }
-
 /* THE SMOOTH LOOP ANIMATION */
 @keyframes scrollLoop {
     0% { transform: translateX(0); }
@@ -750,7 +734,36 @@
 
 function showTgPopup(e) { e.preventDefault(); document.getElementById('tgModal').style.display = 'flex'; }
 function closeTgModal() { document.getElementById('tgModal').style.display = 'none'; document.getElementById('dragContainer').style.display = 'none'; }
-  
+  const counters = document.querySelectorAll('.counter');
+const speed = 200; 
+
+const startCounters = () => {
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 15);
+            } else {
+                counter.innerText = target + (target === 1250 || target === 5000 ? '+' : '');
+            }
+        };
+        updateCount();
+    });
+};
+
+// Intersection Observer to start counting when visible
+const observer = new IntersectionObserver((entries) => {
+    if(entries[0].isIntersecting) {
+        startCounters();
+        observer.disconnect(); 
+    }
+}, { threshold: 0.5 });
+
+observer.observe(document.querySelector('.stats-container'));
 </script>
    <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
@@ -771,5 +784,37 @@ function closeTgModal() { document.getElementById('tgModal').style.display = 'no
         <button class="not-now-pro" onclick="closeTgModal()">I'll join later</button>
     </div>
 </div>
+    <div class="stats-container">
+    <div class="stat-item">
+        <h3 class="counter" data-target="1250">0</h3>
+        <p>Active Members</p>
+    </div>
+    <div class="stat-item">
+        <h3 class="counter" data-target="5000">0</h3>
+        <p>Sunday Blueprints</p>
+    </div>
+    <div class="stat-item">
+        <h3 class="counter" data-target="100">0</h3>
+        <p>Daily Wins</p>
+    </div>
+</div>
+
+<section class="success-gallery">
+    <div class="testimonial-slider">
+        <div class="testimonial-track">
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">JB</div><span class="user-name">Jonard Bethuel</span><span class="verified-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">JR</div><span class="user-name">John Richard</span><span class="verified-check">✔</span></div><p>"Sunday Blessing blueprints are a cheat code."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">OB</div><span class="user-name">Odeyemi Boluwatife</span><span class="verified-check">✔</span></div><p>"Digital sales finally made simple."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">AA</div><span class="user-name">Adebayo Ayomide</span><span class="verified-check">✔</span></div><p>"The funnel structure is top-notch."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">CE</div><span class="user-name">Chidi Emeka</span><span class="verified-check">✔</span></div><p>"I closed 3 clients in 48 hours. Velocity!"</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">FS</div><span class="user-name">Fatima Saliu</span><span class="verified-check">✔</span></div><p>"J-System is the best investment I've made."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">KO</div><span class="user-name">Kelechi Okafor</span><span class="verified-check">✔</span></div><p>"Finally, a system that works on mobile."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">TO</div><span class="user-name">Tunde Olaniyi</span><span class="verified-check">✔</span></div><p>"The Sunday Blessing is my weekly fuel."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">BN</div><span class="user-name">Blessing Nwosu</span><span class="verified-check">✔</span></div><p>"Scaling my e-book was so easy here."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">SU</div><span class="user-name">Samuel Udoh</span><span class="verified-check">✔</span></div><p>"100% legit. The J-System doesn't play."</p></div>
+            <div class="testimony-card"><div class="user-info"><div class="user-img-placeholder">JB</div><span class="user-name">Jonard Bethuel</span><span class="verified-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
+        </div>
+    </div>
+                                            </section>
 </body>
     </html>
