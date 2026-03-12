@@ -458,48 +458,68 @@
         .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
         .more-content.open { max-height: 600px; }
         .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
-/*Lastest msg update*/
-        .hero-frontier {
+
+   .hero-frontier {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 80px;
+    /* Professional Background Image with Dark Overlay */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1500&q=80');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden; /* Keeps the slide-in from showing scrollbars */
 }
 
-/* The Blinking Cursor */
+.main-title {
+    font-family: 'Agbalumo', system-ui; /* Bold Nigerian style */
+    color: white;
+    font-size: 2.8rem;
+    min-height: 80px; /* FIXED HEIGHT: This stops the subtext from shifting! */
+    margin-bottom: 10px;
+}
+
+#typing-text {
+    font-family: 'Poppins', sans-serif;
+    color: #0088cc; /* J-System Blue */
+    font-weight: 700;
+}
+
 .console-cursor {
-    color: #0088cc;
+    color: white; /* As requested: White cursor */
+    font-family: 'Poppins', sans-serif;
     animation: blink 0.7s infinite;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Force the summary to show and look crisp */
-.summary-box.show {
-    margin-top: 30px;
-    opacity: 1; /* Keeping it visible so we don't lose it again */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Makes it pop against stars */
-}
-
 .summary-box p {
+    font-family: 'Poppins', sans-serif;
     color: white;
-    font-size: 1.2rem;
-    margin: 12px 0;
-    font-weight: 500;
+    font-size: 1.1rem;
+    margin: 8px 0;
+    opacity: 0; /* Starts hidden */
+    transform: translateX(100px); /* Starts on the right */
+    animation: slideInRight 0.8s forwards; /* The ladder slide */
 }
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
 .bouncing-arrow {
     color: white;
     font-size: 2.5rem;
     animation: bounce 2s infinite;
-    cursor: pointer;
-        }
+    margin-top: 10px;
+    }
     </style>
 </head>
 <body>
@@ -524,24 +544,25 @@
         <div></div><div></div><div></div>
     </button>
 </header>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <section class="hero-frontier">
     <div class="hero-content">
-        <h1 style="color: white; font-size: 3rem; font-weight: bold;">
-            WELCOME TO <span id="typing-text" style="color: #0088cc;"></span><span class="console-cursor">|</span>
+        <h1 class="main-title">
+            WELCOME TO <span id="typing-text"></span><span class="console-cursor">|</span>
         </h1>
         
-        <div class="summary-box show">
-            <p>MochEarn stands as the ultimate frontier</p>
-            <p>for digital empowerment and growth.</p>
-            <p>We provide the elite tools and architecture</p>
-            <p>needed to outpace inflation in a shifting economy.</p>
-            <p>Our ecosystem is designed to bridge the gap</p>
-            <p>between ambition and high-ticket execution.</p>
+        <div class="summary-box">
+            <p style="animation-delay: 0.5s;">MochEarn stands as the ultimate frontier</p>
+            <p style="animation-delay: 0.7s;">for digital empowerment and growth.</p>
+            <p style="animation-delay: 0.9s;">We provide the elite tools and architecture</p>
+            <p style="animation-delay: 1.1s;">needed to outpace inflation in a shifting economy.</p>
+            <p style="animation-delay: 1.3s;">Our ecosystem is designed to bridge the gap</p>
+            <p style="animation-delay: 1.5s;">between ambition and high-ticket execution.</p>
         </div>
 
         <div class="explore-container">
-            <p style="color: white; margin-top: 30px; font-weight: bold;">EXPLORE MORE BELOW</p>
+            <p>EXPLORE MORE BELOW</p>
             <div class="bouncing-arrow">↓</div>
         </div>
     </div>
