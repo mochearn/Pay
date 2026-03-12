@@ -721,11 +721,10 @@
 
 function showTgPopup(e) { e.preventDefault(); document.getElementById('tgModal').style.display = 'flex'; }
 function closeTgModal() { document.getElementById('tgModal').style.display = 'none'; document.getElementById('dragContainer').style.display = 'none'; }
-/* J-SYSTEM SMOOTH LOOP BRAIN */
-function runJSCounterSmooth() {
+/* J-SYSTEM STEADY & PAUSE BRAIN */
+function runJSCounterSteady() {
     const counters = document.querySelectorAll('.js-stat-box h3');
     
-    // Capture the target numbers once
     const stats = Array.from(counters).map(c => ({
         element: c,
         target: parseInt(c.innerText.replace(/[^0-9]/g, '')),
@@ -735,26 +734,27 @@ function runJSCounterSmooth() {
     function startCounting() {
         stats.forEach(stat => {
             let current = 0;
-            // Dividing by 100 makes the steps smaller and slower
-            const increment = stat.target / 100; 
+            // Smaller increment = Slower counting
+            const increment = stat.target / 150; 
 
             const update = () => {
                 if (current < stat.target) {
                     current += increment;
                     stat.element.innerText = Math.ceil(current).toLocaleString() + stat.suffix;
-                    // 30ms delay between steps for a smoother "slow-roll" effect
-                    setTimeout(update, 30); 
+                    // 50ms delay makes the roll very steady and visible
+                    setTimeout(update, 50); 
                 } else {
+                    // Lock the final number
                     stat.element.innerText = stat.target.toLocaleString() + stat.suffix;
                 }
             };
             update();
         });
 
-        // WAIT 4 SECONDS THEN RESTART THE CYCLE
+        // WAIT 5 SECONDS AT THE TOP BEFORE RESTARTING
         setTimeout(() => {
             startCounting();
-        }, 4000); 
+        }, 5000); 
     }
 
     startCounting();
@@ -762,7 +762,7 @@ function runJSCounterSmooth() {
 
 /* J-SYSTEM AUTO-START */
 window.addEventListener('load', () => {
-    setTimeout(runJSCounterSmooth, 500); 
+    setTimeout(runJSCounterSteady, 500); 
 });
 </script>
    <div id="dragContainer" class="floating-tg-btn">
