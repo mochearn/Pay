@@ -458,40 +458,42 @@
         .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
         .more-content.open { max-height: 600px; }
         .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
-        /* Hero Styling */
+        /* Updated Hero Styling to fix the overlap */
 .hero-frontier {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: 100vh; /* Changed to 100vh to give more space */
     text-align: center;
-    padding: 20px;
+    padding: 120px 20px 40px 20px; /* Added 120px at the top to push it below the header */
+    box-sizing: border-box;
+}
+
+#typing-text {
+    min-height: 1.2em; /* Keeps space for the text even while it's "deleting" */
+    margin-bottom: 20px;
 }
 
 .summary-box {
-    margin-top: 20px;
     opacity: 0; 
-    animation: fadeIn 2s forwards 1.5s; /* Fades in after typing starts */
+    animation: fadeIn 2s forwards 1.5s; 
+    max-width: 90%; /* Keeps the lines from stretching too wide on mobile */
 }
 
 .summary-box p {
     color: white;
     font-size: 1.1rem;
-    margin: 8px 0;
-    line-height: 1.5;
+    margin: 10px 0; /* Space between the 6 lines */
+    line-height: 1.6;
 }
 
-.bouncing-arrow {
-    color: white;
-    font-size: 2rem;
-    animation: bounce 2s infinite;
-}
-
-@keyframes fadeIn { to { opacity: 1; } }
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
+/* Logo placeholder fix */
+.header-logo img {
+    display: block;
+    min-width: 30px;
+    min-height: 30px;
+    background-color: rgba(255,255,255,0.1); /* Temporary box so you can see where it is */
         }
     </style>
 </head>
