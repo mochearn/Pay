@@ -409,8 +409,32 @@
     opacity: 1 !important;
     transform: none !important;
 }
+/* MENU BUTTON RE-INSTALL */
+.menu-btn {
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1100; /* Stays above everything */
+}
 
-/* Leave your .menu-btn and .sidebar code below this! */
+.menu-btn div {
+    width: 25px;         /* Length of the bars */
+    height: 3px;         /* Thickness of the bars */
+    background-color: #ffffff !important; /* Forces them to be WHITE */
+    margin: 4px 0;       /* Spacing between bars */
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+/* Optional: Hover effect to make it feel alive */
+.menu-btn:hover div {
+    background-color: #0088cc !important; /* J-System Blue on hover */
+    box-shadow: 0 0 10px #0088cc;
+    }
 
         .sidebar {
             position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
