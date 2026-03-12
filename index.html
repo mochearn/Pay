@@ -721,53 +721,36 @@
 
 function showTgPopup(e) { e.preventDefault(); document.getElementById('tgModal').style.display = 'flex'; }
 function closeTgModal() { document.getElementById('tgModal').style.display = 'none'; document.getElementById('dragContainer').style.display = 'none'; }
-/* J-SYSTEM STATS BRAIN - FORCE START */
-function initJSCounter() {
+/* J-SYSTEM HARD-WIRED BRAIN */
+function runJSCounter() {
     const counters = document.querySelectorAll('.js-stat-box h3');
     
     counters.forEach(counter => {
-        // Get the target number from the text (e.g., "1,250+" becomes 1250)
+        // Pull the target number and keep the symbol (+ or %)
         const target = parseInt(counter.innerText.replace(/[^0-9]/g, ''));
-        const suffix = counter.innerText.includes('+') ? '+' : (counter.innerText.includes('%') ? '%' : '');
+        const suffix = counter.innerText.replace(/[0-9,]/g, '');
         
-        let start = 0;
-        const duration = 2000; // 2 seconds to finish counting
-        const startTime = performance.now();
+        let current = 0;
+        const increment = target / 50; // Speed of the climb
 
-        function update(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Smooth "ease-out" math
-            const currentCount = Math.floor(progress * target);
-            counter.innerText = currentCount.toLocaleString() + suffix;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
+        const update = () => {
+            if (current < target) {
+                current += increment;
+                counter.innerText = Math.ceil(current).toLocaleString() + suffix;
+                setTimeout(update, 20); // Velocity timing
             } else {
                 counter.innerText = target.toLocaleString() + suffix;
             }
-        }
-        
-        requestAnimationFrame(update);
+        };
+        update();
     });
 }
 
-/* J-SYSTEM VIEWPORT CHECK */
-const jsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            initJSCounter();
-            jsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.2 });
-
-// Target the stats row to start the magic
-const statsRow = document.querySelector('.js-stats-row');
-if (statsRow) {
-    jsObserver.observe(statsRow);
-    }
+/* J-SYSTEM AUTO-START */
+window.addEventListener('load', () => {
+    // Small delay to ensure HTML is fully ready
+    setTimeout(runJSCounter, 500); 
+});
 </script>
    <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
