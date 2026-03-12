@@ -6,73 +6,6 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* --- J-SYSTEM HERO & GAINS STYLING --- */
-.hero-section {
-    padding: 200px 20px 40px; 
-    text-align: center;
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.future-title {
-    font-size: 2.8rem;
-    font-family: 'Arial Black', sans-serif;
-    color: #ffffff;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
-
-.gains-container {
-    max-width: 600px;
-    width: 100%;
-    margin-bottom: 50px; /* Space before the final guide */
-}
-
-.gains-text-box {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 30px;
-    border-radius: 20px;
-    border-top: 2px solid #0088cc;
-    backdrop-filter: blur(8px);
-}
-
-.floating-text {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #cbd5e1;
-    animation: floatText 5s ease-in-out infinite;
-}
-
-.scroll-guide {
-    margin-top: 20px;
-}
-
-.scroll-guide p {
-    font-size: 0.8rem;
-    color: #0088cc;
-    letter-spacing: 4px;
-    font-weight: bold;
-}
-
-.bouncing-arrow {
-    font-size: 26px;
-    margin-top: 10px;
-    animation: bounce 2s infinite;
-}
-
-/* --- ANIMATIONS --- */
-@keyframes floatText {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-15px); }
-        }
       footer {
     background: #000000 !important;
     color: #ffffff !important;
@@ -448,60 +381,21 @@
         body { background: #020617; color: white; overflow-x: hidden; text-align: center; font-family: 'Poppins', sans-serif; }
         #starCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-      /* 1. J-SYSTEM HEADER & NAVIGATION */
-.sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(2, 6, 23, 0.95); /* Deep dark background */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 25px; /* Balanced spacing */
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0, 136, 204, 0.2); /* Subtle blue line */
-}
-
-/* This makes the logo show up instantly without fading/sliding */
-.header-logo {
-    opacity: 1 !important; 
-    transform: none !important;
-    display: flex;
-    align-items: center;
-}
-
-/* This ensures if your JS adds 'visible', it doesn't change anything */
-.header-logo.visible {
-    opacity: 1 !important;
-    transform: none !important;
-}
-/* MENU BUTTON RE-INSTALL */
-.menu-btn {
-    background: none !important;
-    border: none !important;
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 1100; /* Stays above everything */
-}
-
-.menu-btn div {
-    width: 20px;         /* Length of the bars */
-    height: 2px;         /* Thickness of the bars */
-    background-color: #0088cc !important; /* Forces them to be WHITE */
-    margin: 2px 0;       /* Spacing between bars */
-    transition: 0.3s;
-    border-radius: 5px;
-}
-
-/* Optional: Hover effect to make it feel alive */
-.menu-btn:hover div {
-    background-color: #0088cc !important; /* J-System Blue on hover */
-    box-shadow: 0 0 10px #0088cc;
-    }
+        /* 1. Header & Sidebar */
+        .sticky-header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 25px; z-index: 1000; border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+        }
+        .header-logo { 
+            font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 900; 
+            color: #ffffff; letter-spacing: 1px; opacity: 0; transition: opacity 0.4s ease; 
+        }
+        .header-logo.visible { opacity: 1; }
+        .header-logo span { color: #00BFFF; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 10px; z-index: 1100; }
+        .menu-btn div { width: 22px; height: 1.2px; background-color: #00BFFF; border-radius: 1px; }
 
         .sidebar {
             position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
@@ -518,7 +412,7 @@
         .overlay.active { display: block; }
 
         /* 2. Hero Content */
-        .logo-container { padding-top: 200px; margin-bottom: 10px; }
+        .logo-container { padding-top: 100px; margin-bottom: 10px; }
         .logo { 
             font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 4.2rem); font-weight: 900; 
             letter-spacing: 5px; background: linear-gradient(135deg, #ffffff 30%, #00BFFF 100%);
@@ -547,7 +441,7 @@
         .sub-block p { color: #2d3748; font-size: 0.95rem; line-height: 1.7; margin-bottom: 40px; }
 
         /* 5. Product Solutions Section (Purple Boxes) */
-        .product-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
+  .product-section { padding: 80px 24px; background: #f8fafc; text-align: center; }
         .product-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1000px; margin: 0 auto; }
         @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
 
@@ -581,13 +475,16 @@
 </nav>
 
 <header class="sticky-header">
-<div class="header-logo">
-    <img src="YOUR_LOGO_LINK_HERE" alt="J-System Logo" style="height: 30px; width: auto; display: block;">
-</div>
+    <div class="header-logo" id="headerLogo">MOCH<span>EARN</span></div>
     <button class="menu-btn" onclick="toggleMenu()">
         <div></div><div></div><div></div>
     </button>
 </header>
+
+<div class="logo-container">
+    <div class="logo">MOCHEARN</div>
+    <div class="subtitle">ECOSYSTEM</div>
+</div>
 
 <div class="welcome-msg">
     The digital frontier is here. We provide the elite tools you need to outpace inflation and dominate the new economy.
@@ -951,27 +848,6 @@ window.addEventListener('load', () => {
     setTimeout(runJSCounterStable, 800); 
 });
 </script>
-    <section class="hero-section">
-    <div class="hero-content">
-        <h1 class="future-title">WELCOME TO THE FUTURE</h1>
-
-        <div class="gains-container">
-            <h3 class="gains-header">THE J-SYSTEM ADVANTAGE</h3>
-            <div class="gains-text-box">
-                <p class="floating-text">
-                    Master the art of **high-ticket client closing** without the stress. 🦾 
-                    The J-System is built to give you a fully **automated sales architecture** that works while you sleep, positioning you at the top of the 
-                    new digital economy. No more guessing—just pure, systematic growth.
-                </p>
-            </div>
-        </div>
-        
-        <div class="scroll-guide">
-            <p>EXPLORE MORE BELOW</p>
-            <div class="bouncing-arrow">👇</div>
-        </div>
-    </div>
-    </section>
    <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
     <a href="https://t.me/YOUR_CHANNEL_USERNAME" style="text-decoration:none !important;">
@@ -1047,4 +923,4 @@ window.addEventListener('load', () => {
     </div>
             </footer>
 </body>
-    </html>
+        </html>
