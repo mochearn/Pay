@@ -458,42 +458,47 @@
         .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
         .more-content.open { max-height: 600px; }
         .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
-        /* Updated Hero Styling to fix the overlap */
-.hero-frontier {
+/*Lastest msg update*/
+        .hero-frontier {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Changed to 100vh to give more space */
+    min-height: 100vh;
     text-align: center;
-    padding: 120px 20px 40px 20px; /* Added 120px at the top to push it below the header */
-    box-sizing: border-box;
+    padding-top: 100px;
 }
 
-#typing-text {
-    min-height: 1.2em; /* Keeps space for the text even while it's "deleting" */
-    margin-bottom: 20px;
+/* The Blinking Cursor */
+.console-cursor {
+    color: #0088cc;
+    animation: blink 0.7s infinite;
 }
 
-.summary-box {
-    opacity: 0; 
-    animation: fadeIn 2s forwards 1.5s; 
-    max-width: 90%; /* Keeps the lines from stretching too wide on mobile */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Force the summary to show and look crisp */
+.summary-box.show {
+    margin-top: 30px;
+    opacity: 1; /* Keeping it visible so we don't lose it again */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Makes it pop against stars */
 }
 
 .summary-box p {
     color: white;
-    font-size: 1.1rem;
-    margin: 10px 0; /* Space between the 6 lines */
-    line-height: 1.6;
+    font-size: 1.2rem;
+    margin: 12px 0;
+    font-weight: 500;
 }
 
-/* Logo placeholder fix */
-.header-logo img {
-    display: block;
-    min-width: 30px;
-    min-height: 30px;
-    background-color: rgba(255,255,255,0.1); /* Temporary box so you can see where it is */
+.bouncing-arrow {
+    color: white;
+    font-size: 2.5rem;
+    animation: bounce 2s infinite;
+    cursor: pointer;
         }
     </style>
 </head>
@@ -522,9 +527,11 @@
 
 <section class="hero-frontier">
     <div class="hero-content">
-        <h1 id="typing-text" style="color: white; font-size: 3rem;"></h1>
+        <h1 style="color: white; font-size: 3rem; font-weight: bold;">
+            WELCOME TO <span id="typing-text" style="color: #0088cc;"></span><span class="console-cursor">|</span>
+        </h1>
         
-        <div class="summary-box">
+        <div class="summary-box show">
             <p>MochEarn stands as the ultimate frontier</p>
             <p>for digital empowerment and growth.</p>
             <p>We provide the elite tools and architecture</p>
@@ -534,7 +541,7 @@
         </div>
 
         <div class="explore-container">
-            <p style="color: white; margin-top: 30px;">EXPLORE MORE BELOW</p>
+            <p style="color: white; margin-top: 30px; font-weight: bold;">EXPLORE MORE BELOW</p>
             <div class="bouncing-arrow">↓</div>
         </div>
     </div>
@@ -896,44 +903,38 @@ window.addEventListener('load', () => {
 </script>
     <script>
 const textElement = document.getElementById("typing-text");
-const phrases = [
-    "WELCOME TO THE FUTURE",
-    "WELCOME TO THE FRONTIER",
-    "WELCOME TO ELITE SUCCESS",
-    "WELCOME TO THE ECOSYSTEM"
-];
+// Just the words that change:
+const words = ["THE FUTURE", "THE FRONTIER", "ELITE SUCCESS", "THE ECOSYSTEM"];
 
-let phraseIndex = 0;
+let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-let typeSpeed = 150;
 
 function type() {
-    const currentPhrase = phrases[phraseIndex];
+    const currentWord = words[wordIndex];
     
     if (isDeleting) {
-        textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        textElement.textContent = currentWord.substring(0, charIndex - 1);
         charIndex--;
-        typeSpeed = 100;
     } else {
-        textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        textElement.textContent = currentWord.substring(0, charIndex + 1);
         charIndex++;
-        typeSpeed = 150;
     }
 
-    if (!isDeleting && charIndex === currentPhrase.length) {
+    let typeSpeed = isDeleting ? 100 : 150;
+
+    if (!isDeleting && charIndex === currentWord.length) {
         isDeleting = true;
-        typeSpeed = 2000; // Pause at the end
+        typeSpeed = 2000; // Pause at the end of the word
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
+        wordIndex = (wordIndex + 1) % words.length;
         typeSpeed = 500;
     }
 
     setTimeout(type, typeSpeed);
 }
 
-// Start the typing effect when the page loads
 document.addEventListener("DOMContentLoaded", type);
     </script>
    <div id="dragContainer" class="floating-tg-btn">
