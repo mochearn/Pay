@@ -458,6 +458,41 @@
         .more-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; text-align: left; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px; }
         .more-content.open { max-height: 600px; }
         .see-more-btn { background: none; border: none; color: #00BFFF; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.8rem; }
+        /* Hero Styling */
+.hero-frontier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.summary-box {
+    margin-top: 20px;
+    opacity: 0; 
+    animation: fadeIn 2s forwards 1.5s; /* Fades in after typing starts */
+}
+
+.summary-box p {
+    color: white;
+    font-size: 1.1rem;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.bouncing-arrow {
+    color: white;
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
@@ -475,23 +510,32 @@
 </nav>
 
 <header class="sticky-header">
-    <div class="header-logo" id="headerLogo">MOCH<span>EARN</span></div>
+    <div class="header-logo" id="headerLogo">
+    <img src="your-logo-file.png" alt="Logo" style="height: 30px; width: auto;">
+    </div>
     <button class="menu-btn" onclick="toggleMenu()">
         <div></div><div></div><div></div>
     </button>
 </header>
 
-<div class="logo-container">
-    <div class="logo">MOCHEARN</div>
-    <div class="subtitle">ECOSYSTEM</div>
-</div>
+<section class="hero-frontier">
+    <div class="hero-content">
+        <h1 id="typing-text" style="color: white; font-size: 3rem;"></h1>
+        
+        <div class="summary-box">
+            <p>MochEarn stands as the ultimate frontier</p>
+            <p>for digital empowerment and growth.</p>
+            <p>We provide the elite tools and architecture</p>
+            <p>needed to outpace inflation in a shifting economy.</p>
+            <p>Our ecosystem is designed to bridge the gap</p>
+            <p>between ambition and high-ticket execution.</p>
+        </div>
 
-<div class="welcome-msg">
-    The digital frontier is here. We provide the elite tools you need to outpace inflation and dominate the new economy.
-</div>
-
-<section class="slider-wrapper">
-    <div class="slider-track" id="quoteTrack"></div>
+        <div class="explore-container">
+            <p style="color: white; margin-top: 30px;">EXPLORE MORE BELOW</p>
+            <div class="bouncing-arrow">↓</div>
+        </div>
+    </div>
 </section>
 
 <section class="rescue-section">
