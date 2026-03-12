@@ -6,7 +6,7 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-     /* MASTER GALLERY & STATS FIX */
+        /* MASTER GALLERY & STATS FIX */
 .jsystem-success-zone {
     background: #020617 !important;
     padding: 40px 0;
@@ -54,11 +54,6 @@
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); } /* Halfway because of duplicates */
         }
-/* THE SMOOTH LOOP ANIMATION */
-@keyframes scrollLoop {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-290px * 3)); } /* Adjust based on card width + margin */
-                 }
 /* ISOLATED TG BUTTON STYLING */
 .floating-tg-btn {
     position: fixed;
@@ -591,6 +586,7 @@
 
     </div>
     </section>
+
 <script>
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
@@ -725,36 +721,7 @@
 
 function showTgPopup(e) { e.preventDefault(); document.getElementById('tgModal').style.display = 'flex'; }
 function closeTgModal() { document.getElementById('tgModal').style.display = 'none'; document.getElementById('dragContainer').style.display = 'none'; }
-  const counters = document.querySelectorAll('.counter');
-const speed = 200; 
-
-const startCounters = () => {
-    counters.forEach(counter => {
-        const updateCount = () => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText;
-            const inc = target / speed;
-
-            if (count < target) {
-                counter.innerText = Math.ceil(count + inc);
-                setTimeout(updateCount, 15);
-            } else {
-                counter.innerText = target + (target === 1250 || target === 5000 ? '+' : '');
-            }
-        };
-        updateCount();
-    });
-};
-
-// Intersection Observer to start counting when visible
-const observer = new IntersectionObserver((entries) => {
-    if(entries[0].isIntersecting) {
-        startCounters();
-        observer.disconnect(); 
-    }
-}, { threshold: 0.5 });
-
-observer.observe(document.querySelector('.stats-container'));
+  
 </script>
    <div id="dragContainer" class="floating-tg-btn">
     <button class="close-tg-x" onclick="showTgPopup(event)">×</button>
@@ -775,6 +742,31 @@ observer.observe(document.querySelector('.stats-container'));
         <button class="not-now-pro" onclick="closeTgModal()">I'll join later</button>
     </div>
 </div>
-</section>
+    <section class="jsystem-success-zone">
+    <div class="js-stats-row">
+        <div class="js-stat-box"><h3>1,250+</h3><p>Members</p></div>
+        <div class="js-stat-box"><h3>5,000+</h3><p>Blueprints</p></div>
+        <div class="js-stat-box"><h3>100%</h3><p>Velocity</p></div>
+    </div>
+
+    <div style="display: flex; overflow: hidden;">
+        <div class="js-track">
+            <div class="js-card"><div class="js-user"><div class="js-circle">JB</div><span class="js-name">Jonard Bethuel</span><span class="js-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">JR</div><span class="js-name">John Richard</span><span class="js-check">✔</span></div><p>"Sunday Blessing blueprints are a cheat code."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">OB</div><span class="js-name">Odeyemi Boluwatife</span><span class="js-check">✔</span></div><p>"Digital sales finally made simple."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">AA</div><span class="js-name">Adebayo Ayomide</span><span class="js-check">✔</span></div><p>"The funnel structure is top-notch."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">CE</div><span class="js-name">Chidi Emeka</span><span class="js-check">✔</span></div><p>"I closed 3 clients in 48 hours. Velocity!"</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">FS</div><span class="js-name">Fatima Saliu</span><span class="js-check">✔</span></div><p>"J-System is the best investment I've made."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">KO</div><span class="js-name">Kelechi Okafor</span><span class="js-check">✔</span></div><p>"Finally, a system that works on mobile."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">TO</div><span class="js-name">Tunde Olaniyi</span><span class="js-check">✔</span></div><p>"The Sunday Blessing is my weekly fuel."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">BN</div><span class="js-name">Blessing Nwosu</span><span class="js-check">✔</span></div><p>"Scaling my e-book was so easy here."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">SU</div><span class="js-name">Samuel Udoh</span><span class="js-check">✔</span></div><p>"100% legit. The J-System doesn't play."</p></div>
+            
+            <div class="js-card"><div class="js-user"><div class="js-circle">JB</div><span class="js-name">Jonard Bethuel</span><span class="js-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">JR</div><span class="js-name">John Richard</span><span class="js-check">✔</span></div><p>"Sunday Blessing blueprints are a cheat code."</p></div>
+            <div class="js-card"><div class="js-user"><div class="js-circle">OB</div><span class="js-name">Odeyemi Boluwatife</span><span class="js-check">✔</span></div><p>"Digital sales finally made simple."</p></div>
+        </div>
+    </div>
+    </section>
 </body>
     </html>
