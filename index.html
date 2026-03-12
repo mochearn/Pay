@@ -6,6 +6,45 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        .success-gallery { padding: 60px 0; background: #020617; overflow: hidden; }
+.section-title { text-align: center; color: white; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; margin-bottom: 30px; letter-spacing: 2px; }
+
+.testimonial-slider { width: 100%; display: flex; position: relative; }
+
+/* This track moves the cards */
+.testimonial-track {
+    display: flex;
+    width: calc(280px * 10); /* Wide enough for all cards */
+    animation: scrollLoop 25s linear infinite;
+}
+
+.testimony-card {
+    width: 260px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 15px;
+    flex-shrink: 0;
+}
+
+.user-img-placeholder {
+    width: 35px; height: 35px; background: #0088cc; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: bold; font-size: 12px; margin-right: 10px;
+}
+
+.user-name { color: #fff; font-weight: 700; font-size: 0.85rem; }
+.verified-check { color: #0088cc; margin-left: 5px; font-size: 14px; }
+
+.testimony-card p { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; margin-top: 10px; font-style: italic; }
+
+/* THE SMOOTH LOOP ANIMATION */
+@keyframes scrollLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-290px * 3)); } /* Adjust based on card width + margin */
+                 }
 /* ISOLATED TG BUTTON STYLING */
 .floating-tg-btn {
     position: fixed;
@@ -538,6 +577,44 @@
 
     </div>
     </section>
+    <section class="success-gallery">
+    <h2 class="section-title">SUCCESS GALLERY 🏆</h2>
+    <div class="testimonial-slider">
+        <div class="testimonial-track">
+            <div class="testimony-card">
+                <div class="user-info">
+                    <div class="user-img-placeholder">JB</div> <span class="user-name">Jonard Bethuel</span>
+                    <span class="verified-check">✔</span>
+                </div>
+                <p>"The J-System velocity is real. I automated my first $500 week!"</p>
+            </div>
+            <div class="testimony-card">
+                <div class="user-info">
+                    <div class="user-img-placeholder">JR</div>
+                    <span class="user-name">John Richard</span>
+                    <span class="verified-check">✔</span>
+                </div>
+                <p>"Sunday Blessing blueprints are the cheat code for Nigeria right now."</p>
+            </div>
+            <div class="testimony-card">
+                <div class="user-info">
+                    <div class="user-img-placeholder">OB</div>
+                    <span class="user-name">Odeyemi Boluwatife</span>
+                    <span class="verified-check">✔</span>
+                </div>
+                <p>"Finally a system that works on mobile. Digital sales simplified!"</p>
+            </div>
+            <div class="testimony-card">
+                <div class="user-info"><div class="user-img-placeholder">JB</div><span class="user-name">Jonard Bethuel</span><span class="verified-check">✔</span></div>
+                <p>"The J-System velocity is real. I automated my first $500 week!"</p>
+            </div>
+            <div class="testimony-card">
+                <div class="user-info"><div class="user-img-placeholder">JR</div><span class="user-name">John Richard</span><span class="verified-check">✔</span></div>
+                <p>"Sunday Blessing blueprints are the cheat code for Nigeria right now."</p>
+            </div>
+        </div>
+    </div>
+                                                                   </section>
 
 <script>
     const canvas = document.getElementById('starCanvas');
