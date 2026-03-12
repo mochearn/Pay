@@ -6,6 +6,73 @@
     <title>MOCHEARN | Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* --- J-SYSTEM HERO & GAINS STYLING --- */
+.hero-section {
+    padding: 140px 20px 40px; 
+    text-align: center;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.future-title {
+    font-size: 2.8rem;
+    font-family: 'Arial Black', sans-serif;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.gains-container {
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 50px; /* Space before the final guide */
+}
+
+.gains-text-box {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 20px;
+    border-top: 2px solid #0088cc;
+    backdrop-filter: blur(8px);
+}
+
+.floating-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+    animation: floatText 5s ease-in-out infinite;
+}
+
+.scroll-guide {
+    margin-top: 20px;
+}
+
+.scroll-guide p {
+    font-size: 0.8rem;
+    color: #0088cc;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.bouncing-arrow {
+    font-size: 26px;
+    margin-top: 10px;
+    animation: bounce 2s infinite;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes floatText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+        }
       footer {
     background: #000000 !important;
     color: #ffffff !important;
@@ -958,5 +1025,26 @@ window.addEventListener('load', () => {
         <p class="rights-text">&copy; 2026 Jonard Global Systems. All rights reserved.</p>
     </div>
             </footer>
+    <section class="hero-section">
+    <div class="hero-content">
+        <h1 class="future-title">WELCOME TO THE FUTURE</h1>
+
+        <div class="gains-container">
+            <h3 class="gains-header">THE J-SYSTEM ADVANTAGE</h3>
+            <div class="gains-text-box">
+                <p class="floating-text">
+                    Master the art of **high-ticket client closing** without the stress. 🦾 
+                    The J-System is built to give you a fully **automated sales architecture** that works while you sleep, positioning you at the top of the 
+                    new digital economy. No more guessing—just pure, systematic growth.
+                </p>
+            </div>
+        </div>
+        
+        <div class="scroll-guide">
+            <p>EXPLORE MORE BELOW</p>
+            <div class="bouncing-arrow">👇</div>
+        </div>
+    </div>
+                </section>
 </body>
     </html>
