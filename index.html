@@ -501,20 +501,32 @@
     <a href="#">CONTACT US</a>
 </nav>
 
-<header style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #050a18 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 99999 !important; border-bottom: 2px solid #0088cc !important; padding: 0 25px !important; visibility: visible !important; opacity: 1 !important;">
+<header id="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #050a18 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 1000 !important; padding: 0 25px !important; border: none !important;">
     
-    <div style="display: flex !important; align-items: center !important; visibility: visible !important; opacity: 1 !important;">
-        <span style="color: #ffffff !important; font-family: 'Poppins', sans-serif !important; font-weight: 900 !important; font-size: 1.4rem !important; letter-spacing: 1.5px !important; text-transform: uppercase !important; display: inline-block !important;">
-            J-SYSTEM
-        </span>
+    <div id="headerLogo" style="display: flex !important; align-items: center !important;">
+        <span style="color: #ffffff !important; font-family: 'Poppins', sans-serif !important; font-weight: 900 !important; font-size: 1.4rem !important; letter-spacing: 1.5px !important; text-transform: uppercase !important;">J-SYSTEM</span>
     </div>
 
-    <div onclick="toggleMenu()" style="background: none !important; border: none !important; cursor: pointer !important; display: flex !important; flex-direction: column !important; gap: 5px !important; visibility: visible !important; opacity: 1 !important;">
+    <div class="menu-btn" onclick="toggleMenu()" style="cursor: pointer !important; display: flex !important; flex-direction: column !important; gap: 5px !important;">
         <div style="width: 28px !important; height: 3px !important; background-color: #0088cc !important; border-radius: 2px !important;"></div>
         <div style="width: 28px !important; height: 3px !important; background-color: #0088cc !important; border-radius: 2px !important;"></div>
         <div style="width: 28px !important; height: 3px !important; background-color: #0088cc !important; border-radius: 2px !important;"></div>
     </div>
-   </header>
+</header>
+
+<div id="sideMenu" style="position: fixed !important; top: 0 !important; right: -100% !important; width: 100% !important; height: 100% !important; background: #050a18 !important; z-index: 2000 !important; transition: 0.5s !important; display: flex !important; flex-direction: column !important; padding: 30px !important;">
+    
+    <div onclick="toggleMenu()" style="align-self: flex-start !important; cursor: pointer !important; margin-bottom: 40px !important; padding: 10px !important;">
+        <span style="color: #ffffff !important; font-size: 2.5rem !important; font-weight: 300 !important; font-family: 'Poppins', sans-serif !important;">&times;</span>
+    </div>
+
+    <nav style="display: flex !important; flex-direction: column !important; gap: 30px !important;">
+        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">HOME</a>
+        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">ABOUT</a>
+        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">SERVICES</a>
+        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">CONTACT</a>
+    </nav>
+   </div>
 <section class="hero-frontier" style="display: flex !important; flex-direction: column !important; justify-content: flex-start !important; align-items: flex-start !important; width: 100% !important; height: 100vh !important; position: relative !important; background-color: #050a18 !important; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important; background-size: cover !important; background-position: center center !important; background-repeat: no-repeat !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important;">
     
     <div class="hero-content" style="text-align: left !important; width: 95% !important; padding-top: 160px !important; padding-left: 30px !important;">
