@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Comic+Neue:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Comic+Neue:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mochearn | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
       footer {
     background: #000000 !important;
@@ -477,68 +476,78 @@
     min-height: 100vh;
     width: 100%;
     text-align: center;
-    position: relative;
-    /* This forces the image to be full and visible */
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+    /* Force the image to show behind everything */
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
                 url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1500&q=80') no-repeat center center !important;
     background-size: cover !important;
-    background-attachment: fixed;
+    background-attachment: fixed !important;
+    position: relative;
+    z-index: 1;
 }
 
 .main-title {
-    font-family: 'Agbalumo', cursive;
-    color: white;
-    font-size: 2.2rem; /* Reduced slightly to prevent scattering on mobile */
-    margin-bottom: 10px;
-    display: block;
+    font-family: 'Agbalumo', cursive !important;
+    color: white !important;
+    font-size: 3.5rem !important; /* Made this BIG as requested */
+    margin-bottom: 5px;
 }
 
-#typing-text-container {
-    display: block; /* Changed to block so it sits neatly under "WELCOME TO" if screen is small */
-    color: #0088cc;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    min-height: 40px; 
+#typing-text {
+    font-family: 'Poppins', sans-serif !important;
+    color: #0088cc !important; /* J-System Blue */
+    font-weight: 800 !important;
+    font-size: 3rem !important; /* BIG typing text */
 }
 
 .console-cursor {
     color: white !important;
+    font-size: 3rem;
     animation: blink 0.7s infinite;
 }
 
 .summary-box {
-    margin-top: 20px;
-    width: 90%;
-    max-width: 500px;
+    margin-top: 25px;
+    max-width: 600px;
 }
 
 .summary-box p {
-    font-family: 'Comic Neue', cursive;
-    color: white;
-    font-size: 1rem;
-    margin: 8px 0;
-    opacity: 0;
-    transform: translateX(30px); /* Smaller movement for smoother slide */
-    animation: slideInRight 0.6s forwards;
-}
-
-/* The Bounce Fix */
-.bouncing-arrow {
-    display: inline-block;
+    font-family: 'Comic Neue', cursive !important; /* Forced Comic font */
     color: white !important;
-    font-size: 3rem;
-    margin-top: 15px;
-    animation: arrowMove 2s infinite !important;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    opacity: 0;
+    /* The working Slide logic */
+    transform: translateX(100px); 
+    animation: ladderSlide 0.8s forwards !important;
 }
 
-@keyframes arrowMove {
+.explore-text {
+    font-family: 'Poppins', sans-serif !important;
+    color: white !important;
+    font-weight: bold !important; /* Bolded as requested */
+    margin-top: 40px;
+    letter-spacing: 1px;
+}
+
+.bouncing-arrow {
+    color: white !important;
+    font-size: 3rem !important;
+    display: inline-block;
+    animation: megaBounce 2s infinite !important; /* Using the working bounce trick */
+}
+
+/* --- THE WORKING ANIMATIONS --- */
+@keyframes ladderSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes megaBounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-15px); }
-    60% { transform: translateY(-7px); }
-}
-
-@keyframes slideInRight {
-    to { opacity: 1; transform: translateX(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
 }
 
 @keyframes blink { 50% { opacity: 0; } }
@@ -569,25 +578,25 @@
 <section class="hero-frontier">
     <div class="hero-content">
         <h1 class="main-title">WELCOME TO</h1>
-        <div id="typing-text-container">
+        <div style="min-height: 80px;">
             <span id="typing-text"></span><span class="console-cursor">|</span>
         </div>
         
         <div class="summary-box">
-            <p style="animation-delay: 1s;">MochEarn stands as the ultimate frontier</p>
-            <p style="animation-delay: 1.5s;">for digital empowerment and growth.</p>
-            <p style="animation-delay: 2s;">We provide the elite tools and architecture</p>
-            <p style="animation-delay: 2.5s;">needed to outpace inflation in a shifting economy.</p>
-            <p style="animation-delay: 3s;">Our ecosystem is designed to bridge the gap</p>
-            <p style="animation-delay: 3.5s;">between ambition and high-ticket execution.</p>
+            <p style="animation-delay: 0.5s;">MochEarn stands as the ultimate frontier</p>
+            <p style="animation-delay: 0.8s;">for digital empowerment and growth.</p>
+            <p style="animation-delay: 1.1s;">We provide the elite tools and architecture</p>
+            <p style="animation-delay: 1.4s;">needed to outpace inflation in a shifting economy.</p>
+            <p style="animation-delay: 1.7s;">Our ecosystem is designed to bridge the gap</p>
+            <p style="animation-delay: 2s;">between ambition and high-ticket execution.</p>
         </div>
 
         <div class="explore-container">
-            <p style="color: white; font-family: 'Poppins'; margin-top: 20px; font-size: 0.8rem;">EXPLORE MORE BELOW</p>
+            <p class="explore-text">EXPLORE MORE BELOW</p>
             <div class="bouncing-arrow">↓</div>
         </div>
     </div>
-</section>
+                </section>
 
 <section class="rescue-section">
     <div class="truth-tag">THE HARD TRUTH 🇳🇬</div>
