@@ -469,60 +469,54 @@
     padding-top: 80px;
 /*updated header*/
 .moch-hero-box {
-    position: relative !important;
-    width: 100% !important;
-    height: 100vh !important;
-    min-height: 700px !important;
-    overflow: hidden !important;
     display: block !important;
-    /* This creates the dark tint without needing a separate div */
-    background-color: #000 !important;
-}
-
-/* THE PHOTO LAYER: This sits behind the text */
-.moch-hero-box::before {
-    content: "" !important;
-    position: absolute !important;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop') no-repeat center center !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
-    z-index: 1 !important;
-}
-
-/* THE CONTENT LAYER: This forces the text to the front */
-.moch-content-force {
-    position: relative !important;
-    z-index: 10 !important;
-    text-align: center !important;
-    /* TRICK: This pushes text down exactly 30% of the screen height */
-    padding-top: 30vh !important; 
     width: 100% !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    background-color: #050a18 !important;
+    
+    /* THE PHOTO: Using a super-fast office link */
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                      url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.moch-content-force {
+    /* This is your "volume knob" for the text position */
+    /* If text is too high, increase this number (e.g., 280px) */
+    padding-top: 260px !important; 
+    text-align: center !important;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .moch-title {
     font-family: 'Agbalumo', cursive !important;
     color: #ffffff !important;
-    font-size: clamp(2rem, 8vw, 3.5rem) !important;
-    margin-bottom: 20px !important;
-    text-transform: uppercase;
+    font-size: 2.5rem !important;
+    margin: 0 0 10px 0 !important;
 }
 
 #typing-text {
     font-family: 'Poppins', sans-serif !important;
-    color: #0088cc !important;
-    font-weight: 900 !important;
-    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    color: #0088cc !important; /* J-System Blue */
+    font-weight: 800 !important;
+    font-size: 1.8rem !important;
+    display: block !important;
+    min-height: 45px !important;
 }
 
 .moch-sub {
-    color: #e0e0e0 !important;
+    color: #ffffff !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 1.1rem !important;
-    margin-top: 25px !important;
-    padding: 0 20px !important;
+    font-size: 1rem !important;
     line-height: 1.6 !important;
+    margin-top: 20px !important;
+    opacity: 0.9;
        }
 
     </style>
