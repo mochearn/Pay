@@ -467,7 +467,13 @@
     min-height: 100vh;
     text-align: center;
     padding-top: 80px;
-/* Picture testing*/
+/* KILL THE STARS */
+canvas, #canvas, .stars, .star-field {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* THE NEW HERO */
 .moch-hero-box {
     display: flex !important;
     flex-direction: column;
@@ -476,21 +482,14 @@
     width: 100% !important;
     height: 100vh !important;
     position: relative;
-    /* This forces the photo to the FRONT */
     z-index: 5; 
     padding-top: 100px;
     
-    /* THE FIX: We use !important to make sure the stars don't show here */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1500&q=80') !important;
+    /* Reliable Team Office Image */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center !important;
     background-size: cover !important;
-    background-position: center !important;
     background-attachment: fixed !important;
-}
-
-/* This line tells any canvas animation to hide ONLY inside this box */
-.moch-hero-box canvas {
-    display: none !important;
 }
 
     </style>
@@ -518,13 +517,13 @@
     </button>
 </header>
 <section class="moch-hero-box">
-    <div style="z-index: 10; text-align: center;">
-        <h1 style="color: white; font-size: 3.5rem; font-family: 'Agbalumo', cursive;">
-            PHOTO TEST
+    <div style="text-align: center; z-index: 20; position: relative; padding: 20px;">
+        <h1 style="color: white; font-size: 3rem; font-family: 'Agbalumo', cursive; margin-bottom: 10px;">
+            FINAL PHOTO TEST
         </h1>
-        <p style="color: white; font-family: 'Poppins'; font-size: 1.2rem;">
-            If you see the stars, the curtain is still closed.<br>
-            If you see the office, we have won!
+        <p style="color: white; font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600;">
+            Stars should be gone. <br>
+            Team office photo should be here!
         </p>
     </div>
 </section>
