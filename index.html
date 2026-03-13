@@ -467,57 +467,30 @@
     min-height: 100vh;
     text-align: center;
     padding-top: 80px;
-/*updated header*/
-.moch-hero-box {
+/* Target the ID and the CLASS together to make it 'Stronger' */
+section.moch-hero-box {
     display: block !important;
-    width: 100% !important;
+    width: 100vw !important;
     min-height: 100vh !important;
+    height: 100vh !important;
+    position: relative !important;
     margin: 0 !important;
     padding: 0 !important;
-    position: relative !important;
-    background-color: #050a18 !important;
-    
-    /* THE PHOTO: Using a super-fast office link */
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                      url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important;
+    /* We use a different image host just to be safe */
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                      url('https://cdn.pixabay.com/photo/2015/01/08/18/20/meeting-593313_1280.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    background-attachment: scroll !important; /* Changed from fixed to scroll */
 }
 
 .moch-content-force {
-    /* This is your "volume knob" for the text position */
-    /* If text is too high, increase this number (e.g., 280px) */
-    padding-top: 260px !important; 
+    position: relative !important;
+    z-index: 100 !important;
+    padding-top: 300px !important; /* Pushing it even lower */
     text-align: center !important;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.moch-title {
-    font-family: 'Agbalumo', cursive !important;
-    color: #ffffff !important;
-    font-size: 2.5rem !important;
-    margin: 0 0 10px 0 !important;
-}
-
-#typing-text {
-    font-family: 'Poppins', sans-serif !important;
-    color: #0088cc !important; /* J-System Blue */
-    font-weight: 800 !important;
-    font-size: 1.8rem !important;
-    display: block !important;
-    min-height: 45px !important;
-}
-
-.moch-sub {
-    color: #ffffff !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    margin-top: 20px !important;
-    opacity: 0.9;
-       }
+   }
 
     </style>
 </head>
