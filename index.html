@@ -476,14 +476,14 @@
     width: 100% !important;
     min-height: 100vh !important;
     position: relative;
-    z-index: 1; /* Sits nicely in the background */
+    z-index: 1;
     
-    /* THE PUSH: Keeps text clear of that blue menu bar */
-    padding-top: 220px !important; 
+    /* PUSH IT DOWN: 260px should clear any menu bar */
+    padding-top: 260px !important; 
     
-    /* THE PHOTO: Clean Office Team */
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
-                url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center !important;
+    /* NEW PHOTO LINK: A direct, high-speed link */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop') no-repeat center center !important;
     background-size: cover !important;
     background-attachment: fixed !important;
 }
@@ -491,24 +491,21 @@
 .moch-title {
     font-family: 'Agbalumo', cursive !important;
     color: white !important;
-    font-size: 3.5rem !important;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    font-size: 2.8rem !important;
+    margin-bottom: 10px;
 }
 
 #typing-text {
     font-family: 'Poppins', sans-serif !important;
-    color: #0088cc !important; /* J-System Blue */
+    color: #0088cc !important;
     font-weight: 800 !important;
-    font-size: 2.8rem !important;
-    min-height: 60px;
-    display: inline-block;
+    font-size: 2.2rem !important;
+    min-height: 50px;
 }
 
 .console-cursor {
     color: white !important;
-    font-size: 2.8rem;
-    font-weight: 100;
+    font-size: 2.2rem;
     animation: blink 0.7s infinite;
 }
 
@@ -536,15 +533,15 @@
     </button>
 </header>
 <section class="moch-hero-box">
-    <div style="text-align: center; width: 90%;">
-        <h1 style="color: white; font-size: 3rem; font-family: 'Agbalumo', cursive; margin-bottom: 20px;">
-            FINAL PHOTO TEST
-        </h1>
-        <p style="color: #0088cc; font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700;">
-            STARS SHOULD BE GONE NOW.
-        </p>
-        <p style="color: white; font-family: 'Poppins', sans-serif; font-size: 1.1rem; margin-top: 10px;">
-            If you see the office photo, we are ready for the typing miracle! 🚀
+    <div style="text-align: center; width: 95%;">
+        <h1 class="moch-title">WELCOME TO</h1>
+        <div style="margin-bottom: 20px;">
+            <span id="typing-text"></span><span class="console-cursor">|</span>
+        </div>
+        
+        <p style="color: white; font-family: 'Poppins', sans-serif; font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto; opacity: 0.9;">
+            The ultimate frontier for digital empowerment. <br>
+            We provide the tools to outpace inflation.
         </p>
     </div>
 </section>
