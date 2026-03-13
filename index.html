@@ -467,26 +467,31 @@
     min-height: 100vh;
     text-align: center;
     padding-top: 80px;
-/* KILL THE STARS */
-canvas, #canvas, .stars, .star-field {
+/* 1. THE STAR KILLER - Target every possible name */
+canvas, #canvas, .stars, .star-field, .bg-animation, #particles-js {
     display: none !important;
+    opacity: 0 !important;
     visibility: hidden !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    z-index: -999 !important;
 }
 
-/* THE NEW HERO */
+/* 2. THE HERO BOX - The "Surgical" Force */
 .moch-hero-box {
     display: flex !important;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Starts from top instead of middle */
     align-items: center;
     width: 100% !important;
     height: 100vh !important;
     position: relative;
-    z-index: 5; 
-    padding-top: 100px;
+    z-index: 999; /* Higher than the stars! */
     
-    /* Reliable Team Office Image */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+    /* Pushes text down so it's NOT under the blue menu bar */
+    padding-top: 180px !important; 
+    
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
                 url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center !important;
     background-size: cover !important;
     background-attachment: fixed !important;
@@ -517,13 +522,15 @@ canvas, #canvas, .stars, .star-field {
     </button>
 </header>
 <section class="moch-hero-box">
-    <div style="text-align: center; z-index: 20; position: relative; padding: 20px;">
-        <h1 style="color: white; font-size: 3rem; font-family: 'Agbalumo', cursive; margin-bottom: 10px;">
+    <div style="text-align: center; width: 90%;">
+        <h1 style="color: white; font-size: 3rem; font-family: 'Agbalumo', cursive; margin-bottom: 20px;">
             FINAL PHOTO TEST
         </h1>
-        <p style="color: white; font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600;">
-            Stars should be gone. <br>
-            Team office photo should be here!
+        <p style="color: #0088cc; font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700;">
+            STARS SHOULD BE GONE NOW.
+        </p>
+        <p style="color: white; font-family: 'Poppins', sans-serif; font-size: 1.1rem; margin-top: 10px;">
+            If you see the office photo, we are ready for the typing miracle! 🚀
         </p>
     </div>
 </section>
