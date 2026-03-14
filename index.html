@@ -488,6 +488,21 @@
 .console-cursor { color: white; animation: blink 0.7s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
+      /* TARGET ONLY THE HEADINGS WITHOUT TOUCHING THE WELCOME MSG */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 900 !important; /* Extra bold for that 'Hard Truth' vibe */
+    line-height: 1.1 !important;
+    letter-spacing: -1px !important;
+    color: #050a18 !important; /* Keeps it dark and professional */
+}
+
+/* Optional: If "THE HARD TRUTH" is in a small span, use this too */
+.hard-truth-tag {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+       }
     </style>
 </head>
 <body>
