@@ -910,33 +910,175 @@ p, .subtext, p span {
     <div class="stat-item"><span class="stat-val">₦50M+</span><span class="stat-lab">Total Payouts</span></div>
     <div class="stat-item"><span class="stat-val">50+</span><span class="stat-lab">Digital Products</span></div>
 </section>
+<section id="mochearn-steps" style="padding: 40px 20px; background: #ffffff; text-align: center; overflow-x: hidden;">
 
-<section class="how-it-works">
-    <h2 style="font-family:'Montserrat';">3 STEPS TO DOMINATE</h2>
-    <div class="steps-grid">
-        <div class="step-card">
-            <div class="step-num">01</div>
+    <style>
+        /* HEADER SLIDE UP */
+        .step-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.7rem;
+            color: #050a18;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+            margin-bottom: 50px;
+        }
+        .step-header.reveal { opacity: 1; transform: translateY(0); }
+
+        /* STEP BOX CONTAINER */
+        .step-unit {
+            position: relative;
+            margin-bottom: 60px;
+            padding: 0 10px;
+        }
+
+        /* BACKGROUND NUMBERS (TRANSFORMING) */
+        .bg-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 6rem;
+            color: rgba(0, 95, 58, 0.08); /* LIGHT GREEN OPACITY */
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+
+        /* PULSE CLASS FOR TRANSFORM */
+        .pulse-change {
+            animation: pulseText 0.6s ease-in-out;
+        }
+
+        @keyframes pulseText {
+            0% { transform: translate(-50%, -60%) scale(1); opacity: 0.1; }
+            50% { transform: translate(-50%, -60%) scale(1.3); opacity: 0.3; }
+            100% { transform: translate(-50%, -60%) scale(1); opacity: 0.1; }
+        }
+
+        /* FRONT TEXT */
+        .step-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #050a18;
+            text-transform: uppercase;
+        }
+
+        .step-desc {
+            font-family: 'Comic Neue', cursive;
+            font-size: 0.95rem;
+            color: #444;
+            max-width: 280px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* REGISTER BUTTON */
+        .reg-btn-small {
+            display: inline-block;
+            background: #005f3a;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            padding: 12px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            animation: greenPulse 2s infinite;
+        }
+
+        @keyframes greenPulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 95, 58, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 0 15px rgba(0, 95, 58, 0); transform: scale(1.03); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 95, 58, 0); transform: scale(1); }
+        }
+    </style>
+
+    <h2 class="step-header" id="trigger-header">3 STEPS TO DOMINATE</h2>
+
+    <div style="max-width: 500px; margin: 0 auto;">
+
+        <div class="step-unit">
+            <div class="bg-number" id="num-1">01</div>
             <div class="step-content">
-                <h3>REGISTER</h3>
-                <p style="font-size:0.85rem; color:#64748b;">Secure your access to the J-System ecosystem and set up your master profile.</p>
+                <h3 class="step-title">REGISTER</h3>
+                <p class="step-desc">Secure your access to the J-System ecosystem and set up your master profile.</p>
             </div>
         </div>
-        <div class="step-card">
-            <div class="step-num">02</div>
+
+        <div class="step-unit">
+            <div class="bg-number" id="num-2">02</div>
             <div class="step-content">
-                <h3>SELECT & DEPLOY</h3>
-                <p style="font-size:0.85rem; color:#64748b;">Choose a high-demand product from our marketplace and get your unique link.</p>
+                <h3 class="step-title">SELECT & DEPLOY</h3>
+                <p class="step-desc">Choose a high-demand product from our marketplace and get your unique link.</p>
             </div>
         </div>
-        <div class="step-card">
-            <div class="step-num">03</div>
+
+        <div class="step-unit">
+            <div class="bg-number" id="num-3">03</div>
             <div class="step-content">
-                <h3>WITHDRAW</h3>
-                <p style="font-size:0.85rem; color:#64748b;">Request your commissions every Saturday and receive your alert on Sunday.</p>
+                <h3 class="step-title">WITHDRAW</h3>
+                <p class="step-desc">Request your commissions every Saturday and receive your alert on Sunday.</p>
             </div>
         </div>
+
+        <div style="margin-top: 20px;">
+            <a href="#register" class="reg-btn-small">REGISTER NOW</a>
+        </div>
+
     </div>
-</section>
+
+    <script>
+        // HEADER SLIDE UP OBSERVER
+        const headerObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('reveal');
+            });
+        }, { threshold: 0.1 });
+        headerObs.observe(document.getElementById('trigger-header'));
+
+        // NUMBER TO LETTER TRANSFORMATION LOGIC
+        function toggleSteps() {
+            const steps = [
+                { id: 'num-1', num: '01', let: 'A' },
+                { id: 'num-2', num: '02', let: 'B' },
+                { id: 'num-3', num: '03', let: 'C' }
+            ];
+
+            steps.forEach(step => {
+                const el = document.getElementById(step.id);
+                // Pulse and Change
+                el.classList.add('pulse-change');
+                
+                setTimeout(() => {
+                    if (el.innerText === step.num) {
+                        el.innerText = step.let;
+                    } else {
+                        el.innerText = step.num;
+                    }
+                }, 300); // Change mid-pulse
+
+                // Remove class after animation to reset it
+                setTimeout(() => el.classList.remove('pulse-change'), 600);
+            });
+        }
+
+        // Run every 3 seconds
+        setInterval(toggleSteps, 3000);
+    </script>
+
+    </section>
 
 <section class="payout-section">
     <div class="payout-card">
