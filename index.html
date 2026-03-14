@@ -943,7 +943,7 @@ p, .subtext, p span {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
             font-size: 6rem;
-            color: rgba(0, 95, 58, 0.02); /* LIGHT GREEN OPACITY */
+            color: rgba(0, 95, 58, 0.15); /* LIGHT GREEN OPACITY */
             z-index: 1;
             transition: all 0.5s ease;
         }
@@ -1080,12 +1080,110 @@ p, .subtext, p span {
 
     </section>
 
-<section class="payout-section">
-    <div class="payout-card">
-        <h2 style="color:#2ecc71; font-family:'Montserrat'; margin-bottom:15px;">THE SUNDAY BLESSING 💸</h2>
-        <p style="color:#cbd5e1; font-size:0.9rem; line-height:1.6;">At J-System, we don't hold your sweat. Request your earnings on <strong>Saturdays</strong> and wake up to a direct bank alert every <strong>Sunday</strong>. No stories, just velocity.</p>
+<section id="sunday-blessing" style="padding: 40px 20px; background: #050a18; display: flex; justify-content: center; overflow: hidden;">
+
+    <style>
+        /* THE WRAPPER BOX */
+        .blessing-box {
+            position: relative;
+            background: #050a18;
+            padding: 40px 25px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        /* THE MARCHING DASHED BORDER */
+        .blessing-box::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 3.5px dashed #00ff88;
+            border-radius: 40px;
+            animation: borderMarch 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes borderMarch {
+            from { outline-offset: -4px; }
+            to { outline-offset: -4px; }
+            /* This effect creates the "running" look on mobile browsers */
+            0% { clip-path: inset(0 0 0 0); }
+        }
+
+        /* HEADER PULSE */
+        .blessing-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: #00ff88;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            animation: blessingLoop 3s ease-in-out infinite;
+        }
+
+        @keyframes blessingLoop {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px #00ff88); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 0 8px #00ff88); }
+        }
+
+        /* AMAZE PHOTO STYLE */
+        .amaze-img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .amaze-img.reveal { opacity: 1; transform: scale(1); }
+
+        /* SUBTEXT SLIDE UP */
+        .blessing-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #ffffff;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out 0.3s; /* Delays slightly after image */
+        }
+
+        .blessing-text.reveal { opacity: 1; transform: translateY(0); }
+    </style>
+
+    <div class="blessing-box" id="blessing-trigger">
+        <h2 class="blessing-header">THE SUNDAY <br> BLESSING 💸</h2>
+        
+        <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?q=80&w=600&auto=format&fit=crop" 
+             alt="Amaze Reaction" 
+             class="amaze-img" 
+             id="amaze-photo">
+        
+        <p class="blessing-text" id="slide-text">
+            At Mochearn, we don't hold your sweat. Request your earnings on Saturdays and wake up to a direct bank alert every Sunday. No stories, just velocity.
+        </p>
     </div>
-</section>
+
+    <script>
+        const blessingObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    document.getElementById('amaze-photo').classList.add('reveal');
+                    document.getElementById('slide-text').classList.add('reveal');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        blessingObs.observe(document.getElementById('blessing-trigger'));
+    </script>
+
+    </section>
     <section class="marketplace-preview" id="marketSection">
     
     <div class="market-header">
