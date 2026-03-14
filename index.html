@@ -649,40 +649,62 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<section class="product-section">
-    <h2 style="color:#020617; font-family:'Montserrat'; margin-bottom:40px;">THE J-SYSTEM SOLUTIONS</h2>
-    <div class="product-grid">
-        <div class="product-card">
-            <div style="font-size: 2rem; margin-bottom:10px;">🛡️</div>
-            <h4 style="color:#00BFFF">WEALTH SHIELD</h4>
-            <p>This is where we secure your value. The Wealth Shield is designed to convert local struggles into global stability. We use the J-System to ensure your money never loses its power again.</p>
-            <div class="more-content" id="m1">
-                <p>• Automated inflation protection.<br>
-                   • Real-time asset monitoring.<br>
-                   • Diversified dollar-backed portfolios.<br>
-                   • 24/7 wealth preservation support.</p>
-            </div>
-            <button class="see-more-btn" onclick="toggleText('m1', this)">SEE MORE +</button>
+<section id="advantage-section" style="padding: 60px 20px; background: #f9f9f9; text-align: center; overflow-x: hidden;">
+    
+    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2.2rem; color: #050a18; margin-bottom: 40px; text-transform: uppercase;">
+        WHY PARTNER WITH MOCHEARN?
+    </h2>
+
+    <div class="advantage-grid" style="display: flex; flex-direction: column; gap: 25px; max-width: 1100px; margin: 0 auto;">
+        
+        <div class="adv-card mochearn-card slide-left" style="background: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); opacity: 0;">
+            <div style="font-size: 40px; margin-bottom: 15px;">💰</div>
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; margin-bottom: 10px;">HIGH COMMISSIONS</h3>
+            <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 1rem; line-height: 1.5;">
+                Earn more on every sale with our industry-leading commission structures. We ensure our partners are the highest-paid in the digital space.
+            </p>
         </div>
 
-        <div class="product-card">
-            <div style="font-size: 2rem; margin-bottom:10px;">⚡</div>
-            <h4 style="color:#2ecc71">DIGITAL VELOCITY</h4>
-            <p>Speed is the new currency. We provide the high-income blueprints that move you from zero to elite status. No fluff, just the exact steps to dominate the modern digital market.</p>
-            <div class="more-content" id="m2">
-                <p>• High-ticket sales architecture.<br>
-                   • Advanced funnel systems.<br>
-                   • Lead generation mastery.<br>
-                   • Global scaling strategies.</p>
-         </div>
-            <button class="see-more-btn" style="color:#2ecc71" onclick="toggleText('m2', this)">SEE MORE +</button>
+        <div class="adv-card mochearn-card slide-right" style="background: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); opacity: 0;">
+            <div style="font-size: 40px; margin-bottom: 15px;">🛠️</div>
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; margin-bottom: 10px;">MARKETING VAULT</h3>
+            <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 1rem; line-height: 1.5;">
+                Access pre-built funnels, high-converting ad copies, and professional templates designed to help you scale without stress.
+            </p>
         </div>
+
+        <div class="adv-card mochearn-card slide-left" style="background: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); opacity: 0;">
+            <div style="font-size: 40px; margin-bottom: 15px;">🤝</div>
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; margin-bottom: 10px;">ELITE SUPPORT</h3>
+            <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 1rem; line-height: 1.5;">
+                Join a community of top earners. Get 24/7 assistance and mentorship to ensure you never have to build your digital fortress alone.
+            </p>
+        </div>
+
     </div>
 
-    <button class="see-more-btn" style="margin-top: 60px; font-size: 1rem; border: 2.5px solid #00BFFF; padding: 12px 35px; border-radius: 50px; color:#020617">
-        EXPLORE FULL J-SYSTEM →
-    </button>
+    <div style="margin-top: 50px; animation: pulse 2s infinite;">
+        <a href="#register" style="display: inline-block; background: #0088cc; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 900; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); text-transform: uppercase;">
+            GET STARTED NOW 🚀
+        </a>
+    </div>
+
 </section>
+
+<style>
+/* Added Pulse for the Button */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.adv-card:hover {
+    transform: translateY(-10px) !important;
+    transition: 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0, 136, 204, 0.15) !important;
+}
+        </style>
     <section class="roles-container">
     <h2 style="color:#020617; font-family:'Montserrat';">CHOOSE YOUR PATH</h2>
     <p style="color:#64748b; font-size: 0.9rem;">How do you want to dominate the J-System ecosystem?</p>
