@@ -631,7 +631,7 @@ p, .subtext, p span {
             });
         });
     </script>
-    <section id="mochearn-advantages" style="padding: 50px 20px; background: #f9f9f9; text-align: center; overflow-x: hidden;">
+<section id="mochearn-advantages" style="padding: 50px 20px; background: #f9f9f9; text-align: center; overflow-x: hidden;">
 
     <style>
         .vip-header {
@@ -661,7 +661,7 @@ p, .subtext, p span {
             transition: transform 1s ease-out;
         }
 
-        /* Triggered by JS */
+        /* Triggered by JS when scrolling */
         .reveal-active {
             opacity: 1 !important;
             transform: translateY(0) !important;
@@ -689,7 +689,7 @@ p, .subtext, p span {
     <div class="advantage-grid" style="max-width: 1100px; margin: 0 auto;">
         
         <div class="adv-card-unit">
-            <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=500&auto=format&fit=crop" class="adv-photo" alt="Wealth">
+            <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=500&auto=format&fit=crop" class="adv-photo" alt="High Wealth">
             <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; font-size: 1.25rem; margin-bottom: 10px;">HIGH COMMISSIONS</h3>
             <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 0.95rem; line-height: 1.4;">
                 Earn more on every sale with our industry-leading structures. We ensure our partners are the highest-paid.
@@ -697,10 +697,26 @@ p, .subtext, p span {
         </div>
 
         <div class="adv-card-unit">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500&auto=format&fit=crop" class="adv-photo" alt="Tools">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500&auto=format&fit=crop" class="adv-photo" alt="Digital Tools">
             <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; font-size: 1.25rem; margin-bottom: 10px;">MARKETING VAULT</h3>
             <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 0.95rem; line-height: 1.4;">
                 Access pre-built funnels, high-converting ad copies, and professional templates designed to help you scale.
+            </p>
+        </div>
+
+        <div class="adv-card-unit">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=500&auto=format&fit=crop" class="adv-photo" alt="Support Team">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; font-size: 1.25rem; margin-bottom: 10px;">ELITE SUPPORT</h3>
+            <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 0.95rem; line-height: 1.4;">
+                Join a community of top earners and get 24/7 assistance on your journey. You never have to build alone.
+            </p>
+        </div>
+
+        <div class="adv-card-unit">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=500&auto=format&fit=crop" class="adv-photo" alt="Fast Payments">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; color: #050a18; font-size: 1.25rem; margin-bottom: 10px;">FAST PAYMENTS</h3>
+            <p style="font-family: 'Comic Neue', cursive; color: #444; font-size: 0.95rem; line-height: 1.4;">
+                Experience seamless, secure, and lightning-fast withdrawals. Your hard-earned alerts hit your account without delay.
             </p>
         </div>
 
@@ -708,7 +724,7 @@ p, .subtext, p span {
 
     <div style="margin-top: 40px;">
         <a href="#register" style="display: inline-block; background: #0088cc; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 900; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-size: 1rem; text-transform: uppercase; animation: pulseSmall 2s infinite;">
-            GET STARTED 🚀
+            GET STARTED NOW 🚀
         </a>
     </div>
 
@@ -726,7 +742,7 @@ p, .subtext, p span {
                 });
             }, { threshold: 0.1 });
 
-            advObserver.observe(document.getElementById('bounce-header'));
+            if(document.getElementById('bounce-header')) advObserver.observe(document.getElementById('bounce-header'));
             document.querySelectorAll('.adv-card-unit').forEach(card => {
                 advObserver.observe(card);
             });
