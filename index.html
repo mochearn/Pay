@@ -1443,12 +1443,72 @@ document.addEventListener("DOMContentLoaded", type);
         <button class="not-now-pro" onclick="closeTgModal()">I'll join later</button>
     </div>
 </div>
-    <section class="jsystem-success-zone">
-    <div class="js-stats-row">
-        <div class="js-stat-box"><h3>1,250+</h3><p>Members</p></div>
-        <div class="js-stat-box"><h3>5,000+</h3><p>Blueprints</p></div>
-        <div class="js-stat-box"><h3>100%</h3><p>Velocity</p></div>
+   <section id="mochearn-stats" style="padding: 50px 10px; background: #050a18; color: #ffffff; text-align: center;">
+    
+    <div style="display: flex; justify-content: space-around; max-width: 600px; margin: 0 auto; flex-wrap: wrap;">
+        
+        <div style="margin: 10px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #00aaff;">
+                <span class="stat-number" data-target="1250">0</span>+
+            </div>
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
+                MEMBERS
+            </div>
+        </div>
+
+        <div style="margin: 10px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #00aaff;">
+                <span class="stat-number" data-target="5000">0</span>+
+            </div>
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
+                BLUEPRINTS
+            </div>
+        </div>
+
+        <div style="margin: 10px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #00aaff;">
+                <span class="stat-number" data-target="100">0</span>%
+            </div>
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
+                VELOCITY
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        const startCounter = (el) => {
+            const target = +el.getAttribute('data-target');
+            const speed = 150; // Higher = Slower
+            const increment = target / speed;
+
+            const updateCount = () => {
+                const current = +el.innerText.replace(',', '');
+                if (current < target) {
+                    const nextVal = Math.ceil(current + increment);
+                    el.innerText = nextVal.toLocaleString();
+                    setTimeout(updateCount, 20);
+                } else {
+                    el.innerText = target.toLocaleString();
+                }
+            };
+            updateCount();
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = entry.target.querySelectorAll('.stat-number');
+                    numbers.forEach(num => startCounter(num));
+                    statsObserver.unobserve(entry.target); // Run once only
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(document.getElementById('mochearn-stats'));
+    </script>
+
+    </section>
 
     <div style="display: flex; overflow: hidden;">
         <div class="js-track">
