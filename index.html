@@ -583,19 +583,18 @@ p, .subtext, p span {
 }
 @keyframes blink { 50% { opacity: 0; } }
    </style>
+<section id="trigger-section" style="padding: 40px 20px; overflow-x: hidden; background: #ffffff;">
 
-<section style="padding: 60px 25px; overflow-x: hidden; background: #ffffff;">
-
-    <div class="mochearn-card" style="margin-bottom: 50px; animation: slideLeft 1s ease-out forwards;">
-        <h2 style="color: #050a18; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2rem; margin-bottom: 15px;">WHAT IS MOCHEARN?</h2>
-        <p style="color: #4a4a4a; font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 1.1rem;">
+    <div class="mochearn-card slide-left" style="margin-bottom: 40px; opacity: 0;">
+        <h2 style="color: #050a18 !important; font-family: 'Montserrat', sans-serif !important; font-weight: 900 !important; font-size: 1.6rem !important; margin-bottom: 12px; text-transform: uppercase;">WHAT IS MOCHEARN?</h2>
+        <p style="color: #333333 !important; font-family: 'Comic Neue', cursive !important; line-height: 1.5 !important; font-size: 0.95rem !important; font-weight: normal !important;">
             Mochearn is a premier digital growth platform designed to bridge the gap between ambition and high-income reality. We provide the infrastructure, the community, and the proven digital blueprints—like our flagship <strong>J-System</strong>—to help you build sustainable wealth in the global digital economy. Registering with Mochearn means gaining access to a structured environment where learning leads directly to earning.
         </p>
     </div>
 
-    <div class="mochearn-card" style="animation: slideRight 1s ease-out forwards;">
-        <h2 style="color: #0088cc; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2rem; margin-bottom: 15px;">OUR MISSION & YOUR INCOME</h2>
-        <p style="color: #4a4a4a; font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 1.1rem;">
+    <div class="mochearn-card slide-right" style="opacity: 0;">
+        <h2 style="color: #050a18 !important; font-family: 'Montserrat', sans-serif !important; font-weight: 900 !important; font-size: 1.6rem !important; margin-bottom: 12px; text-transform: uppercase;">OUR MISSION & YOUR INCOME</h2>
+        <p style="color: #333333 !important; font-family: 'Comic Neue', cursive !important; line-height: 1.5 !important; font-size: 0.95rem !important; font-weight: normal !important;">
             We don't just teach; we provide the exact products and automated systems that put money in your pocket. By partnering with Mochearn, you get a "business-in-a-box" experience, using our optimized sales funnels and high-demand digital assets to generate consistent alerts. Whether you are a beginner or looking to scale, Mochearn provides the tools to ensure your digital fortress stands firm against any economic climate.
         </p>
     </div>
@@ -603,20 +602,29 @@ p, .subtext, p span {
 </section>
 
 <style>
-@keyframes slideLeft {
-    0% { opacity: 0; transform: translateX(-100px); }
-    100% { opacity: 1; transform: translateX(0); }
+.mochearn-card.show {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    transition: all 1s ease-out !important;
 }
 
-@keyframes slideRight {
-    0% { opacity: 0; transform: translateX(100px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
+.slide-left { transform: translateX(-100px); }
+.slide-right { transform: translateX(100px); }
+</style>
 
-.mochearn-card {
-    opacity: 0; /* Keeps them hidden until animation starts */
-}
-    </style>
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.mochearn-card').forEach(card => {
+    observer.observe(card);
+});
+</script>
 
 <section class="product-section">
     <h2 style="color:#020617; font-family:'Montserrat'; margin-bottom:40px;">THE J-SYSTEM SOLUTIONS</h2>
