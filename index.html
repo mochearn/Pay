@@ -583,44 +583,54 @@ p, .subtext, p span {
 }
 @keyframes blink { 50% { opacity: 0; } }
    </style>
-<section id="mochearn-unified-section" style="padding: 40px 20px; background: #ffffff; overflow-x: hidden;">
+<section id="mochearn-intro" style="padding: 40px 20px; background: #ffffff; overflow-x: hidden;">
 
-    <div class="mochearn-card slide-left" style="margin-bottom: 40px; opacity: 1 !important;"> <h2 style="color: #050a18; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.6rem; margin-bottom: 12px; text-transform: uppercase;">WHAT IS MOCHEARN?</h2>
-        <p style="color: #333333; font-family: 'Comic Neue', cursive; line-height: 1.5; font-size: 0.95rem;">
+    <style>
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s ease-out;
+        }
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1s ease-out;
+        }
+        .slide-active {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+    </style>
+
+    <div class="mochearn-intro-card slide-in-left" style="margin-bottom: 40px;">
+        <h2 style="color: #050a18; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.6rem; margin-bottom: 12px; text-transform: uppercase;">WHAT IS MOCHEARN?</h2>
+        <p style="color: #333333; font-family: 'Comic Neue', cursive; line-height: 1.5; font-size: 0.95rem; font-weight: normal;">
             Mochearn is a premier digital growth platform designed to bridge the gap between ambition and high-income reality. We provide the infrastructure, the community, and the proven digital blueprints—like our flagship <strong>J-System</strong>—to help you build sustainable wealth in the global digital economy. Registering with Mochearn means gaining access to a structured environment where learning leads directly to earning.
         </p>
     </div>
 
-    <div class="mochearn-card slide-right" style="margin-bottom: 60px; opacity: 1 !important;">
+    <div class="mochearn-intro-card slide-in-right" style="margin-bottom: 20px;">
         <h2 style="color: #050a18; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.6rem; margin-bottom: 12px; text-transform: uppercase;">OUR MISSION & YOUR INCOME</h2>
-        <p style="color: #333333; font-family: 'Comic Neue', cursive; line-height: 1.5; font-size: 0.95rem;">
+        <p style="color: #333333; font-family: 'Comic Neue', cursive; line-height: 1.5; font-size: 0.95rem; font-weight: normal;">
             We don't just teach; we provide the exact products and automated systems that put money in your pocket. By partnering with Mochearn, you get a "business-in-a-box" experience, using our optimized sales funnels and high-demand digital assets to generate consistent alerts. Whether you are a beginner or looking to scale, Mochearn provides the tools to ensure your digital fortress stands firm against any economic climate.
         </p>
     </div>
 
-    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.7rem; color: #005f3a; margin-bottom: 35px; text-align: center; text-transform: uppercase;">
-        WHY PARTNER<br>WITH MOCHEARN?
-    </h2>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const introObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-active');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-    <div class="advantage-grid" style="display: flex; flex-direction: column; gap: 25px;">
-        
-        <div class="mochearn-card" style="background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); opacity: 1 !important;">
-            <img src="https://i.imgur.com/kR84f5g.jpeg" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
-            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.2rem;">HIGH COMMISSIONS</h3>
-            <p style="font-family: 'Comic Neue', cursive; font-size: 0.9rem;">Earn more on every sale with our industry-leading structures.</p>
-        </div>
-
-        <div class="mochearn-card" style="background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); opacity: 1 !important;">
-            <img src="https://i.imgur.com/vH9p4wA.jpeg" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
-            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.2rem;">MARKETING VAULT</h3>
-            <p style="font-family: 'Comic Neue', cursive; font-size: 0.9rem;">Access pre-built funnels and professional high-converting templates.</p>
-        </div>
-
-    </div>
-
-    <div style="text-align: center; margin-top: 40px;">
-        <a href="#register" style="display: inline-block; background: #0088cc; color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 900; padding: 12px 30px; border-radius: 30px; text-decoration: none; text-transform: uppercase; font-size: 1rem;">GET STARTED NOW 🚀</a>
-    </div>
+            document.querySelectorAll('.mochearn-intro-card').forEach(card => {
+                introObserver.observe(card);
+            });
+        });
+    </script>
 
 </section>
     <section class="roles-container">
