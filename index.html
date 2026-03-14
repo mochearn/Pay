@@ -1451,7 +1451,7 @@ document.addEventListener("DOMContentLoaded", type);
             <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #00aaff;">
                 <span class="stat-number" data-target="1250">0</span>+
             </div>
-            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px;">
                 MEMBERS
             </div>
         </div>
@@ -1460,7 +1460,7 @@ document.addEventListener("DOMContentLoaded", type);
             <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #00aaff;">
                 <span class="stat-number" data-target="5000">0</span>+
             </div>
-            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px;">
                 BLUEPRINTS
             </div>
         </div>
@@ -1469,7 +1469,7 @@ document.addEventListener("DOMContentLoaded", type);
             <div style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; color: #00aaff;">
                 <span class="stat-number" data-target="100">0</span>%
             </div>
-            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px; letter-spacing: 1px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-top: 5px;">
                 VELOCITY
             </div>
         </div>
@@ -1477,19 +1477,24 @@ document.addEventListener("DOMContentLoaded", type);
     </div>
 
     <script>
-        const startCounter = (el) => {
+        const runCounter = (el) => {
             const target = +el.getAttribute('data-target');
-            const speed = 150; // Higher = Slower
-            const increment = target / speed;
+            // Slower increment for better visibility
+            const increment = target / 100; 
+            let count = 0;
 
             const updateCount = () => {
-                const current = +el.innerText.replace(',', '');
-                if (current < target) {
-                    const nextVal = Math.ceil(current + increment);
-                    el.innerText = nextVal.toLocaleString();
-                    setTimeout(updateCount, 20);
+                if (count < target) {
+                    count += increment;
+                    el.innerText = Math.ceil(count).toLocaleString();
+                    setTimeout(updateCount, 30); // Controlled speed
                 } else {
                     el.innerText = target.toLocaleString();
+                    // WAIT 5 SECONDS THEN RESET
+                    setTimeout(() => {
+                        el.innerText = "0";
+                        runCounter(el);
+                    }, 5000); 
                 }
             };
             updateCount();
@@ -1499,8 +1504,8 @@ document.addEventListener("DOMContentLoaded", type);
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const numbers = entry.target.querySelectorAll('.stat-number');
-                    numbers.forEach(num => startCounter(num));
-                    statsObserver.unobserve(entry.target); // Run once only
+                    numbers.forEach(num => runCounter(num));
+                    statsObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
