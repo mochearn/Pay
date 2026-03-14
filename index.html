@@ -1083,7 +1083,6 @@ p, .subtext, p span {
 <section id="sunday-blessing" style="padding: 40px 20px; background: #050a18; display: flex; justify-content: center; overflow: hidden;">
 
     <style>
-        /* THE WRAPPER BOX */
         .blessing-box {
             position: relative;
             background: #050a18;
@@ -1092,25 +1091,17 @@ p, .subtext, p span {
             width: 100%;
             text-align: center;
             border-radius: 40px;
-            overflow: hidden;
-        }
-
-        /* THE MARCHING DASHED BORDER */
-        .blessing-box::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border: 3.5px dashed #00ff88;
-            border-radius: 40px;
-            animation: borderMarch 8s linear infinite;
-            pointer-events: none;
+            /* THE RUNNING BORDER MAGIC */
+            background-image: linear-gradient(90deg, #00ff88 50%, transparent 50%), linear-gradient(90deg, #00ff88 50%, transparent 50%), linear-gradient(0deg, #00ff88 50%, transparent 50%), linear-gradient(0deg, #00ff88 50%, transparent 50%);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-size: 15px 3px, 15px 3px, 3px 15px, 3px 15px;
+            background-position: 0px 0px, 100% 100%, 0px 100%, 100% 0px;
+            animation: borderMarch 0.4s infinite linear;
         }
 
         @keyframes borderMarch {
-            from { outline-offset: -4px; }
-            to { outline-offset: -4px; }
-            /* This effect creates the "running" look on mobile browsers */
-            0% { clip-path: inset(0 0 0 0); }
+            0% { background-position: 0px 0px, 100% 100%, 0px 100%, 100% 0px; }
+            100% { background-position: 15px 0px, calc(100% - 15px) 100%, 0px calc(100% - 15px), 100% 15px; }
         }
 
         /* HEADER PULSE */
@@ -1129,7 +1120,6 @@ p, .subtext, p span {
             50% { transform: scale(1.03); filter: drop-shadow(0 0 8px #00ff88); }
         }
 
-        /* AMAZE PHOTO STYLE */
         .amaze-img {
             width: 100%;
             max-width: 250px;
@@ -1139,10 +1129,8 @@ p, .subtext, p span {
             transform: scale(0.8);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .amaze-img.reveal { opacity: 1; transform: scale(1); }
 
-        /* SUBTEXT SLIDE UP */
         .blessing-text {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
@@ -1151,9 +1139,8 @@ p, .subtext, p span {
             line-height: 1.6;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out 0.3s; /* Delays slightly after image */
+            transition: all 0.8s ease-out 0.3s;
         }
-
         .blessing-text.reveal { opacity: 1; transform: translateY(0); }
     </style>
 
@@ -1179,11 +1166,10 @@ p, .subtext, p span {
                 }
             });
         }, { threshold: 0.2 });
-
         blessingObs.observe(document.getElementById('blessing-trigger'));
     </script>
 
-    </section>
+            </section>
     <section class="marketplace-preview" id="marketSection">
     
     <div class="market-header">
