@@ -752,95 +752,111 @@ p, .subtext, p span {
     </section>
 
 </section>
-<section id="mochearn-pathways" style="padding: 60px 20px; background: #ffffff; overflow-x: hidden;">
+<section id="mochearn-pathways" style="padding: 20px 15px 60px 15px; background: #ffffff; overflow-x: hidden;">
     
-    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; text-align: center; color: #050a18; text-transform: uppercase; margin-bottom: 40px;">
-        CHOOSE YOUR PATH
-    </h2>
-
     <style>
+        /* LOOPING HEADER SHAKE */
+        .loop-shake {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            text-align: center;
+            color: #050a18;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            display: block;
+            animation: headerLoop 3s ease-in-out infinite;
+        }
+
+        @keyframes headerLoop {
+            0%, 80%, 100% { transform: translateX(0); }
+            85% { transform: translateX(-4px); }
+            90% { transform: translateX(4px); }
+            95% { transform: translateX(-2px); }
+        }
+
+        /* BOX STYLING */
         .path-card {
+            max-width: 500px; /* Reduced box size */
+            margin: 0 auto 40px auto;
             background: #ffffff;
             border: 4px solid #005f3a; 
-            margin-bottom: 50px;
-            padding: 0;
-            opacity: 0; /* Hidden until you scroll here */
+            opacity: 0; 
             position: relative;
-            transition: opacity 0.3s ease;
         }
 
         .path-photo { width: 100%; display: block; border: 0 !important; }
 
-        .path-content { padding: 25px; text-align: left; }
+        .path-content { padding: 20px; text-align: left; }
 
         .path-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             color: #050a18;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-transform: uppercase;
         }
 
         .path-text {
             font-family: 'Comic Neue', cursive;
             font-weight: normal; 
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reduced text size */
             color: #444;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.5;
+            margin-bottom: 18px;
         }
 
-        /* BLINKING BUTTON */
-        .blink-btn {
+        /* BUTTONS */
+        .path-btn {
             display: inline-block;
             background: #005f3a;
             color: #ffffff;
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            padding: 12px 25px;
+            padding: 10px 22px;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             animation: buttonBlink 1.5s infinite;
         }
 
         @keyframes buttonBlink {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.03); }
-            100% { opacity: 1; transform: scale(1); }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
         }
 
-        /* THE MAGIC STATES */
-        .slant-left-prepare { transform: translateX(-100%) rotate(-15deg); }
-        .slant-right-prepare { transform: translateX(100%) rotate(15deg); }
+        /* MAGIC ANIMATIONS */
+        .slant-left-prepare { transform: translateX(-80%) rotate(-10deg); }
+        .slant-right-prepare { transform: translateX(80%) rotate(10deg); }
 
         .path-active {
             opacity: 1 !important;
             transform: translateX(0) rotate(0deg) !important;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
         }
 
-        .shake-impact { animation: textShake 0.4s ease-in-out 0.8s; }
+        .shake-impact { animation: textShake 0.4s ease-in-out 0.7s; }
 
         @keyframes textShake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-3px); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
         }
     </style>
 
-    <div style="max-width: 600px; margin: 0 auto;">
+    <h2 class="loop-shake">CHOOSE YOUR PATH</h2>
+
+    <div style="width: 100%;">
 
         <div class="path-card slant-left-prepare" id="card-1">
             <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop" class="path-photo">
             <div class="path-content">
                 <h3 class="path-title">THE CATALYST</h3>
                 <div class="shake-zone">
-                    <p class="path-text">A Catalyst is an agent that provokes or speeds up significant change. On Mochearn, you are the driving force connecting massive value to the market. You use our automated J-System to speed up sales, earning commissions paid directly to your bank every Sunday. Your income is in your hands; a focused Catalyst can realistically earn between 1 Million to 3 Million Naira monthly.</p>
+                    <p class="path-text">A Catalyst is an agent that speeds up change. When you enroll with Mochearn, you’ll be a driving force connecting massive value to the market. You will use our J-System to scale sales and earn commissions paid directly to you every Sunday. Your income is in your hands; a focused Catalyst can realistically earn between 1M to 3M Naira monthly.</p>
                 </div>
-                <a href="#register" class="blink-btn">BECOME A CATALYST 🚀</a>
+                <a href="#register" class="path-btn">BECOME A CATALYST 🚀</a>
             </div>
         </div>
 
@@ -849,9 +865,9 @@ p, .subtext, p span {
             <div class="path-content">
                 <h3 class="path-title">THE VENDOR</h3>
                 <div class="shake-zone">
-                    <p class="path-text">You are the architect of knowledge and value, focusing on creating world-class digital assets. Instead of struggling to sell alone, you list your validated courses or e-books in our high-traffic marketplace. You gain instant access to our army of Catalysts who use our funnels to scale your sales to the moon while you focus on creating.</p>
+                    <p class="path-text">When you enroll as a Vendor, you become the architect of value. Instead of struggling alone, you will list your validated courses or e-books in our marketplace. You’ll gain instant access to our army of Catalysts who will use our funnels to scale your sales while you focus on creating more value.</p>
                 </div>
-                <a href="#register" class="blink-btn">LIST YOUR PRODUCT 🛠️</a>
+                <a href="#register" class="path-btn">LIST YOUR PRODUCT 🛠️</a>
             </div>
         </div>
 
@@ -860,17 +876,16 @@ p, .subtext, p span {
             <div class="path-content">
                 <h3 class="path-title">THE CUSTOMER</h3>
                 <div class="shake-zone">
-                    <p class="path-text">You are a seeker of elite transformation, looking for the specific tools to unlock your next financial level. Access premium knowledge modules validated by top experts to master high-income skills in today's economy. Mochearn gives you the specific blueprints to build a digital fortress that stands firm against inflation.</p>
+                    <p class="path-text">When you enroll as a Customer, you unlock the elite tools for financial transformation. You will access premium knowledge modules validated by experts to master high-income skills. Mochearn gives you the blueprints to build a digital fortress that stands firm against inflation. This is where your journey begins.</p>
                 </div>
-                <a href="#courses" style="display:inline-block; color:#005f3a; font-family:'Montserrat'; font-weight:900; text-decoration:none; border-bottom: 2px solid #005f3a;">EXPLORE THE VAULT 💎</a>
+                <a href="#courses" class="path-btn" style="background: #005f3a;">EXPLORE THE VAULT 💎</a>
             </div>
         </div>
 
     </div>
 
     <script>
-        const observerOptions = { threshold: 0.15 }; 
-
+        // Set to 0.05 so it triggers almost immediately after the header passes
         const pathObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const shakeZone = entry.target.querySelector('.shake-zone');
@@ -878,19 +893,18 @@ p, .subtext, p span {
                     entry.target.classList.add('path-active');
                     shakeZone.classList.add('shake-impact');
                 } else {
-                    // This allows the magic to happen AGAIN when you scroll back!
                     entry.target.classList.remove('path-active');
                     shakeZone.classList.remove('shake-impact');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.05 }); 
 
         document.querySelectorAll('.path-card').forEach(card => {
             pathObserver.observe(card);
         });
     </script>
 
-            </section>
+                    </section>
     <section class="live-stats">
     <div class="stat-item"><span class="stat-val">10,000+</span><span class="stat-lab">Catalysts</span></div>
     <div class="stat-item"><span class="stat-val">₦50M+</span><span class="stat-lab">Total Payouts</span></div>
