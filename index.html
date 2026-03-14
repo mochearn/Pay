@@ -488,21 +488,23 @@
 .console-cursor { color: white; animation: blink 0.7s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-      /* TARGET ONLY THE HEADINGS WITHOUT TOUCHING THE WELCOME MSG */
-h1, h2, h3 {
+  /* THE ULTIMATE FONT FORCE */
+h1, h2, h3, 
+h1 span, h2 span, h3 span,
+.headline, .sub-headline {
     font-family: 'Poppins', sans-serif !important;
-    font-weight: 900 !important; /* Extra bold for that 'Hard Truth' vibe */
-    line-height: 1.1 !important;
-    letter-spacing: -1px !important;
-    color: #050a18 !important; /* Keeps it dark and professional */
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
 }
 
-/* Optional: If "THE HARD TRUTH" is in a small span, use this too */
-.hard-truth-tag {
+/* Specific fix for "THE HARD TRUTH" tag */
+.hard-truth-tag, h4 {
     font-family: 'Poppins', sans-serif !important;
     font-weight: 700 !important;
-    text-transform: uppercase !important;
-       }
+    color: #ff4500 !important; /* That orange color from your shot */
+}
     </style>
 </head>
 <body>
