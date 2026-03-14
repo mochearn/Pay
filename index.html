@@ -610,19 +610,42 @@ p, .subtext, p span {
 
 .slide-left { transform: translateX(-100px); }
 .slide-right { transform: translateX(100px); }
+    /* Ensure the Header and Menu are always on top */
+header, .navbar, .menu-container {
+    z-index: 10000 !important;
+    position: relative;
+}
+
+/* Ensure the Telegram button is clickable */
+#telegram-wrapper, .join-community-btn, .close-icon {
+    z-index: 99999 !important;
+    pointer-events: auto !important;
+}
+
+/* Fix the cards so they don't block the screen */
+.mochearn-card {
+    position: relative;
+    z-index: 1;
+    }
 </style>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-}, { threshold: 0.2 });
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        const mochearnObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
 
-document.querySelectorAll('.mochearn-card').forEach(card => {
-    observer.observe(card);
+        document.querySelectorAll('.mochearn-card').forEach(card => {
+            mochearnObserver.observe(card);
+        });
+    } catch (e) {
+        console.log("Scroll animation skipped to keep menu working.");
+    }
 });
 </script>
 
