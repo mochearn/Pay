@@ -1514,25 +1514,294 @@ document.addEventListener("DOMContentLoaded", type);
     </script>
 
     </section>
+<section id="mochearn-testimonials" style="padding: 60px 10px; background: #050a18; overflow: hidden; position: relative;">
 
-    <div style="display: flex; overflow: hidden;">
-        <div class="js-track">
-            <div class="js-card"><div class="js-user"><div class="js-circle">JB</div><span class="js-name">Jonard Bethuel</span><span class="js-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">JR</div><span class="js-name">John Richard</span><span class="js-check">✔</span></div><p>"Sunday Blessing blueprints are a cheat code."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">OB</div><span class="js-name">Odeyemi Boluwatife</span><span class="js-check">✔</span></div><p>"Digital sales finally made simple."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">AA</div><span class="js-name">Adebayo Ayomide</span><span class="js-check">✔</span></div><p>"The funnel structure is top-notch."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">CE</div><span class="js-name">Chidi Emeka</span><span class="js-check">✔</span></div><p>"I closed 3 clients in 48 hours. Velocity!"</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">FS</div><span class="js-name">Fatima Saliu</span><span class="js-check">✔</span></div><p>"J-System is the best investment I've made."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">KO</div><span class="js-name">Kelechi Okafor</span><span class="js-check">✔</span></div><p>"Finally, a system that works on mobile."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">TO</div><span class="js-name">Tunde Olaniyi</span><span class="js-check">✔</span></div><p>"The Sunday Blessing is my weekly fuel."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">BN</div><span class="js-name">Blessing Nwosu</span><span class="js-check">✔</span></div><p>"Scaling my e-book was so easy here."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">SU</div><span class="js-name">Samuel Udoh</span><span class="js-check">✔</span></div><p>"100% legit. The J-System doesn't play."</p></div>
-            
-            <div class="js-card"><div class="js-user"><div class="js-circle">JB</div><span class="js-name">Jonard Bethuel</span><span class="js-check">✔</span></div><p>"Automated my first $500 week with ease!"</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">JR</div><span class="js-name">John Richard</span><span class="js-check">✔</span></div><p>"Sunday Blessing blueprints are a cheat code."</p></div>
-            <div class="js-card"><div class="js-user"><div class="js-circle">OB</div><span class="js-name">Odeyemi Boluwatife</span><span class="js-check">✔</span></div><p>"Digital sales finally made simple."</p></div>
-        </div>
+    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; text-align: center; color: #ffffff; text-transform: uppercase; margin-bottom: 50px;">
+        CATALYST STORIES
+    </h2>
+
+    <style>
+        /* BASE CAROUSEL LAYOUT */
+        .testimonial-container {
+            display: flex;
+            width: fit-content;
+            /* Loops every 25 seconds for 10 cards */
+            animation: loopSlide 25s linear infinite;
+        }
+        
+        @keyframes loopSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* THE NEW WHITE CARD */
+        .test-card {
+            background: #ffffff;
+            width: 300px; /* Perfect balance height/width */
+            flex-shrink: 0;
+            margin: 0 15px;
+            padding: 0; /* Padding inside content */
+            border-radius: 20px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* WIDE PROFILE PHOTO */
+        .profile-img-wrap {
+            position: relative;
+            height: 140px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* CHECKMARK OVERLAY (As drawn) */
+        .card-check {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            color: #ffffff;
+            background: rgba(0, 200, 100, 0.8);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+
+        /* THE CATALYST BADGE (CR as drawn) */
+        .catalyst-badge {
+            position: absolute;
+            bottom: -15px; /* Sits on the edge of the photo */
+            right: 20px;
+            background: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            color: #005f3a; /* Mochearn Green */
+            z-index: 10;
+        }
+
+        /* CONTENT SECTION Below the line */
+        .card-content {
+            padding: 30px 20px 25px 20px;
+        }
+
+        .card-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #050a18;
+            margin-bottom: 5px;
+            margin-top: -15px; /* Pulls up near photo */
+        }
+        
+        .card-location {
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* THE STROKE (The Line Drawn) */
+        .card-stroke {
+            width: 60px;
+            height: 3px;
+            background: #005f3a;
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+
+        .card-story {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Slows animation on hover for reading */
+        .testimonial-container:hover {
+            animation-play-state: paused;
+        }
+    </style>
+
+    <div class="test-slider" style="display: flex; overflow: hidden; width: 100%;">
+        <div class="testimonial-container" id="orig-set">
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1542127201-13c545acb356?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Fatima">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Fatima Saliu</h4>
+                    <p class="card-location">Nigeria</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">Before Mochearn, I was only a student. Now, I earn enough weekly to pay my fees and I just bought the iPhone 13 Pro. It’s the best decision I ever made.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Kelechi">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Kelechi Okafor</h4>
+                    <p class="card-location">Nigeria</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">My salary couldn't cover half my bills, but as a Catalyst on Mochearn, I cleared all debt in 3 months. Last week, I made 450,000 Naira in commissions.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Michael">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Michael Brown</h4>
+                    <p class="card-location">USA</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">Mochearn's J-System is a global engine. I was skeptical but hit $2,000 in my first month. It’s fully automated and works in today’s economy.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Sarah">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Sarah Thompson</h4>
+                    <p class="card-location">USA</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">This is more than a side hustle; it’s a career. The velocity of payments is unmatched. Last month’s income funded a weekend getaway.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1512484776495-a09d92e87c3b?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Tunde">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Tunde Oladimeji</h4>
+                    <p class="card-location">Nigeria</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">Mochearn’s blueprints are pure gold. As a full-time Catalyst, I’m now averaging 1.5M Naira monthly and I’m in the process of building my house.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1553531384-cc64ac80f931?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Jessica">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Jessica Davis</h4>
+                    <p class="card-location">USA</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">No complex tools needed. Mochearn's setup is flawless for anyone seeking specific financial knowledge. Payments hit every single week without fail.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1563237023-b1e970526dcb?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Victoria">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Victoria Adelaja</h4>
+                    <p class="card-location">Nigeria</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">They call it a velocity engine for a reason. I scaled from zero knowledge to my first million Naira in commissions using only their specific modules.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="David">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">David Smith</h4>
+                    <p class="card-location">USA</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">This isn’t just about the money; it’s about the transformation. Mochearn provided the automated system that allowed me to finally achieve freedom and scale.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1536148935331-408321065b18?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Musa">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Musa Bello</h4>
+                    <p class="card-location">Nigeria</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">My earnings on Mochearn are 10x what I was making before registering. It’s fully automated and works in today's economy.</p>
+                </div>
+            </div>
+
+            <div class="test-card">
+                <div class="profile-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?q=80&w=400&h=300&auto=format&fit=crop" class="profile-img" alt="Rachel">
+                    <div class="card-check">✓</div>
+                    <div class="catalyst-badge">CR</div>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-name">Rachel Evans</h4>
+                    <p class="card-location">USA</p>
+                    <div class="card-stroke"></div>
+                    <p class="card-story">I was seeking knowledge, but Mochearn gave me a blueprint. Hit my income goals last week and already looking at real estate. Velocity works.</p>
+                </div>
+            </div>
+
+        </div> <div class="testimonial-container" id="copy-set"></div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('orig-set');
+            const copy = document.getElementById('copy-set');
+            // Duplicate the content to make an invisible infinite loop
+            copy.innerHTML = container.innerHTML;
+        });
+    </script>
+
     </section>
     <footer>
     <div class="footer-content">
