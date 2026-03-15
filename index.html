@@ -510,15 +510,82 @@ p, .subtext, p span {
     </style>
 </head>
 <body>
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-<nav class="sidebar" id="sidebar">
-    <div class="close-area"><button class="close-btn" onclick="toggleMenu()">✕</button></div>
-    <a href="#">HOME</a>
-    <a href="#">THE J-SYSTEM</a>
-    <a href="#">ACADEMY</a>
-    <a href="#">COMMUNITY</a>
-    <a href="#">CONTACT US</a>
-</nav>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+  <a href="about-mochearn.html" class="menu-item"><i class="fa-solid fa-circle-info"></i> About Mochearn</a>
+
+  <div class="menu-section">
+    <a href="javascript:void(0)" class="menu-item dropdown-btn" onclick="toggleSub('loginSub')">
+      <i class="fa-solid fa-right-to-bracket"></i> Login <i class="fa-solid fa-caret-down drop-icon"></i>
+    </a>
+    <div id="loginSub" class="sub-menu">
+      <a href="catalyst-login.html">Catalyst Login</a>
+      <a href="vendor-login.html">Vendor Login</a>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <a href="javascript:void(0)" class="menu-item dropdown-btn" onclick="toggleSub('signupSub')">
+      <i class="fa-solid fa-user-plus"></i> Sign-Up <i class="fa-solid fa-caret-down drop-icon"></i>
+    </a>
+    <div id="signupSub" class="sub-menu">
+      <a href="catalyst-registration.html">Sign up for Catalyst</a>
+      <a href="vendor-registration.html">Sign up for Vendor</a>
+    </div>
+  </div>
+
+  <a href="terms-conditions.html" class="menu-item"><i class="fa-solid fa-file-contract"></i> Terms of Mochearn</a>
+  <a href="contact-us.html" class="menu-item"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+</div>
+
+<style>
+/* REDUCED TOP SPACING & STYLING */
+.sidenav {
+  padding-top: 15px; /* Reduced the high space at the top */
+}
+
+.sidenav a, .dropdown-btn {
+  padding: 15px 8px 15px 32px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #ffffff;
+  display: block;
+  font-weight: 600;
+}
+
+.sub-menu {
+  display: none;
+  background-color: rgba(0, 255, 136, 0.1);
+  padding-left: 20px;
+}
+
+.sub-menu a {
+  font-size: 0.95rem;
+  padding: 10px 32px;
+  color: #00ff88;
+}
+
+.drop-icon {
+  font-size: 0.8rem;
+  float: right;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+</style>
+
+<script>
+/* Simple Toggle for Dropdowns */
+function toggleSub(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+        </script>
 
 <header id="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #050a18 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 1000 !important; padding: 0 25px !important; border: none !important;">
     
