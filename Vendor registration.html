@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendor Registration | Mochearn</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -13,23 +14,41 @@
         .logo-header { background: #050a18; padding: 25px; }
         .logo-placeholder { width: 120px; height: 30px; margin: 0 auto; border: 1px dashed #444; color: #555; display: flex; justify-content: center; align-items: center; font-size: 0.6rem; }
         .form-content { padding: 30px 25px; }
+
         h2 { font-weight: 600; font-size: 1.3rem; margin-bottom: 5px; text-transform: uppercase; background: linear-gradient(90deg, #050a18, #00ff88, #050a18); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 3s infinite linear; }
         @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
+        p.subtitle { color: #888; font-size: 0.65rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
+
         .section-label { text-align: left; font-size: 0.6rem; font-weight: 600; color: #00ff88; text-transform: uppercase; margin: 20px 0 10px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
         .input-group { text-align: left; margin-bottom: 12px; position: relative; }
         .input-group label { display: block; font-size: 0.7rem; margin-bottom: 5px; color: #666; }
+        
         input, select { width: 100%; padding: 10px 35px 10px 12px; background: #fff; border: 1px solid #ddd; border-radius: 5px; color: #333; font-family: 'Montserrat', sans-serif; box-sizing: border-box; font-size: 0.8rem; }
         input:focus { outline: none; border-color: #00ff88; }
+
+        /* SEARCHABLE BANK LIST */
+        .bank-container { position: relative; }
+        #bankList { position: absolute; width: 100%; background: white; border: 1px solid #ddd; border-radius: 5px; max-height: 200px; overflow-y: auto; z-index: 1000; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .bank-option { padding: 10px; font-size: 0.8rem; cursor: pointer; text-align: left; }
+        .bank-option:hover { background: #f0fff8; color: #00ff88; }
+
         .status-icon { position: absolute; right: 12px; top: 32px; font-size: 0.75rem; color: #00ff88; visibility: hidden; }
+        .iti { width: 100%; }
+        .terms-box { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: #777; margin: 20px 0; cursor: pointer; text-align: left; }
         .reg-btn { width: 100%; padding: 14px; background: #00ff88; color: #050a18; border: none; border-radius: 5px; font-weight: 600; text-transform: uppercase; cursor: pointer; font-size: 0.8rem; margin-top: 10px; }
+        .footer-link { margin-top: 20px; font-size: 0.7rem; color: #888; }
+        .footer-link a { color: #333; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
 
     <div class="reg-card">
         <div class="logo-header"><div class="logo-placeholder">YOUR LOGO HERE</div></div>
+
         <div class="form-content">
             <h2>Vendor Registration</h2>
+            <p class="subtitle">ESTABLISH MERCHANT CREDENTIALS</p>
+
             <form id="vRegForm">
                 <div class="section-label">Identity & Branding</div>
                 <div class="input-group">
@@ -37,63 +56,119 @@
                     <input type="text" id="officialName" placeholder="e.g. John Doe" onblur="validateField(this, 'c1'); syncName()" required>
                     <i id="c1" class="fa-solid fa-circle-check status-icon"></i>
                 </div>
-
-                <div class="section-label">Financial Details (Global)</div>
                 <div class="input-group">
-                    <label>Select Country</label>
-                    <select id="countrySelect" onchange="updateFinancials()">
-                        <option value="NG">Nigeria 🇳🇬</option>
-                        <option value="GH">Ghana 🇬🇭</option>
-                        <option value="US">USA 🇺🇸</option>
-                        <option value="UK">United Kingdom 🇬🇧</option>
-                    </select>
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" onblur="validateField(this, 'cPhone')" required>
+                    <i id="cPhone" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Brand/Store Name</label>
+                    <input type="text" placeholder="e.g. Mochearn Global" onblur="validateField(this, 'c2')" required>
+                    <i id="c2" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Vendor ID (Choice)</label>
+                    <input type="text" placeholder="VND-XXXX" onblur="validateField(this, 'c3')" required>
+                    <i id="c3" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <div class="section-label">Financial Details</div>
+                <div class="input-group bank-container">
+                    <label>Bank Name</label>
+                    <input type="text" id="bankInput" placeholder="Search your bank..." onfocus="fetchBanks()" onkeyup="filterBanks()" autocomplete="off">
+                    <div id="bankList"></div>
                 </div>
                 <div class="input-group">
                     <label>Account Number</label>
-                    <input type="text" id="accNum" placeholder="10-digit Account Number" onblur="validateField(this, 'c4')" required>
+                    <input type="number" id="accNum" placeholder="Loading format..." onblur="validateField(this, 'c4')" required>
                     <i id="c4" class="fa-solid fa-circle-check status-icon"></i>
                 </div>
                 <div class="input-group">
                     <label>Account Name</label>
-                    <input type="text" id="accName" placeholder="Bank Account Name" onblur="validateField(this, 'c5')" required>
+                    <input type="text" id="accName" placeholder="Auto-fills from Name" onblur="validateField(this, 'c5')" required>
                     <i id="c5" class="fa-solid fa-circle-check status-icon"></i>
                 </div>
 
-                <button type="submit" class="reg-btn">Complete Registration</button>
+                <div class="section-label">Security & Access</div>
+                <div class="input-group">
+                    <label>Business Email</label>
+                    <input type="email" placeholder="merchant@mochearn.com" onblur="validateField(this, 'c6')" required>
+                    <i id="c6" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <label class="terms-box">
+                    <input type="checkbox" required> I agree to the Mochearn Merchant Policies.
+                </label>
+
+                <button type="submit" class="reg-btn">Complete Setup</button>
             </form>
+
+            <div class="footer-link">Have an ID? <a href="#">Login</a></div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script>
-        // Only mark green after they leave the box (onblur)
+        // Init International Phone
+        const phoneInput = window.intlTelInput(document.querySelector("#phone"), {
+            initialCountry: "ng",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+
+        // "Wait-to-mark" logic
         function validateField(input, iconId) {
             const icon = document.getElementById(iconId);
-            if (input.value.length > 2) {
-                icon.style.visibility = 'visible';
-            } else {
-                icon.style.visibility = 'hidden';
-            }
+            if (input.value.length > 2) { icon.style.visibility = 'visible'; }
+            else { icon.style.visibility = 'hidden'; }
         }
 
-        // Sync Official Name to Account Name automatically
+        // Auto-fill Account Name
         function syncName() {
             const official = document.getElementById('officialName').value;
             const accNameInput = document.getElementById('accName');
-            if(accNameInput.value === "") {
-                accNameInput.value = official;
+            if(accNameInput.value === "") { accNameInput.value = official; }
+        }
+
+        // DYNAMIC BANK LOGIC (Global Search)
+        async function fetchBanks() {
+            const countryCode = phoneInput.getSelectedCountryData().iso2.toUpperCase();
+            const listContainer = document.getElementById('bankList');
+            listContainer.style.display = 'block';
+            listContainer.innerHTML = '<div class="bank-item">Loading Banks...</div>';
+
+            try {
+                // In production, you'd call: `https://api.paystack.co/bank?country=${countryName}`
+                // For this design, I'm simulating the massive global fetch
+                const mockBanks = ["Access Bank", "First Bank", "GTBank", "Zenith", "Kuda", "Standard Chartered", "UBA", "Fidelity", "Union Bank", "Wema", "Opay", "Palmpay"];
+                renderBankList(mockBanks);
+            } catch (e) {
+                listContainer.innerHTML = '<div class="bank-item">Error loading banks</div>';
             }
         }
 
-        // Update placeholders based on country
-        function updateFinancials() {
-            const country = document.getElementById('countrySelect').value;
-            const accNum = document.getElementById('accNum');
-            
-            if (country === "NG") accNum.placeholder = "10-digit NUBAN Number";
-            else if (country === "GH") accNum.placeholder = "Account or Wallet Number";
-            else if (country === "US") accNum.placeholder = "Routing & Account Number";
-            else accNum.placeholder = "Enter International Account Number";
+        function renderBankList(banks) {
+            const listContainer = document.getElementById('bankList');
+            listContainer.innerHTML = banks.map(bank => `<div class="bank-option" onclick="selectBank('${bank}')">${bank}</div>`).join('');
+        }
+
+        function filterBanks() {
+            let filter = document.getElementById('bankInput').value.toUpperCase();
+            let options = document.getElementsByClassName('bank-option');
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].innerHTML.toUpperCase().indexOf(filter) > -1) { options[i].style.display = ""; }
+                else { options[i].style.display = "none"; }
+            }
+        }
+
+        function selectBank(name) {
+            document.getElementById('bankInput').value = name;
+            document.getElementById('bankList').style.display = 'none';
         }
     </script>
 </body>
-        </html>
+    </html>
