@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access | Mochearn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body { margin: 0; padding: 0; background-color: #00ff88; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .login-card { background: #ffffff; width: 85%; max-width: 400px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.2); text-align: center; }
+        .logo-header { background: #050a18; padding: 30px 20px; }
+        .logo-placeholder { width: 130px; height: 35px; margin: 0 auto; border: 1px dashed #444; color: #555; display: flex; justify-content: center; align-items: center; font-size: 0.6rem; }
+
+        .form-content { padding: 40px 30px; }
+
+        /* ADMIN SHIMMER EFFECT */
+        h2 { 
+            font-weight: 600; font-size: 1.4rem; margin-bottom: 5px; color: #050a18; text-transform: uppercase;
+            background: linear-gradient(90deg, #050a18, #00ff88, #050a18);
+            background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
+
+        p.subtitle { color: #888; font-size: 0.7rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
+
+        .input-group { text-align: left; margin-bottom: 20px; position: relative; }
+        .input-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: #666; font-weight: 400; }
+        
+        input {
+            width: 100%; padding: 12px 12px; background: #ffffff; border: 1px solid #ddd;
+            border-radius: 5px; color: #333; font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box; font-size: 0.85rem;
+        }
+
+        input:focus { outline: none; border-color: #050a18; }
+
+        /* CHECKMARK ICON ON BLUR */
+        .status-icon { position: absolute; right: 12px; top: 35px; font-size: 0.8rem; color: #00ff88; visibility: hidden; }
+
+        .login-btn {
+            width: 100%; padding: 16px; background: #00ff88; color: #050a18;
+            border: none; border-radius: 5px; font-weight: 600; text-transform: uppercase;
+            cursor: pointer; font-size: 0.85rem; margin-top: 10px; transition: 0.3s;
+        }
+        .login-btn:hover { background: #050a18; color: #ffffff; }
+
+        .footer-link { margin-top: 25px; font-size: 0.75rem; color: #888; }
+        .footer-link a { color: #333; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-header"><div class="logo-placeholder">YOUR LOGO HERE</div></div>
+
+        <div class="form-content">
+            <h2>Admin Vault</h2>
+            <p class="subtitle">MASTER CONTROL ACCESS</p>
+
+            <form>
+                <div class="input-group">
+                    <label>Admin Email</label>
+                    <input type="email" placeholder="master@mochearn.com" onblur="validateField(this, 'c1')" required>
+                    <i id="c1" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" onblur="validateField(this, 'c2')" required>
+                    <i id="c2" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <label>Master Security Key</label>
+                    <input type="password" placeholder="ENTER SYSTEM KEY" onblur="validateField(this, 'c3')" required>
+                    <i id="c3" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+
+            <div class="footer-link">
+                System Issue? <a href="#">Contact Tech Ops</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateField(input, iconId) {
+            const icon = document.getElementById(iconId);
+            if (input.value.length > 3) {
+                icon.style.visibility = 'visible';
+            } else {
+                icon.style.visibility = 'hidden';
+            }
+        }
+    </script>
+</body>
+      </html>
