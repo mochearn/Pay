@@ -6,66 +6,74 @@
     <title>Login | Mochearn</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 1. THE SPLIT BACKGROUND (From your Sketch) */
         body {
             margin: 0;
             padding: 0;
-            /* Top part is Dark Deep Navy, Bottom is Pure Black */
-            background: linear-gradient(to bottom, #050a18 0%, #050a18 35%, #000000 35%, #000000 100%);
+            background-color: #050a18; /* Mochearn Deep Navy Background */
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: #ffffff;
+            min-height: 100vh;
         }
 
-        /* 2. THE WHITE LOGIN BAR (Small & Curved edges as requested) */
-        .login-container {
-            background: #ffffff; /* Changed to White per your sketch */
-            padding: 40px 30px;
-            border-radius: 30px; /* More curved edges per sketch */
-            width: 100%;
-            max-width: 340px; /* Made a bit smaller per your request */
+        /* THE MAIN WHITE BAR (Curved & Compact) */
+        .login-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 360px;
+            border-radius: 25px;
+            overflow: hidden; /* Ensures the dark logo part stays inside the curves */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* DARK LOGO AREA AT THE TOP */
+        .logo-header {
+            background: #050a18; /* Dark color for logo as requested */
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        /* LOGO SPACE (Inside the white bar) */
         .logo-placeholder {
-            width: 150px;
-            height: 50px;
-            margin: 0 auto 20px auto;
-            border: 1px dashed #ccc; 
+            width: 140px;
+            height: 45px;
+            margin: 0 auto;
+            border: 1px dashed #444;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #777;
+            color: #555;
             font-size: 0.7rem;
         }
 
-        /* TEXT COLORS (Adjusted to show on White background) */
-        h2 { font-weight: 900; font-size: 1.5rem; margin-bottom: 10px; text-transform: uppercase; color: #050a18; }
-        p.subtitle { color: #00ff88; font-size: 0.8rem; margin-bottom: 30px; font-weight: 600; }
+        /* FORM CONTENT AREA */
+        .form-content {
+            padding: 30px 25px;
+            text-align: center;
+        }
 
-        .input-group { text-align: left; margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 0.75rem; margin-bottom: 8px; color: #666; font-weight: 700; }
+        h2 { font-weight: 900; font-size: 1.5rem; margin-bottom: 5px; color: #050a18; text-transform: uppercase; }
+        p.subtitle { color: #00ff88; font-size: 0.8rem; margin-bottom: 25px; font-weight: 700; letter-spacing: 1px; }
+
+        .input-group { text-align: left; margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: #333; font-weight: 700; }
         
-        /* RESTORED ORIGINAL INPUT STYLES */
+        /* WHITE FORM BOXES (Professional Style) */
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 12px 15px;
-            background: #0a1126; /* Back to original dark inputs */
-            border: 1px solid #1a2a4d;
-            border-radius: 8px;
-            color: #fff;
+            background: #ffffff; /* White background to match the bar */
+            border: 2px solid #eeeeee; /* Light border */
+            border-radius: 10px;
+            color: #333;
             font-family: 'Montserrat', sans-serif;
             box-sizing: border-box;
+            font-weight: 600;
         }
 
         input:focus { outline: none; border-color: #00ff88; }
 
-        .extra-options {
+        .options-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -74,17 +82,17 @@
             color: #666;
         }
 
-        .remember-me { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .forgot-pass { color: #00ff88; text-decoration: none; font-weight: 700; }
+        .remember { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        .forgot { color: #00ff88; text-decoration: none; font-weight: 800; }
 
-        /* RESTORED ORIGINAL NEON BUTTON */
+        /* THE NEON GREEN BUTTON */
         .login-btn {
             width: 100%;
             padding: 15px;
             background: #00ff88;
             color: #050a18;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
@@ -94,41 +102,45 @@
 
         .login-btn:hover { background: #00cc6e; transform: translateY(-2px); }
 
-        .signup-bridge { margin-top: 30px; font-size: 0.75rem; color: #666; }
-        .signup-bridge a { color: #050a18; text-decoration: underline; font-weight: 700; }
+        .footer-link { margin-top: 25px; font-size: 0.75rem; color: #666; }
+        .footer-link a { color: #050a18; text-decoration: underline; font-weight: 800; }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="logo-placeholder">YOUR LOGO HERE</div>
+    <div class="login-card">
+        <div class="logo-header">
+            <div class="logo-placeholder">YOUR LOGO HERE</div>
+        </div>
 
-        <h2>Welcome Back</h2>
-        <p class="subtitle">ENTER THE VAULT</p>
+        <div class="form-content">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">ENTER THE VAULT</p>
 
-        <form>
-            <div class="input-group">
-                <label>EMAIL OR USERNAME</label>
-                <input type="text" placeholder="Enter your credentials..." required>
+            <form>
+                <div class="input-group">
+                    <label>EMAIL OR USERNAME</label>
+                    <input type="text" placeholder="Enter your credentials..." required>
+                </div>
+
+                <div class="input-group">
+                    <label>PASSWORD</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="options-row">
+                    <label class="remember">
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#" class="forgot">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Login to Mochearn</button>
+            </form>
+
+            <div class="footer-link">
+                Not a Catalyst yet? <a href="signup.html">Join the Movement</a>
             </div>
-
-            <div class="input-group">
-                <label>PASSWORD</label>
-                <input type="password" placeholder="••••••••" required>
-            </div>
-
-            <div class="extra-options">
-                <label class="remember-me">
-                    <input type="checkbox"> Remember me
-                </label>
-                <a href="#" class="forgot-pass">Forgot Password?</a>
-            </div>
-
-            <button type="submit" class="login-btn">Login to Mochearn</button>
-        </form>
-
-        <div class="signup-bridge">
-            Not a Catalyst yet? <a href="signup.html">Join the Movement</a>
         </div>
     </div>
 
