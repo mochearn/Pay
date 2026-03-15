@@ -510,94 +510,90 @@ p, .subtext, p span {
     </style>
 </head>
 <body>
-<div id="mochearnSidebar" style="height:100%; width:0; position:fixed; z-index:10000; top:0; right:0; background-color:#050a18; overflow-x:hidden; transition:0.4s; font-family:'Montserrat', sans-serif;">
-  
-  <a href="javascript:void(0)" style="position:absolute; top:20px; right:30px; font-size:45px; color:#00ff88; text-decoration:none;" onclick="closeMochearnNav()">&times;</a>
-  
-  <div style="padding: 20px; margin-top: 50px;">
-      <a href="index.html" class="m-link">Home</a>
-      <a href="about.html" class="m-link">About Mochearn</a>
+<header style="background: #050a18; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 9999; border-bottom: 1px solid rgba(0, 255, 136, 0.1);">
+    <h1 style="color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 800; margin: 0; font-size: 1.5rem; letter-spacing: 1px;">MOCHEARN</h1>
+    
+    <div onclick="openMochearn()" style="cursor: pointer; display: flex; flex-direction: column; gap: 6px;">
+        <div style="width: 25px; height: 1px; background: #00ff88;"></div>
+        <div style="width: 25px; height: 1px; background: #00ff88;"></div>
+        <div style="width: 25px; height: 1px; background: #00ff88;"></div>
+    </div>
+</header>
 
-      <div style="width:100%;">
-          <button class="m-dropbtn" onclick="toggleMochearnSub('loginD')">
-              Login <i class="fa-solid fa-chevron-down" style="float:right; font-size: 0.8rem; margin-top:10px;"></i>
-          </button>
-          <div id="loginD" style="display:none; background-color:rgba(0,255,136,0.05); padding-left:20px;">
-              <a href="catalyst-login.html" class="sub-link">Catalyst Login</a>
-              <a href="vendor-login.html" class="sub-link">Vendor Login</a>
-          </div>
-      </div>
+<div id="mochearnNav" style="height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: #050a18; overflow-x: hidden; transition: 0.4s; font-family: 'Montserrat', sans-serif;">
+    
+    <a href="javascript:void(0)" style="position: absolute; top: 20px; right: 25px; font-size: 40px; color: #00ff88; text-decoration: none;" onclick="closeMochearn()">&times;</a>
+    
+    <div style="padding: 40px 30px; margin-top: 30px;">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Mochearn</a>
 
-      <div style="width:100%;">
-          <button class="m-dropbtn" onclick="toggleMochearnSub('signupD')">
-              Sign-Up <i class="fa-solid fa-chevron-down" style="float:right; font-size: 0.8rem; margin-top:10px;"></i>
-          </button>
-          <div id="signupD" style="display:none; background-color:rgba(0,255,136,0.05); padding-left:20px;">
-              <a href="catalyst-reg.html" class="sub-link">Sign up for Catalyst</a>
-              <a href="vendor-reg.html" class="sub-link">Sign up for Vendor</a>
-          </div>
-      </div>
+        <div style="width: 100%;">
+            <button class="nav-dropbtn" onclick="toggleMSub('logD')">
+                Login <i class="fa-solid fa-chevron-down" style="float: right; font-size: 0.7rem; margin-top: 8px;"></i>
+            </button>
+            <div id="logD" class="nav-sub-box">
+                <a href="catalyst-login.html" class="nav-sub-link">Catalyst Login</a>
+                <a href="vendor-login.html" class="nav-sub-link">Vendor Login</a>
+            </div>
+        </div>
 
-      <a href="terms.html" class="m-link">Terms of Mochearn</a>
-      <a href="contact.html" class="m-link">Contact Us</a>
-  </div>
+        <div style="width: 100%;">
+            <button class="nav-dropbtn" onclick="toggleMSub('sigD')">
+                Sign-Up <i class="fa-solid fa-chevron-down" style="float: right; font-size: 0.7rem; margin-top: 8px;"></i>
+            </button>
+            <div id="sigD" class="nav-sub-box">
+                <a href="catalyst-reg.html" class="nav-sub-link">Sign up for Catalyst</a>
+                <a href="vendor-reg.html" class="nav-sub-link">Sign up for Vendor</a>
+            </div>
+        </div>
+
+        <a href="terms.html" class="nav-link">Terms of Mochearn</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+    </div>
 </div>
 
 <style>
-.m-link, .m-dropbtn {
-  padding: 18px 10px;
-  text-decoration: none;
-  font-size: 1.4rem;
-  color: #ffffff;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
+/* SLEEK TYPOGRAPHY */
+.nav-link, .nav-dropbtn {
+    padding: 15px 0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #ffffff;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
 }
-.m-link:hover, .m-dropbtn:hover { color: #00ff88; }
-.sub-link {
-  font-size: 1.1rem;
-  color: #00ff88 !important;
-  padding: 12px;
-  display: block;
-  text-decoration: none;
+.nav-link:hover, .nav-dropbtn:hover { color: #00ff88; }
+
+.nav-sub-box { display: none; padding-left: 15px; border-left: 1px solid #00ff88; margin-bottom: 10px; }
+.nav-sub-link {
+    font-size: 1rem;
+    color: #00ff88 !important;
+    padding: 10px 0;
+    display: block;
+    text-decoration: none;
+    font-weight: 500;
 }
 </style>
 
 <script>
-/* THE ENGINE */
-function openNav() {
-  document.getElementById("mochearnSidebar").style.width = "100%";
+function openMochearn() {
+    document.getElementById("mochearnNav").style.width = "100%";
 }
-
-function closeMochearnNav() {
-  document.getElementById("mochearnSidebar").style.width = "0";
+function closeMochearn() {
+    document.getElementById("mochearnNav").style.width = "0";
 }
-
-function toggleMochearnSub(id) {
-  var d = document.getElementById(id);
-  d.style.display = (d.style.display === "block") ? "none" : "block";
+function toggleMSub(id) {
+    var x = document.getElementById(id);
+    x.style.display = (x.style.display === "block") ? "none" : "block";
 }
-
-/* Ensure the hamburger icon uses openNav() */
-    </script>
-
-<header id="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #050a18 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 1000 !important; padding: 0 25px !important; border: none !important;">
-    
-    <div id="headerLogo">
-        <span style="color: #ffffff !important; font-family: 'Poppins', sans-serif !important; font-weight: 900 !important; font-size: 1.4rem !important; letter-spacing: 1.5px !important; text-transform: uppercase !important;">MOCHEARN</span>
-    </div>
-
-    <div class="menu-btn" onclick="toggleMenu()" style="cursor: pointer !important; display: flex !important; flex-direction: column !important; gap: 6px !important;">
-        <div style="width: 24px !important; height: 1.5px !important; background-color: #0088cc !important; border-radius: 1px !important;"></div>
-        <div style="width: 24px !important; height: 1.5px !important; background-color: #0088cc !important; border-radius: 1px !important;"></div>
-        <div style="width: 24px !important; height: 1.5px !important; background-color: #0088cc !important; border-radius: 1px !important;"></div>
-    </div>
-</header>
+</script>
 <section class="hero-frontier" style="display: flex !important; flex-direction: column !important; justify-content: flex-start !important; align-items: flex-start !important; width: 100% !important; height: 100vh !important; position: relative !important; background-color: #050a18 !important; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important; background-size: cover !important; background-position: center center !important; background-repeat: no-repeat !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important;">
     
     <div class="hero-content" style="text-align: left !important; width: 95% !important; padding-top: 160px !important; padding-left: 30px !important;">
