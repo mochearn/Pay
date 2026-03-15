@@ -510,28 +510,16 @@ p, .subtext, p span {
     </style>
 </head>
 <body>
-<div style="background: #050a18; padding: 15px; display: flex; justify-content: flex-end;">
-    <span style="font-size:35px; cursor:pointer; color:#00ff88;" 
-          onclick="document.getElementById('mochearnSidebar').style.width = '100%'">
-          &#9776;
-    </span>
-</div>
-
-<div id="mochearnSidebar" 
-     style="height:100%; width:0; position:fixed; z-index:9999; top:0; right:0; background-color:#050a18; overflow-x:hidden; transition:0.4s; font-family:'Montserrat', sans-serif;">
+<div id="mochearnSidebar" style="height:100%; width:0; position:fixed; z-index:10000; top:0; right:0; background-color:#050a18; overflow-x:hidden; transition:0.4s; font-family:'Montserrat', sans-serif;">
   
-  <a href="javascript:void(0)" 
-     style="position:absolute; top:10px; right:25px; font-size:45px; color:#00ff88; text-decoration:none;" 
-     onclick="document.getElementById('mochearnSidebar').style.width = '0'">
-     &times;
-  </a>
+  <a href="javascript:void(0)" style="position:absolute; top:20px; right:30px; font-size:45px; color:#00ff88; text-decoration:none;" onclick="closeMochearnNav()">&times;</a>
   
-  <div style="padding: 20px; margin-top: 40px;">
+  <div style="padding: 20px; margin-top: 50px;">
       <a href="index.html" class="m-link">Home</a>
       <a href="about.html" class="m-link">About Mochearn</a>
 
       <div style="width:100%;">
-          <button class="m-dropbtn" onclick="var d = document.getElementById('loginD'); d.style.display = (d.style.display === 'block') ? 'none' : 'block';">
+          <button class="m-dropbtn" onclick="toggleMochearnSub('loginD')">
               Login <i class="fa-solid fa-chevron-down" style="float:right; font-size: 0.8rem; margin-top:10px;"></i>
           </button>
           <div id="loginD" style="display:none; background-color:rgba(0,255,136,0.05); padding-left:20px;">
@@ -541,7 +529,7 @@ p, .subtext, p span {
       </div>
 
       <div style="width:100%;">
-          <button class="m-dropbtn" onclick="var d = document.getElementById('signupD'); d.style.display = (d.style.display === 'block') ? 'none' : 'block';">
+          <button class="m-dropbtn" onclick="toggleMochearnSub('signupD')">
               Sign-Up <i class="fa-solid fa-chevron-down" style="float:right; font-size: 0.8rem; margin-top:10px;"></i>
           </button>
           <div id="signupD" style="display:none; background-color:rgba(0,255,136,0.05); padding-left:20px;">
@@ -556,7 +544,6 @@ p, .subtext, p span {
 </div>
 
 <style>
-/* CSS FOR LINKS */
 .m-link, .m-dropbtn {
   padding: 18px 10px;
   text-decoration: none;
@@ -571,18 +558,33 @@ p, .subtext, p span {
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
 }
-
 .m-link:hover, .m-dropbtn:hover { color: #00ff88; }
-
 .sub-link {
   font-size: 1.1rem;
   color: #00ff88 !important;
   padding: 12px;
   display: block;
   text-decoration: none;
-  font-weight: 600;
 }
 </style>
+
+<script>
+/* THE ENGINE */
+function openNav() {
+  document.getElementById("mochearnSidebar").style.width = "100%";
+}
+
+function closeMochearnNav() {
+  document.getElementById("mochearnSidebar").style.width = "0";
+}
+
+function toggleMochearnSub(id) {
+  var d = document.getElementById(id);
+  d.style.display = (d.style.display === "block") ? "none" : "block";
+}
+
+/* Ensure the hamburger icon uses openNav() */
+    </script>
 
 <header id="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #050a18 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 1000 !important; padding: 0 25px !important; border: none !important;">
     
@@ -596,21 +598,6 @@ p, .subtext, p span {
         <div style="width: 24px !important; height: 1.5px !important; background-color: #0088cc !important; border-radius: 1px !important;"></div>
     </div>
 </header>
-
-<div id="sideMenu" style="position: fixed !important; top: 0 !important; right: -100% !important; width: 100% !important; height: 100% !important; background: #050a18 !important; z-index: 2000 !important; transition: 0.5s !important; display: flex !important; flex-direction: column !important; padding: 30px !important;">
-    
-    <div onclick="toggleMenu()" style="align-self: flex-start !important; cursor: pointer !important; width: 40px !important; height: 40px !important; position: relative !important; margin-bottom: 40px !important;">
-        <div style="position: absolute !important; width: 25px !important; height: 1.5px !important; background: white !important; transform: rotate(45deg) !important; top: 20px !important;"></div>
-        <div style="position: absolute !important; width: 25px !important; height: 1.5px !important; background: white !important; transform: rotate(-45deg) !important; top: 20px !important;"></div>
-    </div>
-
-    <nav style="display: flex !important; flex-direction: column !important; gap: 30px !important;">
-        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">HOME</a>
-        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">ABOUT</a>
-        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">SERVICES</a>
-        <a href="#" style="color: white !important; text-decoration: none !important; font-size: 1.8rem !important; font-family: 'Poppins', sans-serif !important; font-weight: 700 !important;">CONTACT</a>
-    </nav>
-   </div>
 <section class="hero-frontier" style="display: flex !important; flex-direction: column !important; justify-content: flex-start !important; align-items: flex-start !important; width: 100% !important; height: 100vh !important; position: relative !important; background-color: #050a18 !important; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important; background-size: cover !important; background-position: center center !important; background-repeat: no-repeat !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important;">
     
     <div class="hero-content" style="text-align: left !important; width: 95% !important; padding-top: 160px !important; padding-left: 30px !important;">
