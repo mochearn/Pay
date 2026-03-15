@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalyst Registration | Mochearn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 0; 
+            background-color: #00ff88; /* Mochearn Green Background */
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .reg-card {
+            background: #ffffff; /* White card */
+            width: 85%;
+            max-width: 420px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: auto;
+        }
+
+        .logo-header {
+            background: #050a18; /* Dark logo area */
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .logo-placeholder {
+            width: 130px;
+            height: 35px;
+            margin: 0 auto;
+            border: 1px dashed #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            font-size: 0.6rem;
+        }
+
+        .form-content { padding: 30px 25px; text-align: center; }
+
+        h2 { font-weight: 600; font-size: 1.3rem; margin-bottom: 5px; color: #333; text-transform: uppercase; }
+        p.subtitle { color: #00ff88; font-size: 0.7rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
+
+        .input-group { text-align: left; margin-bottom: 15px; position: relative; }
+        .input-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: #666; font-weight: 400; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        /* FIX FOR PRO FLAG PICKER WIDTH */
+        .iti { width: 100%; }
+
+        .warning-txt {
+            font-size: 0.65rem;
+            color: #ff3e3e;
+            margin-top: 4px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 32px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        .reg-btn {
+            width: 100%;
+            padding: 15px;
+            background: #00ff88; /* Neon button */
+            color: #050a18;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .footer-link { margin-top: 20px; font-size: 0.75rem; color: #888; }
+        .footer-link a { color: #333; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="reg-card">
+        <div class="logo-header">
+            <div class="logo-placeholder">YOUR LOGO HERE</div>
+        </div>
+
+        <div class="form-content">
+            <h2>Start Your Journey</h2>
+            <p class="subtitle">CATALYST REGISTRATION</p>
+
+            <form id="regForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" onfocus="showWarn('w1')" onblur="hideWarn('w1')" required>
+                    <div id="w1" class="warning-txt">⚠️ This name will appear on your Mochearn dashboard.</div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Use your payment email" onfocus="showWarn('w2')" onblur="hideWarn('w2')" required>
+                    <div id="w2" class="warning-txt">⚠️ Ensure this matches the email used for payment!</div>
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input id="phone" type="tel" onfocus="showWarn('w3')" onblur="hideWarn('w3')" required>
+                    <div id="w3" class="warning-txt">⚠️ Your phone is trusted with Mochearn; we may contact you for updates.</div>
+                </div>
+
+                <div class="input-group">
+                    <label>Create Password</label>
+                    <input type="password" id="pass" placeholder="••••••••" onfocus="showWarn('w4')" onblur="hideWarn('w4')" required>
+                    <span class="toggle-password" onclick="togglePass('pass')">👁️</span>
+                    <div id="w4" class="warning-txt">⚠️ Keep your vault key secret and strong!</div>
+                </div>
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirm_pass" placeholder="••••••••" required>
+                    <span class="toggle-password" onclick="togglePass('confirm_pass')">👁️</span>
+                </div>
+
+                <button type="submit" class="reg-btn">Complete Registration</button>
+            </form>
+
+            <div class="footer-link">
+                Already a Catalyst? <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        // Initialize the Flag Picker
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "ng", // Nigeria Default
+            preferredCountries: ["ng", "gh", "ke", "us", "gb"],
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+
+        function showWarn(id) { document.getElementById(id).style.display = 'block'; }
+        function hideWarn(id) { document.getElementById(id).style.display = 'none'; }
+
+        function togglePass(id) {
+            const input = document.getElementById(id);
+            input.type = (input.type === "password") ? "text" : "password";
+        }
+
+        const form = document.getElementById('regForm');
+        form.addEventListener('submit', function(e) {
+            const pass = document.getElementById('pass').value;
+            const confirm = document.getElementById('confirm_pass').value;
+            if (pass !== confirm) {
+                e.preventDefault();
+                alert("Passwords do not match! Please verify.");
+            }
+        });
+    </script>
+
+</body>
+</html>
