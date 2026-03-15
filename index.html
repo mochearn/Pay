@@ -510,82 +510,113 @@ p, .subtext, p span {
     </style>
 </head>
 <body>
-<div id="mySidenav" class="sidenav">
+<span style="font-size:30px;cursor:pointer;color:#00ff88;float:right;padding:20px;" onclick="openNav()">&#9776;</span>
+
+<div id="mochearnMenu" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  
+  <div class="menu-content">
+      <a href="index.html" class="main-link">Home</a>
+      <a href="about.html" class="main-link">About Mochearn</a>
 
-  <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
-  <a href="about-mochearn.html" class="menu-item"><i class="fa-solid fa-circle-info"></i> About Mochearn</a>
+      <div class="drop-container">
+          <button class="drop-btn" onclick="toggleDrop('loginDrop')">
+              Login <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div id="loginDrop" class="drop-content">
+              <a href="catalyst-login.html">Catalyst Login</a>
+              <a href="vendor-login.html">Vendor Login</a>
+          </div>
+      </div>
 
-  <div class="menu-section">
-    <a href="javascript:void(0)" class="menu-item dropdown-btn" onclick="toggleSub('loginSub')">
-      <i class="fa-solid fa-right-to-bracket"></i> Login <i class="fa-solid fa-caret-down drop-icon"></i>
-    </a>
-    <div id="loginSub" class="sub-menu">
-      <a href="catalyst-login.html">Catalyst Login</a>
-      <a href="vendor-login.html">Vendor Login</a>
-    </div>
+      <div class="drop-container">
+          <button class="drop-btn" onclick="toggleDrop('signupDrop')">
+              Sign-Up <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div id="signupDrop" class="drop-content">
+              <a href="catalyst-reg.html">Sign up for Catalyst</a>
+              <a href="vendor-reg.html">Sign up for Vendor</a>
+          </div>
+      </div>
+
+      <a href="terms.html" class="main-link">Terms of Mochearn</a>
+      <a href="contact.html" class="main-link">Contact Us</a>
   </div>
-
-  <div class="menu-section">
-    <a href="javascript:void(0)" class="menu-item dropdown-btn" onclick="toggleSub('signupSub')">
-      <i class="fa-solid fa-user-plus"></i> Sign-Up <i class="fa-solid fa-caret-down drop-icon"></i>
-    </a>
-    <div id="signupSub" class="sub-menu">
-      <a href="catalyst-registration.html">Sign up for Catalyst</a>
-      <a href="vendor-registration.html">Sign up for Vendor</a>
-    </div>
-  </div>
-
-  <a href="terms-conditions.html" class="menu-item"><i class="fa-solid fa-file-contract"></i> Terms of Mochearn</a>
-  <a href="contact-us.html" class="menu-item"><i class="fa-solid fa-envelope"></i> Contact Us</a>
 </div>
 
 <style>
-/* REDUCED TOP SPACING & STYLING */
+/* THE SIDEBAR BOX */
 .sidenav {
-  padding-top: 15px; /* Reduced the high space at the top */
+  height: 100%;
+  width: 0; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0; /* Attached to the right side icon */
+  background-color: #050a18; /* Dark Mochearn Theme */
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
-.sidenav a, .dropdown-btn {
-  padding: 15px 8px 15px 32px;
+.menu-content {
+  padding: 0 20px;
+  margin-top: -30px; /* Reduces that top gap you mentioned */
+}
+
+/* LINKS STYLING */
+.sidenav a, .drop-btn {
+  padding: 15px 10px;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.4rem; /* Big and Bold like your screenshot */
   color: #ffffff;
   display: block;
-  font-weight: 600;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.sub-menu {
+.sidenav a:hover, .drop-btn:hover { color: #00ff88; }
+
+/* DROPDOWN SECTION */
+.drop-content {
   display: none;
-  background-color: rgba(0, 255, 136, 0.1);
+  background-color: #0a1125;
   padding-left: 20px;
 }
 
-.sub-menu a {
-  font-size: 0.95rem;
-  padding: 10px 32px;
-  color: #00ff88;
+.drop-content a {
+  font-size: 1.1rem;
+  color: #00ff88 !important;
 }
 
-.drop-icon {
-  font-size: 0.8rem;
+.fa-chevron-down {
+  font-size: 0.9rem;
   float: right;
-  margin-right: 20px;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  font-size: 36px !important;
 }
 </style>
 
 <script>
-/* Simple Toggle for Dropdowns */
-function toggleSub(id) {
-  var x = document.getElementById(id);
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
+function openNav() { document.getElementById("mochearnMenu").style.width = "100%"; }
+function closeNav() { document.getElementById("mochearnMenu").style.width = "0"; }
+
+function toggleDrop(id) {
+  var dropdown = document.getElementById(id);
+  dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
 }
-        </script>
+</script>
 
 <header id="main-header" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #050a18 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 1000 !important; padding: 0 25px !important; border: none !important;">
     
