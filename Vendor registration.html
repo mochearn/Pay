@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Registration | Mochearn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0; 
+            background-color: #00ff88; 
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reg-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            margin: 20px;
+        }
+
+        .logo-header { background: #050a18; padding: 25px; }
+        .logo-placeholder { width: 120px; height: 30px; margin: 0 auto; border: 1px dashed #444; color: #555; display: flex; justify-content: center; align-items: center; font-size: 0.6rem; }
+
+        .form-content { padding: 30px 25px; }
+
+        h2 { 
+            font-weight: 600; font-size: 1.3rem; margin-bottom: 5px; text-transform: uppercase;
+            background: linear-gradient(90deg, #050a18, #00ff88, #050a18);
+            background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
+        }
+        @keyframes shimmer { 0% { background-position: -200%; } 100% { background-position: 200%; } }
+
+        p.subtitle { color: #888; font-size: 0.65rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
+
+        .section-label { 
+            text-align: left; font-size: 0.6rem; font-weight: 600; color: #00ff88; 
+            text-transform: uppercase; margin: 20px 0 10px 0; border-bottom: 1px solid #eee; padding-bottom: 5px;
+        }
+
+        .input-group { text-align: left; margin-bottom: 12px; position: relative; }
+        .input-group label { display: block; font-size: 0.7rem; margin-bottom: 5px; color: #666; }
+        
+        input, select {
+            width: 100%; padding: 10px 35px 10px 12px; background: #fff;
+            border: 1px solid #ddd; border-radius: 5px; color: #333;
+            font-family: 'Montserrat', sans-serif; box-sizing: border-box; font-size: 0.8rem;
+        }
+
+        input:focus { outline: none; border-color: #00ff88; }
+
+        .status-icon { position: absolute; right: 12px; top: 32px; font-size: 0.75rem; color: #00ff88; display: none; }
+        .toggle-password { position: absolute; right: 12px; top: 32px; cursor: pointer; color: #bbb; font-size: 0.85rem; }
+
+        .terms-box { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: #777; margin: 20px 0; cursor: pointer; text-align: left; }
+
+        .reg-btn {
+            width: 100%; padding: 14px; background: #00ff88; color: #050a18;
+            border: none; border-radius: 5px; font-weight: 600; text-transform: uppercase;
+            cursor: pointer; font-size: 0.8rem; margin-top: 10px;
+        }
+
+        .footer-link { margin-top: 20px; font-size: 0.7rem; color: #888; }
+        .footer-link a { color: #333; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="reg-card">
+        <div class="logo-header"><div class="logo-placeholder">YOUR LOGO HERE</div></div>
+
+        <div class="form-content">
+            <h2>Vendor Registration</h2>
+            <p class="subtitle">ESTABLISH MERCHANT CREDENTIALS</p>
+
+            <form id="vRegForm">
+                <div class="section-label">Identity & Branding</div>
+                <div class="input-group">
+                    <label>Full Name (Official)</label>
+                    <input type="text" placeholder="e.g. John Doe" oninput="check(this, 'c1')" required>
+                    <i id="c1" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Brand/Store Name</label>
+                    <input type="text" placeholder="e.g. JD Merchants" oninput="check(this, 'c2')" required>
+                    <i id="c2" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Vendor ID (Choice)</label>
+                    <input type="text" placeholder="VND-XXXX" oninput="check(this, 'c3')" required>
+                    <i id="c3" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <div class="section-label">Financial Details</div>
+                <div class="input-group">
+                    <label>Bank Name</label>
+                    <input type="text" placeholder="Select Bank" oninput="check(this, 'c4')" required>
+                    <i id="c4" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Account Number</label>
+                    <input type="number" placeholder="0000000000" oninput="check(this, 'c5')" required>
+                    <i id="c5" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <div class="section-label">Security & Access</div>
+                <div class="input-group">
+                    <label>Business Email</label>
+                    <input type="email" placeholder="email@mochearn.com" oninput="check(this, 'c6')" required>
+                    <i id="c6" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="p1" placeholder="••••••••" required>
+                    <i class="fa-regular fa-eye-slash toggle-password" onclick="toggle('p1', this)"></i>
+                </div>
+
+                <label class="terms-box">
+                    <input type="checkbox" required> I agree to the Mochearn Merchant Policies.
+                </label>
+
+                <button type="submit" class="reg-btn">Complete Registration</button>
+            </form>
+
+            <div class="footer-link">Have an ID? <a href="vendor-login.html">Login</a></div>
+        </div>
+    </div>
+
+    <script>
+        function check(input, id) {
+            const icon = document.getElementById(id);
+            icon.style.display = input.value.length > 2 ? 'block' : 'none';
+        }
+
+        function toggle(id, icon) {
+            const input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("fa-eye-slash", "fa-eye");
+            } else {
+                input.type = "password";
+                icon.classList.replace("fa-eye", "fa-eye-slash");
+            }
+        }
+    </script>
+</body>
+      </html>
