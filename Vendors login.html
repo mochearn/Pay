@@ -11,7 +11,7 @@
         body {
             margin: 0;
             padding: 0; 
-            background-color: #00ff88; /* Matching Catalyst Green */
+            background-color: #00ff88; 
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
@@ -25,7 +25,7 @@
             max-width: 400px;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             text-align: center;
         }
 
@@ -33,15 +33,34 @@
         .logo-placeholder { width: 130px; height: 35px; margin: 0 auto; border: 1px dashed #444; color: #555; display: flex; justify-content: center; align-items: center; font-size: 0.6rem; }
 
         .form-content { padding: 40px 30px; }
-        h2 { font-weight: 600; font-size: 1.3rem; margin-bottom: 5px; color: #333; text-transform: uppercase; }
-        p.subtitle { color: #00ff88; font-size: 0.7rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
+
+        /* SHIMMER ANIMATION FOR VENDOR VAULT */
+        h2 { 
+            font-weight: 600; 
+            font-size: 1.4rem; 
+            margin-bottom: 5px; 
+            color: #050a18; 
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #050a18, #00ff88, #050a18);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200%; }
+            100% { background-position: 200%; }
+        }
+
+        p.subtitle { color: #888; font-size: 0.7rem; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
 
         .input-group { text-align: left; margin-bottom: 20px; position: relative; }
         .input-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: #666; font-weight: 400; }
         
         input {
             width: 100%;
-            padding: 12px;
+            padding: 12px 40px 12px 12px; /* Extra space on right for checkmark */
             background: #ffffff;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -51,11 +70,21 @@
             font-size: 0.85rem;
         }
 
-        input:focus { outline: none; border-color: #00ff88; }
+        input:focus { outline: none; border-color: #050a18; }
+
+        /* CHECKMARK & EYE ICONS */
+        .status-icon {
+            position: absolute;
+            right: 12px;
+            top: 35px;
+            font-size: 0.8rem;
+            color: #00ff88;
+            display: none; /* Shows when valid */
+        }
 
         .toggle-password {
             position: absolute;
-            right: 15px;
+            right: 12px;
             top: 35px;
             cursor: pointer;
             color: #bbb;
@@ -66,8 +95,8 @@
         .login-btn {
             width: 100%;
             padding: 16px;
-            background: #00ff88;
-            color: #050a18;
+            background:#00ff88;
+            color: #ffffff;
             border: none;
             border-radius: 5px;
             font-weight: 600;
@@ -75,7 +104,10 @@
             cursor: pointer;
             font-size: 0.85rem;
             margin-top: 10px;
+            transition: 0.3s;
         }
+
+        .login-btn:hover { background: #00ff88; color: #050a18; }
 
         .footer-link { margin-top: 25px; font-size: 0.8rem; color: #888; }
         .footer-link a { color: #333; text-decoration: none; font-weight: 600; }
@@ -87,13 +119,20 @@
         <div class="logo-header"><div class="logo-placeholder">YOUR LOGO HERE</div></div>
 
         <div class="form-content">
-            <h2>Vendor Vault</h2>
-            <p class="subtitle">MERCHANT ADMINISTRATION</p>
+            <h2>Vendor login</h2>
+            <p class="subtitle">MERCHANT ACCESS</p>
 
             <form>
                 <div class="input-group">
-                    <label>Vendor ID / Email</label>
-                    <input type="text" placeholder="Enter your ID" required>
+                    <label>Vendor ID</label>
+                    <input type="text" id="v_id" placeholder="e.g. VND-7720" oninput="checkInput(this, 'c1')" required>
+                    <i id="c1" class="fa-solid fa-circle-check status-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="v_email" placeholder="merchant@mochearn.com" oninput="checkInput(this, 'c2')" required>
+                    <i id="c2" class="fa-solid fa-circle-check status-icon"></i>
                 </div>
 
                 <div class="input-group">
@@ -102,16 +141,27 @@
                     <i class="fa-regular fa-eye-slash toggle-password" onclick="togglePass(this)"></i>
                 </div>
 
-                <button type="submit" class="login-btn">Unlock Portal</button>
+                <button type="submit" class="login-btn">LOGIN</button>
             </form>
 
             <div class="footer-link">
-                Need a vendor license? <a href="#">Contact Admin</a>
+                Missing credentials? <a href="#">Contact Support</a>
             </div>
         </div>
     </div>
 
     <script>
+        // SHOW CHECKMARK IF INPUT HAS TEXT
+        function checkInput(input, checkId) {
+            const check = document.getElementById(checkId);
+            if (input.value.length > 3) {
+                check.style.display = 'block';
+            } else {
+                check.style.display = 'none';
+            }
+        }
+
+        // TOGGLE PASSWORD
         function togglePass(icon) {
             const input = document.getElementById('pass');
             if (input.type === "password") {
@@ -124,4 +174,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
