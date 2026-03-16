@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & Community | Mochearn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { margin: 0; background-color: #f4f7f6; font-family: 'Montserrat', sans-serif; color: #050a18; }
+        
+        /* SLEEK HEADER */
+        .m-header { background: #050a18; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 999; }
+        .m-header h1 { color: #ffffff; font-size: 1.2rem; margin: 0; letter-spacing: 1px; }
+        .back-home { color: #00ff88; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        /* CARDS */
+        .card { background: #ffffff; border-radius: 20px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .dark-card { background: #050a18; color: #ffffff; border-radius: 20px; padding: 30px; }
+
+        /* FORM */
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat'; box-sizing: border-box; }
+        .btn-submit { width: 100%; background: #050a18; color: #00ff88; padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* COMMUNITY BOX */
+        .btn-community { display: inline-block; background: #00ff88; color: #050a18; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.8rem; margin-top: 10px; }
+        
+        .leader-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header class="m-header">
+        <h1>MOCHEARN</h1>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back</a>
+    </header>
+
+    <div class="container">
+        <div style="padding: 40px 0; text-align: center;">
+            <h2 style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Help & Hub</h2>
+            <p style="font-weight: 300; opacity: 0.7;">Official Mochearn Resolution Center</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            
+            <div style="flex: 1; min-width: 320px;">
+                <div class="card">
+                    <h3 style="margin-top: 0; color: #050a18;">Open Support Ticket</h3>
+                    <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 20px;">Average response time: 2-4 Hours</p>
+                    <form action="#">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <select>
+                            <option>Issue Category</option>
+                            <option>Payment/Withdrawal</option>
+                            <option>Account Access</option>
+                            <option>Vendor Verification</option>
+                        </select>
+                        <textarea placeholder="Tell us what's happening..." rows="5"></textarea>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 320px;">
+                <div class="dark-card">
+                    <h3 style="color: #00ff88; margin-top: 0;">Elite Telegram Community</h3>
+                    <p style="font-size: 0.85rem; font-weight: 300; line-height: 1.6;">Connect with thousands of active Catalysts. Get real-time updates and success strategies.</p>
+                    <a href="YOUR_TELEGRAM_LINK" class="btn-community">JOIN THE HUB</a>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h4 style="margin-top: 0; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Top Catalysts This Week 🏆</h4>
+                    <div class="leader-row"><span>@Beth_Odak</span> <span style="color: #00ff88; font-weight: 700;">₦450k</span></div>
+                    <div class="leader-row"><span>@Jonard_Global</span> <span style="color: #00ff88; font-weight: 700;">₦320k</span></div>
+                    <div class="leader-row" style="border:none;"><span>@Moch_Admin</span> <span style="color: #00ff88; font-weight: 700;">₦190k</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="https://wa.me/YOUR_NUMBER" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-decoration: none;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
