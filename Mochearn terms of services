@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of services | Mochearn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background: #f4f7f6; font-family: 'Montserrat', sans-serif; color: #050a18; line-height: 1.6; }
+        .header-bg { background: #050a18; color: white; padding: 60px 20px; text-align: center; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .green { color: #00ff88; }
+        .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 40px 0; }
+        .pillar-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid #00ff88; }
+        .mochearn-box { background: #050a18; color: white; border-radius: 30px; padding: 40px; margin: 60px 0; position: relative; }
+        .stats-bar { display: flex; flex-wrap: wrap; justify-content: space-around; background: white; padding: 30px; border-radius: 20px; margin: 40px 0; text-align: center; }
+        .stat-item h2 { margin: 0; font-size: 2rem; color: #050a18; }
+        .btn-back { display: inline-block; background: #050a18; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 800; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="header-bg">
+        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">The <span class="green">Mochearn</span> Story</h1>
+        <p style="opacity: 0.8;">The Official Resolution to Digital Entrepreneurship.</p>
+    </div>
+    <div class="container">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto 60px auto;">
+            <h2>Our Origin ⚡</h2>
+            <p>Mochearn was built to bridge the gap between having a smartphone and actually having a bank account that reflects your hard work. We are a Wealth Engine designed for consistent results.</p>
+        </div>
+        <div class="pillar-grid">
+            <div class="pillar-card"><h3>Education</h3><p>High-income skills for the 2026 digital market.</p></div>
+            <div class="pillar-card"><h3>Empowerment</h3><p>Tools for every Catalyst to earn daily.</p></div>
+            <div class="pillar-card"><h3>Execution</h3><p>A proven system that works every single time.</p></div>
+        </div>
+        <div class="mochearn-box">
+            <h2 class="green">The Mochearn Ecosystem 💎</h2>
+            <p>We provide a specialized platform that simplifies sales and digital marketing into a step-by-step process. Whether you are a Catalyst or a Vendor, Mochearn is built to help you scale.</p>
+        </div>
+        <div class="stats-bar">
+            <div class="stat-item"><h2>5,000+</h2><p>ACTIVE CATALYSTS</p></div>
+            <div class="stat-item"><h2>₦50M+</h2><p>TOTAL PAYOUTS</p></div>
+        </div>
+        <div style="text-align: center;"><a href="index.html" class="btn-back">BACK TO HUB</a></div>
+    </div>
+</body>
+</html>
