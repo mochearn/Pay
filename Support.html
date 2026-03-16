@@ -6,86 +6,99 @@
     <title>Support & Community | Mochearn</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
-    
     <style>
         body { margin: 0; background-color: #f4f7f6; font-family: 'Montserrat', sans-serif; color: #050a18; }
-        
-        /* SLEEK HEADER */
         .m-header { background: #050a18; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 999; }
-        .m-header h1 { color: #ffffff; font-size: 1.2rem; margin: 0; letter-spacing: 1px; }
+        .m-header h1 { color: #ffffff; font-size: 1.2rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
         .back-home { color: #00ff88; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-
-        /* CARDS */
         .card { background: #ffffff; border-radius: 20px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; }
         .dark-card { background: #050a18; color: #ffffff; border-radius: 20px; padding: 30px; }
-
-        /* FORM */
-        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat'; box-sizing: border-box; }
-        .btn-submit { width: 100%; background: #050a18; color: #00ff88; padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* COMMUNITY BOX */
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat'; box-sizing: border-box; font-size: 0.9rem; }
+        .btn-submit { width: 100%; background: #050a18; color: #00ff88; padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
         .btn-community { display: inline-block; background: #00ff88; color: #050a18; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.8rem; margin-top: 10px; }
-        
         .leader-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-
     <header class="m-header">
         <h1>MOCHEARN</h1>
-        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back Home</a>
     </header>
 
     <div class="container">
         <div style="padding: 40px 0; text-align: center;">
-            <h2 style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Help & Hub</h2>
-            <p style="font-weight: 300; opacity: 0.7;">Official Mochearn Resolution Center</p>
+            <h2 style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0;">Help & Hub</h2>
+            <p style="font-weight: 300; opacity: 0.7; margin-top: 5px;">Resolution Center & Community Rewards</p>
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-            
-            <div style="flex: 1; min-width: 320px;">
-                <div class="card">
+            <div style="flex: 1.2; min-width: 320px;">
+                <div class="card" style="border-top: 4px solid #ff4d4d;">
                     <h3 style="margin-top: 0; color: #050a18;">Open Support Ticket</h3>
-                    <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 20px;">Average response time: 2-4 Hours</p>
+                    <p style="font-size: 0.75rem; font-weight: 700; color: #ff4d4d; margin-bottom: 15px; line-height: 1.5; background: rgba(255, 77, 77, 0.05); padding: 10px; border-radius: 8px;">
+                        <i class="fas fa-exclamation-triangle"></i> WARNING: You must use your official Mochearn account name. This is required as we might be giving you some lift <span style="color: #00ff88;">DIRECTLY</span>.
+                    </p>
                     <form action="#">
-                        <input type="text" placeholder="Full Name" required>
+                        <input type="text" placeholder="Mochearn Username" required>
                         <input type="email" placeholder="Email Address" required>
-                        <select>
-                            <option>Issue Category</option>
-                            <option>Payment/Withdrawal</option>
-                            <option>Account Access</option>
-                            <option>Vendor Verification</option>
+                        <select required>
+                            <option value="" disabled selected>Select Category (10 Options)</option>
+                            <option>1. Withdrawal & Payouts</option>
+                            <option>2. Account Access & Security</option>
+                            <option>3. Catalyst Registration Help</option>
+                            <option>4. Vendor Partnership Inquiry</option>
+                            <option>5. Technical Bugs/Site Errors</option>
+                            <option>6. Sales Tracking Issues</option>
+                            <option>7. Reward & Bonus Claims</option>
+                            <option>8. Profile Update Request</option>
+                            <option>9. Report a User/Fraud</option>
+                            <option>10. General Inquiries</option>
                         </select>
-                        <textarea placeholder="Tell us what's happening..." rows="5"></textarea>
-                        <button type="submit" class="btn-submit">Send Message</button>
+                        <textarea placeholder="Describe your request in detail..." rows="5" required></textarea>
+                        <button type="submit" class="btn-submit">Submit Ticket</button>
                     </form>
                 </div>
             </div>
 
-            <div style="flex: 1; min-width: 320px;">
+            <div style="flex: 0.8; min-width: 320px;">
                 <div class="dark-card">
-                    <h3 style="color: #00ff88; margin-top: 0;">Elite Telegram Community</h3>
-                    <p style="font-size: 0.85rem; font-weight: 300; line-height: 1.6;">Connect with thousands of active Catalysts. Get real-time updates and success strategies.</p>
-                    <a href="YOUR_TELEGRAM_LINK" class="btn-community">JOIN THE HUB</a>
+                    <h3 style="color: #00ff88; margin-top: 0;">Elite Hub</h3>
+                    <p style="font-size: 0.85rem; font-weight: 300; line-height: 1.6;">Connect with active Catalysts. Get direct strategies and motivation in our Telegram.</p>
+                    <a href="#" class="btn-community">JOIN TELEGRAM</a>
                 </div>
-
                 <div class="card" style="margin-top: 20px;">
-                    <h4 style="margin-top: 0; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Top Catalysts This Week 🏆</h4>
-                    <div class="leader-row"><span>@Beth_Odak</span> <span style="color: #00ff88; font-weight: 700;">₦450k</span></div>
-                    <div class="leader-row"><span>@Jonard_Global</span> <span style="color: #00ff88; font-weight: 700;">₦320k</span></div>
-                    <div class="leader-row" style="border:none;"><span>@Moch_Admin</span> <span style="color: #00ff88; font-weight: 700;">₦190k</span></div>
+                    <h4 style="margin-top: 0; text-transform: uppercase; font-size: 0.75rem; color: #666;">Top Catalysts This Week 🏆</h4>
+                    <div class="leader-row"><span>1. @Catalyst_King</span> <span style="color: #00ff88; font-weight: 700;">₦510k</span></div>
+                    <div class="leader-row"><span>2. @Jonard_Bethuel</span> <span style="color: #00ff88; font-weight: 700;">₦320k</span></div>
+                    <div class="leader-row" style="border:none;"><span>3. @Alpha_Vendor</span> <span style="color: #00ff88; font-weight: 700;">₦245k</span></div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <a href="https://wa.me/YOUR_NUMBER" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-decoration: none;">
-        <i class="fab fa-whatsapp"></i>
+    <a href="#" style="position: fixed; bottom: 30px; right: 30px; background: #0088cc; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4); text-decoration: none; z-index: 1000;">
+        <i class="fab fa-telegram-plane"></i>
     </a>
-
+    <div id="successBox" style="display: none; background: rgba(0, 255, 136, 0.5); color: black; padding: 15px; text-align: center; border-radius: 8px; margin-top: 20px; font-weight: 700; width: 100%; box-sizing: border-box;">
+    Your report has been submitted successfully, <span id="userName"></span>!
+    </div>
+    <script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault(); // This stops the page from refreshing
+    
+    // 1. Get the name they typed
+    var nameInput = document.querySelector('input[placeholder="Mochearn Username"]').value;
+    
+    // 2. Put the name into the success message
+    document.getElementById('userName').innerText = nameInput;
+    
+    // 3. Show the green success box
+    document.getElementById('successBox').style.display = 'block';
+    
+    // 4. Clear the form (Optional, so they don't submit twice)
+    this.reset();
+});
+    </script>
 </body>
-</html>
+    </html>
