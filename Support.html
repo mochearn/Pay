@@ -83,22 +83,26 @@
     <div id="successBox" style="display: none; background: rgba(0, 255, 136, 0.5); color: black; padding: 15px; text-align: center; border-radius: 8px; margin-top: 20px; font-weight: 700; width: 100%; box-sizing: border-box;">
     Your report has been submitted successfully, <span id="userName"></span>!
     </div>
-    <script>
+   <script>
 document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault(); // This stops the page from refreshing
+    e.preventDefault(); 
     
-    // 1. Get the name they typed
+    // 1. Get the name
     var nameInput = document.querySelector('input[placeholder="Mochearn Username"]').value;
+    var successBox = document.getElementById('successBox');
     
-    // 2. Put the name into the success message
+    // 2. Put the name in and show the box
     document.getElementById('userName').innerText = nameInput;
+    successBox.style.display = 'block';
     
-    // 3. Show the green success box
-    document.getElementById('successBox').style.display = 'block';
+    // 3. THE MAGIC: Hide it after 4 seconds (4000ms)
+    setTimeout(function() {
+        successBox.style.display = 'none';
+    }, 4000);
     
-    // 4. Clear the form (Optional, so they don't submit twice)
+    // 4. Reset the form
     this.reset();
 });
-    </script>
+   </script>
 </body>
     </html>
