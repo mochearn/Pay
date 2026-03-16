@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mochearn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background: #050a18; font-family: 'Montserrat', sans-serif; color: #ffffff; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .hero h1 { font-size: 2.2rem; font-weight: 800; color: #00ff88; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .hero p { opacity: 0.8; font-size: 1rem; margin-top: 10px; }
+
+        /* STORY SECTIONS */
+        .story-section { margin: 50px 0; }
+        h2 { color: #00ff88; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 15px; border-left: 4px solid #00ff88; padding-left: 15px; }
+        p { margin-bottom: 20px; opacity: 0.9; font-size: 0.95rem; }
+
+        /* J-SYSTEM HIGHLIGHT CARD */
+        .j-card { background: rgba(0, 255, 136, 0.05); border: 1px solid #00ff88; border-radius: 15px; padding: 25px; margin: 40px 0; }
+        .j-card h3 { color: #00ff88; margin-top: 0; text-transform: uppercase; font-size: 1.2rem; }
+
+        /* FOOTER ACTION */
+        .btn-join { display: block; width: 100%; text-align: center; background: #00ff88; color: #050a18; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-top: 40px; transition: 0.3s; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="hero">
+            <h1>The Catalyst Movement</h1>
+            <p>Beyond Earning. We Build Digital Powerhouses.</p>
+        </div>
+
+        <div class="story-section">
+            <h2>The Spark ⚡</h2>
+            <p>Mochearn didn't start in a boardroom; it started with a single question: <i>"Why are so many smart Nigerians struggling to find a real digital blueprint?"</i> We saw the struggle, the broken systems, and the confusion. We decided to build the solution.</p>
+        </div>
+
+        <div class="story-section">
+            <h2>The Mission 🎯</h2>
+            <p>Mochearn is the <b>Official Resolution</b> to digital poverty. We aren't just an affiliate platform; we are an <b>Ecosystem</b>. Our mission is to transform everyday internet users into Elite Catalysts—the sparks that drive sales and dominate the digital space.</p>
+        </div>
+
+        <div class="j-card">
+            <h3>The J-System Edge 💎</h3>
+            <p>While others just give you a link and wish you luck, Mochearn gives you a <b>System</b>. Every Catalyst is armed with the proprietary J-System blueprint—a proven strategy designed to turn "No" into "Credit Alert" instantly.</p>
+        </div>
+
+        <div class="story-section">
+            <h2>Our Vision 🔭</h2>
+            <p>By 2027, Mochearn will be the largest community of digital entrepreneurs in Africa. We are building a future where your smartphone is your most valuable asset and your username is a brand people trust.</p>
+        </div>
+
+        <a href="index.html" class="btn-join">Back to Hub</a>
+    </div>
+
+</body>
+</html>
