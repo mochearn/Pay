@@ -27,13 +27,25 @@
 
         /* LEADERBOARD & REAL PHOTOS */
         .leader-item { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee; }
-        .pfp-wrap { position: relative; width: 45px; height: 45px; }
-       .pfp { 
+       /* 1. Forces the container to be a perfect square */
+.pfp-wrap { 
+    position: relative; 
+    width: 50px; 
+    height: 50px; 
+    aspect-ratio: 1 / 1; /* This is the 'magic' that stops the oval shape */
+    border-radius: 50%; 
+    border: 2px solid #00ff88; /* Your Green Ring */
+    overflow: hidden; /* This cuts off the stubborn corners of the photo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. Forces the photo to fill the square perfectly without stretching */
+.pfp { 
     width: 100%; 
     height: 100%; 
-    border-radius: 50%; /* Makes the image round */
-    object-fit: cover;   /* Forces it to fill the circle without stretching */
-    border: 2px solid #00ff88; /* RESTORES your green circle border */
+    object-fit: cover; /* This centers and crops the photo into the circle */
     display: block;
         }
         .diamond-badge { position: absolute; bottom: -2px; right: -2px; width: 18px; height: 18px; background: white; -webkit-clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); display: flex; justify-content: center; align-items: center; color: #050a18; font-weight: 900; font-size: 0.5rem; border: 1px solid #ddd; }
@@ -60,7 +72,7 @@
                     <h3 style="margin-top: 0;">Open Support Ticket</h3>
                     <form id="mochearnForm">
                         <input type="text" id="mUsername" placeholder="Mochearn Username" required onfocus="document.getElementById('tapWarning').style.display='block'" onblur="document.getElementById('tapWarning').style.display='none'">
-                        <div id="tapWarning">WARNING: Use your official Mochearn account name. Lift <span style="color: #008844;">DIRECTLY</span>.</div>
+                        <div id="tapWarning">WARNING⚠️:  Your details must match your mochearn account name. Required as we may be giving you some lift <span style="color: #008844;">DIRECTLY</span>.</div>
                         <input type="email" placeholder="Email Address" required>
                         <select id="mCategory">
                             <option value="">Category (Optional)</option>
@@ -90,16 +102,16 @@
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" class="pfp">
                             <div class="diamond-badge">CR</div>
                         </div>
-                        <span style="flex:1; font-weight: 600;">@Catalyst_King</span>
+                        <span style="flex:1; font-weight: 600;">Victor Odey</span>
                         <span style="color:#00ff88; font-weight: 800;">₦510k</span>
                     </div>
 
                     <div class="leader-item">
                         <div class="pfp-wrap">
                             <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" class="pfp">
-                            <div class="diamond-badge">CR</div>
+                            <div class="diamond-badge"AD</div>
                         </div>
-                        <span style="flex:1; font-weight: 600;">@Jonard_Bethuel</span>
+                        <span style="flex:1; font-weight: 600;">Jonard Bethuel</span>
                         <span style="color:#00ff88; font-weight: 800;">₦320k</span>
                     </div>
 
@@ -108,7 +120,7 @@
                             <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" class="pfp">
                             <div class="diamond-badge">CR</div>
                         </div>
-                        <span style="flex:1; font-weight: 600;">@Alpha_Vendor</span>
+                        <span style="flex:1; font-weight: 600;">Samuel ice</span>
                         <span style="color:#00ff88; font-weight: 800;">₦245k</span>
                     </div>
                 </div>
