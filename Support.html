@@ -6,79 +6,59 @@
     <title>Support Hub | Mochearn</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
-    
     <style>
         body { margin: 0; background-color: #f4f7f6; font-family: 'Montserrat', sans-serif; color: #050a18; }
-        
-        /* SLEEK HEADER */
         .m-header { background: #050a18; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 999; }
-        .m-header h1 { color: #ffffff; font-size: 1.2rem; margin: 0; letter-spacing: 1px; font-weight: 800; }
+        .m-header h1 { color: #ffffff; font-size: 1.2rem; margin: 0; font-weight: 800; }
         .back-home { color: #00ff88; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-
-        /* TICKETING & FORMS */
         .card { background: #ffffff; border-radius: 20px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 30px; position: relative; }
-        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat'; box-sizing: border-box; font-size: 0.9rem; transition: 0.3s; }
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Montserrat'; box-sizing: border-box; font-size: 0.9rem; }
+        .btn-submit { width: 100%; background: #050a18; color: #00ff88; padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .btn-submitted { background: #000000 !important; color: #ffffff !important; }
         
-        /* Submit Button with State Changes */
-        .btn-submit { width: 100%; background: #050a18; color: #00ff88; padding: 15px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .btn-submitted { background: #000000; color: #666; cursor: default; }
+        /* THE WARNING - FORCED VISIBILITY */
+        #tapWarning { display: none; font-size: 0.75rem; font-weight: 700; color: #ff4d4d; margin-bottom: 15px; line-height: 1.5; background: rgba(255, 77, 77, 0.05); padding: 10px; border-radius: 8px; border-left: 4px solid #ff4d4d; }
+        
+        /* DIAMOND LEADERBOARD PFPs */
+        .leader-item { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .pfp-wrap { position: relative; width: 45px; height: 45px; }
+        .pfp { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #00ff88; }
+        .diamond-badge { position: absolute; bottom: -2px; right: -2px; width: 18px; height: 18px; background: white; -webkit-clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); display: flex; justify-content: center; align-items: center; color: #050a18; font-weight: 900; font-size: 0.5rem; border: 1px solid #ddd; }
 
-        /* THE "POPPING" WARNING (Starts Hidden) */
-        #tapWarning { display: none; font-size: 0.75rem; font-weight: 700; color: #ff4d4d; margin-bottom: 15px; line-height: 1.5; background: rgba(255, 77, 77, 0.05); padding: 10px; border-radius: 8px; }
-
-        /* COMMUNITY BOX */
-        .dark-card { background: #050a18; color: #ffffff; border-radius: 20px; padding: 30px; }
-        .btn-community { display: inline-block; background: #00ff88; color: #050a18; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.8rem; margin-top: 10px; }
-        
-        /* LEADERBOARD (Reset and Fixed) */
-        .leader-item { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #eee; }
-        
-        .pfp-wrap { position: relative; width: 50px; height: 50px; }
-        .pfp { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        
-        /* THE DIAMOND BADGE (PROFESSIONAL UPDATE) */
-        .diamond-badge { position: absolute; bottom: -2px; right: -2px; width: 22px; height: 22px; background: white; -webkit-clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%); display: flex; justify-content: center; align-items: center; color: #050a18; font-weight: 800; font-size: 0.6rem; border: 1px solid #ddd; }
-        
-        .leader-txt { font-size: 0.9rem; color: #050a18; font-weight: 500; flex: 1; }
-        .sales-txt { color: #00ff88; font-weight: 700; font-size: 0.9rem; }
+        /* SUCCESS PILL */
+        #successBox { display: none; position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #00ff88; color: black; padding: 12px 25px; border-radius: 50px; font-weight: 800; font-size: 0.85rem; z-index: 99999; box-shadow: 0 10px 30px rgba(0,255,136,0.3); white-space: nowrap; }
     </style>
 </head>
 <body>
 
+    <div id="successBox">Your report submitted successfully, <span id="userName"></span>!</div>
+
     <header class="m-header">
         <h1>MOCHEARN</h1>
-        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back Home</a>
+        <a href="index.html" class="back-home">Back Home</a>
     </header>
 
     <div class="container">
-        
-        <div style="padding: 40px 0; text-align: center;">
-            <h2 style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0;">Help & Hub</h2>
-            <p style="font-weight: 300; opacity: 0.7; margin-top: 5px;">Mochearn Official Resolution Center</p>
+        <div style="text-align: center; padding: 30px 0;">
+            <h2 style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Help & Hub</h2>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Official Mochearn Resolution Center</p>
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-            
             <div style="flex: 1.2; min-width: 320px;">
-                <div class="card" style="border-top: 4px solid #ff4d4d;">
-                    <h3 style="margin-top: 0; color: #050a18;">Open Support Ticket</h3>
-                    
+                <div class="card">
+                    <h3 style="margin-top: 0;">Open Support Ticket</h3>
                     <form id="mochearnForm">
+                        <input type="text" id="mUsername" placeholder="Mochearn Username" required onfocus="document.getElementById('tapWarning').style.display='block'">
                         
-                        <div style="position: relative; margin-bottom: 5px;">
-                            <input type="text" id="mUsername" placeholder="Mochearn Username" required onclick="showTapWarning()">
-                            
-                            <div id="tapWarning">
-                                <i class="fas fa-exclamation-triangle"></i> WARNING: You must use your official Mochearn account name. This is required as we might be giving you some lift <span style="color: #009955;">DIRECTLY</span>.
-                            </div>
+                        <div id="tapWarning">
+                            WARNING: Use your official Mochearn account name. Required as we might be giving you some lift <span style="color: #008844;">DIRECTLY</span>.
                         </div>
 
                         <input type="email" placeholder="Email Address" required>
-                        
                         <select id="mCategory">
-                            <option value="" selected>Category (Optional)</option>
+                            <option value="">Category (Optional)</option>
                             <option>1. Withdrawal & Payouts</option>
                             <option>2. Account Access & Security</option>
                             <option>3. Catalyst Registration Help</option>
@@ -90,109 +70,70 @@
                             <option>9. Report a User/Fraud</option>
                             <option>10. General Inquiries</option>
                         </select>
-                        <textarea placeholder="Describe your request in detail..." rows="5" required></textarea>
-                        
+                        <textarea placeholder="Describe your issue..." rows="5" required></textarea>
                         <button type="submit" id="submitBtn" class="btn-submit">Submit Ticket</button>
                     </form>
                 </div>
             </div>
 
             <div style="flex: 0.8; min-width: 320px;">
-                
-                <div class="dark-card">
-                    <h3 style="color: #00ff88; margin-top: 0;">Elite Telegram Hub</h3>
-                    <p style="font-size: 0.85rem; font-weight: 300; line-height: 1.6;">Join active Mochearn members. Receive direct strategies, alerts, and motivation from the core team.</p>
-                    <a href="https://t.me/YOUR_OFFICIAL_TELEGRAM_LINK" class="btn-community">JOIN THE HUB</a>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h4 style="margin-top: 0; text-transform: uppercase; font-size: 0.75rem; color: #666; letter-spacing: 1px;">Top Catalyst This Week 🏆</h4>
+                <div class="card">
+                    <h4 style="margin-top: 0; text-transform: uppercase; font-size: 0.75rem; color: #666;">Top Catalyst This Week 🏆</h4>
                     
                     <div class="leader-item">
                         <div class="pfp-wrap">
-                            <img src="https://mochearn.com/pfp1.jpg" alt="@C_King" class="pfp">
+                            <img src="http://googleusercontent.com/image_collection/image_retrieval/4583679243093931383_0" class="pfp">
                             <div class="diamond-badge">CR</div>
                         </div>
-                        <span class="leader-txt">@Catalyst_King</span>
-                        <span class="sales-txt">₦510k</span>
+                        <span style="flex:1; font-size: 0.85rem; font-weight: 600;">@Catalyst_King</span>
+                        <span style="color:#00ff88; font-weight: 800;">₦510k</span>
                     </div>
 
                     <div class="leader-item">
                         <div class="pfp-wrap">
-                            <img src="https://mochearn.com/pfp2.jpg" alt="@Jonard_B" class="pfp">
+                            <img src="http://googleusercontent.com/image_collection/image_retrieval/4583679243093931383_1" class="pfp">
                             <div class="diamond-badge">CR</div>
                         </div>
-                        <span class="leader-txt">@Jonard_Bethuel</span>
-                        <span class="sales-txt">₦320k</span>
+                        <span style="flex:1; font-size: 0.85rem; font-weight: 600;">@Jonard_Bethuel</span>
+                        <span style="color:#00ff88; font-weight: 800;">₦320k</span>
                     </div>
 
                     <div class="leader-item" style="border:none;">
                         <div class="pfp-wrap">
-                            <img src="https://mochearn.com/pfp3.jpg" alt="@Alpha" class="pfp">
+                            <img src="http://googleusercontent.com/image_collection/image_retrieval/4583679243093931383_2" class="pfp">
                             <div class="diamond-badge">CR</div>
                         </div>
-                        <span class="leader-txt">@Alpha_Vendor</span>
-                        <span class="sales-txt">₦245k</span>
+                        <span style="flex:1; font-size: 0.85rem; font-weight: 600;">@Alpha_Vendor</span>
+                        <span style="color:#00ff88; font-weight: 800;">₦245k</span>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <a href="https://t.me/YOUR_OFFICIAL_TELEGRAM_LINK" style="position: fixed; bottom: 30px; right: 30px; background: #0088cc; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4); text-decoration: none; z-index: 10000; border: none !important; margin: 0 !important; transform: none !important;">
-        <i class="fab fa-telegram-plane"></i>
-    </a>
-
-    <div id="successBox" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #00ff88; color: black; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.8rem; z-index: 20000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); white-space: nowrap;">
-        Your report has been submitted successfully, <span id="userName"></span>!
-        <span onclick="closeSuccess()" style="margin-left: 10px; cursor: pointer;">&times;</span>
-    </div>
-
     <script>
-        // 1. POP-OUT WARNING ON TAP
-        function showTapWarning() {
-            // Strong Code: Forces appearance by ID
-            document.getElementById('tapWarning').style.display = 'block';
-        }
-
-        // 2. FORM INTERACTION CONTROL (BY FORCE)
         const form = document.getElementById('mochearnForm');
         const submitBtn = document.getElementById('submitBtn');
+        const successBox = document.getElementById('successBox');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevents page reload/redirect (STRONG CODE)
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('userName').innerText = document.getElementById('mUsername').value;
             
-            // A. PERSONALIZED SUCCESS (Pill style at the top)
-            var name = document.getElementById('mUsername').value;
-            var sb = document.getElementById('successBox');
-            document.getElementById('userName').innerText = name;
-            sb.style.display = 'flex';
-            sb.style.alignItems = 'center';
-
-            // B. BUTTON STATE CHANGE (FORCED)
+            // SHOW SUCCESS
+            successBox.style.display = 'block';
             submitBtn.classList.add('btn-submitted');
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Ticket Submitted';
+            submitBtn.innerText = 'TICKET SUBMITTED';
+            
+            setTimeout(() => { successBox.style.display = 'none'; }, 4000);
+            form.reset();
+            document.getElementById('tapWarning').style.display = 'none';
+        };
 
-            // C. AUTO-EXIT DELAY (4 Seconds)
-            setTimeout(function() { closeSuccess(); }, 4000);
-            this.reset();
-            document.getElementById('tapWarning').style.display = 'none'; // Re-hide warning
-        });
-
-        // 3. MANUAL SUCCESS BOX CLOSE
-        function closeSuccess() {
-            document.getElementById('successBox').style.display = 'none';
-        }
-
-        // 4. BUTTON RESET ON KEYPRESS (FORCED)
-        form.addEventListener('input', function() {
-            if (submitBtn.classList.contains('btn-submitted')) {
-                // Strong Code: Forces button back to normal state
-                submitBtn.classList.remove('btn-submitted');
-                submitBtn.innerHTML = 'Submit Ticket';
-            }
-        });
-    </style>
+        form.oninput = function() {
+            submitBtn.classList.remove('btn-submitted');
+            submitBtn.innerText = 'SUBMIT TICKET';
+        };
+    </script>
 </body>
     </html>
