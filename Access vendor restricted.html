@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Restricted | Mochearn Vendors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Light Blue Background as requested */
+            background-color: #00d2ff; 
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* MAIN CARD CONTAINER */
+        .restricted-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* TOP BLACK LOGO BOX */
+        .logo-header {
+            background-color: #050a18;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            padding: 15px 30px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* CONTENT AREA */
+        .content {
+            padding: 50px 30px 40px 30px;
+        }
+
+        .tag-restricted {
+            background-color: #fff0f0;
+            color: #ff5c5c;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            color: #1a1a1a;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .description {
+            color: #666666;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .highlight-bold {
+            color: #333333;
+            font-weight: 700;
+        }
+
+        /* LIGHT BLUE BUTTON */
+        .btn-secure {
+            background-color: #007bff; /* Professional Light Blue */
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .btn-secure:hover {
+            background-color: #0056b3;
+        }
+
+        /* FOOTER LOGIN LINK */
+        .login-footer {
+            color: #888888;
+            font-size: 0.95rem;
+        }
+
+        .login-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 2px;
+        }
+
+        /* MOBILE FIX */
+        @media (max-width: 480px) {
+            .main-title { font-size: 1.5rem; }
+            .description { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="restricted-card">
+        <header class="logo-header">
+            <div class="logo-placeholder">YOUR LOGO HERE</div>
+        </header>
+
+        <div class="content">
+            <span class="tag-restricted">Access Restricted</span>
+            
+            <h1 class="main-title">THE VENDOR VAULT IS LOCKED</h1>
+            
+            <p class="description">
+                Access to the <span class="highlight-bold">Mochearn Vendor Command</span> is exclusive to approved partners. Secure your <span class="highlight-bold">Vendor License</span> first to unlock the ability to list products and track global sales.
+            </p>
+
+            <a href="#" class="btn-secure">SECURE MY VENDOR LICENSE NOW</a>
+
+            <p class="login-footer">
+                Already a vendor? <a href="Vendors login" class="login-link">login</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+  </html>
