@@ -140,40 +140,7 @@
                     <input type="password" id="pass" placeholder="••••••••" required>
                     <i class="fa-regular fa-eye-slash toggle-password" onclick="togglePass(this)"></i>
                 </div>
-
-                <button type="submit" class="login-btn">LOGIN</button>
-            </form>
-
-            <div class="footer-link">
-                Missing credentials? <a href="#">Contact Support</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // SHOW CHECKMARK IF INPUT HAS TEXT
-        function checkInput(input, checkId) {
-            const check = document.getElementById(checkId);
-            if (input.value.length > 3) {
-                check.style.display = 'block';
-            } else {
-                check.style.display = 'none';
-            }
-        }
-
-        // TOGGLE PASSWORD
-        function togglePass(icon) {
-            const input = document.getElementById('pass');
-            if (input.type === "password") {
-                input.type = "text";
-                icon.classList.replace("fa-eye-slash", "fa-eye");
-            } else {
-                input.type = "password";
-                icon.classList.replace("fa-eye", "fa-eye-slash");
-            }
-        }
-    </script>
-    <div class="login-extras">
+<div class="login-extras">
     <label class="remember-me">
         <input type="checkbox"> 
         <span>Remember me</span>
@@ -218,6 +185,37 @@
         color: #00ff88;
         text-decoration: underline;
     }
-</style>
+                        </style>
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+
+            <div class="footer-link">
+                Missing credentials? <a href="#">Contact Support</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SHOW CHECKMARK IF INPUT HAS TEXT
+        function checkInput(input, checkId) {
+            const check = document.getElementById(checkId);
+            if (input.value.length > 3) {
+                check.style.display = 'block';
+            } else {
+                check.style.display = 'none';
+            }
+        }
+
+        // TOGGLE PASSWORD
+        function togglePass(icon) {
+            const input = document.getElementById('pass');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.replace("fa-eye-slash", "fa-eye");
+            } else {
+                input.type = "password";
+                icon.classList.replace("fa-eye", "fa-eye-slash");
+            }
+    </script>
 </body>
     </html>
