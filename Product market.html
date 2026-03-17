@@ -3,140 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product listing| Mochearn Marketplace</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <title>The Vault | Mochearn Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background-color: #f4f7f6; /* Light professional grey */
+            background-color: #050a18; /* Correct Mochearn Dark Background */
+            color: #ffffff;
             font-family: 'Arial', sans-serif;
-            color: #1a1a1a;
             padding-bottom: 100px;
         }
 
         /* HEADER */
         .vault-header {
-            background-color: #050a18;
-            padding: 80px 20px;
+            padding: 80px 20px 40px 20px;
             text-align: center;
-            color: #00ff88;
         }
 
         .vault-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             font-size: clamp(2rem, 8vw, 3.5rem);
+            color: #00ff88;
             text-transform: uppercase;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
         }
 
-        /* PRODUCT GRID */
+        /* MAIN CONTAINER */
         .container {
             max-width: 1200px;
-            margin: -40px auto 0; /* Pulls grid up into the header slightly */
+            margin: 0 auto;
             padding: 0 20px;
         }
 
-        #product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        /* PRODUCT CARD (Matches your "The Customer" Screenshot) */
-        .product-card {
-            background: #ffffff;
-            border: 6px solid #004d33; /* Dark green border from your screenshot */
-            border-radius: 4px;
-            overflow: hidden;
+        #product-command-hub {
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease;
+            gap: 20px;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        /* PRODUCT ROW (Based on your sketch image_3.png) */
+        .product-row {
+            background-color: rgba(255, 255, 255, 0.03); /* Subtle dark card */
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center; /* Aligns everything on the same line */
+            justify-content: space-between; /* Pushes action button to the far right */
+            gap: 20px;
+            transition: 0.3s;
         }
 
-        .product-image {
-            width: 100%;
-            height: 250px;
+        .product-row:hover {
+            background-color: rgba(0, 255, 136, 0.02);
+            border-color: rgba(0, 255, 136, 0.3);
+            transform: scale(1.01);
+        }
+
+        /* LEFT BLOCK (Vendor & Product Info) */
+        .left-block {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-grow: 1; /* Takes up the most space */
+        }
+
+        /* 1. Vendor Picture */
+        .vendor-avatar {
+            width: 100px; /* Specific smaller size for Vendor Photo */
+            height: 100px;
+            border-radius: 50%;
             object-fit: cover;
-            border-bottom: 4px solid #004d33;
+            border: 4px solid #00ff88;
         }
 
-        .product-content {
-            padding: 30px;
-            flex-grow: 1;
+        .info-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
+        /* 2. Product Name */
         .product-name {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            color: #050a18;
-        }
-
-        .product-desc {
-            color: #444;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .price-tag {
-            font-weight: 800;
-            color: #004d33;
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .btn-explore {
-            background-color: #004d33; /* Dark green button */
+            font-size: 1.3rem;
             color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        /* 3. Vendor Name */
+        .vendor-name {
+            color: #00ff88;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: bold;
+        }
+
+        /* 4. Small Product Picture */
+        .small-product-img {
+            width: 80px; /* Small Product Picture */
+            height: 80px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 5. Description & See More */
+        .description-block {
+            color: #ffffff;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+
+        .see-more-btn {
+            color: #00ff88;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        /* RIGHT BLOCK (Price & Action) */
+        .right-block {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-align: right;
+            min-width: 250px;
+            justify-content: flex-end;
+        }
+
+        /* 6. Product Price (The 'Tall Lines' from sketch) */
+        .price-disclosed {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+
+        /* What happens if Price is NOT disclosed */
+        .price-undisclosed {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
+        }
+
+        /* 7. Action Button */
+        .action-button {
+            background-color: #00ff88; /* Command Green */
+            color: #050a18; /* Dark background font */
             text-decoration: none;
             display: inline-block;
-            padding: 15px 25px;
+            padding: 15px 30px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            width: 100%;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .top-seller-badge {
-            background: #00ff88;
-            color: #050a18;
-            padding: 5px 12px;
-            font-size: 0.75rem;
-            font-weight: 800;
             border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+            transition: background 0.3s;
         }
 
-        /* EMPTY STATE STYLE */
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 100px 20px;
-            background: white;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
+        .action-button:hover {
+            background-color: #00cc6e;
         }
 
-        .empty-state h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            color: #888;
-            margin-bottom: 10px;
+        /* MOBILE FIX */
+        @media (max-width: 900px) {
+            .product-row { flex-direction: column; align-items: flex-start; }
+            .left-block { flex-direction: column; align-items: flex-start; }
+            .vendor-avatar { width: 80px; height: 80px; }
+            .right-block { width: 100%; justify-content: space-between; }
         }
     </style>
 </head>
@@ -144,75 +190,75 @@
 
     <header class="vault-header">
         <h1 class="vault-title">THE VAULT 💎</h1>
-        <p>Validated Blueprints for Financial Transformation</p>
+        <p style="opacity:0.8;">Validated Command Hub for Marketplace Assets</p>
     </header>
 
     <div class="container">
-        <div id="product-grid">
+        <div id="product-command-hub">
             </div>
     </div>
 
     <script>
-        // THIS IS YOUR "DATABASE"
-        // To add a new product, just add a new {} block below.
-        // The computer will automatically sort them by 'sales'!
-        const mochearnProducts = [
+        // THIS IS THE "SMART LOGIC" THAT RUNS THE MAGIC
+        const availableProducts = [
             {
-                name: "The J-System",
-                desc: "Unlock the elite tools for financial transformation. Access premium knowledge modules validated by experts.",
+                vendorName: "Jonard Global Systems",
+                vendorPic: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300",
+                productName: "The J-System",
+                productPic: "https://images.unsplash.com/photo-1526303328184-c75ff4896ca2?q=80&w=300",
+                desc: "Unlock the elite tools for financial transformation. Master premium knowledge modules validated by experts to master high-income skills.",
+                disclosePrice: true, // VENDOR CHOICE
                 price: "₦5,000",
-                sales: 850,
-                image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=800"
+                sales: 500 // Used for the auto-rank sorting logic
             },
             {
-                name: "Vendor Blueprint",
-                desc: "Master the art of high-volume digital sales. Build a digital fortress that stands firm against inflation.",
+                vendorName: "Startup Guru Nigeria",
+                vendorPic: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=300",
+                productName: "Vendor Pro Blueprint",
+                productPic: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=300",
+                desc: "The professional's guide to managing multi-vendor accounts. Correct! Build a digital fortress and take your product global.",
+                disclosePrice: false, // VENDOR CHOICE (Computers will not show price)
                 price: "₦15,000",
-                sales: 120,
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800"
-            },
-            {
-                name: "Catalyst Fast-Track",
-                desc: "The accelerated path to your first digital payout. Simple, sharp, and correct.",
-                price: "₦3,500",
-                sales: 1200, // This is the highest sales, so it will go to the top!
-                image: "https://images.unsplash.com/photo-1526303328184-c75ff4896ca2?q=80&w=800"
+                sales: 120
             }
         ];
 
-        const grid = document.getElementById('product-grid');
+        const hub = document.getElementById('product-command-hub');
 
-        // THE MAGIC LOGIC
-        if (mochearnProducts.length === 0) {
-            // If No Products exist
-            grid.innerHTML = `
-                <div class="empty-state">
-                    <h2>VAULT ACCESS RESTRICTED</h2>
-                    <p>No products have been validated by Jonard Global Systems yet. Check back soon.</p>
+        // Logic: Auto-Rank (Highest sales at top)
+        availableProducts.sort((a, b) => b.sales - a.sales);
+
+        // Render the "Horizontal Command Row" based on sketch blueprint
+        availableProducts.forEach(p => {
+            
+            // Logic: Vendor choice on price disclosure
+            const priceDisplay = p.disclosePrice ? `<span class="price-disclosed">${p.price}</span>` : `<span class="price-undisclosed">Price by Request</span>`;
+
+            hub.innerHTML += `
+                <div class="product-row">
+                    <div class="left-block">
+                        <img src="${p.vendorPic}" class="vendor-avatar" alt="${p.vendorName}">
+                        
+                        <div class="info-stack">
+                            <h2 class="product-name">${p.productName}</h2>
+                            <span class="vendor-name">${p.vendorName}</span>
+                            <div class="description-block">
+                                ${p.desc} <button class="see-more-btn"> See more</button>
+                            </div>
+                        </div>
+                        
+                        <img src="${p.productPic}" class="small-product-img" alt="${p.productName}">
+                    </div>
+
+                    <div class="right-block">
+                        <div class="price-area">
+                            ${priceDisplay}
+                        </div>
+                        <a href="#" class="action-button">COMMAND 💎</a>
+                    </div>
                 </div>
             `;
-        } else {
-            // SORTING: Highest sales at the top
-            mochearnProducts.sort((a, b) => b.sales - a.sales);
-
-            // RENDERING: Create the cards
-            mochearnProducts.forEach(p => {
-                const isTop = p.sales > 500 ? `<span class="top-seller-badge">🔥 BEST SELLER</span>` : '';
-                
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <img src="${p.image}" class="product-image" alt="${p.name}">
-                        <div class="product-content">
-                            ${isTop}
-                            <h2 class="product-name">${p.name}</h2>
-                            <p class="product-desc">${p.desc}</p>
-                            <span class="price-tag">${p.price}</span>
-                            <a href="#" class="btn-explore">EXPLORE THE VAULT 💎</a>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+        });
     </script>
 </body>
-</html>
+    </html>
