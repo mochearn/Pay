@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product listing| Mochearn Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: #f4f7f6; /* Light professional grey */
+            font-family: 'Arial', sans-serif;
+            color: #1a1a1a;
+            padding-bottom: 100px;
+        }
+
+        /* HEADER */
+        .vault-header {
+            background-color: #050a18;
+            padding: 80px 20px;
+            text-align: center;
+            color: #00ff88;
+        }
+
+        .vault-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        /* PRODUCT GRID */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 0; /* Pulls grid up into the header slightly */
+            padding: 0 20px;
+        }
+
+        #product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* PRODUCT CARD (Matches your "The Customer" Screenshot) */
+        .product-card {
+            background: #ffffff;
+            border: 6px solid #004d33; /* Dark green border from your screenshot */
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid #004d33;
+        }
+
+        .product-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .product-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #050a18;
+        }
+
+        .product-desc {
+            color: #444;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .price-tag {
+            font-weight: 800;
+            color: #004d33;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .btn-explore {
+            background-color: #004d33; /* Dark green button */
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            padding: 15px 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .top-seller-badge {
+            background: #00ff88;
+            color: #050a18;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* EMPTY STATE STYLE */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 100px 20px;
+            background: white;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+        }
+
+        .empty-state h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="vault-header">
+        <h1 class="vault-title">THE VAULT 💎</h1>
+        <p>Validated Blueprints for Financial Transformation</p>
+    </header>
+
+    <div class="container">
+        <div id="product-grid">
+            </div>
+    </div>
+
+    <script>
+        // THIS IS YOUR "DATABASE"
+        // To add a new product, just add a new {} block below.
+        // The computer will automatically sort them by 'sales'!
+        const mochearnProducts = [
+            {
+                name: "The J-System",
+                desc: "Unlock the elite tools for financial transformation. Access premium knowledge modules validated by experts.",
+                price: "₦5,000",
+                sales: 850,
+                image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=800"
+            },
+            {
+                name: "Vendor Blueprint",
+                desc: "Master the art of high-volume digital sales. Build a digital fortress that stands firm against inflation.",
+                price: "₦15,000",
+                sales: 120,
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800"
+            },
+            {
+                name: "Catalyst Fast-Track",
+                desc: "The accelerated path to your first digital payout. Simple, sharp, and correct.",
+                price: "₦3,500",
+                sales: 1200, // This is the highest sales, so it will go to the top!
+                image: "https://images.unsplash.com/photo-1526303328184-c75ff4896ca2?q=80&w=800"
+            }
+        ];
+
+        const grid = document.getElementById('product-grid');
+
+        // THE MAGIC LOGIC
+        if (mochearnProducts.length === 0) {
+            // If No Products exist
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <h2>VAULT ACCESS RESTRICTED</h2>
+                    <p>No products have been validated by Jonard Global Systems yet. Check back soon.</p>
+                </div>
+            `;
+        } else {
+            // SORTING: Highest sales at the top
+            mochearnProducts.sort((a, b) => b.sales - a.sales);
+
+            // RENDERING: Create the cards
+            mochearnProducts.forEach(p => {
+                const isTop = p.sales > 500 ? `<span class="top-seller-badge">🔥 BEST SELLER</span>` : '';
+                
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <img src="${p.image}" class="product-image" alt="${p.name}">
+                        <div class="product-content">
+                            ${isTop}
+                            <h2 class="product-name">${p.name}</h2>
+                            <p class="product-desc">${p.desc}</p>
+                            <span class="price-tag">${p.price}</span>
+                            <a href="#" class="btn-explore">EXPLORE THE VAULT 💎</a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
