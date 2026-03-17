@@ -8,7 +8,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* BLACKOUT EMPTY STATE SUPPORT */
         body { 
             background-color: #050a18; 
             color: #ffffff; 
@@ -17,7 +16,7 @@
         }
 
         .container {
-            max-width: 800px; /* 60% feel on Laptop */
+            max-width: 800px; /* Centered 60% width for Laptop */
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -40,13 +39,14 @@
             gap: 25px;
             margin-bottom: 25px;
             align-items: flex-start;
+            transition: background 0.3s ease;
         }
 
         /* LEFT STACK: IMAGES */
         .image-stack {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             min-width: 100px;
         }
 
@@ -77,6 +77,7 @@
             font-size: 1.2rem;
             text-transform: uppercase;
             margin-bottom: 5px;
+            color: #ffffff;
         }
 
         .v-name {
@@ -84,33 +85,42 @@
             font-size: 0.8rem;
             color: #00ff88;
             margin-bottom: 15px;
+            font-weight: bold;
         }
 
-        /* 3-LINE DESCRIPTION RULE */
+        /* DESCRIPTION BOX */
+        .desc-container {
+            position: relative;
+            overflow: hidden;
+        }
+
         .desc-text {
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
             color: #cccccc;
-            overflow: hidden;
+            /* Start with 3-line clamp */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
-            transition: all 0.5s ease;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
         }
 
         .desc-text.expanded {
-            display: block; /* Removes the 3-line limit */
+            display: block;
             -webkit-line-clamp: unset;
+            max-height: 2000px; /* Allows full growth */
         }
 
-        .see-more {
+        .toggle-btn {
             color: #00ff88;
             cursor: pointer;
             font-weight: bold;
             font-size: 0.85rem;
             background: none;
             border: none;
-            margin-top: 5px;
+            margin-top: 8px;
+            display: inline-block;
         }
 
         /* RIGHT BLOCK: PRICE & ACTION */
@@ -120,16 +130,16 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
         }
 
         .price-area {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.3rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 800;
         }
 
-        .lock-icon { font-size: 1.5rem; opacity: 0.5; }
+        .lock-icon { font-size: 1.4rem; color: #555; }
 
         .cmd-btn {
             background: #00ff88;
@@ -140,58 +150,52 @@
             font-weight: 800;
             font-size: 0.8rem;
             text-transform: uppercase;
-        }
-
-        /* EMPTY STATE */
-        #empty-notice {
-            display: none;
             text-align: center;
-            padding-top: 100px;
+            transition: transform 0.2s ease;
         }
 
-        #empty-notice p { color: #888; font-size: 1.1rem; }
+        .cmd-btn:hover { transform: scale(1.05); }
+
+        /* BLACKOUT EMPTY STATE */
+        #empty-notice {
+            display: block; /* Shown by default since no products exist */
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        #empty-notice p { color: #666; font-size: 1.1rem; letter-spacing: 1px; }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 600px) {
+            .product-row { flex-direction: column; align-items: center; text-align: center; }
+            .action-block { text-align: center; min-width: 100%; margin-top: 20px; }
+            .image-stack { align-items: center; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-container">
+    <div class="container">
         <h1 class="hub-title">The Vault 💎</h1>
+        
         <div id="product-list"></div>
+
         <div id="empty-notice">
             <p>No available products yet.</p>
         </div>
     </div>
 
     <script>
-        // DATABASE SCANNING SIMULATION
-        const products = [
-            {
-                name: "The J-System",
-                vendor: "Jonard Global",
-                desc: "Unlock the elite tools for financial transformation. This blueprint is designed to build a digital fortress that stands firm against inflation. Master high-income skills with modules validated by experts and scale your revenue today.",
-                price: "₦5,000",
-                showPrice: true,
-                pImg: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=200",
-                vImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100"
-            },
-            {
-                name: "Vendor Secret",
-                vendor: "Mochearn Elite",
-                desc: "A classified guide to multi-vendor management. This restricted module is for those looking to dominate the marketplace. Learn the hidden protocols of high-level digital asset sales and secure your future.",
-                price: "₦15,000",
-                showPrice: false, // LOCK ICON TRIGGER
-                pImg: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200",
-                vImg: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100"
-            }
-        ];
+        // THIS LIST IS EMPTY. 
+        // When you are ready to add products, they go inside these brackets [ ].
+        const products = []; 
 
         const list = document.getElementById('product-list');
         const emptyNotice = document.getElementById('empty-notice');
 
         // SCANNING LOGIC
-        if (products.length === 0) {
-            emptyNotice.style.display = 'block';
-        } else {
+        if (products.length > 0) {
+            emptyNotice.style.display = 'none';
             products.forEach((p, index) => {
                 const priceHTML = p.showPrice ? p.price : '<span class="lock-icon">🔒</span>';
                 
@@ -204,8 +208,10 @@
                         <div class="info-block">
                             <h2 class="p-name">${p.name}</h2>
                             <span class="v-name">Vendor: ${p.vendor}</span>
-                            <p class="desc-text" id="desc-${index}">${p.desc}</p>
-                            <button class="see-more" onclick="revealText(${index})">... see more</button>
+                            <div class="desc-container">
+                                <p class="desc-text" id="desc-${index}">${p.desc}</p>
+                                <button class="toggle-btn" id="btn-${index}" onclick="handleToggle(${index})">... see more</button>
+                            </div>
                         </div>
                         <div class="action-block">
                             <div class="price-area">${priceHTML}</div>
@@ -216,22 +222,20 @@
             });
         }
 
-        // LINE-BY-LINE REVEAL MAGIC
-        function revealText(id) {
+        // TOGGLE LOGIC: SEE MORE / SEE LESS
+        function handleToggle(id) {
             const textElement = document.getElementById(`desc-${id}`);
-            textElement.classList.add('expanded');
-            textElement.style.maxHeight = '0px';
+            const btn = document.getElementById(`btn-${id}`);
             
-            // Fast count-down reveal effect
-            let height = 0;
-            const target = 300; // estimated max height
-            const interval = setInterval(() => {
-                height += 15;
-                textElement.style.maxHeight = height + 'px';
-                if (height >= target) clearInterval(interval);
-            }, 20); // Fast timing
-            
-            event.target.style.display = 'none'; // Hide "see more" after click
+            if (textElement.classList.contains('expanded')) {
+                // CLOSE IT
+                textElement.classList.remove('expanded');
+                btn.innerText = "... see more";
+            } else {
+                // OPEN IT (LINE BY LINE FEEL)
+                textElement.classList.add('expanded');
+                btn.innerText = "see less ↑";
+            }
         }
     </script>
 </body>
