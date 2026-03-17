@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Your Spot | Mochearn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: #fcfcfc; 
+            color: #050a18; 
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #004d40; /* Dark Green like your screenshot */
+            text-transform: uppercase;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* PILLAR CARDS */
+        .pillar-row {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .pillar-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+
+        .pillar-img {
+            width: 45%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .pillar-text {
+            padding: 40px;
+            width: 55%;
+        }
+
+        .pillar-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #050a18;
+            text-transform: uppercase;
+        }
+
+        .pillar-text p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        /* REGISTRATION FORM CARD */
+        .reg-card {
+            background: #ffffff;
+            border: 2px solid #004d40;
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            box-shadow: 0 20px 40px rgba(0,77,64,0.1);
+        }
+
+        .reg-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+            color: #004d40;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #004d40;
+        }
+
+        /* GET STARTED BUTTON (MATCHING YOUR SCREENSHOT) */
+        .btn-register {
+            display: block;
+            width: 100%;
+            background: #0088cc; /* Vibrant Blue from your screenshot */
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #006699;
+        }
+
+        /* COMMAND CENTER MESSAGE */
+        .command-msg {
+            text-align: center;
+            background: #050a18;
+            color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .command-msg p {
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            font-size: 1.1rem;
+        }
+
+        .telegram-link {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* MOBILE FIX */
+        @media (max-width: 768px) {
+            .pillar-card { flex-direction: column; }
+            .pillar-img, .pillar-text { width: 100%; }
+            .pillar-img { height: 200px; }
+            .header-section h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header-section">
+            <h1>Why Partner with Mochearn?</h1>
+            <p>The elite digital system for high-performing earners.</p>
+        </div>
+
+        <div class="pillar-row">
+            <div class="pillar-card">
+                <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=600" class="pillar-img" alt="High Commissions">
+                <div class="pillar-text">
+                    <h2>High Commissions</h2>
+                    <p>Earn industry-leading structures on every successful command. We ensure our partners are the highest-paid in the digital space.</p>
+                </div>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-text">
+                    <h2>Marketing Vault</h2>
+                    <p>Gain instant access to pre-built sales funnels, high-converting ad copies, and professional templates designed to help you scale your revenue.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600" class="pillar-img" alt="Marketing Vault">
+            </div>
+
+            <div class="pillar-card">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600" class="pillar-img" alt="Elite Support">
+                <div class="pillar-text">
+                    <h2>Elite Support</h2>
+                    <p>You never build alone. Join a community of top earners and get 24/7 assistance on your journey to financial transformation.</p>
+                </div>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-text">
+                    <h2>Fast Payments</h2>
+                    <p>Experience seamless, secure, and lightning-fast withdrawals. Your hard-earned alerts hit your account without delay.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600" class="pillar-img" alt="Fast Payments">
+            </div>
+        </div>
+
+        <div class="reg-card">
+            <h3>Secure Your Spot Now</h3>
+            <form id="regForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Active Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Telegram Username</label>
+                    <input type="text" placeholder="@yourusername" required>
+                </div>
+                <div class="form-group">
+                    <label>Create Password</label>
+                    <input type="password" placeholder="Create a secure password" required>
+                </div>
+                
+                <button type="submit" class="btn-register">Register Account 🚀</button>
+            </form>
+        </div>
+
+        <div class="command-msg">
+            <p>"Mochearn is more than a platform; it is a digital fortress built to withstand inflation. By registering your account today, you are taking the first step toward a validated financial blueprint."</p>
+            <p>Join the <a href="https://t.me/yourlink" class="telegram-link">Mochearn Command Center</a> on Telegram.</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('regForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // SIMULATING REGISTRATION & REDIRECT
+            alert("Account Reserved! Redirecting to the Activation Gateway...");
+            
+            // REPLACE THIS URL WITH YOUR PAYMENT GATEWAY LINK
+            window.location.href = "https://your-payment-gateway-link.com";
+        });
+    </script>
+
+</body>
+  </html>
