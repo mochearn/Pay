@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: linear-gradient(135deg, #050a30 0%, #004d40 100%);
+            background: #ffffff; /* Pure White Background */
             font-family: 'Arial', sans-serif;
             display: flex;
             align-items: center;
@@ -19,70 +19,121 @@
         }
 
         .recovery-box {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
+            background: #ffffff;
             width: 100%;
-            max-width: 420px;
-            padding: 40px 30px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            max-width: 400px;
+            padding: 40px 25px;
+            border-radius: 20px;
             text-align: center;
+            /* Light shadow to make it pop off the white background */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
         }
 
-        .mochearn-logo { width: 140px; margin-bottom: 15px; }
-        .icon-shield { font-size: 2.5rem; margin-bottom: 15px; display: block; }
-        h2 { font-family: 'Montserrat', sans-serif; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
-        p { color: #aaa; font-size: 0.9rem; margin-bottom: 30px; }
+        .mochearn-logo { width: 130px; margin-bottom: 20px; }
+        
+        .icon-shield { 
+            font-size: 2.5rem; 
+            margin-bottom: 15px; 
+            display: block; 
+            color: #004d40; 
+        }
+
+        h2 { 
+            font-family: 'Montserrat', sans-serif; 
+            color: #333; 
+            font-size: 1.3rem;
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+        }
+
+        p { color: #777; font-size: 0.9rem; margin-bottom: 30px; line-height: 1.5; }
 
         .input-container { text-align: left; margin-bottom: 25px; }
-        .input-container label { color: #00ff88; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; display: block; }
-        input { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); padding: 16px; border-radius: 12px; color: #fff; outline: none; }
         
-        .btn-request { width: 100%; background: #fff; color: #050a30; border: none; padding: 18px; border-radius: 15px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; cursor: pointer; }
-        .btn-request:hover { background: #00ff88; }
+        .input-container label { 
+            color: #004d40; 
+            font-size: 0.75rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            display: block; 
+        }
 
-        /* THE POP-UP OVERLAY */
+        input { 
+            width: 100%; 
+            background: #f9f9f9; 
+            border: 1px solid #eee; 
+            padding: 16px; 
+            border-radius: 12px; 
+            color: #333; 
+            outline: none; 
+            font-size: 1rem;
+        }
+        
+        input:focus { border-color: #00ff88; background: #fff; }
+
+        .btn-request { 
+            width: 100%; 
+            background: #004d40; /* Dark Professional Green */
+            color: #fff; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 12px; 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+
+        /* THE CHOICE POP-UP */
         #loginPopup {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
             z-index: 100;
             align-items: center;
             justify-content: center;
         }
 
         .popup-card {
-            background: rgba(255,255,255,0.1);
-            padding: 40px 30px;
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.2);
-            width: 90%;
-            max-width: 350px;
+            background: #fff;
+            padding: 35px 25px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 320px;
             text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
 
         .choice-btn {
             display: block;
             width: 100%;
             padding: 15px;
-            margin: 15px 0;
-            border-radius: 12px;
+            margin: 12px 0;
+            border-radius: 10px;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .btn-catalyst { background: #0088cc; color: white; }
-        .btn-vendor { background: #00ff88; color: #050a30; }
+        .btn-vendor { background: #00ff88; color: #004d40; }
 
-        .close-btn { color: #aaa; font-size: 0.8rem; cursor: pointer; text-decoration: underline; }
-
-        .footer-nav a { color: #00ff88; text-decoration: none; font-size: 0.8rem; margin-top: 25px; display: inline-block; font-weight: bold; cursor: pointer; }
+        .footer-nav a { 
+            color: #004d40; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            margin-top: 25px; 
+            display: inline-block; 
+            font-weight: bold; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
@@ -96,9 +147,9 @@
         <form id="requestForm">
             <div class="input-container">
                 <label>Verified Email</label>
-                <input type="email" placeholder="Enter your email" required>
+                <input type="email" id="userEmail" placeholder="Enter your email" required>
             </div>
-            <button type="submit" class="btn-request">Authorize Reset 🚀</button>
+            <button type="submit" id="authBtn" class="btn-request">Authorize Reset 🚀</button>
         </form>
 
         <div class="footer-nav">
@@ -108,12 +159,10 @@
 
     <div id="loginPopup">
         <div class="popup-card">
-            <h2 style="font-size: 1.1rem; margin-bottom: 20px;">Choose Your Gateway</h2>
-            
+            <h2 style="font-size: 1rem; margin-bottom: 20px;">Choose Your Gateway</h2>
             <a href="catalyst-login.html" class="choice-btn btn-catalyst">Catalyst Login</a>
             <a href="vendor-login.html" class="choice-btn btn-vendor">Vendor Login</a>
-            
-            <div class="close-btn" onclick="hidePopup()">Cancel</div>
+            <div style="font-size: 0.8rem; color: #999; cursor: pointer; margin-top: 10px;" onclick="hidePopup()">Cancel</div>
         </div>
     </div>
 
@@ -123,7 +172,18 @@
         
         document.getElementById('requestForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // 1. Show the pop-up/alert message
             alert("Verification link dispatched to your inbox!");
+            
+            // 2. Change the button after they tap "OK"
+            const btn = document.getElementById('authBtn');
+            btn.innerHTML = "CHECK YOUR MAIL BOX ✅";
+            btn.style.background = "#00ff88"; // Turn green to show success
+            btn.style.color = "#004d40";
+            
+            // Disable input so they don't keep clicking
+            document.getElementById('userEmail').disabled = true;
         });
     </script>
 
