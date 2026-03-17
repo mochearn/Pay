@@ -2,46 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Activate Account | Mochearn</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background-color: #050a18; /* Deep Command Black */
+            background-color: #050a18; 
             color: #ffffff; 
             font-family: 'Arial', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             padding: 20px;
+            overflow: hidden; /* Prevents unwanted scrolling */
         }
 
         .gate-card {
-            max-width: 500px;
+            width: 100%;
+            max-width: 400px; /* Kept tight for professional feel */
             text-align: center;
-            padding: 40px;
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 15px;
+            padding: 35px 25px;
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 20px;
             background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            color: #00ff88; /* Elite Mochearn Green */
+            color: #00ff88; 
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: 25px;
-            font-size: 1.8rem;
+            font-size: 1.5rem; /* Adjusted for mobile */
         }
 
         p {
-            color: #cccccc;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 40px;
+            color: #bbbbbb;
+            font-size: 0.95rem; /* Shrunk for better fit */
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
         .highlight {
@@ -50,14 +53,14 @@
         }
 
         .btn-activate {
-            display: inline-block;
-            background: #006b3e; /* Solid Green from your screenshot */
+            display: block;
+            background: #006b3e; 
             color: #ffffff;
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
-            padding: 20px 40px;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 0.9rem;
             text-transform: uppercase;
             font-weight: 800;
             transition: all 0.3s ease;
@@ -66,33 +69,40 @@
             cursor: pointer;
         }
 
-        .btn-activate:hover {
+        .btn-activate:active {
+            transform: scale(0.98);
             background: #008f52;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
         }
 
         .footer-line {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #444;
-            letter-spacing: 5px;
+            margin-top: 25px;
+            font-size: 0.7rem;
+            color: #222;
+            letter-spacing: 4px;
+            opacity: 0.5;
+        }
+
+        /* MOBILE SPECIFIC TWEAK */
+        @media (max-height: 600px) {
+            .gate-card { padding: 20px; }
+            h1 { margin-bottom: 15px; }
+            p { margin-bottom: 20px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="gate-card">
-        <h1>Access Protocol</h1>
+        <h1>PROTOCOL</h1>
         
         <p>To enter the Vault and secure your unique Mochearn ID, a <span class="highlight">one-time activation payment</span> is required. This grants you full access to the Marketplace, high-commission structures, and the Command Center.</p>
 
         <p>Once payment is validated, your credentials will be <span class="highlight">immediately activated.</span></p>
 
-        <a href="https://your-payment-gateway.com" class="btn-activate">Register Now 🚀</a>
+        <a href="https://your-payment-gateway.com" class="btn-activate">REGISTER NOW 🚀</a>
 
-        <div class="footer-line">- - - - - - - - - - - - - -</div>
+        <div class="footer-line">. . . . . . . . . . . . . . . .</div>
     </div>
 
 </body>
-        </html>
+    </html>
