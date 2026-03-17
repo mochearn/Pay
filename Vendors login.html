@@ -173,5 +173,51 @@
             }
         }
     </script>
+    <div class="login-extras">
+    <label class="remember-me">
+        <input type="checkbox"> 
+        <span>Remember me</span>
+    </label>
+    <a href="#" class="forgot-link">Forgot Password?</a>
+</div>
+
+<style>
+    /* Add these styles to your <style> block */
+    .login-extras {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 25px; /* Creates space before the Login button */
+        width: 100%;
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: #666;
+        cursor: pointer;
+    }
+
+    .remember-me input {
+        width: 16px;
+        height: 16px;
+        accent-color: #00ff88; /* Matches your Mochearn Green */
+    }
+
+    .forgot-link {
+        font-size: 0.85rem;
+        color: #666;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .forgot-link:hover {
+        color: #00ff88;
+        text-decoration: underline;
+    }
+</style>
 </body>
     </html>
