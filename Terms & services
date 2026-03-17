@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | Mochearn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050a18;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* HERO SECTION (Matches your Screenshot) */
+        .terms-hero {
+            padding: 120px 20px 60px 20px;
+            text-align: center;
+            background-color: #050a18;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 4rem; 
+            color: #00ff88;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #ffffff;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* STORY BOOK CONTENT (Subheadings and Text) */
+        .terms-body {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 30px 100px 30px;
+        }
+
+        .rule-subheading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #00ff88;
+            margin-top: 50px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .rule-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ffffff;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            text-align: left; /* Kept clean for easy reading */
+        }
+
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050a18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00ff88;
+            border-radius: 10px;
+        }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .rule-subheading { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="terms-hero">
+        <h1 class="hero-title">TERMS &<br>CONDITIONS</h1>
+        <p class="hero-subtitle">Direct Access to Official Mochearn Rules</p>
+    </header>
+
+    <main class="terms-body">
+        
+        <h2 class="rule-subheading">01. THE SUPREMACY OF MOCHEARN</h2>
+        <p class="rule-text">
+            By accessing this platform, you acknowledge that Mochearn is a proprietary ecosystem. 
+            The rules laid down here are final and binding. We do not negotiate on our standards. 
+            Every interaction within this system is governed by our official protocols.
+        </p>
+
+        <h2 class="rule-subheading">02. USER CONDUCT & ELIGIBILITY</h2>
+        <p class="rule-text">
+            Mochearn is built for serious digital entrepreneurs and action-takers. Any attempt 
+            to bypass security, manipulate system logic, or engage in fraudulent activities 
+            will result in an immediate and unpitying permanent ban from the entire ecosystem.
+        </p>
+
+        <h2 class="rule-subheading">03. VENDOR & CATALYST MANDATE</h2>
+        <p class="rule-text">
+            All Vendors and Catalysts are representatives of the Mochearn brand. You are 
+            required to maintain professional integrity. Failure to deliver value or 
+            misrepresenting the Mochearn system will lead to an official resolution of your access.
+        </p>
+
+        <h2 class="rule-subheading">04. SYSTEM UPDATES</h2>
+        <p class="rule-text">
+            Mochearn is a living force. We reserve the right to add or modify these rules 
+            at any time. It is your responsibility to stay updated. As we expand the 
+            blueprint, new rules will be added here to protect our community and assets.
+        </p>
+
+    </main>
+
+</body>
+</html>
