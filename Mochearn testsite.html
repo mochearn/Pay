@@ -156,26 +156,48 @@
         }
         applyRank(15); // Testing Rank 1
 
-        // C. RESTORED MESSAGE SCANNER (7 SECONDS)
-        const reports = [
-            "Check the command center for new tasks. 🎁",
-            "You are 5 sales away from ELITE status! 🚀",
-            "Your empire is growing—12% increase today. 📈",
-            "Earnings are ready for verification. 💰"
-        ];
-        
-        let reportIndex = 0;
+<script>
+    // 1. TRIPLE-THREAT WELCOME LOGIC (Randomizes on every login/refresh)
+    const welcomeGreetings = [
+        "WELCOME BACK,",
+        "SALUTE,",
+        "READY TO EARN,"
+    ];
+    
+    // Pick one at random
+    const randomGreet = welcomeGreetings[Math.floor(Math.random() * welcomeGreetings.length)];
+    
+    // Inject it into the H1 (Keeping the Blue Name)
+    document.getElementById('greet').innerHTML = `${randomGreet} <span class="user-name">BETHUEL</span>`;
+
+
+    // 2. THE MESSAGE LOOP ENGINE (Cycles every 7 seconds)
+    const reports = [
+        "Check the command center for new tasks. 🎁",
+        "Your empire is growing—12% increase today. 📈",
+        "Earnings are ready for verification. 💰",
+        "Security protocols are active and nominal. 🛡️"
+    ];
+    
+    let reportIndex = 0;
+    const reportElement = document.getElementById('status-report');
+
+    function startMessageLoop() {
+        // Change message every 7000ms (7 seconds)
         setInterval(() => {
-            const msg = document.getElementById('status-report');
-            msg.style.opacity = 0;
+            reportElement.style.opacity = 0; // Smooth Fade Out
+            
             setTimeout(() => {
                 reportIndex = (reportIndex + 1) % reports.length;
-                msg.innerText = reports[reportIndex];
-                msg.style.opacity = 1;
-            }, 500);
+                reportElement.innerText = reports[reportIndex];
+                reportElement.style.opacity = 1; // Smooth Fade In
+            }, 500); // Wait 0.5s for the fade before changing text
         }, 7000);
+    }
 
-    </script>
+    // Start the loop immediately when page loads
+    window.onload = startMessageLoop;
+</script>
  <style>
     #intel-hub-container { width: 100%; display: flex; justify-content: center; padding-top: 10px; }
 
