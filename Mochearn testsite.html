@@ -143,5 +143,106 @@
         }, 7000);
 
     </script>
+    <style>
+    #intel-hub { 
+        max-width: 320px; /* Small and centered, as requested */
+        margin: 15px auto; 
+        background: #ffffff; 
+        border: 1.2px solid #f0f0f0; 
+        border-radius: 10px; 
+        padding: 10px 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04); 
+        display: flex; 
+        align-items: center; 
+        gap: 10px; 
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Space-Shift: Removes the box so content below slides up */
+    .hub-hidden { 
+        display: none !important; 
+    } 
+
+    .hub-content { 
+        flex-grow: 1; 
+        font-size: 0.78rem; 
+        font-weight: 600; 
+        color: #555; 
+        line-height: 1.4;
+    }
+
+    .audio-icon { 
+        cursor: pointer; 
+        font-size: 1.1rem; 
+        display: none; /* Only shows if audio exists */
+    }
+
+    .close-hub-btn { 
+        cursor: pointer; 
+        font-size: 1.3rem; 
+        color: #ddd; 
+        line-height: 1; 
+        font-weight: bold;
+        display: none; /* Only shows when box is empty */
+        transition: 0.2s;
+    }
+
+    .close-hub-btn:hover { color: #ff5555; }
+
+    /* Pulse for urgent broadcasts */
+    .pulse-border { border-color: #00ff88 !important; animation: hubGlow 2s infinite; }
+    @keyframes hubGlow { 50% { box-shadow: 0 0 10px rgba(0,255,136,0.2); } }
+</style>
+
+<div id="intel-hub">
+    <div class="audio-icon" id="hubAudio">🔊</div>
+    
+    <div class="hub-content" id="hubMessageText">
+        Mochearn Systems: All Engines Nominal.
+    </div>
+    
+    <div class="close-hub-btn" id="hubClose" onclick="dismissIntelligenceHub()">×</div>
+</div>
+
+<script>
+    /**
+     * CORE BROADCAST LOGIC
+     * This function handles everything: Timers, Audio, and Content.
+     */
+    function setIntelligenceHub(text, hasAudio = false, isUrgent = false) {
+        const hub = document.getElementById('intel-hub');
+        const msg = document.getElementById('hubMessageText');
+        const xBtn = document.getElementById('hubClose');
+        const audio = document.getElementById('hubAudio');
+
+        // 1. Force box back into view if a message exists
+        hub.classList.remove('hub-hidden');
+        msg.innerText = text;
+
+        // 2. Logic for the "X" and the Audio Icon
+        if (text === "Mochearn Systems: All Engines Nominal.") {
+            xBtn.style.display = "block"; // Allow dismissal when empty
+            audio.style.display = "none";
+            hub.classList.remove('pulse-border');
+        } else {
+            xBtn.style.display = "none"; // Lock the box if a message/update is active
+            audio.style.display = hasAudio ? "block" : "none";
+            if(isUrgent) hub.classList.add('pulse-border');
+        }
+    }
+
+    function dismissIntelligenceHub() {
+        document.getElementById('intel-hub').classList.add('hub-hidden');
+    }
+
+    // INITIAL LOAD: Box starts in "Nominal" mode with X visible
+    setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
+
+    // --- TEST AREA ---
+    // You can test the auto-reappearance by typing this in your console:
+    // setIntelligenceHub("NEW BROADCAST: Check your wallet! 💰", true, true);
+</script>
 </body>
                         </html>
