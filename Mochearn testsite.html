@@ -65,15 +65,19 @@
             font-size: 0.9rem; color: #888; margin-top: 10px; 
             transition: opacity 0.5s; 
         }
-/* SURGICAL FIX: Welcome Container with Fixed Height */
+/* CORRECTED VERSION: BLUE COLOR + ANIMATIONS RESTORED */
+.user-name { 
+    color: #0088cc !important; /* Mochearn Blue restored */
+    font-weight: 800;
+}
+
 .welcome-stack { 
     padding: 35px 25px 0; 
     text-align: left; 
-    min-height: 110px; /* Adjust this number to fit 2-3 lines of your text */
+    min-height: 115px; /* Keeps the gap solid so the box doesn't jump */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow: hidden; /* Prevents text from leaking out */
 }
 
 .welcome-stack h1 { 
@@ -81,14 +85,22 @@
     font-size: 1.6rem; 
     text-transform: uppercase; 
     margin-bottom: 5px;
+    /* Entrance Animation */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideUpFade 0.8s forwards; 
 }
 
-/* This is the text that was shifting the box */
+@keyframes slideUpFade {
+    to { opacity: 1; transform: translateY(0); }
+}
+
 #status-report { 
-    font-size: 0.85rem; 
+    font-size: 0.82rem; 
     color: #888; 
     line-height: 1.4;
     margin: 0;
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for the loop */
         }
     </style>
 </head>
@@ -265,5 +277,31 @@
     // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
+    <script>
+    // THE MESSAGE LOOP ENGINE
+    const reports = [
+        "Check the command center for new tasks. 🎁",
+        "Your empire is growing—12% increase today. 📈",
+        "Earnings are ready for verification. 💰",
+        "Security protocols are active and nominal. 🛡️"
+    ];
+    
+    let reportIndex = 0;
+    const reportElement = document.getElementById('status-report');
+
+    function startMessageLoop() {
+        setInterval(() => {
+            reportElement.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                reportIndex = (reportIndex + 1) % reports.length;
+                reportElement.innerText = reports[reportIndex];
+                reportElement.style.opacity = 1; // Fade in
+            }, 500); // Half-second for the swap
+        }, 7000); // 7 Seconds per message
+    }
+
+    // Start the loop immediately
+    startMessageLoop();
+    </script>
 </body>
                         </html>
