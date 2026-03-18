@@ -325,31 +325,8 @@
     // Start the loop immediately
     startMessageLoop();
     </script>
-    <style>
-    .link-station {
-        max-width: 600px;
-        margin: 10px auto 20px;
-        padding: 0 20px;
-        font-family: 'Inter', sans-serif;
-    }
-
-    .link-card {
-        background: rgba(39, 174, 96, 0.4); /* Mochearn Green with Opacity */
-        border: 1.5px solid rgba(39, 174, 96, 0.2);
-        border-radius: 16px;
-        padding: 20px;
-    }
-
-    .link-label {
-        font-size: 0.65rem;
-        font-weight: 800;
-        color: #1a5e3a;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 10px;
-        display: block;
-    }
-
+<style>
+    /* ... Keep your other styles, just update these two ... */
     .link-display-area {
         background: #fff;
         border-radius: 10px;
@@ -359,6 +336,7 @@
         justify-content: space-between;
         margin-bottom: 15px;
         border: 1px solid rgba(0,0,0,0.05);
+        gap: 10px;
     }
 
     .full-url {
@@ -366,60 +344,26 @@
         color: #333;
         font-weight: 600;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-right: 10px;
+        /* FIXED: This allows sliding left/right */
+        overflow-x: auto; 
+        flex-grow: 1;
+        scrollbar-width: none; /* Hides scrollbar on Firefox */
     }
+    .full-url::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
 
-    .copy-trigger {
-        background: #0088cc;
-        color: #fff;
-        font-size: 0.7rem;
-        font-weight: 700;
-        padding: 6px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        border: none;
-        white-space: nowrap;
-    }
-
-    .share-group {
-        display: flex;
-        gap: 10px;
-    }
-
-    .share-btn {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 10px;
-        border-radius: 8px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .wa-btn { background: #25D366; color: #fff; }
-    .tg-btn { background: #0088cc; color: #fff; }
-
-    /* The Formal Notification */
     #copy-toast {
         display: none;
         position: fixed;
-        bottom: 30px;
+        bottom: 50px;
         left: 50%;
         transform: translateX(-50%);
-        background: #333;
+        background: rgba(0, 0, 0, 0.8);
         color: #fff;
-        padding: 10px 20px;
-        border-radius: 30px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        z-index: 50000;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        z-index: 99999;
+        font-family: 'Inter', sans-serif;
     }
 </style>
 
@@ -433,8 +377,8 @@
         </div>
 
         <div class="share-group">
-            <a id="wa-share" href="#" class="share-btn wa-btn">WhatsApp</a>
-            <a id="tg-share" href="#" class="share-btn tg-btn">Telegram</a>
+            <a id="wa-share" target="_blank" class="share-btn wa-btn">WhatsApp</a>
+            <a id="tg-share" target="_blank" class="share-btn tg-btn">Telegram</a>
         </div>
     </div>
 </div>
@@ -442,24 +386,48 @@
 <div id="copy-toast">Link copied to clipboard</div>
 
 <script>
-    // In a real system, this comes from your database
+    // In your real system, this will be dynamic
     const m_username = "CHIDERA24"; 
     const m_base_url = "https://mochearn.com/register?ref=";
     const m_final_link = m_base_url + m_username;
 
-    // Set link text on load
+    // Initialize values
     document.getElementById('m-link-text').innerText = m_final_link;
-    document.getElementById('wa-share').href = "https://wa.me/?text=" + encodeURIComponent("Join Mochearn and start earning with the J-System! " + m_final_link);
-    document.getElementById('tg-share').href = "https://t.me/share/url?url=" + encodeURIComponent(m_final_link) + "&text=" + encodeURIComponent("Join Mochearn and start earning!");
+    
+    // Social Sharing Logic
+    const shareMsg = encodeURIComponent("Join Mochearn and start earning with the J-System! " + m_final_link);
+    document.getElementById('wa-share').href = "https://wa.me/?text=" + shareMsg;
+    document.getElementById('tg-share').href = "https://t.me/share/url?url=" + encodeURIComponent(m_final_link) + "&text=" + encodeURIComponent("Join Mochearn!");
 
+    // FIXED COPY FUNCTION
     function copyMochearnLink() {
-        navigator.clipboard.writeText(m_final_link).then(() => {
-            const toast = document.getElementById('copy-toast');
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2500);
-        });
+        const textToCopy = document.getElementById('m-link-text').innerText;
+        
+        // Modern approach
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => showToast());
+        } else {
+            // Backup for older mobile browsers
+            let textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Unable to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
     }
-</script>
+
+    function showToast() {
+        const toast = document.getElementById('copy-toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    }
+    </script>
 <style>
     .mochearn-global { font-family: 'Inter', sans-serif; }
     .currency-control-bar { max-width: 600px; margin: 15px auto 5px; padding: 0 25px; display: flex; justify-content: flex-end; }
