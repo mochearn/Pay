@@ -3,106 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalyst Dashboard | Mochearn</title>
+    <title>Mochearn Catalyst Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #ffffff; color: #333; }
+        body { background-color: #ffffff; color: #333; overflow-x: hidden; }
 
-        /* --- THE TOP BAR (RECONSTRUCTED) --- */
+        /* --- 1. THE STRAIGHT-LINE HEADER --- */
         .header-main {
-            display: flex; justify-content: space-between; align-items: flex-end; /* Aligns items to the bottom line */
-            padding: 15px 20px 8px; /* Bottom padding keeps text near the line */
-            border-bottom: 1.5px solid #eee; 
-            background: #fff;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding: 15px 25px 10px; border-bottom: 1.5px solid #eee;
+            position: relative;
         }
 
-        .left-wing { display: flex; align-items: flex-end; gap: 10px; }
-        .hamburger-icon { padding-bottom: 2px; cursor: pointer; }
-        .mochearn-logo { width: 38px; height: 38px; margin-bottom: -4px; }
-        .brand-text { 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 1.1rem; 
-            text-transform: uppercase; 
-            color: #000;
-            margin-bottom: -2px; /* Rests it on the line */
+        .brand-block { display: flex; flex-direction: column; align-items: flex-start; }
+        .mochearn-logo { width: 40px; height: 40px; margin-bottom: 5px; margin-left: 5px; } /* Sits high on top */
+        
+        .title-row { display: flex; align-items: center; gap: 10px; }
+        .hamburger { cursor: pointer; padding-bottom: 2px; }
+        .dashboard-title { 
+            font-family: 'Montserrat', sans-serif; font-size: 1.1rem; 
+            text-transform: uppercase; white-space: nowrap; /* Forces straight line */
+            letter-spacing: 0.5px;
         }
 
-        /* NEW RANK POSITION: Far Right of the Top Bar */
-        .right-wing-rank { 
-            display: flex; flex-direction: column; align-items: center; 
-            margin-bottom: -5px; 
+        /* --- 2. THE EXPENSIVE RANK (RIGHT SIDE) --- */
+        .rank-wing { display: flex; flex-direction: column; align-items: center; margin-bottom: -5px; }
+        
+        .rank-crest { 
+            width: 55px; height: 55px; 
+            animation: rankPulse 2s infinite ease-in-out; /* Live Animation */
         }
-        #topRankIcon { width: 45px; height: 45px; } /* Smaller size to fit the top bar */
-        .rank-tag { 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 0.5rem; color: #00ff88; 
-            font-weight: 900; margin-top: -8px;
+        .rank-word { 
+            font-family: 'Montserrat', sans-serif; font-size: 0.6rem; 
+            color: #00ff88; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 2px; margin-top: -10px;
         }
 
-        /* --- WELCOME AREA (CLEANED) --- */
-        .welcome-section { padding: 40px 20px; }
-        .welcome-section h1 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; text-transform: uppercase; }
-        .user-highlight { color: #0088cc; }
-        #auto-messenger { font-size: 0.9rem; color: #888; margin-top: 10px; transition: 0.5s; }
+        @keyframes rankPulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- 3. THE WELCOME CENTER --- */
+        .welcome-area { padding: 45px 25px; }
+        
+        .welcome-msg { 
+            font-family: 'Montserrat', sans-serif; font-size: 1.8rem; 
+            text-transform: uppercase; opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 0.8s forwards; /* Entrance Animation */
+        }
+        .user-blue { color: #0088cc; }
+
+        @keyframes slideUpFade {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #status-report { 
+            font-size: 0.9rem; color: #888; margin-top: 10px; 
+            transition: opacity 0.5s; 
+        }
 
     </style>
 </head>
 <body>
 
     <header class="header-main">
-        <div class="left-wing">
-            <div class="hamburger-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </div>
+        <div class="brand-block">
             <img src="mochearn-logo.png" alt="Logo" class="mochearn-logo">
-            <span class="brand-text">Catalyst Dashboard</span>
+            <div class="title-row">
+                <div class="hamburger">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </div>
+                <span class="dashboard-title">Catalyst Dashboard</span>
+            </div>
         </div>
 
-        <div class="right-wing-rank">
-            <div id="topRankIcon">
-                <svg viewBox="0 0 100 100"><path d="M50 5 L90 20 L90 60 L50 95 L10 60 L10 20 Z" fill="none" stroke="#ddd" stroke-width="4"></path></svg>
+        <div class="rank-wing">
+            <div class="rank-crest" id="rankIcon">
+                <svg viewBox="0 0 100 100"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="#ddd" stroke-width="4"></path></svg>
             </div>
-            <span class="rank-tag" id="rankTitle">INITIATE</span>
+            <span class="rank-word" id="rankLabel">PREMIER</span>
         </div>
     </header>
 
-    <div class="welcome-section">
-        <h1>WELCOME BACK, <span class="user-highlight">BETHUEL</span></h1>
-        <p id="auto-messenger">Scanning your empire...</p>
+    <div class="welcome-area">
+        <h1 class="welcome-msg" id="loginGreeting">
+            WELCOME BACK, <span class="user-blue">BETHUEL</span>
+        </h1>
+        <p id="status-report">Initializing secure connection...</p>
     </div>
 
     <script>
-        // 1. THE 7-SECOND AUTOMATIC SCANNER
-        const messages = [
-            "Let's build your empire today, Bethuel.",
-            "You are 5 sales away from RISING STAR! 🚀",
-            "Your weekly conversion is up 12% 📊",
-            "Check the command center for new tasks. 🎁"
+        // A. TRIPLE-THREAT WELCOME LOGIC
+        const greetings = [
+            'WELCOME BACK, <span class="user-blue">BETHUEL</span>',
+            'SALUTE, <span class="user-blue">BETHUEL</span>',
+            'READY TO EARN, <span class="user-blue">BETHUEL</span>'
         ];
         
-        let i = 0;
+        // Randomly pick one on every login/refresh
+        document.getElementById('loginGreeting').innerHTML = greetings[Math.floor(Math.random() * greetings.length)];
+
+        // B. EXPENSIVE ONE-WORD RANK ENGINE
+        function applyRank(sales) {
+            const icon = document.getElementById('rankIcon');
+            const label = document.getElementById('rankLabel');
+            
+            if (sales < 20) {
+                label.innerText = 'PREMIER';
+                icon.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="#ddd" stroke-width="5"></path></svg>`;
+            } else if (sales < 50) {
+                label.innerText = 'ELITE';
+                icon.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="#0088cc" stroke-width="6"></path></svg>`;
+            }
+            // Add other ranks (VANGUARD, EXALTED, LEGEND) here
+        }
+        applyRank(15); // Testing Rank 1
+
+        // C. RESTORED MESSAGE SCANNER (7 SECONDS)
+        const reports = [
+            "Check the command center for new tasks. 🎁",
+            "You are 5 sales away from ELITE status! 🚀",
+            "Your empire is growing—12% increase today. 📈",
+            "Earnings are ready for verification. 💰"
+        ];
+        
+        let reportIndex = 0;
         setInterval(() => {
-            const el = document.getElementById('auto-messenger');
-            el.style.opacity = 0;
+            const msg = document.getElementById('status-report');
+            msg.style.opacity = 0;
             setTimeout(() => {
-                i = (i + 1) % messages.length;
-                el.innerText = messages[i];
-                el.style.opacity = 1;
+                reportIndex = (reportIndex + 1) % reports.length;
+                msg.innerText = reports[reportIndex];
+                msg.style.opacity = 1;
             }, 500);
         }, 7000);
 
-        // 2. RANK LOGIC (DESIGNED SVG)
-        function setTopRank(sales) {
-            const container = document.getElementById('topRankIcon');
-            const title = document.getElementById('rankTitle');
-            if (sales < 20) {
-                container.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 20 L90 60 L50 95 L10 60 L10 20 Z" fill="none" stroke="#ddd" stroke-width="6"></path></svg>`;
-                title.innerText = 'INITIATE';
-            }
-            // Add other SVG designs for 50, 80, 120 here...
-        }
-        setTopRank(15);
     </script>
 </body>
-                                                                                                                                                       </html>
+                        </html>
