@@ -325,7 +325,100 @@
     // Start the loop immediately
     startMessageLoop();
     </script>
+<style>
+    .mochearn-global { font-family: 'Inter', sans-serif; }
+    .currency-control-bar { max-width: 600px; margin: 15px auto 5px; padding: 0 25px; display: flex; justify-content: flex-end; }
+    .selector-trigger { display: flex; align-items: center; gap: 8px; background: #fcfcfc; padding: 8px 16px; border-radius: 30px; border: 1.5px solid #eee; cursor: pointer; }
+    .selector-label { font-size: 0.7rem; font-weight: 800; color: #333; }
+    
+    #global-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 30000; align-items: flex-end; }
+    .drawer-content { background: #fff; width: 100%; border-radius: 24px 24px 0 0; padding: 20px; height: 75vh; display: flex; flex-direction: column; animation: m_slideUp 0.4s ease-out; }
+    @keyframes m_slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
+    #decision-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 40000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+    .decision-card { background: #fff; width: 85%; max-width: 320px; padding: 30px; border-radius: 20px; text-align: center; }
+</style>
+
+<div class="currency-control-bar mochearn-global">
+    <div class="selector-trigger" onclick="m_openDrawer()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0088cc" stroke-width="3"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        <span class="selector-label" id="current-display">NGN (₦)</span>
+    </div>
 </div>
+
+<div id="global-drawer" onclick="m_closeDrawer()">
+    <div class="drawer-content" onclick="event.stopPropagation()"><h2 style="text-align:center; margin-bottom:20px; font-size:1.1rem;">Global Vault Currency</h2><div id="m_country_list" style="overflow-y:auto;"></div></div>
+</div>
+
+<div id="decision-popup">
+    <div class="decision-card">
+        <h3 style="margin-bottom:15px;">Vault Confirmation</h3><p id="decision-text" style="font-size:0.85rem; color:#666; margin-bottom:25px;"></p>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <button style="background:#0088cc; color:#fff; padding:15px; border:none; border-radius:10px; font-weight:700;" onclick="m_save(true)">PERMANENT</button>
+            <button style="background:#f4f4f4; color:#333; padding:15px; border:none; border-radius:10px; font-weight:700;" onclick="m_save(false)">TEMPORARY</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const m_countries = [
+        {n: "Nigeria", c: "NGN", s: "₦", r: 1, f: "🇳🇬"},
+        {n: "USA", c: "USD", s: "$", r: 0.00067, f: "🇺🇸"},
+        {n: "UK", c: "GBP", s: "£", r: 0.00052, f: "🇬🇧"},
+        {n: "South Korea", c: "KRW", s: "₩", r: 0.89, f: "🇰🇷"},
+        {n: "Ghana", c: "GHS", s: "₵", r: 0.0084, f: "🇬🇭"},
+        {n: "Canada", c: "CAD", s: "$", r: 0.00091, f: "🇨🇦"},
+        {n: "Germany", c: "EUR", s: "€", r: 0.00061, f: "🇩🇪"}
+    ];
+    let m_active = { c: "NGN", s: "₦", r: 1 };
+    const m_raw = { e: 15500.85, te: 2400.30, b: 12000.45, w: 3500.40 };
+
+    function m_openDrawer() {
+        const list = document.getElementById('m_country_list');
+        list.innerHTML = m_countries.map(c => `<div class="country-item" onclick="m_prepare('${c.c}', '${c.s}', ${c.r}, '${c.n}')" style="display:flex; justify-content:space-between; padding:18px; border-bottom:1px solid #f8f8f8; cursor:pointer;"><span>${c.f} ${c.n}</span> <b>${c.c} (${c.s})</b></div>`).join('');
+        document.getElementById('global-drawer').style.display = 'flex';
+    }
+    function m_prepare(code, sym, rate, name) {
+        m_active = { c: code, s: sym, r: rate };
+        document.getElementById('decision-text').innerText = `Apply ${name} (${sym}) settings?`;
+        setTimeout(() => { const pop = document.getElementById('decision-popup'); pop.style.display = 'flex'; setTimeout(() => pop.style.opacity = '1', 10); }, 350);
+    }
+    function m_save(isPerm) {
+        m_update();
+        if(isPerm) { localStorage.setItem('m_perm_c', m_active.c); localStorage.setItem('m_perm_s', m_active.s); localStorage.setItem('m_perm_r', m_active.r); }
+        m_closeDrawer(); document.getElementById('decision-popup').style.display = 'none'; document.getElementById('decision-popup').style.opacity = '0';
+    }
+    function m_update() {
+        document.getElementById('current-display').innerText = `${m_active.c} (${m_active.s})`;
+        const s = m_active.s; const r = m_active.r;
+        if(document.getElementById('val-1')) document.getElementById('val-1').innerText = s + (m_raw.e * r).toFixed(2);
+        if(document.getElementById('val-2')) document.getElementById('val-2').innerText = s + (m_raw.te * r).toFixed(2);
+        if(document.getElementById('val-5')) document.getElementById('val-5').innerText = s + (m_raw.b * r).toFixed(2);
+        if(document.getElementById('val-6')) document.getElementById('val-6').innerText = s + (m_raw.w * r).toFixed(2);
+    }
+    function m_closeDrawer() { document.getElementById('global-drawer').style.display = 'none'; }
+    window.addEventListener('load', () => {
+        const c = localStorage.getItem('m_perm_c');
+        if(c) { m_active = { c: c, s: localStorage.getItem('m_perm_s'), r: parseFloat(localStorage.getItem('m_perm_r')) }; m_update(); }
+    });
+</script>
+    <style>
+    .stats-container { padding: 15px 20px; max-width: 600px; margin: 0 auto; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-card { background: #fff; padding: 20px 15px; border-radius: 12px; border: 1.2px solid #f2f2f2; }
+    .stat-label { font-size: 0.6rem; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 8px; }
+    .stat-value { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: #1a1a1a; font-weight: 800; }
+</style>
+
+<div class="stats-container">
+    <div class="stats-grid">
+        <div class="stat-card"><p class="stat-label">Total Earnings</p><p class="stat-value" id="val-1">₦15500.85</p></div>
+        <div class="stat-card"><p class="stat-label">Today's Earnings</p><p class="stat-value" id="val-2">₦2400.30</p></div>
+        <div class="stat-card"><p class="stat-label">Total Sales</p><p class="stat-value" id="val-3">12</p></div>
+        <div class="stat-card"><p class="stat-label">Today's Sales</p><p class="stat-value" id="val-4">2</p></div>
+        <div class="stat-card" style="border-color: #0088cc33;"><p class="stat-label" style="color:#0088cc;">Current Balance</p><p class="stat-value" id="val-5">₦12000.45</p></div>
+        <div class="stat-card"><p class="stat-label">Withdrawn</p><p class="stat-value" id="val-6" style="color:#ff4444;">₦3500.40</p></div>
+    </div>
+                                                                                                                         </div>
 </body>
                         </html>
