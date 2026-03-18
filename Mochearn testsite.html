@@ -3,259 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn Catalyst Dashboard | Elite Top-Panel</title>
+    <title>Catalyst Dashboard | Mochearn</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #ffffff; color: #333; overflow-x: hidden; }
+        body { background-color: #ffffff; color: #333; }
 
-        /* --- 1. TOP NAVIGATION & MENU --- */
-        .top-nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 25px; border-bottom: 1px solid #f0f0f0; background: #fff;
-            position: relative; z-index: 1000;
+        /* --- THE TOP BAR (RECONSTRUCTED) --- */
+        .header-main {
+            display: flex; justify-content: space-between; align-items: flex-end; /* Aligns items to the bottom line */
+            padding: 15px 20px 8px; /* Bottom padding keeps text near the line */
+            border-bottom: 1.5px solid #eee; 
+            background: #fff;
         }
 
-        /* Brand Wing (Top Left) */
-        .brand-gate { display: flex; align-items: center; gap: 12px; }
-        
-        .menu-btn { cursor: pointer; padding: 5px; border-radius: 8px; transition: 0.2s; }
-        .menu-btn:hover { background: #f0f0f0; }
-
-        .mochearn-logo { 
-            width: 40px; height: 40px; 
-            object-fit: contain;
-            margin-top: -10px; /* Moves it high, as requested */
-        }
-        .dashboard-title { 
+        .left-wing { display: flex; align-items: flex-end; gap: 10px; }
+        .hamburger-icon { padding-bottom: 2px; cursor: pointer; }
+        .mochearn-logo { width: 38px; height: 38px; margin-bottom: -4px; }
+        .brand-text { 
             font-family: 'Montserrat', sans-serif; 
-            font-size: 1.1rem; /* Big, as requested */
-            text-transform: uppercase; color: #000;
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+            color: #000;
+            margin-bottom: -2px; /* Rests it on the line */
         }
 
-        /* CHROME-STYLE MENU (Dropdown) */
-        .chrome-drop {
-            position: absolute; top: 65px; left: 15px; width: 220px;
-            background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-            border: 1px solid #f0f0f0;
-            display: none; flex-direction: column; padding: 10px; z-index: 2000;
+        /* NEW RANK POSITION: Far Right of the Top Bar */
+        .right-wing-rank { 
+            display: flex; flex-direction: column; align-items: center; 
+            margin-bottom: -5px; 
         }
-        .chrome-drop.open { display: flex; }
-        .chrome-item { 
-            padding: 12px; display: flex; align-items: center; gap: 12px; 
-            text-decoration: none; color: #333; font-size: 0.9rem; border-radius: 8px;
-            transition: 0.2s;
-        }
-        .chrome-item:hover { background: #f5f5f5; }
-        .chrome-item svg { width: 18px; height: 18px; stroke: #333; stroke-width: 2; fill: none; }
-
-        /* Control Wing (Middle/Right) */
-        .control-wing { display: flex; gap: 30px; align-items: center; }
-        
-        .nav-link { text-align: center; text-decoration: none; color: #000; transition: 0.3s; position: relative; }
-        .nav-link svg { width: 20px; height: 20px; display: block; margin: 0 auto 3px; stroke: #000; fill: none; stroke-width: 2.5; }
-        .nav-link span { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .nav-link:hover { color: #0088cc; } /* Light Blue highlight */
-        .nav-link:hover svg { stroke: #0088cc; }
-
-        /* Profile Area (Far Right) */
-        .profile-btn { 
-            width: 42px; height: 42px; border-radius: 50%; 
-            border: 2px solid #00ff88; overflow: hidden;
-            cursor: pointer; box-shadow: 0 3px 6px rgba(0,255,136,0.15);
-        }
-        .profile-btn img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* --- 2. STATUS & RANK PANEL --- */
-        .status-panel { 
-            padding: 30px 25px 40px; 
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        /* Welcome Message (Left) */
-        .welcome-stack { margin-top: -15px; /* Takes welcome msg high, as requested */ }
-        .welcome-stack h1 { font-family: 'Montserrat', sans-serif; font-size: 1.7rem; text-transform: uppercase; color: #222; }
-        .user-name { color: #0088cc; } /* Light Blue */
-        
-        /* THE DYNAMIC AUTO-SCANNER MESSENGER */
-        #intelligent-messenger { 
-            font-size: 0.88rem; color: #777; margin-top: 5px; 
-            font-weight: 500; min-height: 1.2rem; transition: opacity 0.4s;
-        }
-
-        /* THE AWARD PRESTIGE CREST (Rank Icon) */
-        .award-crest { text-align: center; }
-        #prestigeIconContainer { width: 85px; height: 85px; display: block; margin: 0 auto; transition: 0.5s; }
-        .rank-label { 
+        #topRankIcon { width: 45px; height: 45px; } /* Smaller size to fit the top bar */
+        .rank-tag { 
             font-family: 'Montserrat', sans-serif; 
-            font-size: 0.65rem; color: #00ff88; /* Mochearn Green */
-            font-weight: 900; 
-            margin-top: -8px; /* Pulled closer, as requested */
-            display: block; text-transform: uppercase;
+            font-size: 0.5rem; color: #00ff88; 
+            font-weight: 900; margin-top: -8px;
         }
 
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 768px) {
-            .top-nav { padding: 10px 15px; }
-            .control-wing { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px; border-top: 1px solid #f0f0f0; justify-content: space-around; }
-            .status-panel { flex-direction: column; text-align: center; gap: 30px; }
-            .welcome-stack h1 { font-size: 1.4rem; }
-            .dashboard-title { font-size: 0.9rem; }
-            .award-crest { order: -1; } /* Moves Crest above Welcome on mobile */
-        }
+        /* --- WELCOME AREA (CLEANED) --- */
+        .welcome-section { padding: 40px 20px; }
+        .welcome-section h1 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; text-transform: uppercase; }
+        .user-highlight { color: #0088cc; }
+        #auto-messenger { font-size: 0.9rem; color: #888; margin-top: 10px; transition: 0.5s; }
+
     </style>
 </head>
 <body>
 
-    <nav class="top-nav">
-        
-        <div class="brand-gate">
-            <div class="menu-btn" onclick="toggleMenu()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    <header class="header-main">
+        <div class="left-wing">
+            <div class="hamburger-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </div>
             <img src="mochearn-logo.png" alt="Logo" class="mochearn-logo">
-            <span class="dashboard-title">Catalyst Dashboard</span>
+            <span class="brand-text">Catalyst Dashboard</span>
         </div>
 
-        <div class="control-wing">
-            <a href="#" class="nav-link">
-                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                <span>HOME</span>
-            </a>
-            <a href="#" class="nav-link">
-                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-                <span>EARNINGS</span>
-            </a>
-            <div class="profile-btn">
-                <img src="" id="displayProfile" alt="User Avatar">
+        <div class="right-wing-rank">
+            <div id="topRankIcon">
+                <svg viewBox="0 0 100 100"><path d="M50 5 L90 20 L90 60 L50 95 L10 60 L10 20 Z" fill="none" stroke="#ddd" stroke-width="4"></path></svg>
             </div>
+            <span class="rank-tag" id="rankTitle">INITIATE</span>
         </div>
+    </header>
 
-        <div class="chrome-drop" id="chromeMenu">
-            <a href="#" class="chrome-item">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                History
-            </a>
-            <a href="#" class="chrome-item">
-                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Downloads
-            </a>
-            <a href="#" class="chrome-item">
-                <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                Bookmarks
-            </a>
-            <hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 8px 0;">
-            <a href="#" class="chrome-item">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                Settings
-            </a>
-        </div>
-    </nav>
-
-    <div class="status-panel">
-        
-        <div class="welcome-stack">
-            <h1>WELCOME BACK, <span id="userName" class="user-name">BETHUEL</span></h1>
-            <p id="intelligent-messenger">Wait for it... the empire scanner is waking up.</p>
-        </div>
-
-        <div class="award-crest">
-            <div id="prestigeIconContainer">
-                <svg id="rank1" class="rank-svg active" viewBox="0 0 100 100"><path d="M50 5 L90 20 L90 60 L50 95 L10 60 L10 20 Z" fill="none" stroke="#ddd" stroke-width="3"></path><path d="M50 15 L80 26 L80 58 L50 85 L20 58 L20 26 Z" fill="none" stroke="#666" stroke-width="2"></path></svg>
-            </div>
-            <span class="rank-label" id="rankTitle">INITIATE CATALYST</span>
-        </div>
+    <div class="welcome-section">
+        <h1>WELCOME BACK, <span class="user-highlight">BETHUEL</span></h1>
+        <p id="auto-messenger">Scanning your empire...</p>
     </div>
 
     <script>
-        // A. THE PERMANENT AVATAR LOCK (GENDER)
-        function setPermAvatar(gender) {
-            const pic = document.getElementById('displayProfile');
-            pic.src = (gender === 'female') ? 'female-avatar.png' : 'male-avatar.png';
-        }
-        setPermAvatar('male'); // Linked to onboarding gender key
-
-        // B. THE INTELLIGENT MESSENGER (AUTO-SCAN 7 SECONDS)
-        // You will replace these messages with real dynamic data later.
-        const reports = [
-            "Let's build your empire today, Bethuel. 🏢",
-            "You have made 3 sales today. 17 away from your RISING STAR award! 🚀",
-            "Your weekly conversion rate is up 12%! 📊",
-            "Your network referrals just approved a ₦25,000 payout. 💸",
-            "A new daily task is waiting for you at the command center. 🎁"
+        // 1. THE 7-SECOND AUTOMATIC SCANNER
+        const messages = [
+            "Let's build your empire today, Bethuel.",
+            "You are 5 sales away from RISING STAR! 🚀",
+            "Your weekly conversion is up 12% 📊",
+            "Check the command center for new tasks. 🎁"
         ];
         
-        let reportIndex = 0;
+        let i = 0;
         setInterval(() => {
-            const messenger = document.getElementById('intelligent-messenger');
-            messenger.style.opacity = 0; // Fade out
+            const el = document.getElementById('auto-messenger');
+            el.style.opacity = 0;
             setTimeout(() => {
-                reportIndex = (reportIndex + 1) % reports.length;
-                messenger.innerText = reports[reportIndex];
-                messenger.style.opacity = 1; // Fade in
-            }, 400); // 0.4s fade animation
-        }, 7000); // 7 seconds cycle
+                i = (i + 1) % messages.length;
+                el.innerText = messages[i];
+                el.style.opacity = 1;
+            }, 500);
+        }, 7000);
 
-        // C. THE CHROME-STYLE MENU TOGGLE
-        function toggleMenu() {
-            document.getElementById('chromeMenu').classList.toggle('open');
-        }
-
-        // Close menu if user clicks outside
-        window.addEventListener('click', function(e) {
-            const menu = document.getElementById('chromeMenu');
-            const trigger = document.querySelector('.menu-btn');
-            if (!menu.contains(e.target) && !trigger.contains(e.target)) {
-                menu.classList.remove('open');
-            }
-        });
-
-
-        /* --- D. THE DYNAMIC ACHIEVEMENT CRESTS (Ranks 1-5 DESIGNED) --- */
-        // COPY THIS PART TO ADJUST YOUR MILESTONES
-        function updateUserRankBySales(salesCount) {
-            const container = document.getElementById('prestigeIconContainer');
+        // 2. RANK LOGIC (DESIGNED SVG)
+        function setTopRank(sales) {
+            const container = document.getElementById('topRankIcon');
             const title = document.getElementById('rankTitle');
-            
-            let svg = '';
-            let label = '';
-            
-            if (salesCount < 20) {
-                // RANK 1: Initiate Catalyst (0-19 Sales) | Minimal Shield 🛡️
-                svg = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 20 L90 60 L50 95 L10 60 L10 20 Z" fill="none" stroke="#ddd" stroke-width="3"></path><path d="M50 15 L80 26 L80 58 L50 85 L20 58 L20 26 Z" fill="none" stroke="#666" stroke-width="2"></path></svg>`;
-                label = 'INITIATE CATALYST';
+            if (sales < 20) {
+                container.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 20 L90 60 L50 95 L10 60 L10 20 Z" fill="none" stroke="#ddd" stroke-width="6"></path></svg>`;
+                title.innerText = 'INITIATE';
             }
-            else if (salesCount < 50) {
-                // RANK 2: Rising Star (20-49 Sales) | Blue Star Burst 🌟
-                svg = `<svg viewBox="0 0 100 100"><path d="M50 10 L61 40 L90 40 L70 60 L78 90 L50 75 L22 90 L30 60 L10 40 L39 40 Z" fill="none" stroke="#0088cc" stroke-width="3"></path><circle cx="50" cy="50" r="10" stroke="#ddd" fill="none" stroke-width="2"></circle></svg>`;
-                label = 'RISING STAR';
-            }
-            else if (salesCount < 80) {
-                // RANK 3: Elite Commander (50-79 Sales) | Green Hex Badge ⬢
-                svg = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" fill="none" stroke="#00ff88" stroke-width="3"></path><path d="M30 50 L45 65 L70 35" fill="none" stroke="#666" stroke-width="5" stroke-linecap="round"></path></svg>`;
-                label = 'ELITE COMMANDER';
-            }
-            else if (salesCount < 120) {
-                // RANK 4: Diamond Master (80-119 Sales) | Crystal Diamond 💎
-                svg = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 30 L80 95 L20 95 L10 30 Z" fill="none" stroke="#ddd" stroke-width="2"></path><path d="M50 15 L80 35 L70 85 L30 85 L20 35 Z" fill="none" stroke="#0088cc" stroke-width="3"></path><path d="M20 35 L80 35" stroke="#ddd" stroke-width="2"></path></svg>`;
-                label = 'DIAMOND MASTER';
-            }
-            else {
-                // RANK 5: Empire Legend (120+ Sales) | Black & Gold Crown 👑
-                svg = `<svg viewBox="0 0 100 100"><path d="M50 90 L90 90 L90 40 L75 60 L50 10 L25 60 L10 40 L10 90 Z" fill="none" stroke="#000" stroke-width="3"></path><circle cx="50" cy="15" r="5" fill="#cc8800"></circle><path d="M30 75 L70 75" stroke="#cc8800" stroke-width="3"></path></svg>`;
-                label = 'EMPIRE LEGEND';
-            }
-            
-            // Apply changes to the dashboard
-            container.innerHTML = svg;
-            title.innerText = label;
+            // Add other SVG designs for 50, 80, 120 here...
         }
-
-        // INITIALIZE THE SYSTEM (Connects to your real database sales count later)
-        // Try changing this number (e.g., 60, 100) to test the rank change!
-        updateUserRankBySales(15); 
-
+        setTopRank(15);
     </script>
 </body>
-    </html>
+                                                                                                                                                       </html>
