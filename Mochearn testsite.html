@@ -420,5 +420,82 @@
         <div class="stat-card"><p class="stat-label">Withdrawn</p><p class="stat-value" id="val-6" style="color:#ff4444;">₦3500.40</p></div>
     </div>
                                                                                                                          </div>
+
+<style>
+    .action-container {
+        padding: 0 20px 20px;
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        gap: 12px;
+    }
+
+    .action-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 12px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.2s;
+    }
+
+    .action-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Withdraw: Mochearn Blue Style */
+    .btn-withdraw {
+        background: #0088cc;
+        color: #fff;
+    }
+
+    /* Transfer: Clean Light Style */
+    .btn-transfer {
+        background: #f4f4f4;
+        color: #333;
+        border: 1.2px solid #eee;
+    }
+
+    /* Icon Styling */
+    .action-icon {
+        width: 18px;
+        height: 18px;
+    }
+</style>
+
+<div class="action-container">
+    <button class="action-btn btn-withdraw" onclick="handleWithdraw()">
+        <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+        Withdraw
+    </button>
+
+    <button class="action-btn btn-transfer" onclick="handleTransfer()">
+        <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+        </svg>
+        Transfer
+    </button>
+</div>
+
+<script>
+    function handleWithdraw() {
+        // We will build the Withdrawal Modal later
+        alert("Opening Mochearn Withdrawal Vault...");
+    }
+
+    function handleTransfer() {
+        // We will build the Transfer System later
+        alert("Initializing Peer-to-Peer Transfer...");
+    }
+</script>
 </body>
                         </html>
