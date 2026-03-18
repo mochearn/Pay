@@ -65,7 +65,31 @@
             font-size: 0.9rem; color: #888; margin-top: 10px; 
             transition: opacity 0.5s; 
         }
+/* SURGICAL FIX: Welcome Container with Fixed Height */
+.welcome-stack { 
+    padding: 35px 25px 0; 
+    text-align: left; 
+    min-height: 110px; /* Adjust this number to fit 2-3 lines of your text */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden; /* Prevents text from leaking out */
+}
 
+.welcome-stack h1 { 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 1.6rem; 
+    text-transform: uppercase; 
+    margin-bottom: 5px;
+}
+
+/* This is the text that was shifting the box */
+#status-report { 
+    font-size: 0.85rem; 
+    color: #888; 
+    line-height: 1.4;
+    margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -88,13 +112,10 @@
             <span class="rank-word" id="rankLabel">PREMIER</span>
         </div>
     </header>
-
-    <div class="welcome-area">
-        <h1 class="welcome-msg" id="loginGreeting">
-            WELCOME BACK, <span class="user-blue">BETHUEL</span>
-        </h1>
-        <p id="status-report">Initializing secure connection...</p>
-    </div>
+<div class="welcome-stack">
+    <h1 id="greet">WELCOME BACK, <span class="user-name">BETHUEL</span></h1>
+    <p id="status-report">Initializing secure connection...</p> 
+</div>
 
     <script>
         // A. TRIPLE-THREAT WELCOME LOGIC
