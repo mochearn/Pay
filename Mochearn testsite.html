@@ -143,105 +143,105 @@
         }, 7000);
 
     </script>
-    <style>
-    #intel-hub-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        /* This ensures the box stays a set distance from the top, regardless of text above */
-        padding-top: 10px; 
-    }
+ <style>
+    #intel-hub-container { width: 100%; display: flex; justify-content: center; padding-top: 10px; }
 
     #intel-hub { 
-        width: 90%;
-        max-width: 330px; 
-        /* Expensive Dark Theme: 80% Opacity */
-        background: rgba(18, 18, 18, 0.8); 
-        backdrop-filter: blur(5px); /* Adds a glass-like feel */
-        border: 1px solid rgba(255, 255, 255, 0.1); 
-        border-radius: 14px; 
-        
-        /* Increased Height but Elastic */
-        min-height: 55px; 
+        width: 90%; max-width: 330px; 
+        background: rgba(0, 0, 0, 0.1); /* 10% Opacity */
+        backdrop-filter: blur(3px);
+        border: 2px solid #000000; /* Solid Black Border */
+        border-radius: 12px; 
+        min-height: 60px; 
         padding: 12px 16px;
-        
-        display: flex; 
-        align-items: center; 
-        gap: 12px; 
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        display: flex; align-items: center; gap: 12px; 
+        position: relative;
     }
-
-    .hub-hidden { 
-        display: none !important; 
-    } 
 
     .hub-content { 
-        flex-grow: 1; 
-        font-size: 0.82rem; 
-        font-weight: 500; 
-        color: #ffffff; /* White text for the dark box */
-        line-height: 1.4;
-        word-wrap: break-word; /* Ensures long text expands the box */
-    }
-
-    .audio-icon { 
-        cursor: pointer; 
-        font-size: 1.2rem; 
-        display: none; 
-        filter: drop-shadow(0 0 5px rgba(0, 255, 136, 0.5));
+        flex-grow: 1; font-size: 0.8rem; font-weight: 500; 
+        color: #444444; /* Light Black / Grey Text */
+        line-height: 1.4; word-wrap: break-word; 
     }
 
     .close-hub-btn { 
-        cursor: pointer; 
-        font-size: 1.4rem; 
-        color: rgba(255, 255, 255, 0.4); 
-        line-height: 1; 
-        display: none;
+        cursor: pointer; font-size: 1.4rem; color: #000; 
+        display: none; font-weight: bold;
     }
 
-    .close-hub-btn:hover { color: #ff5555; }
+    /* THE COMPLEX POP-UP OVERLAY */
+    #hub-overlay {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center;
+    }
+    .pop-up-card {
+        background: #fff; width: 85%; max-width: 300px; padding: 25px; border-radius: 15px; text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .pop-up-card p { font-size: 0.75rem; color: #333; line-height: 1.6; margin-bottom: 20px; font-weight: 600; }
+    
+    .pop-btn-group { display: flex; flex-direction: column; gap: 8px; }
+    .pop-btn { 
+        padding: 8px; 
+        border-radius: 10%; /* 10% Curved edges as requested */
+        border: none; 
+        font-size: 0.7rem; 
+        font-weight: 700; 
+        text-transform: uppercase; 
+        cursor: pointer;
+        background: #e0e0e0; /* Light Grey */
+        color: #000; /* Black Text */
+        transition: background 0.2s;
+    }
+    .pop-btn:hover { background: #d0d0d0; }
 
-    /* The "Live" glow for broadcasts */
-    .urgent-glow { border: 1px solid #00ff88 !important; box-shadow: 0 0 15px rgba(0, 255, 136, 0.2); }
+    .hub-hidden { display: none !important; }
 </style>
 
 <div id="intel-hub-container">
     <div id="intel-hub">
-        <div class="audio-icon" id="hubAudio">🔊</div>
-        <div class="hub-content" id="hubMessageText">
-            Mochearn Systems: All Engines Nominal.
+        <div class="hub-content" id="hubMsg">Mochearn Systems: All Engines Nominal.</div>
+        <div class="close-hub-btn" id="hubX" onclick="showHubPopup()">×</div>
+    </div>
+</div>
+
+<div id="hub-overlay">
+    <div class="pop-up-card">
+        <p>
+            Acknowledge that the cessation of this interface is purely ephemeral. Upon the manifestation of a critical system synchronization or a top-tier administrative broadcast, the terminal will autonomously re-establish visibility protocols without further mandate. Proceed?
+        </p>
+        <div class="pop-btn-group">
+            <button class="pop-btn" onclick="confirmDismiss()">Agree and Dismiss</button>
+            <button class="pop-btn" onclick="closePopup()">Didn't Agree and Leave</button>
         </div>
-        <div class="close-hub-btn" id="hubClose" onclick="dismissIntelligenceHub()">×</div>
     </div>
 </div>
 
 <script>
-    function setIntelligenceHub(text, hasAudio = false, isUrgent = false) {
+    function setIntelligenceHub(text) {
         const hub = document.getElementById('intel-hub');
-        const msg = document.getElementById('hubMessageText');
-        const xBtn = document.getElementById('hubClose');
-        const audio = document.getElementById('hubAudio');
+        const msg = document.getElementById('hubMsg');
+        const xBtn = document.getElementById('hubX');
 
         hub.classList.remove('hub-hidden');
         msg.innerText = text;
 
         if (text === "Mochearn Systems: All Engines Nominal.") {
             xBtn.style.display = "block";
-            audio.style.display = "none";
-            hub.classList.remove('urgent-glow');
         } else {
             xBtn.style.display = "none";
-            audio.style.display = hasAudio ? "block" : "none";
-            if(isUrgent) hub.classList.add('urgent-glow');
         }
     }
 
-    function dismissIntelligenceHub() {
+    // POP-UP ACTIONS
+    function showHubPopup() { document.getElementById('hub-overlay').style.display = 'flex'; }
+    function closePopup() { document.getElementById('hub-overlay').style.display = 'none'; }
+    function confirmDismiss() {
+        closePopup();
         document.getElementById('intel-hub').classList.add('hub-hidden');
     }
 
-    // Default state
+    // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
 </body>
