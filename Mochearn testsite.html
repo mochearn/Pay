@@ -325,5 +325,99 @@
     // Start the loop immediately
     startMessageLoop();
     </script>
+    <style>
+    .stats-container {
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .stats-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 15px; 
+    }
+
+    .stat-card { 
+        background: #ffffff; 
+        padding: 18px 15px; 
+        border-radius: 12px; 
+        border: 1.2px solid #f2f2f2; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        transition: transform 0.2s ease;
+    }
+
+    .stat-card:active { transform: scale(0.97); } /* Feel like a real button when tapped */
+
+    .stat-label { 
+        font-size: 0.65rem; 
+        font-weight: 700; 
+        color: #aaaaaa; 
+        text-transform: uppercase; 
+        letter-spacing: 0.8px; 
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+    }
+
+    .stat-value { 
+        font-family: 'Montserrat', sans-serif; 
+        font-size: 1.15rem; 
+        color: #1a1a1a; 
+        font-weight: 800;
+    }
+
+    /* The Live Pulse Dot */
+    .pulse-dot {
+        height: 6px;
+        width: 6px;
+        background-color: #00ff88;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 6px;
+        box-shadow: 0 0 8px #00ff88;
+        animation: pulse-green 1.5s infinite;
+    }
+
+    @keyframes pulse-green {
+        0% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(1.2); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+</style>
+
+<div class="stats-container">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p class="stat-label">Total Earnings</p>
+            <p class="stat-value">₦0.00</p>
+        </div>
+
+        <div class="stat-card">
+            <p class="stat-label"><span class="pulse-dot"></span>Today's Earnings</p>
+            <p class="stat-value">₦0.00</p>
+        </div>
+
+        <div class="stat-card">
+            <p class="stat-label">Total Sales</p>
+            <p class="stat-value">0</p>
+        </div>
+
+        <div class="stat-card">
+            <p class="stat-label"><span class="pulse-dot"></span>Today's Sales</p>
+            <p class="stat-value">0</p>
+        </div>
+
+        <div class="stat-card" style="border-color: #0088cc22;">
+            <p class="stat-label" style="color: #0088cc;">Current Balance</p>
+            <p class="stat-value">₦0.00</p>
+        </div>
+
+        <div class="stat-card">
+            <p class="stat-label">Withdrawn</p>
+            <p class="stat-value" style="color: #ff4444;">₦0.00</p>
+        </div>
+    </div>
+</div>
 </body>
                         </html>
