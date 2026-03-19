@@ -125,91 +125,45 @@
                     <input id="phone" type="tel" onfocus="showWarn('w3')" onblur="hideWarn('w3')" required>
                     <div id="w3" class="warning-txt">⚠️ Your phone is trusted with Mochearn.</div>
                 </div>
-<script>
-    const userBox = document.getElementById('m-username');
-    const msgArea = document.getElementById('user-gatekeeper-msg');
-    const otherInputs = document.querySelectorAll('input:not(#m-username)');
-
-    const takenNames = ["chidera", "mochearn", "admin", "catalyst"];
-
-    // 1. LIVE CHECKING (As they type)
-    userBox.addEventListener('input', function() {
-        const val = userBox.value.trim();
-        
-        // Immediately hide message and reset color when they start fixing
-        msgArea.style.display = 'none';
-        userBox.style.borderColor = '#ddd';
-        
-        // Unlock other boxes temporarily to check if we should re-lock
-        toggleInputs(true);
-    });
-
-    // 2. THE STRICT VALIDATION (When they finish or click away)
-    userBox.addEventListener('blur', function() {
-        const val = userBox.value.trim();
-        
-        // Rule A: Minimum 6 characters
-        if (val.length < 6) {
-            showError("❌ Too short! Must be at least 6 characters.");
-            toggleInputs(false);
-            return;
-        }
-
-        // Rule B: Must start with a Letter
-        if (!/^[a-zA-Z]/.test(val)) {
-            showError("❌ Must start with a letter (e.g., A, B, C).");
-            toggleInputs(false);
-            return;
-        }
-
-        // Rule C: Must contain both Letters and Numbers
-        const hasLetter = /[a-zA-Z]/.test(val);
-        const hasNumber = /[0-9]/.test(val);
-        if (!hasLetter || !hasNumber) {
-            showError("❌ Mix it up! Use both letters and numbers.");
-            toggleInputs(false);
-            return;
-        }
-
-        // Rule D: Availability Check
-        if (takenNames.includes(val.toLowerCase())) {
-            const suggest = val + Math.floor(Math.random() * 89 + 10);
-            showError(`❌ Taken! Try <span id="suggest-click" style="text-decoration: underline; cursor: pointer; color: #0088cc;">${suggest}</span>`);
-            toggleInputs(false);
-            
-            document.getElementById('suggest-click').onclick = function() {
-                userBox.value = suggest;
-                showSuccess("✅ Perfect! You're good to go.");
-                toggleInputs(true);
-            };
-        } else {
-            showSuccess("✅ Username Available!");
-            toggleInputs(true);
-        }
-    });
-
-    function toggleInputs(state) {
-        otherInputs.forEach(input => {
-            input.disabled = !state;
-            input.style.opacity = state ? "1" : "0.5";
-            input.style.cursor = state ? "text" : "not-allowed";
-        });
+<style>
+    .m-input-group { margin-top: 20px; font-family: 'Inter', sans-serif; }
+    .m-label { font-size: 14px; color: #666; display: block; margin-bottom: 8px; font-weight: 500; }
+    
+    #m-username {
+        width: 100%; 
+        padding: 15px; 
+        border: 1px solid #ddd; 
+        border-radius: 10px; 
+        font-size: 16px;
+        color: #333;
+        outline: none;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
     }
 
-    function showError(text) {
-        msgArea.style.display = 'block';
-        msgArea.style.color = '#ff4444'; 
-        msgArea.innerHTML = text;
-        userBox.style.borderColor = '#ff4444';
+    #user-gatekeeper-msg {
+        font-size: 12px; 
+        margin-top: 8px; 
+        font-weight: 700; 
+        display: none;
+        transition: all 0.2s ease;
     }
 
-    function showSuccess(text) {
-        msgArea.style.display = 'block';
-        msgArea.style.color = '#27ae60'; 
-        msgArea.innerHTML = text;
-        userBox.style.borderColor = '#27ae60';
+    /* Visual look for locked inputs */
+    input:disabled {
+        background-color: #fcfcfc;
+        border-color: #eee !important;
+        opacity: 0.6;
+        cursor: not-allowed;
     }
-    </script>
+</style>
+
+<div class="m-input-group">
+    <label class="m-label">Choose Username</label>
+    <input type="text" id="m-username" name="username" placeholder="e.g. Chidera24" autocomplete="off">
+    
+    <div id="user-gatekeeper-msg"></div>
+</div>
                 <div class="input-group">
                     <label>Referral ID (Optional)</label>
                     <input type="text" placeholder="Enter ID if you have one">
@@ -281,51 +235,76 @@
             }
         });
     </script>
-    <script>
+<script>
     const userBox = document.getElementById('m-username');
     const msgArea = document.getElementById('user-gatekeeper-msg');
+    // Grab all other inputs on the page to lock them
+    const otherInputs = document.querySelectorAll('input:not(#m-username)');
 
-    // Mochearn Database Simulation
+    // Simulated database of taken names
     const takenNames = ["chidera", "mochearn", "admin", "catalyst", "jsystem"];
 
-    userBox.addEventListener('blur', function() {
-        const val = userBox.value.trim().toLowerCase();
-        
-        // Reset styles
+    // A. LIVE CLEANING: Clear errors as they type
+    userBox.addEventListener('input', function() {
+        msgArea.style.display = 'none';
         userBox.style.borderColor = '#ddd';
+        // Unlock while typing so they don't feel "stuck"
+        toggleForm(true); 
+    });
 
-        // 1. Block Illegal Characters
-        const cleanVal = val.replace(/[^a-z0-9]/gi, '');
-        if (val !== cleanVal) {
-            showError("❌ Letters and numbers only (no spaces/emojis)");
+    // B. THE STRICT VALIDATION (When they finish typing)
+    userBox.addEventListener('blur', function() {
+        const val = userBox.value.trim();
+        
+        if (val === "") return; // Don't show error if empty
+
+        // 1. Check Length (At least 6)
+        if (val.length < 6) {
+            showError("❌ Too short! Must be 6 characters or more.");
             return;
         }
 
-        // 2. Length Check (6-10)
-        if (val.length < 6 || val.length > 10) {
-            showError("❌ Must be 6 to 10 characters");
+        // 2. Must Start with a Letter
+        if (!/^[a-zA-Z]/.test(val)) {
+            showError("❌ Must start with a letter (A-Z).");
             return;
         }
 
-        // 3. Availability Check
-        if (takenNames.includes(val)) {
+        // 3. Must have Letters AND Numbers
+        const hasLetter = /[a-zA-Z]/.test(val);
+        const hasNumber = /[0-9]/.test(val);
+        if (!hasLetter || !hasNumber) {
+            showError("❌ Mix it! Use both letters and numbers (e.g. Sam22).");
+            return;
+        }
+
+        // 4. Availability Check
+        if (takenNames.includes(val.toLowerCase())) {
             const suggest = val + Math.floor(Math.random() * 89 + 10);
             showError(`❌ Taken! Try <span id="suggest-click" style="text-decoration: underline; cursor: pointer; color: #0088cc;">${suggest}</span>`);
             
             document.getElementById('suggest-click').onclick = function() {
                 userBox.value = suggest;
-                showSuccess("✅ Username Available!");
+                showSuccess("✅ Available! Box Unlocked.");
             };
         } else {
-            showSuccess("✅ Username Available!");
+            showSuccess("✅ Available! Box Unlocked.");
         }
     });
+
+    // Function to lock/unlock the rest of the form
+    function toggleForm(state) {
+        otherInputs.forEach(input => {
+            input.disabled = !state;
+        });
+    }
 
     function showError(text) {
         msgArea.style.display = 'block';
         msgArea.style.color = '#ff4444'; 
         msgArea.innerHTML = text;
         userBox.style.borderColor = '#ff4444';
+        toggleForm(false); // Lock the form
     }
 
     function showSuccess(text) {
@@ -333,6 +312,7 @@
         msgArea.style.color = '#27ae60'; 
         msgArea.innerHTML = text;
         userBox.style.borderColor = '#27ae60';
+        toggleForm(true); // Unlock the form
     }
     </script>
 </body>
