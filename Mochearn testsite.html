@@ -105,7 +105,142 @@
     </style>
 </head>
 <body>
+<div id="m-sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <span class="close-btn" onclick="toggleMenu()">&times;</span>
+        <div class="user-profile-mini">
+            <div class="avatar">B</div>
+            <div class="user-info-text">
+                <span class="user-name">Bethuel O.</span>
+                <span class="user-status">Premier Member</span>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="sidebar-links">
+        <a href="dashboard.html" class="active">🏠 Dashboard</a>
+        <a href="marketplace.html">🛒 Marketplace</a>
+        <a href="academy.html">🎓 My Academy</a>
+        <a href="withdrawals.html">💰 Withdrawals</a>
+        <a href="history.html">📊 Sales History</a>
+        <a href="support.html">🎧 Help & Support</a>
+        <hr style="border: 0.5px solid #eee; margin: 20px 0;">
+        <a href="logout.html" style="color: #ff4444; font-weight: 700;">🚪 Logout</a>
+    </nav>
+</div>
 
+<div id="sidebar-overlay" class="overlay" onclick="toggleMenu()"></div>
+
+
+<style>
+    /* SIDEBAR CONTAINER */
+    .sidebar {
+        height: 100%; 
+        width: 0; 
+        position: fixed; 
+        z-index: 2000;
+        top: 0; 
+        left: 0; 
+        background-color: #ffffff; 
+        overflow-x: hidden;
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+        font-family: sans-serif;
+    }
+
+    /* HEADER SECTION */
+    .sidebar-header { 
+        padding: 40px 20px 20px; 
+        border-bottom: 1px solid #f1f1f1; 
+        position: relative; 
+    }
+    
+    .close-btn { 
+        position: absolute; 
+        right: 20px; 
+        top: 15px; 
+        font-size: 30px; 
+        cursor: pointer; 
+        color: #ccc; 
+        transition: 0.2s; 
+    }
+    .close-btn:hover { color: #0084ff; }
+    
+    .user-profile-mini { display: flex; align-items: center; margin-top: 10px; }
+    
+    .avatar { 
+        width: 42px; 
+        height: 42px; 
+        background: #0084ff; 
+        color: white; 
+        border-radius: 50%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-weight: bold; 
+        font-size: 18px; 
+    }
+    
+    .user-info-text { margin-left: 12px; display: flex; flex-direction: column; }
+    .user-name { font-weight: 700; color: #333; font-size: 15px; }
+    .user-status { font-size: 10px; color: #27ae60; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* NAVIGATION LINKS */
+    .sidebar-links { padding-top: 10px; }
+    
+    .sidebar-links a {
+        padding: 15px 25px; 
+        text-decoration: none; 
+        font-size: 15px; 
+        color: #555;
+        display: block; 
+        transition: 0.2s; 
+        font-weight: 500;
+    }
+    
+    .sidebar-links a:hover { 
+        background-color: #f8faff; 
+        color: #0084ff; 
+        padding-left: 30px; 
+    }
+    
+    .sidebar-links a.active { 
+        background-color: #eef6ff; 
+        color: #0084ff; 
+        font-weight: 700; 
+        border-left: 5px solid #0084ff; 
+    }
+
+    /* OVERLAY BACKGROUND */
+    .overlay {
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%; 
+        background: rgba(0,0,0,0.4); 
+        backdrop-filter: blur(2px); 
+        z-index: 1999;
+    }
+</style>
+
+
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("m-sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        
+        // Open to 280px or close back to 0
+        if (sidebar.style.width === "280px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "280px";
+            overlay.style.display = "block";
+        }
+    }
+</script>
     <header class="header-main">
         <div class="brand-block">
             <img src="mochearn-logo.png" alt="Logo" class="mochearn-logo">
