@@ -118,10 +118,60 @@
                     <input type="email" placeholder="merchant@mochearn.com" onblur="validateField(this, 'c6')" required>
                     <i id="c6" class="fa-solid fa-circle-check status-icon"></i>
                 </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
-                </div>
+           <style>
+    .v-pass-group { margin-top: 25px; text-align: left; font-family: sans-serif; }
+    .v-label { font-size: 14px; color: #666; font-weight: 600; display: block; margin-bottom: 8px; }
+    
+    .v-input-wrapper { position: relative; display: flex; align-items: center; }
+    
+    .v-input {
+        width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 10px;
+        font-size: 16px; color: #333; outline: none; transition: border 0.3s;
+    }
+
+    .v-eye { position: absolute; right: 15px; cursor: pointer; width: 20px; opacity: 0.5; }
+
+    /* The Checklist Box - Styled exactly like your Vendor inputs */
+    .v-checklist {
+        margin-top: 15px; padding: 15px; border: 1px solid #eee; border-radius: 10px; background: #fff;
+    }
+
+    .v-rule { display: flex; align-items: center; margin-bottom: 8px; font-size: 13px; color: #999; transition: 0.3s; }
+    .v-rule:last-child { margin-bottom: 0; }
+
+    .v-dot { 
+        width: 14px; height: 14px; border: 1.5px solid #ccc; border-radius: 50%; 
+        margin-right: 10px; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Active Rule State */
+    .v-rule.valid { color: #27ae60; font-weight: 600; }
+    .v-rule.valid .v-dot { border-color: #27ae60; background: #27ae60; }
+</style>
+
+<div class="v-pass-group">
+    <label class="v-label">New Password</label>
+    <div class="v-input-wrapper">
+        <input type="password" id="v-pass-main" class="v-input" placeholder="Min. 10 characters">
+        <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" id="eye-main" class="v-eye" onclick="toggleVPass('v-pass-main', 'eye-main')">
+    </div>
+
+    <div class="v-checklist">
+        <div class="v-rule" id="rule-len"><span class="v-dot"></span> At least 10 Characters</div>
+        <div class="v-rule" id="rule-let"><span class="v-dot"></span> 3 to 6 Letters</div>
+        <div class="v-rule" id="rule-num"><span class="v-dot"></span> Includes Numbers</div>
+        <div class="v-rule" id="rule-sym"><span class="v-dot"></span> Includes Symbols (@, #, $)</div>
+    </div>
+</div>
+
+<div class="v-pass-group" style="margin-top: 20px;">
+    <label class="v-label">Confirm Password</label>
+    <div class="v-input-wrapper">
+        <input type="password" id="v-pass-confirm" class="v-input" placeholder="Repeat new password" disabled>
+        <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" id="eye-conf" class="v-eye" onclick="toggleVPass('v-pass-confirm', 'eye-conf')">
+    </div>
+    <div id="v-match-note" style="font-size: 12px; margin-top: 8px; font-weight: 700; display: none;"></div>
+    </div>
 
                 <label class="terms-box">
                     <input type="checkbox" required> I agree to the Mochearn Merchant Policies.
@@ -275,6 +325,85 @@
         vMsg.innerHTML = text;
         vBox.parentElement.style.borderColor = '#27ae60';
         toggleVForm(true);
+    }
+    </script>
+    <script>
+    // 1. EYE TOGGLE LOGIC
+    function toggleVPass(boxId, eyeId) {
+        const box = document.getElementById(boxId);
+        const eye = document.getElementById(eyeId);
+        if (box.type === "password") {
+            box.type = "text";
+            eye.style.opacity = "1"; // Brighter when visible
+        } else {
+            box.type = "password";
+            eye.style.opacity = "0.5";
+        }
+    }
+
+    const mainPass = document.getElementById('v-pass-main');
+    const confPass = document.getElementById('v-pass-confirm');
+    const matchNote = document.getElementById('v-match-note');
+
+    // 2. LIVE VALIDATION
+    mainPass.addEventListener('input', function() {
+        // Kill Emojis instantly
+        this.value = this.value.replace(/[^\x00-\x7F]/g, "");
+        
+        const val = this.value;
+
+        // Requirement Checks
+        const isLen = val.length >= 10;
+        const letterCount = (val.match(/[a-zA-Z]/g) || []).length;
+        const isLetters = letterCount >= 3 && letterCount <= 6;
+        const isNumbers = /[0-9]/.test(val);
+        const isSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+
+        // Update Checklist UI
+        updateRule('rule-len', isLen);
+        updateRule('rule-let', isLetters);
+        updateRule('rule-num', isNumbers);
+        updateRule('rule-sym', isSymbols);
+
+        // Unlock Confirm Box only if all 4 are true
+        if (isLen && isLetters && isNumbers && isSymbols) {
+            confPass.disabled = false;
+            confPass.style.opacity = "1";
+            confPass.style.cursor = "text";
+        } else {
+            confPass.disabled = true;
+            confPass.style.opacity = "0.5";
+            confPass.style.cursor = "not-allowed";
+            confPass.value = ""; // Clear confirm if main becomes invalid
+            matchNote.style.display = "none";
+        }
+    });
+
+    // 3. CONFIRM MATCH LOGIC
+    confPass.addEventListener('input', function() {
+        if (this.value === mainPass.value) {
+            matchNote.style.display = "block";
+            matchNote.style.color = "#27ae60";
+            matchNote.innerHTML = "✅ Passwords Match!";
+            this.style.borderColor = "#27ae60";
+        } else {
+            matchNote.style.display = "block";
+            matchNote.style.color = "#ff4444";
+            matchNote.innerHTML = "❌ Passwords do not match";
+            this.style.borderColor = "#ff4444";
+        }
+    });
+
+    function updateRule(id, isValid) {
+        const el = document.getElementById(id);
+        if (isValid) {
+            el.classList.add('valid');
+            // Change dot to a small check icon look
+            el.querySelector('.v-dot').innerHTML = '<span style="color:white; font-size:9px;">L</span>'; 
+        } else {
+            el.classList.remove('valid');
+            el.querySelector('.v-dot').innerHTML = '';
+        }
     }
     </script>
 </body>
