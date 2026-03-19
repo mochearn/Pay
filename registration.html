@@ -125,7 +125,27 @@
                     <input id="phone" type="tel" onfocus="showWarn('w3')" onblur="hideWarn('w3')" required>
                     <div id="w3" class="warning-txt">⚠️ Your phone is trusted with Mochearn.</div>
                 </div>
-
+<div class="input-group" style="margin-top: 20px;">
+    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 8px; font-family: sans-serif;">Username</label>
+    <input type="text" id="m-username" name="username" placeholder="Choose a unique name" style="
+        width: 100%; 
+        padding: 15px; 
+        border: 1px solid #ddd; 
+        border-radius: 10px; 
+        font-size: 16px;
+        color: #333;
+        outline: none;
+        box-sizing: border-box;
+        transition: border 0.3s;"
+    >
+    <div id="user-gatekeeper-msg" style="
+        font-size: 12px; 
+        margin-top: 8px; 
+        font-weight: 600; 
+        display: none;
+        font-family: sans-serif;">
+    </div>
+    </div>
                 <div class="input-group">
                     <label>Referral ID (Optional)</label>
                     <input type="text" placeholder="Enter ID if you have one">
@@ -196,6 +216,60 @@
                 alert("Passwords do not match!");
             }
         });
+    </script>
+    <script>
+    const userBox = document.getElementById('m-username');
+    const msgArea = document.getElementById('user-gatekeeper-msg');
+
+    // Mochearn Database Simulation
+    const takenNames = ["chidera", "mochearn", "admin", "catalyst", "jsystem"];
+
+    userBox.addEventListener('blur', function() {
+        const val = userBox.value.trim().toLowerCase();
+        
+        // Reset styles
+        userBox.style.borderColor = '#ddd';
+
+        // 1. Block Illegal Characters
+        const cleanVal = val.replace(/[^a-z0-9]/gi, '');
+        if (val !== cleanVal) {
+            showError("❌ Letters and numbers only (no spaces/emojis)");
+            return;
+        }
+
+        // 2. Length Check (6-10)
+        if (val.length < 6 || val.length > 10) {
+            showError("❌ Must be 6 to 10 characters");
+            return;
+        }
+
+        // 3. Availability Check
+        if (takenNames.includes(val)) {
+            const suggest = val + Math.floor(Math.random() * 89 + 10);
+            showError(`❌ Taken! Try <span id="suggest-click" style="text-decoration: underline; cursor: pointer; color: #0088cc;">${suggest}</span>`);
+            
+            document.getElementById('suggest-click').onclick = function() {
+                userBox.value = suggest;
+                showSuccess("✅ Username Available!");
+            };
+        } else {
+            showSuccess("✅ Username Available!");
+        }
+    });
+
+    function showError(text) {
+        msgArea.style.display = 'block';
+        msgArea.style.color = '#ff4444'; 
+        msgArea.innerHTML = text;
+        userBox.style.borderColor = '#ff4444';
+    }
+
+    function showSuccess(text) {
+        msgArea.style.display = 'block';
+        msgArea.style.color = '#27ae60'; 
+        msgArea.innerHTML = text;
+        userBox.style.borderColor = '#27ae60';
+    }
     </script>
 </body>
     </html>
