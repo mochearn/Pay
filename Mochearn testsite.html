@@ -326,108 +326,156 @@
     startMessageLoop();
     </script>
 <style>
-    /* ... Keep your other styles, just update these two ... */
-    .link-display-area {
-        background: #fff;
-        border-radius: 10px;
-        padding: 12px 15px;
+    /* We use a unique prefix 'mls' to prevent scattering */
+    .mls-container {
+        max-width: 600px;
+        margin: 15px auto 25px;
+        padding: 0 20px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .mls-card {
+        background: rgba(39, 174, 96, 0.4) !important; /* Mochearn Green Opacity 4 */
+        border: 1.5px solid rgba(39, 174, 96, 0.2);
+        border-radius: 18px;
+        padding: 20px;
+        display: block;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    }
+
+    .mls-label {
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #1a5e3a;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+        display: block;
+    }
+
+    .mls-input-area {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 10px 15px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 10px;
         margin-bottom: 15px;
         border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .mls-url-text {
+        font-size: 0.85rem;
+        color: #333;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow-x: auto; /* ALLOWS SLIDING LEFT/RIGHT */
+        flex-grow: 1;
+        scrollbar-width: none;
+    }
+    .mls-url-text::-webkit-scrollbar { display: none; }
+
+    .mls-copy-btn {
+        background: #0088cc;
+        color: #fff;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    .mls-social-row {
+        display: flex;
         gap: 10px;
     }
 
-    .full-url {
+    .mls-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 10px;
+        text-align: center;
+        text-decoration: none;
         font-size: 0.8rem;
-        color: #333;
-        font-weight: 600;
-        white-space: nowrap;
-        /* FIXED: This allows sliding left/right */
-        overflow-x: auto; 
-        flex-grow: 1;
-        scrollbar-width: none; /* Hides scrollbar on Firefox */
+        font-weight: 700;
+        color: #fff;
     }
-    .full-url::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
 
-    #copy-toast {
+    .mls-wa { background: #25D366; }
+    .mls-tg { background: #0088cc; }
+
+    /* The Formal Message */
+    #mls-toast {
         display: none;
         position: fixed;
-        bottom: 50px;
+        bottom: 40px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(0, 0, 0, 0.8);
+        background: #1a1a1a;
         color: #fff;
-        padding: 12px 24px;
+        padding: 12px 25px;
         border-radius: 50px;
-        font-size: 0.85rem;
-        z-index: 99999;
-        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 999999;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 </style>
 
-<div class="link-station">
-    <div class="link-card">
-        <span class="link-label">Your Unique Catalyst Link</span>
+<div class="mls-container">
+    <div class="mls-card">
+        <span class="mls-label">Your Unique Catalyst Link</span>
         
-        <div class="link-display-area">
-            <span class="full-url" id="m-link-text">https://mochearn.com/register?ref=USERNAME</span>
-            <button class="copy-trigger" onclick="copyMochearnLink()">COPY</button>
+        <div class="mls-input-area">
+            <span class="mls-url-text" id="mls-link-display">https://mochearn.com/register?ref=USERNAME</span>
+            <button class="mls-copy-btn" onclick="mlsCopy()">COPY</button>
         </div>
 
-        <div class="share-group">
-            <a id="wa-share" target="_blank" class="share-btn wa-btn">WhatsApp</a>
-            <a id="tg-share" target="_blank" class="share-btn tg-btn">Telegram</a>
+        <div class="mls-social-row">
+            <a id="mls-wa-link" target="_blank" class="mls-btn mls-wa">WhatsApp</a>
+            <a id="mls-tg-link" target="_blank" class="mls-btn mls-tg">Telegram</a>
         </div>
     </div>
 </div>
 
-<div id="copy-toast">Link copied to clipboard</div>
+<div id="mls-toast">Link copied to clipboard</div>
 
 <script>
-    // In your real system, this will be dynamic
-    const m_username = "CHIDERA24"; 
-    const m_base_url = "https://mochearn.com/register?ref=";
-    const m_final_link = m_base_url + m_username;
+    // System Values
+    const m_user = "CHIDERA24"; 
+    const m_base = "https://mochearn.com/register?ref=";
+    const m_full = m_base + m_user;
 
-    // Initialize values
-    document.getElementById('m-link-text').innerText = m_final_link;
+    // Set Text
+    document.getElementById('mls-link-display').innerText = m_full;
     
-    // Social Sharing Logic
-    const shareMsg = encodeURIComponent("Join Mochearn and start earning with the J-System! " + m_final_link);
-    document.getElementById('wa-share').href = "https://wa.me/?text=" + shareMsg;
-    document.getElementById('tg-share').href = "https://t.me/share/url?url=" + encodeURIComponent(m_final_link) + "&text=" + encodeURIComponent("Join Mochearn!");
+    // Social Links
+    const m_msg = encodeURIComponent("Start earning on Mochearn with the J-System! " + m_full);
+    document.getElementById('mls-wa-link').href = "https://wa.me/?text=" + m_msg;
+    document.getElementById('mls-tg-link').href = "https://t.me/share/url?url=" + encodeURIComponent(m_full) + "&text=" + encodeURIComponent("Join Mochearn!");
 
-    // FIXED COPY FUNCTION
-    function copyMochearnLink() {
-        const textToCopy = document.getElementById('m-link-text').innerText;
+    function mlsCopy() {
+        const link = document.getElementById('mls-link-display').innerText;
         
-        // Modern approach
+        // Advanced Copy Logic
         if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(textToCopy).then(() => showToast());
+            navigator.clipboard.writeText(link).then(() => mlsShowToast());
         } else {
-            // Backup for older mobile browsers
-            let textArea = document.createElement("textarea");
-            textArea.value = textToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {
-                console.error('Unable to copy', err);
-            }
-            document.body.removeChild(textArea);
+            let t = document.createElement("textarea");
+            t.value = link; document.body.appendChild(t);
+            t.select(); document.execCommand('copy');
+            document.body.removeChild(t);
+            mlsShowToast();
         }
     }
 
-    function showToast() {
-        const toast = document.getElementById('copy-toast');
+    function mlsShowToast() {
+        const toast = document.getElementById('mls-toast');
         toast.style.display = 'block';
         setTimeout(() => { toast.style.display = 'none'; }, 2500);
     }
-    </script>
+</script>
 <style>
     .mochearn-global { font-family: 'Inter', sans-serif; }
     .currency-control-bar { max-width: 600px; margin: 15px auto 5px; padding: 0 25px; display: flex; justify-content: flex-end; }
