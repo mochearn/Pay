@@ -61,6 +61,29 @@
                     <input type="tel" id="phone" onblur="validateField(this, 'cPhone')" required>
                     <i id="cPhone" class="fa-solid fa-circle-check status-icon"></i>
                 </div>
+                <div class="v-input-group" style="margin-top: 25px; margin-bottom: 25px; text-align: left;">
+    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 4px; font-family: sans-serif; font-weight: 600;">Vendor Username (For your Link)</label>
+    
+    <span style="font-size: 11px; color: #999; display: block; margin-bottom: 8px; font-family: sans-serif;">
+        * No spaces or symbols. Must include letters and numbers.
+    </span>
+
+    <div style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: #fff;">
+        <span style="padding-left: 15px; font-weight: 800; color: #27ae60; font-family: sans-serif; background: #fff;">V_</span>
+        
+        <input type="text" id="v-username" name="v_username" placeholder="e.g. Store24" autocomplete="off" style="
+            width: 100%; 
+            padding: 15px 10px; 
+            border: none; 
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            font-family: sans-serif;
+            background: #fff;">
+    </div>
+    
+    <div id="v-gatekeeper-msg" style="font-size: 12px; margin-top: 8px; font-weight: 700; display: none; text-align: left;"></div>
+                </div>
                 <div class="input-group">
                     <label>Brand/Store Name</label>
                     <input type="text" placeholder="e.g. Mochearn Global" onblur="validateField(this, 'c2')" required>
@@ -107,7 +130,7 @@
                 <button type="submit" class="reg-btn">Complete Setup</button>
             </form>
 
-            <div class="footer-link">Have an ID? <a href="#">Login</a></div>
+            <div class="footer-link">Have an ID? <a href="Vendors login.html">Login</a></div>
         </div>
     </div>
 
@@ -169,6 +192,90 @@
             document.getElementById('bankInput').value = name;
             document.getElementById('bankList').style.display = 'none';
         }
+    </script>
+    <script>
+    const vBox = document.getElementById('v-username');
+    const vMsg = document.getElementById('v-gatekeeper-msg');
+    const vOtherInputs = document.querySelectorAll('input:not(#v-username)');
+
+    // Simulated Vendor Database
+    const takenVendors = ["v_chiderahub", "v_mochearnstore", "v_admin"];
+
+    // 1. LIVE EMOJI & SPACE KILLER
+    vBox.addEventListener('input', function() {
+        const original = this.value;
+        const clean = this.value.replace(/[^a-zA-Z0-9]/g, '');
+        
+        if (original !== clean) {
+            this.value = clean;
+            showVErr("❌ Symbols and spaces are not allowed!");
+        } else {
+            vMsg.style.display = 'none';
+            vBox.parentElement.style.borderColor = '#ddd';
+            toggleVForm(true); 
+        }
+    });
+
+    // 2. VENDOR VALIDATION
+    vBox.addEventListener('blur', function() {
+        const rawVal = vBox.value.trim();
+        const fullVal = "v_" + rawVal.toLowerCase();
+        
+        if (rawVal === "") return;
+
+        // Rule: Start with Letter
+        if (!/^[a-zA-Z]/.test(rawVal)) {
+            showVErr("❌ Must start with a letter.");
+            return;
+        }
+
+        // Rule: Letter + Number Mix
+        const hasL = /[a-zA-Z]/.test(rawVal);
+        const hasN = /[0-9]/.test(rawVal);
+        if (!hasL || !hasN) {
+            showVErr("❌ Use both letters and numbers.");
+            return;
+        }
+
+        // Rule: Corporate Length (8-15)
+        if (rawVal.length < 8 || rawVal.length > 15) {
+            showVErr("❌ Vendor ID must be 8 to 15 characters.");
+            return;
+        }
+
+        // Rule: Database Check
+        if (takenVendors.includes(fullVal)) {
+            const vSuggest = rawVal + Math.floor(Math.random() * 89 + 10);
+            showVErr(`❌ Taken! Try <span id="v-suggest" style="text-decoration: underline; cursor: pointer; color: #0088cc;">${vSuggest}</span>`);
+            
+            document.getElementById('v-suggest').onclick = function() {
+                vBox.value = vSuggest;
+                showVSuccess("✅ Vendor ID Available!");
+            };
+        } else {
+            showVSuccess("✅ Vendor ID Available!");
+        }
+    });
+
+    function toggleVForm(state) {
+        vOtherInputs.forEach(input => { input.disabled = !state; });
+    }
+
+    function showVErr(text) {
+        vMsg.style.display = 'block';
+        vMsg.style.color = '#ff4444'; 
+        vMsg.innerHTML = text;
+        vBox.parentElement.style.borderColor = '#ff4444';
+        toggleVForm(false);
+    }
+
+    function showVSuccess(text) {
+        vMsg.style.display = 'block';
+        vMsg.style.color = '#27ae60'; 
+        vMsg.innerHTML = text;
+        vBox.parentElement.style.borderColor = '#27ae60';
+        toggleVForm(true);
+    }
     </script>
 </body>
     </html>
