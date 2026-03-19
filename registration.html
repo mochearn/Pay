@@ -125,27 +125,91 @@
                     <input id="phone" type="tel" onfocus="showWarn('w3')" onblur="hideWarn('w3')" required>
                     <div id="w3" class="warning-txt">⚠️ Your phone is trusted with Mochearn.</div>
                 </div>
-<div class="input-group" style="margin-top: 20px;">
-    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 8px; font-family: sans-serif;">Username</label>
-    <input type="text" id="m-username" name="username" placeholder="Choose a unique name" style="
-        width: 100%; 
-        padding: 15px; 
-        border: 1px solid #ddd; 
-        border-radius: 10px; 
-        font-size: 16px;
-        color: #333;
-        outline: none;
-        box-sizing: border-box;
-        transition: border 0.3s;"
-    >
-    <div id="user-gatekeeper-msg" style="
-        font-size: 12px; 
-        margin-top: 8px; 
-        font-weight: 600; 
-        display: none;
-        font-family: sans-serif;">
-    </div>
-    </div>
+<script>
+    const userBox = document.getElementById('m-username');
+    const msgArea = document.getElementById('user-gatekeeper-msg');
+    const otherInputs = document.querySelectorAll('input:not(#m-username)');
+
+    const takenNames = ["chidera", "mochearn", "admin", "catalyst"];
+
+    // 1. LIVE CHECKING (As they type)
+    userBox.addEventListener('input', function() {
+        const val = userBox.value.trim();
+        
+        // Immediately hide message and reset color when they start fixing
+        msgArea.style.display = 'none';
+        userBox.style.borderColor = '#ddd';
+        
+        // Unlock other boxes temporarily to check if we should re-lock
+        toggleInputs(true);
+    });
+
+    // 2. THE STRICT VALIDATION (When they finish or click away)
+    userBox.addEventListener('blur', function() {
+        const val = userBox.value.trim();
+        
+        // Rule A: Minimum 6 characters
+        if (val.length < 6) {
+            showError("❌ Too short! Must be at least 6 characters.");
+            toggleInputs(false);
+            return;
+        }
+
+        // Rule B: Must start with a Letter
+        if (!/^[a-zA-Z]/.test(val)) {
+            showError("❌ Must start with a letter (e.g., A, B, C).");
+            toggleInputs(false);
+            return;
+        }
+
+        // Rule C: Must contain both Letters and Numbers
+        const hasLetter = /[a-zA-Z]/.test(val);
+        const hasNumber = /[0-9]/.test(val);
+        if (!hasLetter || !hasNumber) {
+            showError("❌ Mix it up! Use both letters and numbers.");
+            toggleInputs(false);
+            return;
+        }
+
+        // Rule D: Availability Check
+        if (takenNames.includes(val.toLowerCase())) {
+            const suggest = val + Math.floor(Math.random() * 89 + 10);
+            showError(`❌ Taken! Try <span id="suggest-click" style="text-decoration: underline; cursor: pointer; color: #0088cc;">${suggest}</span>`);
+            toggleInputs(false);
+            
+            document.getElementById('suggest-click').onclick = function() {
+                userBox.value = suggest;
+                showSuccess("✅ Perfect! You're good to go.");
+                toggleInputs(true);
+            };
+        } else {
+            showSuccess("✅ Username Available!");
+            toggleInputs(true);
+        }
+    });
+
+    function toggleInputs(state) {
+        otherInputs.forEach(input => {
+            input.disabled = !state;
+            input.style.opacity = state ? "1" : "0.5";
+            input.style.cursor = state ? "text" : "not-allowed";
+        });
+    }
+
+    function showError(text) {
+        msgArea.style.display = 'block';
+        msgArea.style.color = '#ff4444'; 
+        msgArea.innerHTML = text;
+        userBox.style.borderColor = '#ff4444';
+    }
+
+    function showSuccess(text) {
+        msgArea.style.display = 'block';
+        msgArea.style.color = '#27ae60'; 
+        msgArea.innerHTML = text;
+        userBox.style.borderColor = '#27ae60';
+    }
+    </script>
                 <div class="input-group">
                     <label>Referral ID (Optional)</label>
                     <input type="text" placeholder="Enter ID if you have one">
