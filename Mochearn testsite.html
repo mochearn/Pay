@@ -447,33 +447,49 @@
     const m_base = "https://mochearn.com/register?ref=";
     const m_full = m_base + m_user;
 
-    // Set Text
+    // Set the link text on the screen
     document.getElementById('mls-link-display').innerText = m_full;
     
-    // Social Links
+    // Social Sharing Links
     const m_msg = encodeURIComponent("Start earning on Mochearn with the J-System! " + m_full);
     document.getElementById('mls-wa-link').href = "https://wa.me/?text=" + m_msg;
     document.getElementById('mls-tg-link').href = "https://t.me/share/url?url=" + encodeURIComponent(m_full) + "&text=" + encodeURIComponent("Join Mochearn!");
 
+    // THE SUPER-COPY FUNCTION (Force Copy)
     function mlsCopy() {
-        const link = document.getElementById('mls-link-display').innerText;
-        
-        // Advanced Copy Logic
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(link).then(() => mlsShowToast());
-        } else {
-            let t = document.createElement("textarea");
-            t.value = link; document.body.appendChild(t);
-            t.select(); document.execCommand('copy');
-            document.body.removeChild(t);
-            mlsShowToast();
+        const linkToCopy = document.getElementById('mls-link-display').innerText;
+
+        // Step 1: Create a hidden input element
+        const hiddenInput = document.createElement('input');
+        hiddenInput.value = linkToCopy;
+        document.body.appendChild(hiddenInput);
+
+        // Step 2: Select the text
+        hiddenInput.select();
+        hiddenInput.setSelectionRange(0, 99999); // For mobile devices
+
+        // Step 3: Execute Copy
+        try {
+            document.execCommand('copy');
+            mlsShowToast(); // Show the "Link Copied" message
+        } catch (err) {
+            // Fallback for very strict browsers
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(linkToCopy).then(() => mlsShowToast());
+            }
         }
+
+        // Step 4: Clean up
+        document.body.removeChild(hiddenInput);
     }
 
     function mlsShowToast() {
         const toast = document.getElementById('mls-toast');
         toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        // Auto-hide after 2.5 seconds
+        setTimeout(() => { 
+            toast.style.display = 'none'; 
+        }, 2500);
     }
 </script>
 <style>
