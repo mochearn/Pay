@@ -440,57 +440,64 @@
 </div>
 
 <div id="mls-toast">Link copied to clipboard</div>
-
 <script>
-    // System Values
+    // System Values (These will eventually come from your database)
     const m_user = "CHIDERA24"; 
     const m_base = "https://mochearn.com/register?ref=";
     const m_full = m_base + m_user;
 
-    // Set the link text on the screen
-    document.getElementById('mls-link-display').innerText = m_full;
-    
-    // Social Sharing Links
-    const m_msg = encodeURIComponent("Start earning on Mochearn with the J-System! " + m_full);
-    document.getElementById('mls-wa-link').href = "https://wa.me/?text=" + m_msg;
-    document.getElementById('mls-tg-link').href = "https://t.me/share/url?url=" + encodeURIComponent(m_full) + "&text=" + encodeURIComponent("Join Mochearn!");
+    // 1. Force display the link immediately on load
+    function initializeMochearnLink() {
+        const linkDisplay = document.getElementById('mls-link-display');
+        if(linkDisplay) {
+            linkDisplay.innerText = m_full;
+        }
+        
+        // Update Social Sharing
+        const m_msg = encodeURIComponent("Start earning on Mochearn with the J-System! " + m_full);
+        document.getElementById('mls-wa-link').href = "https://wa.me/?text=" + m_msg;
+        document.getElementById('mls-tg-link').href = "https://t.me/share/url?url=" + encodeURIComponent(m_full) + "&text=" + encodeURIComponent("Join Mochearn!");
+    }
 
-    // THE SUPER-COPY FUNCTION (Force Copy)
+    // 2. THE UNLIMITED COPY FUNCTION
     function mlsCopy() {
-        const linkToCopy = document.getElementById('mls-link-display').innerText;
+        const linkToCopy = m_full; // Use the direct variable so it never fails
 
-        // Step 1: Create a hidden input element
-        const hiddenInput = document.createElement('input');
-        hiddenInput.value = linkToCopy;
-        document.body.appendChild(hiddenInput);
+        // Create a temporary input that is invisible to the user
+        const tempInput = document.createElement('input');
+        tempInput.style.position = 'fixed';
+        tempInput.style.opacity = '0';
+        tempInput.value = linkToCopy;
+        document.body.appendChild(tempInput);
 
-        // Step 2: Select the text
-        hiddenInput.select();
-        hiddenInput.setSelectionRange(0, 99999); // For mobile devices
+        // Select and Copy
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999); // Mobile compatibility
 
-        // Step 3: Execute Copy
         try {
             document.execCommand('copy');
-            mlsShowToast(); // Show the "Link Copied" message
+            mlsShowToast();
         } catch (err) {
-            // Fallback for very strict browsers
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(linkToCopy).then(() => mlsShowToast());
-            }
+            // High-security browser fallback
+            navigator.clipboard.writeText(linkToCopy).then(() => mlsShowToast());
         }
 
-        // Step 4: Clean up
-        document.body.removeChild(hiddenInput);
+        // Remove the temporary element immediately so it's fresh for next time
+        document.body.removeChild(tempInput);
     }
 
     function mlsShowToast() {
         const toast = document.getElementById('mls-toast');
         toast.style.display = 'block';
-        // Auto-hide after 2.5 seconds
+        
+        // We use a fresh timer every time
         setTimeout(() => { 
             toast.style.display = 'none'; 
         }, 2500);
     }
+
+    // Run initialization
+    window.onload = initializeMochearnLink;
 </script>
 <style>
     .mochearn-global { font-family: 'Inter', sans-serif; }
