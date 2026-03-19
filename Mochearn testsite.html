@@ -105,127 +105,81 @@
     </style>
 </head>
 <body>
-    <div id="m-sidebar" class="sidebar">
+<div id="m-sidebar" class="sidebar">
     <div class="sidebar-header">
         <span class="close-btn" onclick="toggleMenu()">&times;</span>
-        
         <a href="profile.html" class="user-profile-block">
             <div class="avatar">B</div>
             <div class="user-info-text">
                 <span class="user-name">Bethuel O.</span>
                 <span class="user-status">Premier Member</span>
             </div>
-            <svg class="chevron-right" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 18L15 12L9 6" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><path d="M9 18L15 12L9 6"/></svg>
         </a>
     </div>
     
     <nav class="sidebar-links">
         <a href="dashboard.html" class="active">
-            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9.778v11.222a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.778M3 9.778L12 3l9 6.778M10 12.778h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Dashboard
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Dashboard
         </a>
-        
         <a href="marketplace.html">
-            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M2.232 4a1.018 1.018 0 0 0-1.011 1.026v15.013A1.026 1.026 0 0 0 2.232 21.066h16.536a1.026 1.026 0 0 0 1.011-1.027V5.026a1.018 1.018 0 0 0-1.011-1.026Zm1.011 3.066h14.514M16.012 11.132v4.067M5.017 11.132v4.067M10.51 11.132v4.067" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Marketplace
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Marketplace
         </a>
-        
         <a href="academy.html">
-            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3 2 8.35v6.5l10 5.35 10-5.35V8.35L12 3ZM22 8.35v6.5l-4-2.15v-6.5l4 2.15Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            My Academy
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg> My Academy
         </a>
-        
         <a href="withdrawals.html">
-            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 4h4v16h-4M4 4h4v16H4M8 12h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Withdrawals
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M8 12h8"/></svg> Withdrawals
         </a>
-        
         <a href="history.html">
-            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 3v18h18M18 9l-5 5-3-3-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Sales History
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M18 9l-5 5-3-3-4 4"/></svg> Sales History
         </a>
-        
-        <a href="support.html">
-            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0v7a3 3 0 0 1-3 3h-2v-4h4m-12 0H5a3 3 0 0 1-3-3V12Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Help & Support
-        </a>
-        
-        <hr style="border: 0.5px solid #eee; margin: 20px 0;">
-        
-        <a href="logout.html" class="logout-link">
-            <svg class="nav-icon logout-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Logout
+        <hr style="border: 0.5px solid #eee; margin: 15px 0;">
+        <a href="logout.html" style="color: #e74c3c; font-weight: 700;">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg> Logout
         </a>
     </nav>
 </div>
-
 <div id="sidebar-overlay" class="overlay" onclick="toggleMenu()"></div>
 
-
 <style>
-    /* ... (Keep your existing sidebar CSS, but replace/add these parts) ... */
-
-    /* *** NEW: PROFILE SECTION STYLING *** */
-    .user-profile-block { 
-        display: flex; 
-        align-items: center; 
-        margin-top: 15px; 
-        text-decoration: none; /* Crucial: no underline */
-        padding: 5px; 
-        border-radius: 8px; 
-        transition: 0.2s; 
+    .sidebar {
+        height: 100%; width: 0; position: fixed; 
+        z-index: 10000 !important; /* Forces it to stay on top */
+        top: 0; left: 0; background-color: #fff; 
+        overflow-x: hidden; transition: 0.3s ease-in-out; 
+        box-shadow: 10px 0 30px rgba(0,0,0,0.1); font-family: sans-serif;
     }
-    .user-profile-block:hover { background-color: #f8faff; } /* Slight hover effect */
-    
-    .avatar { 
-        width: 44px; /* Slightly larger */
-        height: 44px; 
-        background: #0084ff; 
-        color: white; 
-        border-radius: 50%; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        font-weight: 700; 
-        font-size: 18px; 
+    .overlay {
+        display: none; position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%; background: rgba(0,0,0,0.5); 
+        backdrop-filter: blur(4px); z-index: 9999 !important;
     }
-    
-    .user-info-text { margin-left: 14px; flex-grow: 1; } /* Take up space */
-    .user-name { font-weight: 700; color: #1a1a1a; font-size: 15px; display: block; }
-    .user-status { font-size: 10px; color: #27ae60; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-    .chevron-right { margin-left: 10px; opacity: 0.6; }
-
-    /* *** NEW: ICON & LINK STYLING *** */
-    .sidebar-links a {
-        display: flex; 
-        align-items: center; /* Aligns icon and text */
-        padding: 15px 25px; 
-        text-decoration: none; 
-        font-size: 15px; 
-        color: #555;
-        transition: 0.2s; 
-        font-weight: 500;
-    }
-    
-    .nav-icon {
-        width: 18px; /* Consistent icon size */
-        height: 18px; 
-        margin-right: 15px; /* Perfect spacing before text */
-        color: inherit; /* Icons take the color of the link (gray/blue/red) */
-        transition: 0.2s;
-    }
-    
-    .sidebar-links a:hover { padding-left: 30px; color: #0084ff; background-color: #f8faff; }
+    .sidebar-header { padding: 40px 20px 20px; border-bottom: 1px solid #f1f1f1; position: relative; }
+    .close-btn { position: absolute; right: 20px; top: 15px; font-size: 30px; cursor: pointer; color: #ccc; }
+    .user-profile-block { display: flex; align-items: center; text-decoration: none; padding: 10px; border-radius: 8px; }
+    .avatar { width: 42px; height: 42px; background: #0084ff; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .user-info-text { margin-left: 12px; flex-grow: 1; }
+    .user-name { font-weight: 700; color: #333; font-size: 15px; display: block; }
+    .user-status { font-size: 10px; color: #27ae60; font-weight: 800; text-transform: uppercase; }
+    .sidebar-links a { display: flex; align-items: center; padding: 15px 25px; text-decoration: none; font-size: 15px; color: #555; font-weight: 500; }
+    .nav-icon { width: 18px; height: 18px; margin-right: 15px; }
     .sidebar-links a.active { color: #0084ff; background-color: #eef6ff; font-weight: 700; border-left: 5px solid #0084ff; }
-    .sidebar-links a.active .nav-icon { color: #0084ff; } /* Active icon is blue */
+</style>
 
-    /* LOGOUT STYLING */
-    .logout-link { color: #e74c3c !important; font-weight: 700 !important; } /* Standard Red */
-    .logout-icon { color: #e74c3c !important; }
-    .logout-link:hover { background-color: #fdf2f0; } /* Slight reddish hover */
-                </style>
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("m-sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        if (sidebar.style.width === "280px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "280px";
+            overlay.style.display = "block";
+        }
+    }
+                    </script>
                 <span class="dashboard-title">Catalyst Dashboard</span>
             </div>
         </div>
