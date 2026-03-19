@@ -125,8 +125,13 @@
                     <input id="phone" type="tel" onfocus="showWarn('w3')" onblur="hideWarn('w3')" required>
                     <div id="w3" class="warning-txt">⚠️ Your phone is trusted with Mochearn.</div>
                 </div>
-<div class="m-input-group" style="margin-top: 20px; margin-bottom: 25px;">
-    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 8px; text-align: left; font-family: sans-serif;">Choose Username</label>
+<div class="m-input-group" style="margin-top: 20px; margin-bottom: 25px; text-align: left;">
+    <label style="font-size: 14px; color: #666; display: block; margin-bottom: 4px; font-family: sans-serif; font-weight: 600;">Choose Username</label>
+    
+    <span style="font-size: 11px; color: #999; display: block; margin-bottom: 8px; font-family: sans-serif;">
+        * Use letters and numbers only (No spaces or symbols)
+    </span>
+
     <input type="text" id="m-username" name="username" placeholder="e.g. Chidera24" autocomplete="off" style="
         width: 100%; 
         padding: 15px; 
@@ -138,8 +143,8 @@
         box-sizing: border-box;
         transition: all 0.3s ease;">
     
-    <div id="user-gatekeeper-msg" style="font-size: 12px; margin-top: 8px; font-weight: 700; display: none; text-align: left;"></div>
-</div>
+    <div id="user-gatekeeper-msg" style="font-size: 12px; margin-top: 8px; font-weight: 700; display: none;"></div>
+    </div>
                 <div class="input-group">
                     <label>Referral ID (Optional)</label>
                     <input type="text" placeholder="Enter ID if you have one">
@@ -211,43 +216,45 @@
             }
         });
     </script>
-
-   <script>
+<script>
     const userBox = document.getElementById('m-username');
     const msgArea = document.getElementById('user-gatekeeper-msg');
     const otherInputs = document.querySelectorAll('input:not(#m-username)');
 
     const takenNames = ["chidera", "mochearn", "admin", "catalyst"];
 
-    // 1. LIVE EMOJI & SPACE KILLER
+    // 1. LIVE "WHY" FEEDBACK
     userBox.addEventListener('input', function() {
-        // This line kills emojis and spaces instantly while typing
-        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+        const original = this.value;
+        const clean = this.value.replace(/[^a-zA-Z0-9]/g, '');
         
-        msgArea.style.display = 'none';
-        userBox.style.borderColor = '#ddd';
-        toggleForm(true); 
+        // If they tried to type a symbol/space
+        if (original !== clean) {
+            this.value = clean;
+            showError("❌ Symbols and spaces are not allowed!");
+        } else {
+            msgArea.style.display = 'none';
+            userBox.style.borderColor = '#ddd';
+            toggleForm(true); 
+        }
     });
 
     userBox.addEventListener('blur', function() {
         const val = userBox.value.trim();
         if (val === "") return;
 
-        // Rule: Start with Letter
         if (!/^[a-zA-Z]/.test(val)) {
             showError("❌ Must start with a letter.");
             return;
         }
 
-        // Rule: Mix of Letter & Number
         const hasLetter = /[a-zA-Z]/.test(val);
         const hasNumber = /[0-9]/.test(val);
         if (!hasLetter || !hasNumber) {
-            showError("❌ Use both letters and numbers.");
+            showError("❌ Add at least one number (e.g. Sam77).");
             return;
         }
 
-        // Rule: Length 6+
         if (val.length < 6) {
             showError("❌ Too short! (Min 6 characters).");
             return;
