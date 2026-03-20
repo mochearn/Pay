@@ -718,98 +718,60 @@
     });
             </script>
 <style>
-    /* 1. LAYOUT */
+    /* 1. LAYOUT & CARD DESIGN */
     .stats-container { padding: 15px 20px; max-width: 600px; margin: 0 auto; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     
-    /* 2. ELEVATED CARD DESIGN */
     .stat-card { 
         background: #ffffff; 
         padding: 22px 16px; 
         border-radius: 18px; 
-        border: none; /* Removed permanent borders */
-        /* This makes the white card look "thicker" and different from background */
+        border: 2px solid transparent; /* Hidden border by default */
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); 
-        transition: transform 0.1s ease, border 0.1s ease;
+        transition: all 0.2s ease;
         cursor: pointer;
-        -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile */
+        -webkit-tap-highlight-color: transparent;
     }
 
-/* This class will be added by JavaScript to make the border stick */
-.stat-card.active-card { 
-    transform: scale(0.96); 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border: 2px solid #27ae60 !important;
-}
-
-    /* 4. TEXT STYLING */
-    .stat-label { 
-        font-size: 0.65rem; 
-        font-weight: 700; 
-        color: #888; 
-        text-transform: uppercase; 
-        margin-bottom: 10px; 
-        letter-spacing: 0.5px;
-    }
-    
-    .stat-value { 
-        font-family: 'Montserrat', sans-serif; 
-        font-size: 1.15rem; 
-        color: #1a1a1a; 
-        font-weight: 900; /* Extra Bold Money */
+    /* 2. THE STICKY GREEN CLASS (This is what makes it work) */
+    .stat-card.active-card { 
+        transform: scale(0.95); 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        border: 2px solid #27ae60 !important; 
     }
 
+    /* 3. TEXT STYLING */
+    .stat-label { font-size: 0.65rem; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 10px; }
+    .stat-value { font-family: sans-serif; font-size: 1.15rem; color: #1a1a1a; font-weight: 900; }
     .money-text { font-weight: 900; }
 </style>
 
 <div class="stats-container">
     <div class="stats-grid">
-        <div class="stat-card">
-            <p class="stat-label">Total Earnings</p>
-            <p class="stat-value"><span class="money-text" id="val-1">₦15500.85</span></p>
-        </div>
-        
-        <div class="stat-card">
-            <p class="stat-label">Today's Earnings</p>
-            <p class="stat-value"><span class="money-text" id="val-2">₦2400.30</span></p>
-        </div>
-        
-        <div class="stat-card">
-            <p class="stat-label">Total Sales</p>
-            <p class="stat-value" id="val-3">12</p>
-        </div>
-        
-        <div class="stat-card">
-            <p class="stat-label">Today's Sales</p>
-            <p class="stat-value" id="val-4">2</p>
-        </div>
-        
-        <div class="stat-card">
-            <p class="stat-label" style="color:#0088cc;">Current Balance</p>
-            <p class="stat-value"><span class="money-text" id="val-5">₦12000.45</span></p>
-        </div>
-        
-        <div class="stat-card">
-            <p class="stat-label">Withdrawn</p>
-            <p class="stat-value"><span class="money-text" id="val-6" style="color:#ff4444;">₦3500.40</span></p>
-        </div>
+        <div class="stat-card"><p class="stat-label">Total Earnings</p><p class="stat-value"><span class="money-text" id="val-1">₦15500.85</span></p></div>
+        <div class="stat-card"><p class="stat-label">Today's Earnings</p><p class="stat-value"><span class="money-text" id="val-2">₦2400.30</span></p></div>
+        <div class="stat-card"><p class="stat-label">Total Sales</p><p class="stat-value" id="val-3">12</p></div>
+        <div class="stat-card"><p class="stat-label">Today's Sales</p><p class="stat-value" id="val-4">2</p></div>
+        <div class="stat-card"><p class="stat-label" style="color:#0088cc;">Current Balance</p><p class="stat-value"><span class="money-text" id="val-5">₦12000.45</span></p></div>
+        <div class="stat-card"><p class="stat-label">Withdrawn</p><p class="stat-value"><span class="money-text" id="val-6" style="color:#ff4444;">₦3500.40</span></p></div>
     </div>
-    </div>
-    <script>
-    // 1. SELECT ALL CARDS
-    const allCards = document.querySelectorAll('.stat-grid .stat-card');
+</div>
 
-    // 2. ADD THE CLICK ACTION
-    allCards.forEach(card => {
+<script>
+    // THE CLICK HANDLER
+    const mochearnCards = document.querySelectorAll('.stat-card');
+
+    mochearnCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Remove the active class from every card first
-            allCards.forEach(c => c.classList.remove('active-card'));
-            
-            // Add the active class only to the one you tapped
+            // Remove active-card from everyone
+            mochearnCards.forEach(c => c.classList.remove('active-card'));
+            // Add to the one clicked
             this.classList.add('active-card');
         });
     });
-    </script>
+
+    // NOTE: Your 'Hide Balance' function togglePrivacy() should also be in your main script!
+</script>
 <div class="action-buttons-row" style="display: flex; gap: 10px; padding: 10px 0; width: 100%;">
 
     <a href="withdrawals.html" style="text-decoration: none; flex: 1;">
