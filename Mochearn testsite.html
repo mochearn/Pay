@@ -638,74 +638,85 @@
         if(c) { m_active = { c: c, s: localStorage.getItem('m_perm_s'), r: parseFloat(localStorage.getItem('m_perm_r')) }; m_update(); }
     });
 </script>
-    <div class="dashboard-controls" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; margin-top: 5px;">
+<div class="privacy-container" style="padding: 10px 15px; margin-top: 5px;">
     
-    <div id="privacy-btn" onclick="togglePrivacy()" style="display: flex; align-items: center; gap: 8px; cursor: pointer; background: #fff; padding: 8px 15px; border-radius: 20px; border: 1px solid #eee; transition: 0.3s;">
-        <svg id="eye-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
+    <div id="privacy-btn" onclick="togglePrivacy()" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; background: #fff; padding: 10px 18px; border-radius: 25px; border: 1px solid #eee; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <svg id="eye-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path id="eye-open" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle id="eye-pupil" cx="12" cy="12" r="3"></circle>
+            <line id="eye-slash" x1="1" y1="1" x2="23" y2="23" style="display: none;"></line>
         </svg>
-        <span id="privacy-text" style="font-size: 13px; font-weight: 700; color: #444;">Hide Balance</span>
-    </div>
 
-    <div class="currency-box" style="display: flex; align-items: center; background: #fff; padding: 6px 15px; border-radius: 20px; border: 1px solid #eee; gap: 8px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0084ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"></path>
-        </svg>
-        <span style="font-size: 13px; font-weight: 800; color: #0084ff;">NGN (₦)</span>
+        <span id="privacy-text" style="font-size: 14px; font-weight: 700; color: #333;">Hide Balance</span>
     </div>
 </div>
 
 <style>
-    /* CSS for the money elements */
-    .money-text { transition: all 0.2s ease-in-out; }
-    .privacy-active #privacy-btn { background: #0084ff; border-color: #0084ff; }
-    .privacy-active #privacy-btn span { color: #fff; }
-    .privacy-active #eye-svg { stroke: #fff; }
+    /* Styling for when Privacy is Active */
+    .privacy-active #privacy-btn {
+        background: #f8f9fa;
+        border-color: #ddd;
+    }
+    
+    /* Animation for the money hiding */
+    .money-text {
+        transition: opacity 0.2s ease;
+    }
 </style>
 
 <script>
     function togglePrivacy() {
         const body = document.body;
+        // Flip the state
         const isHidden = body.classList.toggle('privacy-active');
-        localStorage.setItem('mochearn_privacy', isHidden);
-        updateMoneyDisplay(isHidden);
+        
+        // Save to memory
+        localStorage.setItem('mochearn_privacy_state', isHidden);
+        
+        // Run the update
+        applyPrivacySettings(isHidden);
     }
 
-    function updateMoneyDisplay(hide) {
+    function applyPrivacySettings(hide) {
         const moneyElements = document.querySelectorAll('.money-text');
         const pText = document.getElementById('privacy-text');
-        const eyeSvg = document.getElementById('eye-svg');
+        const eyeSlash = document.getElementById('eye-slash');
+        const eyePupil = document.getElementById('eye-pupil');
 
         moneyElements.forEach(el => {
             if (hide) {
-                if (!el.hasAttribute('data-original')) {
-                    el.setAttribute('data-original', el.innerText);
+                // Save original value if not already saved
+                if (!el.getAttribute('data-real-value')) {
+                    el.setAttribute('data-real-value', el.innerText);
                 }
                 el.innerText = '****';
+                
+                // UI Updates
                 pText.innerText = 'Show Balance';
-                // Change to Eye-Off SVG
-                eyeSvg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+                eyeSlash.style.display = 'block'; // Show the slash stroke
+                eyePupil.style.opacity = '0.3';   // Fade the pupil slightly
             } else {
-                el.innerText = el.getAttribute('data-original') || el.innerText;
+                // Restore original value
+                el.innerText = el.getAttribute('data-real-value') || el.innerText;
+                
+                // UI Updates
                 pText.innerText = 'Hide Balance';
-                // Change back to Eye SVG
-                eyeSvg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+                eyeSlash.style.display = 'none';  // Remove the slash stroke
+                eyePupil.style.opacity = '1';     // Restore pupil
             }
         });
     }
 
-    // Load saved preference
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedPrivacy = localStorage.getItem('mochearn_privacy') === 'true';
+    // MEMORY: Check state when the page opens
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedPrivacy = localStorage.getItem('mochearn_privacy_state') === 'true';
         if (savedPrivacy) {
             document.body.classList.add('privacy-active');
-            updateMoneyDisplay(true);
+            applyPrivacySettings(true);
         }
     });
-</script>
+            </script>
     <style>
     .stats-container { padding: 15px 20px; max-width: 600px; margin: 0 auto; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
