@@ -717,23 +717,103 @@
         }
     });
             </script>
-    <style>
+<style>
+    /* 1. LAYOUT & DESIGN */
     .stats-container { padding: 15px 20px; max-width: 600px; margin: 0 auto; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .stat-card { background: #fff; padding: 20px 15px; border-radius: 12px; border: 1.2px solid #f2f2f2; }
-    .stat-label { font-size: 0.6rem; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 8px; }
+    
+    /* 2. CARD STYLES: Added transition for the tap animation */
+    .stat-card { 
+        background: #fff; 
+        padding: 20px 15px; 
+        border-radius: 18px; 
+        border: 1.5px solid #f2f2f2; 
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+
+    /* 3. TAP ANIMATION: Shrinks slightly when pressed */
+    .stat-card:active { 
+        transform: scale(0.95); 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .stat-label { font-size: 0.65rem; font-weight: 700; color: #aaa; text-transform: uppercase; margin-bottom: 8px; }
     .stat-value { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: #1a1a1a; font-weight: 800; }
+
+    /* 4. SLEEK COLORED BORDERS */
+    .border-blue { border-color: #0084ff !important; }
+    .border-green { border-color: #27ae60 !important; }
+    .border-yellow { border-color: #f1c40f !important; }
+    .border-purple { border-color: #9b59b6 !important; }
+    .border-red { border-color: #ff4d4d !important; }
+
+    /* Privacy text class for the script */
+    .money-text { display: inline-block; }
 </style>
 
 <div class="stats-container">
     <div class="stats-grid">
-        <div class="stat-card"><p class="stat-label">Total Earnings</p><p class="stat-value" id="val-1">₦15500.85</p></div>
-        <div class="stat-card"><p class="stat-label">Today's Earnings</p><p class="stat-value" id="val-2">₦2400.30</p></div>
-        <div class="stat-card"><p class="stat-label">Total Sales</p><p class="stat-value" id="val-3">12</p></div>
-        <div class="stat-card"><p class="stat-label">Today's Sales</p><p class="stat-value" id="val-4">2</p></div>
-        <div class="stat-card" style="border-color: #0088cc33;"><p class="stat-label" style="color:#0088cc;">Current Balance</p><p class="stat-value" id="val-5">₦12000.45</p></div>
-        <div class="stat-card"><p class="stat-label">Withdrawn</p><p class="stat-value" id="val-6" style="color:#ff4444;">₦3500.40</p></div>
+        <div class="stat-card border-blue"><p class="stat-label">Total Earnings</p><p class="stat-value"><span class="money-text" id="val-1">₦15500.85</span></p></div>
+        <div class="stat-card border-green"><p class="stat-label">Today's Earnings</p><p class="stat-value"><span class="money-text" id="val-2">₦2400.30</span></p></div>
+        <div class="stat-card border-yellow"><p class="stat-label">Total Sales</p><p class="stat-value" id="val-3">12</p></div>
+        <div class="stat-card border-purple"><p class="stat-label">Today's Sales</p><p class="stat-value" id="val-4">2</p></div>
+        
+        <div class="stat-card border-blue" style="background: #f0f7ff33;"><p class="stat-label" style="color:#0088cc;">Current Balance</p><p class="stat-value"><span class="money-text" id="val-5">₦12000.45</span></p></div>
+        
+        <div class="stat-card border-red"><p class="stat-label">Withdrawn</p><p class="stat-value"><span class="money-text" id="val-6" style="color:#ff4444;">₦3500.40</span></p></div>
     </div>
+</div>
+
+<script>
+    // THE PRIVACY LOGIC: Integrated with your hide toggle
+    function togglePrivacy() {
+        const moneyElements = document.querySelectorAll('.money-text');
+        const pText = document.getElementById('privacy-text');
+        const eyeSlash = document.getElementById('eye-slash');
+        const eyePupil = document.getElementById('eye-pupil');
+        
+        // Check if we are currently showing or hiding
+        const currentlyHidden = localStorage.getItem('mochearn_privacy') === 'true';
+        const newState = !currentlyHidden;
+
+        moneyElements.forEach(el => {
+            if (newState) {
+                // Store the real value before hiding
+                if (!el.hasAttribute('data-original')) {
+                    el.setAttribute('data-original', el.innerText);
+                }
+                el.innerText = "****";
+            } else {
+                // Restore the real value
+                el.innerText = el.getAttribute('data-original') || el.innerText;
+            }
+        });
+
+        // Update the Toggle Button UI
+        if (newState) {
+            pText.innerText = "Show Balance";
+            if(eyeSlash) eyeSlash.style.display = "block";
+            if(eyePupil) eyePupil.style.opacity = "0.3";
+        } else {
+            pText.innerText = "Hide Balance";
+            if(eyeSlash) eyeSlash.style.display = "none";
+            if(eyePupil) eyePupil.style.opacity = "1";
+        }
+
+        localStorage.setItem('mochearn_privacy', newState);
+    }
+
+    // Auto-load the preference on page refresh
+    window.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('mochearn_privacy') === 'true') {
+            // Wait a split second for currency switcher to load then hide
+            setTimeout(togglePrivacy, 100); 
+            // We run it twice to "flip" it back to the saved hidden state
+            localStorage.setItem('mochearn_privacy', 'false'); 
+        }
+    });
+    </script>
 <div class="action-buttons-row" style="display: flex; gap: 10px; padding: 10px 0; width: 100%;">
 
     <a href="withdrawals.html" style="text-decoration: none; flex: 1;">
