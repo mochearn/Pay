@@ -735,12 +735,12 @@
         -webkit-tap-highlight-color: transparent; /* Removes blue flash on mobile */
     }
 
-    /* 3. TAP ANIMATION & GREEN BORDER */
-    .stat-card:active { 
-        transform: scale(0.94); 
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        border: 2px solid #27ae60 !important; /* Shows green only on tap */
-    }
+/* This class will be added by JavaScript to make the border stick */
+.stat-card.active-card { 
+    transform: scale(0.96); 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 2px solid #27ae60 !important;
+}
 
     /* 4. TEXT STYLING */
     .stat-label { 
@@ -795,6 +795,21 @@
         </div>
     </div>
     </div>
+    <script>
+    // 1. SELECT ALL CARDS
+    const allCards = document.querySelectorAll('.stat-grid .stat-card');
+
+    // 2. ADD THE CLICK ACTION
+    allCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove the active class from every card first
+            allCards.forEach(c => c.classList.remove('active-card'));
+            
+            // Add the active class only to the one you tapped
+            this.classList.add('active-card');
+        });
+    });
+    </script>
 <div class="action-buttons-row" style="display: flex; gap: 10px; padding: 10px 0; width: 100%;">
 
     <a href="withdrawals.html" style="text-decoration: none; flex: 1;">
