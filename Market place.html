@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn Marketplace</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: #f9f9f9; padding: 20px; }
+
+        /* HEADER SECTION */
+        .market-header { display: flex; align-items: center; margin-bottom: 25px; gap: 15px; }
+        .back-btn { text-decoration: none; font-size: 24px; color: #333; font-weight: bold; }
+        .market-title { font-size: 20px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; }
+
+        /* PRODUCT CARD */
+        .p-card { 
+            background: #fff; 
+            border: 1px solid #eee; 
+            border-radius: 12px; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        /* TOP SECTION: IMAGE + NAME */
+        .p-top { display: flex; align-items: center; margin-bottom: 15px; }
+        
+        /* The Small Square with Round Edges */
+        .p-img { 
+            width: 50px; 
+            height: 50px; 
+            border-radius: 10px; /* Small round edges */
+            object-fit: cover; 
+            background: #f0f0f0; 
+            border: 1px solid #eee;
+        }
+
+        .p-info { margin-left: 12px; }
+        .p-name { display: block; font-weight: 700; color: #222; font-size: 16px; margin-bottom: 2px; }
+        .p-vendor { font-size: 11px; color: #27ae60; font-weight: 700; text-transform: uppercase; }
+
+        /* STATS SECTION */
+        .p-stats { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 12px 0; 
+            border-top: 1px dashed #eee; 
+            border-bottom: 1px dashed #eee; 
+        }
+        .stat-box { display: flex; flex-direction: column; }
+        .s-label { font-size: 10px; color: #aaa; text-transform: uppercase; margin-bottom: 4px; }
+        .s-value { font-size: 14px; font-weight: 700; color: #333; }
+
+        /* PROMOTE BUTTON */
+        .btn-promote { 
+            width: 100%; 
+            margin-top: 15px; 
+            background: #0084ff; 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            font-size: 14px;
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+        .btn-promote:active { transform: scale(0.98); background: #0073e6; }
+    </style>
+</head>
+<body>
+
+    <div class="market-header">
+        <a href="dashboard.html" class="back-btn">←</a>
+        <h1 class="market-title">Marketplace</h1>
+    </div>
+
+    <div class="p-card">
+        <div class="p-top">
+            <img src="jsystem-icon.png" class="p-img" alt="Product">
+            <div class="p-info">
+                <span class="p-name">The J-System</span>
+                <span class="p-vendor">By Mochearn</span>
+            </div>
+        </div>
+        
+        <div class="p-stats">
+            <div class="stat-box">
+                <span class="s-label">Price</span>
+                <span class="s-value">₦15,000</span>
+            </div>
+            <div class="stat-box">
+                <span class="s-label">Commission</span>
+                <span class="s-value">50% (₦7,500)</span>
+            </div>
+        </div>
+
+        <button class="btn-promote" onclick="copyLink('The J-System')">Promote Now</button>
+    </div>
+
+    <script>
+        function copyLink(productName) {
+            // Placeholder link - we can customize this later for each user
+            const dummyLink = "https://mochearn.com/jsystem?ref=bethuel"; 
+            navigator.clipboard.writeText(dummyLink);
+            alert("Success! " + productName + " link copied to clipboard. 🚀");
+        }
+    </script>
+
+</body>
+</html>
