@@ -27,25 +27,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- 2. THE EXPENSIVE RANK (RIGHT SIDE) --- */
-        .rank-wing { display: flex; flex-direction: column; align-items: center; margin-bottom: -5px; }
-        
-        .rank-crest { 
-            width: 55px; height: 55px; 
-            animation: rankPulse 2s infinite ease-in-out; /* Live Animation */
-        }
-        .rank-word { 
-            font-family: 'Montserrat', sans-serif; font-size: 0.6rem; 
-            color: #00ff88; font-weight: 900; text-transform: uppercase;
-            letter-spacing: 2px; margin-top: -10px;
-        }
-
-        @keyframes rankPulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
         /* --- 3. THE WELCOME CENTER --- */
         .welcome-area { padding: 45px 25px; }
         
@@ -105,6 +86,28 @@
     </style>
 </head>
 <body>
+    <header class="header-main" style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 900;">
+    
+    <div class="brand-block" style="display: flex; align-items: center; gap: 15px;">
+        <div class="hamburger" onclick="toggleMenu()" style="cursor:pointer;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </div>
+
+        <img src="mochearn-logo.png" alt="Logo" class="logo-img" style="height: 30px; width: auto;">
+        
+        <span class="dashboard-title" style="font-weight: 700; font-size: 16px; color: #333;">Catalyst Dashboard</span>
+    </div>
+
+    <div class="header-right">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" onclick="location.reload()" style="cursor:pointer;">
+            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+    </div>
+    </header>
 <div id="m-sidebar" class="sidebar">
     <div class="sidebar-header">
         <span class="close-btn" onclick="toggleMenu()">&times;</span>
@@ -182,15 +185,8 @@
                     </script>
                 <span class="dashboard-title">Catalyst Dashboard</span>
             </div>
-        </div>
-
-        <div class="rank-wing">
-            <div class="rank-crest" id="rankIcon">
-                <svg viewBox="0 0 100 100"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="#ddd" stroke-width="4"></path></svg>
-            </div>
-            <span class="rank-word" id="rankLabel">PREMIER</span>
-        </div>
-    </header>
+</div>
+</header>
 <div class="welcome-stack">
     <h1 id="greet">WELCOME BACK, <span class="user-name">BETHUEL</span></h1>
     <p id="status-report">Initializing secure connection...</p> 
