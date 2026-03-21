@@ -5,86 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mochearn Catalyst Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #ffffff; color: #333; overflow-x: hidden; }
-
-        /* --- 1. THE STRAIGHT-LINE HEADER --- */
-        .header-main {
-            display: flex; justify-content: space-between; align-items: flex-end;
-            padding: 15px 25px 10px; border-bottom: 1.5px solid #eee;
-            position: relative;
-        }
-
-        .brand-block { display: flex; flex-direction: column; align-items: flex-start; }
-        .mochearn-logo { width: 40px; height: 40px; margin-bottom: 5px; margin-left: 5px; } /* Sits high on top */
-        
-        .title-row { display: flex; align-items: center; gap: 10px; }
-        .hamburger { cursor: pointer; padding-bottom: 2px; }
-        .dashboard-title { 
-            font-family: 'Montserrat', sans-serif; font-size: 1.1rem; 
-            text-transform: uppercase; white-space: nowrap; /* Forces straight line */
-            letter-spacing: 0.5px;
-        }
-
-        /* --- 3. THE WELCOME CENTER --- */
-        .welcome-area { padding: 45px 25px; }
-        
-        .welcome-msg { 
-            font-family: 'Montserrat', sans-serif; font-size: 1.8rem; 
-            text-transform: uppercase; opacity: 0;
-            transform: translateY(20px);
-            animation: slideUpFade 0.8s forwards; /* Entrance Animation */
-        }
-        .user-blue { color: #0088cc; }
-
-        @keyframes slideUpFade {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        #status-report { 
-            font-size: 0.9rem; color: #888; margin-top: 10px; 
-            transition: opacity 0.5s; 
-        }
-/* CORRECTED VERSION: BLUE COLOR + ANIMATIONS RESTORED */
-.user-name { 
-    color: #0088cc !important; /* Mochearn Blue restored */
-    font-weight: 800;
-}
-
-.welcome-stack { 
-    padding: 35px 25px 0; 
-    text-align: left; 
-    min-height: 115px; /* Keeps the gap solid so the box doesn't jump */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.welcome-stack h1 { 
-    font-family: 'Montserrat', sans-serif; 
-    font-size: 1.6rem; 
-    text-transform: uppercase; 
-    margin-bottom: 5px;
-    /* Entrance Animation */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: slideUpFade 0.8s forwards; 
-}
-
-@keyframes slideUpFade {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#status-report { 
-    font-size: 0.82rem; 
-    color: #888; 
-    line-height: 1.4;
-    margin: 0;
-    transition: opacity 0.5s ease-in-out; /* Smooth transition for the loop */
-        }
-    </style>
-</head>
 <body>
 <header class="header-main" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 900; height: 60px;">
     
@@ -185,81 +105,61 @@
         }
     }
                     </script>
-            
-<div class="welcome-stack">
-    <h1 id="greet">WELCOME BACK, <span class="user-name">BETHUEL</span></h1>
-    <p id="status-report">Initializing secure connection...</p> 
+ <div id="mochearn-header" style="padding: 20px; display: flex; align-items: center; gap: 15px; background: #fff;">
+    
+    <a href="profile.html" style="text-decoration: none;">
+        <div id="user-avatar" style="width: 55px; height: 55px; background: #0084ff22; color: #0084ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; border: 2px solid #0084ff; transition: 0.2s;" onmousedown="this.style.transform='scale(0.9)'" onmouseup="this.style.transform='scale(1)'">
+            <span id="initials-text">U</span>
+        </div>
+    </a>
+
+    <div style="display: flex; flex-direction: column;">
+        <span id="banker-greeting" style="font-size: 14px; color: #666; font-weight: 500; margin-bottom: 2px;">
+            Welcome Back,
+        </span>
+        <span id="display-username" style="font-size: 22px; font-weight: 900; color: #0084ff; text-transform: uppercase; letter-spacing: -0.5px;">
+            Partner
+        </span>
+    </div>
 </div>
 
-    <script>
-        // A. TRIPLE-THREAT WELCOME LOGIC
-        const greetings = [
-            'WELCOME BACK, <span class="user-blue">BETHUEL</span>',
-            'SALUTE, <span class="user-blue">BETHUEL</span>',
-            'READY TO EARN, <span class="user-blue">BETHUEL</span>'
-        ];
-        
-        // Randomly pick one on every login/refresh
-        document.getElementById('loginGreeting').innerHTML = greetings[Math.floor(Math.random() * greetings.length)];
-
-        // B. EXPENSIVE ONE-WORD RANK ENGINE
-        function applyRank(sales) {
-            const icon = document.getElementById('rankIcon');
-            const label = document.getElementById('rankLabel');
-            
-            if (sales < 20) {
-                label.innerText = 'PREMIER';
-                icon.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="#ddd" stroke-width="5"></path></svg>`;
-            } else if (sales < 50) {
-                label.innerText = 'ELITE';
-                icon.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" fill="none" stroke="#0088cc" stroke-width="6"></path></svg>`;
-            }
-            // Add other ranks (VANGUARD, EXALTED, LEGEND) here
-        }
-        applyRank(15); // Testing Rank 1
-
 <script>
-    // 1. TRIPLE-THREAT WELCOME LOGIC (Randomizes on every login/refresh)
-    const welcomeGreetings = [
-        "WELCOME BACK,",
-        "SALUTE,",
-        "READY TO EARN,"
-    ];
-    
-    // Pick one at random
-    const randomGreet = welcomeGreetings[Math.floor(Math.random() * welcomeGreetings.length)];
-    
-    // Inject it into the H1 (Keeping the Blue Name)
-    document.getElementById('greet').innerHTML = `${randomGreet} <span class="user-name">BETHUEL</span>`;
+    function setupModernHeader() {
+        // 1. Pull the name from the registration storage
+        // Note: Make sure your signup page uses: localStorage.setItem('mochearn_user', name);
+        const fullName = localStorage.getItem('mochearn_user') || "Valued Partner";
+        
+        // 2. Display the Name in Mochearn Blue
+        document.getElementById('display-username').innerText = fullName;
 
+        // 3. Generate Initials (e.g., Jonard Bethuel -> JB)
+        const nameParts = fullName.split(' ');
+        let initials = "";
+        if (nameParts.length >= 2) {
+            initials = nameParts[0][0] + nameParts[1][0];
+        } else {
+            initials = nameParts[0][0]; // Just one letter if only one name
+        }
+        document.getElementById('initials-text').innerText = initials.toUpperCase();
 
-    // 2. THE MESSAGE LOOP ENGINE (Cycles every 7 seconds)
-    const reports = [
-        "Check the command center for new tasks. 🎁",
-        "Your empire is growing—12% increase today. 📈",
-        "Earnings are ready for verification. 💰",
-        "Security protocols are active and nominal. 🛡️"
-    ];
-    
-    let reportIndex = 0;
-    const reportElement = document.getElementById('status-report');
+        // 4. Banker Greeting Logic (Time-based)
+        const hour = new Date().getHours();
+        const greetingDisplay = document.getElementById('banker-greeting');
 
-    function startMessageLoop() {
-        // Change message every 7000ms (7 seconds)
-        setInterval(() => {
-            reportElement.style.opacity = 0; // Smooth Fade Out
-            
-            setTimeout(() => {
-                reportIndex = (reportIndex + 1) % reports.length;
-                reportElement.innerText = reports[reportIndex];
-                reportElement.style.opacity = 1; // Smooth Fade In
-            }, 500); // Wait 0.5s for the fade before changing text
-        }, 7000);
+        if (hour >= 5 && hour < 12) {
+            greetingDisplay.innerText = "Good Morning,";
+        } else if (hour >= 12 && hour < 17) {
+            greetingDisplay.innerText = "Good Afternoon,";
+        } else if (hour >= 17 && hour < 22) {
+            greetingDisplay.innerText = "Good Evening,";
+        } else {
+            greetingDisplay.innerText = "Working Late?";
+        }
     }
 
-    // Start the loop immediately when page loads
-    window.onload = startMessageLoop;
-</script>
+    // Run when page loads
+    window.addEventListener('DOMContentLoaded', setupModernHeader);
+     </script>
  <style>
     #intel-hub-container { width: 100%; display: flex; justify-content: center; padding-top: 10px; }
 
