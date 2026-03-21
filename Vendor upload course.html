@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard | Upload Course</title>
+    <style>
+        :root {
+            --banker-blue: #007bff;
+            --border-gray: #dee2cf;
+            --text-dark: #222;
+            --bg-light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-light);
+            margin: 0; padding: 0;
+        }
+
+        .vendor-header {
+            padding: 20px 5%;
+            background: white;
+            border-bottom: 2px solid var(--border-gray);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .container { width: 90%; margin: 30px auto; }
+
+        .form-card {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        h2 { font-weight: 900; font-size: 1.4rem; margin-top: 0; }
+
+        label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        /* DYNAMIC LESSON CARDS */
+        .lesson-entry {
+            background: #fafafa;
+            border: 1px dashed #bbb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .btn-add {
+            background: var(--banker-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-save {
+            background: #28a745; /* Success Green */
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vendor-header">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <h1 style="font-size: 1.2rem; font-weight: 900; margin: 0;">UPLOAD CONTENT</h1>
+    </div>
+</div>
+
+<div class="container">
+    
+    <div class="form-card">
+        <h2>1. PRODUCT SELECTION 📂</h2>
+        <label>Select Product to Link Academy Content:</label>
+        <select id="product-select">
+            <option value="jsystem">THE J-SYSTEM</option>
+            <option value="graphic_pro">GRAPHIC DESIGN MASTERY</option>
+        </select>
+    </div>
+
+    <div class="form-card">
+        <h2>2. ACADEMY CURRICULUM 📚</h2>
+        <div id="lesson-container">
+            <div class="lesson-entry">
+                <label>Lesson 1 Title:</label>
+                <input type="text" placeholder="e.g. Introduction to Sales">
+                
+                <label>Video Link (URL):</label>
+                <input type="text" placeholder="https://youtube.com/...">
+                
+                <label>Lesson Description:</label>
+                <textarea rows="3" placeholder="Briefly explain what this lesson covers..."></textarea>
+            </div>
+        </div>
+
+        <button class="btn-add" onclick="addLesson()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            ADD NEW LESSON
+        </button>
+    </div>
+
+    <button class="btn-save" onclick="publishCourse()">
+        SYNC TO ACADEMY & PUBLISH 🚀
+    </button>
+
+</div>
+
+<script>
+    let lessonCount = 1;
+
+    function addLesson() {
+        lessonCount++;
+        const container = document.getElementById('lesson-container');
+        const newLesson = document.createElement('div');
+        newLesson.className = 'lesson-entry';
+        newLesson.innerHTML = `
+            <label>Lesson ${lessonCount} Title:</label>
+            <input type="text" placeholder="e.g. Next Level Strategies">
+            
+            <label>Video Link (URL):</label>
+            <input type="text" placeholder="https://youtube.com/...">
+            
+            <label>Lesson Description:</label>
+            <textarea rows="3" placeholder="Explain the module..."></textarea>
+        `;
+        container.appendChild(newLesson);
+    }
+
+    function publishCourse() {
+        alert("Correct! Course successfully synced to the Academy.");
+        // Logic to save to localStorage 'mochearn_academy_data'
+    }
+</script>
+
+</body>
+</html>
