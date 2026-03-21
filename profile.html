@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn | Profile Settings</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9; /* Light banker gray background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* This ensures our "Oval" fix stays solid */
+        #profile-preview-circle {
+            aspect-ratio: 1 / 1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="profile-room" style="padding: 40px 20px; text-align: center; min-height: 100vh;">
+        
+        <div style="text-align: left; max-width: 400px; margin: 0 auto 30px auto;">
+            <a href="index.html" style="text-decoration: none; color: #0084ff; font-size: 14px; font-weight: 700;">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <h2 style="font-weight: 800; color: #1a1a1a; margin-bottom: 30px; letter-spacing: -1px;">Profile Settings</h2>
+
+        <div id="profile-preview-circle" style="
+            width: 110px; height: 110px; 
+            background: #0084ff11; color: #0084ff; 
+            border-radius: 50%; border: 3px solid #0084ff;
+            margin: 0 auto 15px auto;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px; font-weight: 900;
+        ">
+            <span id="preview-initials">VP</span>
+        </div>
+
+        <p style="color: #0084ff; font-weight: 700; font-size: 14px; margin-bottom: 40px;">
+            Partner Identity
+        </p>
+
+        <div style="text-align: left; max-width: 400px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; border: 1px solid #eee;">
+            <label style="font-size: 12px; color: #aaa; font-weight: 800; display: block; margin-bottom: 10px; letter-spacing: 1px;">FULL NAME</label>
+            
+            <input type="text" id="edit-fullname" placeholder="Enter your name" style="
+                width: 100%; padding: 15px; 
+                border: 2px solid #f0f0f0; border-radius: 12px; 
+                font-size: 16px; font-weight: 600; color: #1a1a1a;
+                outline: none; box-sizing: border-box;
+                background: #fafafa;
+            ">
+            
+            <p style="font-size: 12px; color: #aaa; margin-top: 10px; line-height: 1.4;">
+                Changing your name here will update your <strong>Mochearn ID</strong> and dashboard greeting.
+            </p>
+
+            <button onclick="saveProfileChanges()" style="
+                width: 100%; background: #0084ff; color: #fff; 
+                padding: 18px; border: none; border-radius: 15px; 
+                font-size: 16px; font-weight: 800; margin-top: 30px;
+                cursor: pointer; box-shadow: 0 8px 20px rgba(0, 132, 255, 0.2);
+            ">
+                Save Changes
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Pull existing data when the page opens
+        window.onload = function() {
+            const currentName = localStorage.getItem('mochearn_user') || "Valued Partner";
+            document.getElementById('edit-fullname').value = currentName;
+            updatePreview(currentName);
+        };
+
+        // 2. Update Initials in real-time as user types
+        document.getElementById('edit-fullname').oninput = function() {
+            updatePreview(this.value);
+        };
+
+        function updatePreview(name) {
+            const parts = name.trim().split(' ');
+            let initials = parts[0] ? parts[0][0] : "?";
+            if (parts.length >= 2 && parts[1][0]) {
+                initials += parts[1][0];
+            }
+            document.getElementById('preview-initials').innerText = initials.toUpperCase();
+        }
+
+        // 3. Save the new name to the "Brain" (localStorage)
+        function saveProfileChanges() {
+            const newName = document.getElementById('edit-fullname').value;
+            if(newName.trim() === "") {
+                alert("Please enter a valid name.");
+                return;
+            }
+            
+            localStorage.setItem('mochearn_user', newName);
+            alert("Profile updated! 🚀");
+            window.location.href = "index.html"; // Send them back to dashboard
+        }
+    </script>
+
+</body>
+  </html>
