@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mochearn | Product Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Lora:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --banker-blue: #007bff;
             --border-gray: #dee2cf;
-            --text-dark: #222;
-            --text-light: #777;
-            --bg-light: #f8f9fa;
-            --locked-gray: #e0e0e0;
+            --text-dark: #111;
+            --bg-light: #f4f7f6;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-light);
             margin: 0; padding: 0;
+            color: var(--text-dark);
         }
 
         .header {
-            padding: 25px 5%;
+            padding: 20px 5%;
             background: white;
             border-bottom: 2px solid var(--border-gray);
             display: flex;
@@ -31,117 +31,143 @@
 
         .container { width: 90%; margin: 25px auto; }
 
-        .page-title { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 20px; }
+        .page-title { 
+            font-family: 'Lora', serif; 
+            font-size: 1.6rem; 
+            margin-bottom: 20px; 
+        }
 
-        /* PRODUCT CARD */
+        /* PRODUCT CARD - COMPACT & SHORT 📏 */
         .product-card {
             background: white;
             border: 2px solid var(--border-gray);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 20px; /* Reduced padding to make it shorter */
             margin-bottom: 20px;
-            position: relative;
         }
 
         .badge {
-            font-size: 0.7rem;
-            font-weight: 800;
+            font-size: 0.75rem;
+            font-weight: 700;
             padding: 4px 10px;
-            border-radius: 5px;
+            border-radius: 6px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 12px;
         }
 
-        .badge-active { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .badge-locked { background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }
+        .badge-active { background: #e6fffa; color: #2c7a7b; border: 1px solid #b2f5ea; }
+        .badge-locked { background: #f7fafc; color: #a0aec0; border: 1px solid #e2e8f0; }
 
-        .product-name { font-weight: 900; font-size: 1.3rem; margin: 0 0 5px 0; }
-        .vendor-name { color: #28a745; font-weight: 700; font-size: 0.8rem; margin-bottom: 15px; }
+        .product-name { font-weight: 900; font-size: 1.2rem; margin: 0 0 4px 0; }
+        .vendor-name { color: #28a745; font-weight: 700; font-size: 0.85rem; margin-bottom: 15px; }
 
-        /* THE LINK BOX */
+        /* SCROLLABLE LINK BOX */
         .link-container {
-            background: #f1f3f5;
-            border: 1.5px solid var(--border-gray);
-            border-radius: 8px;
+            background: #fafbfc;
+            border: 1.5px solid #e1e4e8;
+            border-radius: 10px;
             padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-top: 15px;
+            gap: 12px;
         }
 
-        .link-text { font-size: 0.85rem; color: #555; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .link-text-wrapper {
+            flex-grow: 1;
+            overflow-x: auto; /* SCROLLABLE 🔗 */
+            white-space: nowrap;
+        }
+        
+        .link-text-wrapper::-webkit-scrollbar { height: 4px; }
+        .link-text-wrapper::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
+
+        .link-text { font-size: 0.85rem; color: #4a5568; font-family: monospace; }
 
         .copy-btn {
             background: var(--banker-blue);
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 8px 14px;
+            border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
             font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            flex-shrink: 0;
         }
 
-        .locked-overlay {
-            color: var(--text-light);
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-top: 10px;
+        .enroll-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            border: 2px solid var(--banker-blue);
+            color: var(--banker-blue);
+            background: transparent;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <h1 style="font-size: 1.2rem; font-weight: 900; margin: 0;">PRODUCTS</h1>
+    <div class="header" onclick="location.href='index.html'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <h1 style="font-size: 1.1rem; font-weight: 900; margin: 0;">PRODUCTS</h1>
     </div>
 
     <div class="container">
-        <div class="page-title">Available Products 🏛️</div>
+        <div class="page-title">Catalyst Assets 🏛️</div>
 
         <div class="product-card">
-            <span class="badge badge-active">Active</span>
+            <span class="badge badge-active">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Active
+            </span>
             <div class="product-name">THE J-SYSTEM MASTERCLASS</div>
             <div class="vendor-name">BY MOCHEARN</div>
             
-            <p style="font-size: 0.9rem; color: #666;">Copy your unique link below to start promoting and earning commissions.</p>
-            
             <div class="link-container">
-                <span class="link-text">https://mochearn.com/ref/bethuel_jsys_01</span>
-                <button class="copy-btn" onclick="copyLink()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <div class="link-text-wrapper">
+                    <span class="link-text" id="link-1">https://mochearn.com/ref/bethuel_odakwaji_jsystem_001_unique_id</span>
+                </div>
+                <button class="copy-btn" id="btn-1" onclick="copyText('link-1', 'btn-1')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     COPY
                 </button>
             </div>
         </div>
 
-        <div class="product-card" style="opacity: 0.8;">
-            <span class="badge badge-locked">Locked</span>
+        <div class="product-card">
+            <span class="badge badge-locked">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Locked
+            </span>
             <div class="product-name">GRAPHIC DESIGN PRO</div>
             <div class="vendor-name">BY CREATIVE HUB</div>
-            
-            <div class="locked-overlay">
-                🔒 Purchase this product to unlock your catalyst link.
-            </div>
-            
-            <button style="width: 100%; margin-top: 15px; padding: 12px; border: 2px solid var(--banker-blue); color: var(--banker-blue); background: transparent; border-radius: 8px; font-weight: 800; cursor: pointer;">
-                ENROLL TO PROMOTE
-            </button>
+            <button class="enroll-btn">ENROLL TO UNLOCK</button>
         </div>
-
     </div>
 
     <script>
-        function copyLink() {
-            alert("Correct! Link copied to clipboard. Go and cash out! 💰");
+        async function copyText(id, btnId) {
+            const text = document.getElementById(id).innerText;
+            const btn = document.getElementById(btnId);
+            try {
+                await navigator.clipboard.writeText(text);
+                btn.innerHTML = "COPIED!";
+                btn.style.background = "#28a745";
+                setTimeout(() => {
+                    btn.innerHTML = "COPY";
+                    btn.style.background = "#007bff";
+                }, 2000);
+            } catch (err) { console.error("Error copying"); }
         }
     </script>
-
 </body>
-        </html>
+    </html>
