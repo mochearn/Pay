@@ -3,184 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn Academy | Premium Training</title>
+    <title>Mochearn Academy | Professional</title>
     <style>
         :root {
             --banker-blue: #007bff;
             --border-gray: #dee2cf;
-            --text-dark: #333;
-            --bg-light: #f8f9fa;
+            --text-dark: #222;
+            --text-light: #666;
+            --bg-light: #f9f9f9;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-light);
             margin: 0;
             padding: 0;
             color: var(--text-dark);
         }
 
-        /* Header Navigation Area */
+        /* HEADER AREA */
         .academy-header {
-            padding: 20px;
+            padding: 25px 5%;
             display: flex;
             align-items: center;
             background: white;
-            border-bottom: 1px solid var(--border-gray);
+            border-bottom: 2px solid var(--border-gray);
         }
 
         .back-btn {
-            text-decoration: none;
-            font-size: 24px;
-            color: var(--text-dark);
-            margin-right: 15px;
+            margin-right: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
         }
 
-        /* Main Theater Container */
+        .header-title {
+            font-weight: 900; /* Extra Bold */
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
         .academy-container {
             width: 90%;
             margin: 20px auto;
         }
 
-        .course-title {
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Video Player Box */
-        .video-box {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        .video-box iframe, .video-box video {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Lesson Details Card */
-        .lesson-card {
-            background: white;
-            border: 2px solid var(--border-gray);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .lesson-card h2 {
-            margin-top: 0;
-            font-size: 1.2rem;
-            color: var(--banker-blue);
-        }
-
-        /* Curriculum List - No Locks! 🔓 */
-        .curriculum-list {
-            background: white;
-            border: 2px solid var(--border-gray);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .curriculum-item {
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .curriculum-item:last-child { border-bottom: none; }
-        .curriculum-item:hover { background: #f0f4ff; }
-
-        .curriculum-item.active {
-            background: #eef2ff;
-            border-left: 4px solid var(--banker-blue);
-        }
-
-        .lesson-info {
+        /* COURSE TITLE - BOLDER */
+        .course-main-title {
+            font-weight: 900;
+            font-size: 1.7rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .play-icon { color: var(--banker-blue); font-size: 1.2rem; }
+        /* LESSON TOPIC CARD (NOW ON TOP) */
+        .topic-card {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .topic-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--banker-blue);
+        }
+
+        .topic-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        /* VIDEO CONTAINER */
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 2px solid var(--border-gray);
+        }
+
+        /* CURRICULUM SECTION */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .curriculum-list {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .curriculum-item {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .curriculum-item:last-child { border-bottom: none; }
+        .curriculum-item:hover { background: #f4f7ff; }
+
+        .curriculum-item.active {
+            background: #f0f4ff;
+            border-left: 5px solid var(--banker-blue);
+        }
+
+        .lesson-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .duration {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* SVG STYLING */
+        svg { vertical-align: middle; }
     </style>
 </head>
 <body>
 
     <div class="academy-header">
-        <a href="index.html" class="back-btn">⬅️</a>
-        <h1 style="font-size: 1.2rem; margin: 0;">MY ACADEMY</h1>
+        <a href="index.html" class="back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <h1 class="header-title">MY ACADEMY</h1>
     </div>
 
     <div class="academy-container">
-        <div id="course-name-display" class="course-title">Loading Course... 🎓</div>
-
-        <div class="video-box">
-            <div style="color: white; display: flex; align-items: center; justify-content: center; height: 100%;">
-                🎥 Video Lesson Loading...
-            </div>
+        
+        <div class="course-main-title">
+            THE J-SYSTEM TRAINING 
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
         </div>
 
-        <div class="lesson-card">
-            <h2 id="current-lesson-title">Lesson 1: Introduction</h2>
-            <p id="lesson-desc" style="font-size: 0.9rem; color: #666;">
-                Welcome to your training. This lesson covers the foundational steps for success as a Catalyst on Mochearn. 🚀
+        <div class="topic-card">
+            <h2 id="lesson-title">Lesson 1: Introduction</h2>
+            <p id="lesson-desc">
+                Welcome to your training. This lesson covers the foundational steps for success as a Catalyst on Mochearn. Learn how to navigate your dashboard and maximize your sales potential.
             </p>
         </div>
 
-        <h3 style="margin-left: 5px;">Curriculum 📑</h3>
-        <div class="curriculum-list" id="curriculum-container">
-            <div class="curriculum-item active">
-                <div class="lesson-info">
-                    <span class="play-icon">▶️</span>
-                    <span>1. Welcome & Overview</span>
-                </div>
-                <span style="font-size: 0.8rem; color: #999;">10:00</span>
-            </div>
-            <div class="curriculum-item">
-                <div class="lesson-info">
-                    <span class="play-icon">▶️</span>
-                    <span>2. Understanding the J-System</span>
-                </div>
-                <span style="font-size: 0.8rem; color: #999;">15:45</span>
-            </div>
-            <div class="curriculum-item">
-                <div class="lesson-info">
-                    <span class="play-icon">▶️</span>
-                    <span>3. Setting Up Your Funnel</span>
-                </div>
-                <span style="font-size: 0.8rem; color: #999;">22:10</span>
+        <div class="video-wrapper">
+            <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #555;">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                <p style="margin-top: 10px; font-weight: 600;">Video Lesson Loading...</p>
             </div>
         </div>
+
+        <div class="section-label">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            CURRICULUM
+        </div>
+
+        <div class="curriculum-list">
+            <div class="curriculum-item active">
+                <div class="lesson-meta">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#007bff" stroke="#007bff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>1. Welcome & Overview</span>
+                </div>
+                <span class="duration">10:00</span>
+            </div>
+
+            <div class="curriculum-item">
+                <div class="lesson-meta">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>2. Understanding the J-System</span>
+                </div>
+                <span class="duration">15:45</span>
+            </div>
+
+            <div class="curriculum-item">
+                <div class="lesson-meta">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>3. Setting Up Your Funnel</span>
+                </div>
+                <span class="duration">22:10</span>
+            </div>
+        </div>
+
     </div>
 
-    <script>
-        // THE BRAIN 🧠
-        document.addEventListener('DOMContentLoaded', () => {
-            const activeCourse = localStorage.getItem('mochearn_active_course') || 'The J-System';
-            const courseDisplay = document.getElementById('course-name-display');
-            
-            // Set the Title Dynamically
-            if(activeCourse === 'jsystem') {
-                courseDisplay.innerText = "THE J-SYSTEM MASTERCLASS 🏦";
-            } else {
-                courseDisplay.innerText = activeCourse.toUpperCase() + " TRAINING 🎓";
-            }
-
-            // Correct! Everything is open, no 🔐 locks here.
-            console.log("Academy Loaded: All lessons accessible for Catalyst.");
-        });
-    </script>
 </body>
-</html>
+    </html>
