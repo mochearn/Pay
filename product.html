@@ -3,176 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn | Premium Product Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>Mochearn Catalyst | Product Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --banker-blue: #007bff;
-            --text-dark: #1a1a1a;
-            --text-muted: #888;
-            --bg-pure-white: #ffffff;
-            --soft-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --mochearn-green: #28a745;
+            --text-dark: #111111;
+            --text-gray: #777777;
+            --bg-body: #f7f9fb;
+            --card-white: #ffffff;
+            --strong-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --border-light: #e1e4e8;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-pure-white);
+            background-color: var(--bg-body);
             margin: 0; padding: 0;
             color: var(--text-dark);
             -webkit-font-smoothing: antialiased;
         }
 
-        /* HEADER AREA */
+        /* HEADER AREA (Correct Title) */
         .header {
-            padding: 15px 5%;
+            padding: 18px 5%;
             background: white;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
             border-bottom: 1px solid #f0f0f0;
         }
 
-        .container { width: 92%; margin: 20px auto; }
+        .container { width: 92%; margin: 25px auto; padding-bottom: 50px; }
 
-        /* THE BOLD TITLE WITH SVG SHIELD */
-        .section-header {
+        /* THE BOLD ASSETS TITLE */
+        .asset-row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 15px;
         }
 
-        .page-title { 
+        .asset-title { 
             font-weight: 900; 
-            font-size: 1.1rem; 
-            letter-spacing: 1px;
+            font-size: 1.15rem; 
+            letter-spacing: 0.8px;
             text-transform: uppercase;
             margin: 0;
         }
 
-        /* SLIM PRODUCT CARD 📏 */
-        .product-card {
+        /* SEARCH BAR IMPLEMENTATION */
+        .search-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            padding-left: 50px; /* Space for icon */
             background: white;
+            border: 1px solid var(--border-light);
             border-radius: 12px;
-            padding: 12px 18px; /* Tight padding for short height */
-            margin-bottom: 12px;
-            box-shadow: var(--soft-shadow);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--banker-blue);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+        }
+
+        /* REFINED PRODUCT CARD (THICKER, STRONG SHADOW) */
+        .product-card {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--strong-shadow); /* Strong Shadow! STRONG DROP */
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border: 1px solid #f0f0f0; /* Optional: very light border for crisper edge on strong shadow */
         }
 
         .card-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
-        /* SMALL, LONG TEXT ON ONE LINE */
+        /* ONE-LINE, SMALL, LONG TEXT Rule */
         .product-name { 
             font-weight: 800; 
-            font-size: 0.85rem; 
+            font-size: 0.8rem; /* Small & Long text rule */
             margin: 0;
             white-space: nowrap; 
             overflow: hidden; 
             text-overflow: ellipsis; 
-            max-width: 70%; /* Keeps it from hitting the badge */
+            max-width: 65%; /* Keeps it from overlapping badge */
+            color: #1a1a1a;
         }
 
         .badge {
             font-size: 0.65rem;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 4px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 5px;
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
         }
-        .badge-active { background: #eefdf5; color: #28a745; }
-        .badge-locked { background: #f8f9fa; color: #999; }
+        .badge-active { background: #e6fffa; color: #2c7a7b; border: 1.5px solid #b2f5ea; }
+        .badge-locked { background: #f7fafc; color: #a0aec0; border: 1.5px solid #e2e8f0; }
 
         .vendor-name { 
-            font-weight: 600; 
+            font-weight: 700; 
             font-size: 0.7rem; 
-            color: #28a745; 
-            margin-bottom: 10px;
+            color: var(--mochearn_green); 
+            margin-bottom: 18px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* SCROLLABLE LINK BOX - COMPACT */
+        /* SCROLLABLE LINK BAR (Fixed) */
         .link-bar {
-            background: #f9f9f9;
-            border-radius: 6px;
-            padding: 6px 10px;
+            background: #fafbfc;
+            border: 1.5px solid #e1e4e8;
+            border-radius: 10px;
+            padding: 8px 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .link-scroll {
             flex-grow: 1;
             overflow-x: auto;
             white-space: nowrap;
+            scrollbar-width: thin; /* Firefox */
         }
         
-        .link-scroll::-webkit-scrollbar { height: 0px; } /* Hidden but scrollable */
+        .link-scroll::-webkit-scrollbar { height: 4px; }
+        .link-scroll::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
 
+        /* LINK TEXT (Solid Black Rule) */
         .link-text { 
             font-size: 0.75rem; 
-            color: #666; 
-            font-family: monospace; 
+            color: var(--text-dark); /* Rule: Black Link Text */
+            font-family: 'Courier New', monospace; /* Professional link font */
         }
 
         .copy-btn {
             background: var(--banker-blue);
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 8px 15px;
+            border-radius: 8px;
             font-weight: 800;
             cursor: pointer;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             flex-shrink: 0;
+            text-transform: uppercase;
         }
 
-        .locked-btn {
+        /* LOCKED BUTTON (Green background, Black text Rule) */
+        .enroll-btn {
             width: 100%;
-            padding: 8px;
-            background: transparent;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            color: #999;
-            font-size: 0.75rem;
-            font-weight: 700;
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--mochearn_green); /* Green background Rule */
+            color: var(--text-dark); /* Black text Rule */
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
             cursor: pointer;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.2s;
+        }
+        
+        .enroll-btn:hover { background: #238d39; }
+
+        /* THE SCREEN TOP POPUP (TOAST) IMPLEMENTATION */
+        .copy-popup {
+            position: fixed;
+            top: -100px; /* Starts hidden off-screen */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #111111;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: top 0.3s ease-in-out;
+        }
+
+        .copy-popup.show {
+            top: 20px; /* Slides down from top center */
         }
     </style>
 </head>
 <body>
 
+    <div id="copy-toast" class="copy-popup">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>LINK COPIED! GO AND CASH OUT 💰</span>
+    </div>
+
     <div class="header">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <h1 style="font-size: 0.9rem; font-weight: 900; margin: 0;">MARKETPLACE</h1>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <h1 style="font-size: 1.05rem; font-weight: 900; margin: 0; text-transform: uppercase;">PRODUCTS</h1>
     </div>
 
     <div class="container">
         
-        <div class="section-header">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--banker-blue)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <h2 class="page-title">Catalyst Assets</h2>
+        <div class="asset-row">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--banker-blue)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <h2 class="asset-title">Catalyst Assets</h2>
+        </div>
+
+        <div class="search-container">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" class="search-input" placeholder="Search for a product...">
         </div>
 
         <div class="product-card">
             <div class="card-top-row">
-                <p class="product-name">THE J-SYSTEM MASTERCLASS FOR DIGITAL ENTREPRENEURS</p>
+                <p class="product-name">THE J-SYSTEM MASTERCLASS FOR AFRICAN ENTREPRENEURS 2026</p>
                 <span class="badge badge-active">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     Active
                 </span>
             </div>
@@ -180,10 +264,10 @@
             
             <div class="link-bar">
                 <div class="link-scroll">
-                    <span class="link-text" id="link1">https://mochearn.com/catalyst/access/ref_id=bethuel_odakwaji_jsystem_2026_premium</span>
+                    <span class="link-text" id="linkText1">https://mochearn.com/ref/catalyst_auth/unique_id_bethuel_jsys_premium_access_2026_link_end</span>
                 </div>
-                <button class="copy-btn" onclick="copyAction('link1', this)">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <button class="copy-btn" onclick="copyUniqueLink('linkText1', this)">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     COPY
                 </button>
             </div>
@@ -191,31 +275,47 @@
 
         <div class="product-card">
             <div class="card-top-row">
-                <p class="product-name">GRAPHIC DESIGN MASTERY AND BRANDING STRATEGY 2026</p>
+                <p class="product-name">GRAPHIC DESIGN MASTERY, BRANDING & 3D MODELLING ACADEMY</p>
                 <span class="badge badge-locked">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     Locked
                 </span>
             </div>
             <div class="vendor-name">By Creative Hub Int.</div>
-            <button class="locked-btn">Enroll to Promote</button>
+            <button class="enroll-btn">Enroll to Promote</button>
         </div>
 
     </div>
 
     <script>
-        async function copyAction(id, btn) {
-            const text = document.getElementById(id).innerText;
+        // STRONG CLIPBOARD & POPUP LOGIC 🧠
+        async function copyUniqueLink(elementId, btn) {
+            const linkText = document.getElementById(elementId).innerText;
+            
             try {
-                await navigator.clipboard.writeText(text);
+                // Correct! navigator.clipboard is the solid API we use.
+                await navigator.clipboard.writeText(linkText);
+                
+                // Show the Top Screen Popup
+                const toast = document.getElementById('copy-toast');
+                toast.classList.add('show');
+                
+                // Temporary button feedback
                 const originalText = btn.innerHTML;
-                btn.innerText = "COPIED!";
+                btn.innerText = "DONE!";
                 btn.style.background = "#28a745";
+                
+                // Remove Popup and Reset Button after 2.5 seconds
                 setTimeout(() => {
+                    toast.classList.remove('show');
                     btn.innerHTML = originalText;
                     btn.style.background = "#007bff";
-                }, 1500);
-            } catch (err) { console.error("Copy failed"); }
+                }, 2500);
+                
+            } catch (err) {
+                console.error("Link copy failed:", err);
+                alert("Failed to copy. Please copy manually.");
+            }
         }
     </script>
 </body>
