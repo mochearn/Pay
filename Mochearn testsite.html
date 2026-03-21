@@ -105,20 +105,33 @@
         }
     }
                     </script>
- <div id="mochearn-header" style="padding: 20px; display: flex; align-items: center; gap: 15px; background: #fff;">
+<div id="mochearn-header" style="padding: 20px 10px; display: flex; align-items: center; gap: 12px; background: #fff; width: 100%;">
     
-    <a href="profile.html" style="text-decoration: none;">
-        <div id="user-avatar" style="width: 45px; height: 55px; background: #0084ff22; color: #0084ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; border: 2px solid #0084ff; transition: 0.2s;" onmousedown="this.style.transform='scale(0.9)'" onmouseup="this.style.transform='scale(1)'">
-            <span id="initials-text">U</span>
+    <a href="profile.html" style="text-decoration: none; margin-left: -5px; flex-shrink: 0;">
+        <div id="user-avatar" style="
+            width: 55px; 
+            height: 55px; 
+            background: #0084ff11; 
+            color: #0084ff; 
+            border-radius: 50%; /* This makes it round */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            font-size: 18px; 
+            border: 2px solid #0084ff;
+            aspect-ratio: 1 / 1; /* Forces 1:1 ratio so it can't be oval */
+        ">
+            <span id="initials-text">VP</span>
         </div>
     </a>
 
-    <div style="display: flex; flex-direction: column;">
-        <span id="banker-greeting" style="font-size: 14px; color: #666; font-weight: 500; margin-bottom: 2px;">
-            Welcome Back,
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+        <span id="banker-greeting" style="font-size: 14px; color: #666; font-weight: 500; margin-bottom: 1px; line-height: 1;">
+            Good Afternoon,
         </span>
-        <span id="display-username" style="font-size: 22px; font-weight: 900; color: #0084ff; text-transform: uppercase; letter-spacing: -0.5px;">
-            Partner
+        <span id="display-username" style="font-size: 21px; font-weight: 900; color: #0084ff; text-transform: uppercase; letter-spacing: -0.5px; line-height: 1.2;">
+            Valued Partner
         </span>
     </div>
 </div>
