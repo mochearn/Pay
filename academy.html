@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn Academy | Premium Training</title>
+    <style>
+        :root {
+            --banker-blue: #007bff;
+            --border-gray: #dee2cf;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        /* Header Navigation Area */
+        .academy-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-right: 15px;
+        }
+
+        /* Main Theater Container */
+        .academy-container {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .course-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Video Player Box */
+        .video-box {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .video-box iframe, .video-box video {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Lesson Details Card */
+        .lesson-card {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .lesson-card h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--banker-blue);
+        }
+
+        /* Curriculum List - No Locks! 🔓 */
+        .curriculum-list {
+            background: white;
+            border: 2px solid var(--border-gray);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .curriculum-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .curriculum-item:last-child { border-bottom: none; }
+        .curriculum-item:hover { background: #f0f4ff; }
+
+        .curriculum-item.active {
+            background: #eef2ff;
+            border-left: 4px solid var(--banker-blue);
+        }
+
+        .lesson-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .play-icon { color: var(--banker-blue); font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <div class="academy-header">
+        <a href="index.html" class="back-btn">⬅️</a>
+        <h1 style="font-size: 1.2rem; margin: 0;">MY ACADEMY</h1>
+    </div>
+
+    <div class="academy-container">
+        <div id="course-name-display" class="course-title">Loading Course... 🎓</div>
+
+        <div class="video-box">
+            <div style="color: white; display: flex; align-items: center; justify-content: center; height: 100%;">
+                🎥 Video Lesson Loading...
+            </div>
+        </div>
+
+        <div class="lesson-card">
+            <h2 id="current-lesson-title">Lesson 1: Introduction</h2>
+            <p id="lesson-desc" style="font-size: 0.9rem; color: #666;">
+                Welcome to your training. This lesson covers the foundational steps for success as a Catalyst on Mochearn. 🚀
+            </p>
+        </div>
+
+        <h3 style="margin-left: 5px;">Curriculum 📑</h3>
+        <div class="curriculum-list" id="curriculum-container">
+            <div class="curriculum-item active">
+                <div class="lesson-info">
+                    <span class="play-icon">▶️</span>
+                    <span>1. Welcome & Overview</span>
+                </div>
+                <span style="font-size: 0.8rem; color: #999;">10:00</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-info">
+                    <span class="play-icon">▶️</span>
+                    <span>2. Understanding the J-System</span>
+                </div>
+                <span style="font-size: 0.8rem; color: #999;">15:45</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-info">
+                    <span class="play-icon">▶️</span>
+                    <span>3. Setting Up Your Funnel</span>
+                </div>
+                <span style="font-size: 0.8rem; color: #999;">22:10</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // THE BRAIN 🧠
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeCourse = localStorage.getItem('mochearn_active_course') || 'The J-System';
+            const courseDisplay = document.getElementById('course-name-display');
+            
+            // Set the Title Dynamically
+            if(activeCourse === 'jsystem') {
+                courseDisplay.innerText = "THE J-SYSTEM MASTERCLASS 🏦";
+            } else {
+                courseDisplay.innerText = activeCourse.toUpperCase() + " TRAINING 🎓";
+            }
+
+            // Correct! Everything is open, no 🔐 locks here.
+            console.log("Academy Loaded: All lessons accessible for Catalyst.");
+        });
+    </script>
+</body>
+</html>
