@@ -3,170 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn | Product Room</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Lora:wght@700&display=swap" rel="stylesheet">
+    <title>Mochearn | Premium Product Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --banker-blue: #007bff;
-            --border-gray: #dee2cf;
-            --text-dark: #111;
-            --bg-light: #f4f7f6;
+            --text-dark: #1a1a1a;
+            --text-muted: #888;
+            --bg-pure-white: #ffffff;
+            --soft-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
+            background-color: var(--bg-pure-white);
             margin: 0; padding: 0;
             color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* HEADER AREA */
         .header {
-            padding: 20px 5%;
+            padding: 15px 5%;
             background: white;
-            border-bottom: 2px solid var(--border-gray);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .container { width: 90%; margin: 25px auto; }
-
-        .page-title { 
-            font-family: 'Lora', serif; 
-            font-size: 1.6rem; 
-            margin-bottom: 20px; 
-        }
-
-        /* PRODUCT CARD - COMPACT & SHORT 📏 */
-        .product-card {
-            background: white;
-            border: 2px solid var(--border-gray);
-            border-radius: 16px;
-            padding: 20px; /* Reduced padding to make it shorter */
-            margin-bottom: 20px;
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 12px;
-        }
-
-        .badge-active { background: #e6fffa; color: #2c7a7b; border: 1px solid #b2f5ea; }
-        .badge-locked { background: #f7fafc; color: #a0aec0; border: 1px solid #e2e8f0; }
-
-        .product-name { font-weight: 900; font-size: 1.2rem; margin: 0 0 4px 0; }
-        .vendor-name { color: #28a745; font-weight: 700; font-size: 0.85rem; margin-bottom: 15px; }
-
-        /* SCROLLABLE LINK BOX */
-        .link-container {
-            background: #fafbfc;
-            border: 1.5px solid #e1e4e8;
-            border-radius: 10px;
-            padding: 10px;
             display: flex;
             align-items: center;
             gap: 12px;
+            border-bottom: 1px solid #f0f0f0;
         }
 
-        .link-text-wrapper {
+        .container { width: 92%; margin: 20px auto; }
+
+        /* THE BOLD TITLE WITH SVG SHIELD */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .page-title { 
+            font-weight: 900; 
+            font-size: 1.1rem; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* SLIM PRODUCT CARD 📏 */
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 18px; /* Tight padding for short height */
+            margin-bottom: 12px;
+            box-shadow: var(--soft-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        /* SMALL, LONG TEXT ON ONE LINE */
+        .product-name { 
+            font-weight: 800; 
+            font-size: 0.85rem; 
+            margin: 0;
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            max-width: 70%; /* Keeps it from hitting the badge */
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .badge-active { background: #eefdf5; color: #28a745; }
+        .badge-locked { background: #f8f9fa; color: #999; }
+
+        .vendor-name { 
+            font-weight: 600; 
+            font-size: 0.7rem; 
+            color: #28a745; 
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* SCROLLABLE LINK BOX - COMPACT */
+        .link-bar {
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .link-scroll {
             flex-grow: 1;
-            overflow-x: auto; /* SCROLLABLE 🔗 */
+            overflow-x: auto;
             white-space: nowrap;
         }
         
-        .link-text-wrapper::-webkit-scrollbar { height: 4px; }
-        .link-text-wrapper::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
+        .link-scroll::-webkit-scrollbar { height: 0px; } /* Hidden but scrollable */
 
-        .link-text { font-size: 0.85rem; color: #4a5568; font-family: monospace; }
+        .link-text { 
+            font-size: 0.75rem; 
+            color: #666; 
+            font-family: monospace; 
+        }
 
         .copy-btn {
             background: var(--banker-blue);
             color: white;
             border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 800;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             flex-shrink: 0;
         }
 
-        .enroll-btn {
+        .locked-btn {
             width: 100%;
-            margin-top: 15px;
-            padding: 12px;
-            border: 2px solid var(--banker-blue);
-            color: var(--banker-blue);
+            padding: 8px;
             background: transparent;
-            border-radius: 10px;
-            font-weight: 800;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #999;
+            font-size: 0.75rem;
+            font-weight: 700;
             cursor: pointer;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <div class="header" onclick="location.href='index.html'">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <h1 style="font-size: 1.1rem; font-weight: 900; margin: 0;">PRODUCTS</h1>
+    <div class="header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <h1 style="font-size: 0.9rem; font-weight: 900; margin: 0;">MARKETPLACE</h1>
     </div>
 
     <div class="container">
-        <div class="page-title">Catalyst Assets 🏛️</div>
+        
+        <div class="section-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--banker-blue)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <h2 class="page-title">Catalyst Assets</h2>
+        </div>
 
         <div class="product-card">
-            <span class="badge badge-active">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                Active
-            </span>
-            <div class="product-name">THE J-SYSTEM MASTERCLASS</div>
-            <div class="vendor-name">BY MOCHEARN</div>
+            <div class="card-top-row">
+                <p class="product-name">THE J-SYSTEM MASTERCLASS FOR DIGITAL ENTREPRENEURS</p>
+                <span class="badge badge-active">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Active
+                </span>
+            </div>
+            <div class="vendor-name">By Mochearn Official</div>
             
-            <div class="link-container">
-                <div class="link-text-wrapper">
-                    <span class="link-text" id="link-1">https://mochearn.com/ref/bethuel_odakwaji_jsystem_001_unique_id</span>
+            <div class="link-bar">
+                <div class="link-scroll">
+                    <span class="link-text" id="link1">https://mochearn.com/catalyst/access/ref_id=bethuel_odakwaji_jsystem_2026_premium</span>
                 </div>
-                <button class="copy-btn" id="btn-1" onclick="copyText('link-1', 'btn-1')">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <button class="copy-btn" onclick="copyAction('link1', this)">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     COPY
                 </button>
             </div>
         </div>
 
         <div class="product-card">
-            <span class="badge badge-locked">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                Locked
-            </span>
-            <div class="product-name">GRAPHIC DESIGN PRO</div>
-            <div class="vendor-name">BY CREATIVE HUB</div>
-            <button class="enroll-btn">ENROLL TO UNLOCK</button>
+            <div class="card-top-row">
+                <p class="product-name">GRAPHIC DESIGN MASTERY AND BRANDING STRATEGY 2026</p>
+                <span class="badge badge-locked">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    Locked
+                </span>
+            </div>
+            <div class="vendor-name">By Creative Hub Int.</div>
+            <button class="locked-btn">Enroll to Promote</button>
         </div>
+
     </div>
 
     <script>
-        async function copyText(id, btnId) {
+        async function copyAction(id, btn) {
             const text = document.getElementById(id).innerText;
-            const btn = document.getElementById(btnId);
             try {
                 await navigator.clipboard.writeText(text);
-                btn.innerHTML = "COPIED!";
+                const originalText = btn.innerHTML;
+                btn.innerText = "COPIED!";
                 btn.style.background = "#28a745";
                 setTimeout(() => {
-                    btn.innerHTML = "COPY";
+                    btn.innerHTML = originalText;
                     btn.style.background = "#007bff";
-                }, 2000);
-            } catch (err) { console.error("Error copying"); }
+                }, 1500);
+            } catch (err) { console.error("Copy failed"); }
         }
     </script>
 </body>
