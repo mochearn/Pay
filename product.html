@@ -10,11 +10,8 @@
             --banker-blue: #007bff;
             --mochearn-green: #28a745;
             --text-dark: #111111;
-            --text-gray: #777777;
-            --bg-body: #f7f9fb;
-            --card-white: #ffffff;
-            --strong-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            --border-light: #e1e4e8;
+            --bg-body: #ffffff;
+            --strong-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         body {
@@ -22,300 +19,164 @@
             background-color: var(--bg-body);
             margin: 0; padding: 0;
             color: var(--text-dark);
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* HEADER AREA (Correct Title) */
+        /* HEADER - FIXED POSITIONING */
         .header {
             padding: 18px 5%;
-            background: white;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 15px;
             border-bottom: 1px solid #f0f0f0;
         }
 
-        .container { width: 92%; margin: 25px auto; padding-bottom: 50px; }
+        .header h1 { font-size: 1.1rem; font-weight: 900; margin: 0; text-transform: uppercase; }
 
-        /* THE BOLD ASSETS TITLE */
-        .asset-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
+        .container { width: 92%; margin: 20px auto; }
 
-        .asset-title { 
-            font-weight: 900; 
-            font-size: 1.15rem; 
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            margin: 0;
-        }
+        .asset-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .asset-title { font-weight: 900; font-size: 1.1rem; text-transform: uppercase; margin: 0; }
 
-        /* SEARCH BAR IMPLEMENTATION */
-        .search-container {
-            position: relative;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
+        /* REAL SEARCH BAR */
+        .search-container { position: relative; width: 100%; margin-bottom: 25px; }
         .search-input {
-            width: 100%;
-            padding: 15px;
-            padding-left: 50px; /* Space for icon */
-            background: white;
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            box-sizing: border-box;
+            width: 100%; padding: 14px 14px 14px 45px;
+            border: 1.5px solid #eee; border-radius: 12px;
+            font-size: 0.9rem; box-sizing: border-box; outline: none;
         }
+        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999; }
 
-        .search-input:focus {
-            outline: none;
-            border-color: var(--banker-blue);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ccc;
-        }
-
-        /* REFINED PRODUCT CARD (THICKER, STRONG SHADOW) */
+        /* PRODUCT CARD - PREMIUM DEPTH */
         .product-card {
-            background: var(--card-white);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: var(--strong-shadow); /* Strong Shadow! STRONG DROP */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border: 1px solid #f0f0f0; /* Optional: very light border for crisper edge on strong shadow */
+            background: white; border-radius: 16px; padding: 20px;
+            margin-bottom: 20px; box-shadow: var(--strong-shadow);
+            display: flex; flex-direction: column;
         }
 
-        .card-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        /* ONE-LINE, SMALL, LONG TEXT Rule */
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        
+        /* TEXT DIFFERENTIATION */
         .product-name { 
-            font-weight: 800; 
-            font-size: 0.8rem; /* Small & Long text rule */
-            margin: 0;
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            max-width: 65%; /* Keeps it from overlapping badge */
-            color: #1a1a1a;
+            font-weight: 800; font-size: 0.8rem; margin: 0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%;
+            color: var(--text-dark); 
         }
-
-        .badge {
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .badge-active { background: #e6fffa; color: #2c7a7b; border: 1.5px solid #b2f5ea; }
-        .badge-locked { background: #f7fafc; color: #a0aec0; border: 1.5px solid #e2e8f0; }
 
         .vendor-name { 
-            font-weight: 700; 
-            font-size: 0.7rem; 
-            color: var(--mochearn_green); 
-            margin-bottom: 18px;
+            font-weight: 700; font-size: 0.7rem; 
+            color: var(--mochearn-green); margin-bottom: 15px; 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        /* SCROLLABLE LINK BAR (Fixed) */
+        /* ACTIVE BADGE - CORRECT GREEN WITH OPACITY */
+        .badge { font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 5px; text-transform: uppercase; }
+        .badge-active { background: rgba(40, 167, 69, 0.15); color: #1e7e34; }
+        .badge-locked { background: #f0f0f0; color: #888; }
+
+        /* LINK BAR */
         .link-bar {
-            background: #fafbfc;
-            border: 1.5px solid #e1e4e8;
-            border-radius: 10px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            background: #f9f9f9; border: 1px solid #eee; border-radius: 10px;
+            padding: 8px 12px; display: flex; align-items: center; gap: 10px;
         }
-
-        .link-scroll {
-            flex-grow: 1;
-            overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: thin; /* Firefox */
-        }
+        .link-scroll { flex-grow: 1; overflow-x: auto; white-space: nowrap; }
+        .link-scroll::-webkit-scrollbar { height: 0px; }
         
-        .link-scroll::-webkit-scrollbar { height: 4px; }
-        .link-scroll::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 10px; }
-
-        /* LINK TEXT (Solid Black Rule) */
-        .link-text { 
-            font-size: 0.75rem; 
-            color: var(--text-dark); /* Rule: Black Link Text */
-            font-family: 'Courier New', monospace; /* Professional link font */
-        }
+        /* LINK TEXT - BLACK & PROFESSIONAL */
+        .link-text { font-size: 0.75rem; color: #000; font-weight: 600; }
 
         .copy-btn {
-            background: var(--banker-blue);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-            text-transform: uppercase;
+            background: var(--banker-blue); color: white; border: none;
+            padding: 8px 15px; border-radius: 8px; font-weight: 800;
+            cursor: pointer; font-size: 0.7rem; flex-shrink: 0;
         }
 
-        /* LOCKED BUTTON (Green background, Black text Rule) */
+        /* ENROLL BUTTON - PERMANENT GREEN & BLACK TEXT */
         .enroll-btn {
-            width: 100%;
-            margin-top: 20px;
-            padding: 16px;
-            background: var(--mochearn_green); /* Green background Rule */
-            color: var(--text-dark); /* Black text Rule */
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-        }
-        
-        .enroll-btn:hover { background: #238d39; }
-
-        /* THE SCREEN TOP POPUP (TOAST) IMPLEMENTATION */
-        .copy-popup {
-            position: fixed;
-            top: -100px; /* Starts hidden off-screen */
-            left: 50%;
-            transform: translateX(-50%);
-            background: #111111;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 9999;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: top 0.3s ease-in-out;
+            width: 100%; margin-top: 15px; padding: 15px;
+            background: var(--mochearn-green); color: #000;
+            border: none; border-radius: 12px; font-weight: 800;
+            font-size: 0.9rem; text-transform: uppercase; cursor: pointer;
         }
 
-        .copy-popup.show {
-            top: 20px; /* Slides down from top center */
+        /* FLOATING TOAST POPUP */
+        .toast {
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+            background: #000; color: #fff; padding: 12px 25px;
+            border-radius: 30px; font-size: 0.8rem; font-weight: 700;
+            z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
+        .toast.show { top: 25px; }
     </style>
 </head>
 <body>
 
-    <div id="copy-toast" class="copy-popup">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        <span>LINK COPIED! GO AND CASH OUT 💰</span>
-    </div>
+    <div id="copy-toast" class="toast">LINK COPIED! GO AND CASH OUT 💰</div>
 
     <div class="header">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <h1 style="font-size: 1.05rem; font-weight: 900; margin: 0; text-transform: uppercase;">PRODUCTS</h1>
+        <h1>Products</h1>
     </div>
 
     <div class="container">
-        
         <div class="asset-row">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--banker-blue)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             <h2 class="asset-title">Catalyst Assets</h2>
         </div>
 
         <div class="search-container">
-            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" class="search-input" placeholder="Search for a product...">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="productSearch" class="search-input" placeholder="Search for a product..." onkeyup="filterProducts()">
         </div>
 
-        <div class="product-card">
-            <div class="card-top-row">
-                <p class="product-name">THE J-SYSTEM MASTERCLASS FOR AFRICAN ENTREPRENEURS 2026</p>
-                <span class="badge badge-active">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Active
-                </span>
-            </div>
-            <div class="vendor-name">By Mochearn Official</div>
-            
-            <div class="link-bar">
-                <div class="link-scroll">
-                    <span class="link-text" id="linkText1">https://mochearn.com/ref/catalyst_auth/unique_id_bethuel_jsys_premium_access_2026_link_end</span>
+        <div id="productList">
+            <div class="product-card">
+                <div class="card-top">
+                    <p class="product-name">THE J-SYSTEM MASTERCLASS 2026</p>
+                    <span class="badge badge-active">Active</span>
                 </div>
-                <button class="copy-btn" onclick="copyUniqueLink('linkText1', this)">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    COPY
-                </button>
+                <div class="vendor-name">By Mochearn Official</div>
+                <div class="link-bar">
+                    <div class="link-scroll"><span class="link-text" id="link1">https://mochearn.com/ref/auth/jsystem_bethuel_2026</span></div>
+                    <button class="copy-btn" onclick="copyLink('link1')">COPY</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <p class="product-name">GRAPHIC DESIGN MASTERY PRO</p>
+                    <span class="badge badge-locked">Locked</span>
+                </div>
+                <div class="vendor-name">By Creative Hub Int.</div>
+                <button class="enroll-btn">Enroll to Promote</button>
             </div>
         </div>
-
-        <div class="product-card">
-            <div class="card-top-row">
-                <p class="product-name">GRAPHIC DESIGN MASTERY, BRANDING & 3D MODELLING ACADEMY</p>
-                <span class="badge badge-locked">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    Locked
-                </span>
-            </div>
-            <div class="vendor-name">By Creative Hub Int.</div>
-            <button class="enroll-btn">Enroll to Promote</button>
-        </div>
-
     </div>
 
     <script>
-        // STRONG CLIPBOARD & POPUP LOGIC 🧠
-        async function copyUniqueLink(elementId, btn) {
-            const linkText = document.getElementById(elementId).innerText;
-            
-            try {
-                // Correct! navigator.clipboard is the solid API we use.
-                await navigator.clipboard.writeText(linkText);
-                
-                // Show the Top Screen Popup
-                const toast = document.getElementById('copy-toast');
-                toast.classList.add('show');
-                
-                // Temporary button feedback
-                const originalText = btn.innerHTML;
-                btn.innerText = "DONE!";
-                btn.style.background = "#28a745";
-                
-                // Remove Popup and Reset Button after 2.5 seconds
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                    btn.innerHTML = originalText;
-                    btn.style.background = "#007bff";
-                }, 2500);
-                
-            } catch (err) {
-                console.error("Link copy failed:", err);
-                alert("Failed to copy. Please copy manually.");
+        // REAL SEARCH LOGIC 🔍
+        function filterProducts() {
+            let input = document.getElementById('productSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('product-card');
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getElementsByClassName('product-name')[0].innerText.toLowerCase();
+                cards[i].style.display = name.includes(input) ? "flex" : "none";
             }
+        }
+
+        // BULLETPROOF COPY LOGIC 🛡️
+        function copyLink(id) {
+            const text = document.getElementById(id).innerText;
+            const elem = document.createElement('textarea');
+            elem.value = text;
+            document.body.appendChild(elem);
+            elem.select();
+            document.execCommand('copy');
+            document.body.removeChild(elem);
+
+            const toast = document.getElementById('copy-toast');
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 2500);
         }
     </script>
 </body>
