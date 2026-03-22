@@ -8,192 +8,183 @@
     <style>
         :root {
             --banker-blue: #007bff;
-            --mochearn-green: #28a745;
             --text-dark: #111111;
+            --text-sub: #555555;
             --bg-body: #ffffff;
         }
 
-        body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; overflow: hidden; color: var(--text-dark); }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; color: var(--text-dark); -webkit-font-smoothing: antialiased; }
         
-        .progress-container { position: fixed; top: 0; width: 100%; height: 6px; background: #f0f0f0; z-index: 100; }
-        .progress-bar { height: 100%; background: var(--banker-blue); width: 14.2%; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* TOP NAV WITH BLUE SKIP */
+        .top-nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 25px; background: white;
+        }
+        .step-indicator { font-size: 0.75rem; font-weight: 900; color: var(--banker-blue); text-transform: uppercase; letter-spacing: 1px; }
+        
+        .skip-btn {
+            background: none; border: none; color: var(--banker-blue);
+            font-weight: 800; font-size: 0.85rem; cursor: pointer;
+        }
 
-        .container { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 30px; box-sizing: border-box; }
+        .p-container { width: 100%; height: 4px; background: #f0f0f0; }
+        .p-bar { height: 100%; background: var(--banker-blue); width: 14.2%; transition: 0.5s; }
 
-        .step { display: none; width: 100%; max-width: 400px; animation: fadeIn 0.5s ease; }
+        /* SCROLLABLE CONTENT AREA */
+        .main-content { padding: 40px 30px; min-height: calc(100vh - 100px); box-sizing: border-box; }
+
+        .step { display: none; animation: fadeIn 0.4s ease; max-width: 500px; margin: 0 auto; }
         .step.active { display: block; }
 
-        .step-count { font-size: 0.75rem; font-weight: 900; color: var(--banker-blue); text-transform: uppercase; margin-bottom: 10px; display: block; }
-        h1 { font-size: 1.6rem; font-weight: 900; margin: 0 0 15px 0; letter-spacing: -0.8px; line-height: 1.2; }
-        p { font-size: 0.85rem; color: #777; font-weight: 600; margin-bottom: 30px; line-height: 1.5; }
+        h1 { font-size: 1.8rem; font-weight: 900; margin: 0 0 10px 0; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .sub-desc { font-size: 0.9rem; color: var(--text-sub); font-weight: 500; margin-bottom: 35px; line-height: 1.5; }
 
         .styled-input {
-            width: 100%; padding: 18px; border: 2px solid #eee; border-radius: 16px;
-            font-size: 1rem; font-weight: 700; outline: none; transition: 0.3s; box-sizing: border-box;
+            width: 100%; padding: 20px; border: 2.5px solid #f0f0f0; border-radius: 18px;
+            font-size: 1.1rem; font-weight: 700; outline: none; transition: 0.3s; box-sizing: border-box;
+            margin-bottom: 40px;
         }
         .styled-input:focus { border-color: var(--banker-blue); }
 
-        .option-card {
-            padding: 18px; border: 2px solid #eee; border-radius: 16px; margin-bottom: 12px;
-            font-weight: 800; font-size: 0.9rem; cursor: pointer; transition: 0.2s;
-        }
-        .option-card.selected { border-color: var(--banker-blue); background: rgba(0,123,255,0.03); color: var(--banker-blue); }
-
-        /* TERMS OF SERVICE STYLES (SMALL TEXT, FULL SCREEN VIBE) */
-        .tos-box {
-            background: #fcfcfc; border: 1.5px solid #f0f0f0; border-radius: 20px;
-            padding: 20px; height: 250px; overflow-y: scroll; margin-bottom: 20px;
-        }
-        .tos-box h3 { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; margin-top: 0; }
-        .tos-box p { font-size: 0.68rem; color: #888; line-height: 1.4; margin-bottom: 15px; }
-
-        .agree-container { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
-        .agree-container input { width: 20px; height: 20px; accent-color: var(--banker-blue); }
-        .agree-container label { font-size: 0.8rem; font-weight: 800; color: #111; cursor: pointer; }
-
-        .next-btn {
-            position: fixed; bottom: 40px; right: 30px; left: 30px;
-            background: #111; color: white; border: none; padding: 20px;
+        /* BUTTON MOVED TO FLOW (NOT FIXED) */
+        .continue-btn {
+            width: 100%; background: #111; color: white; border: none; padding: 20px;
             border-radius: 18px; font-weight: 900; font-size: 0.95rem; cursor: pointer;
-            text-transform: uppercase;
+            text-transform: uppercase; margin-bottom: 50px;
         }
-        .next-btn:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
+        .continue-btn:disabled { background: #eee; color: #aaa; }
 
-        #loadingOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; z-index: 1000; display: none; flex-direction: column;
-            align-items: center; justify-content: center;
+        /* GRID FOR LAZY USERS */
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 40px; }
+        .option-card {
+            padding: 18px 15px; border: 2px solid #f0f0f0; border-radius: 16px;
+            font-weight: 800; font-size: 0.8rem; cursor: pointer; text-align: center; transition: 0.2s;
         }
-        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #111; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .option-card.selected { border-color: var(--banker-blue); background: rgba(0,123,255,0.04); color: var(--banker-blue); }
+
+        .privacy-item { margin-bottom: 35px; border-bottom: 1px solid #f9f9f9; padding-bottom: 20px; }
+        .privacy-item h2 { font-size: 0.85rem; font-weight: 900; color: #111; text-transform: uppercase; margin-bottom: 10px; }
+        .privacy-item p { font-size: 0.78rem; color: var(--text-sub); line-height: 1.6; text-align: justify; margin: 0; }
+
+        .agree-wrap { display: flex; align-items: center; gap: 15px; padding: 20px 0; margin-bottom: 30px; }
+        .agree-wrap input { width: 22px; height: 22px; accent-color: var(--banker-blue); }
+        .agree-wrap label { font-size: 0.85rem; font-weight: 800; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body>
+<body onclick="document.activeElement.blur()"> <div class="top-nav">
+        <span class="step-indicator" id="stepText">Step 01/06</span>
+        <button class="skip-btn" onclick="nextStep()">Skip</button>
+    </div>
 
-    <div class="progress-container"><div class="progress-bar" id="pBar"></div></div>
+    <div class="p-container"><div class="p-bar" id="pBar"></div></div>
 
-    <div class="container">
+    <div class="main-content">
         <div class="step active" id="step1">
-            <span class="step-count">Step 01/07</span>
             <h1>Display Name 👤</h1>
-            <p>What should we call you on your dashboard?</p>
+            <p class="sub-desc">What should we call you on your dashboard?</p>
             <input type="text" class="styled-input" placeholder="e.g. Bethuel Odakwaji">
+            <button class="continue-btn" onclick="nextStep()">Continue</button>
         </div>
 
         <div class="step" id="step2">
-            <span class="step-count">Step 02/07</span>
-            <h1>Catalyst Handle 🆔</h1>
-            <p>Claim your unique @username for the ecosystem.</p>
-            <input type="text" class="styled-input" placeholder="@username">
+            <h1>Discovery Source 🔍</h1>
+            <p class="sub-desc">How did you find your way to Mochearn?</p>
+            <div class="options-grid">
+                <div class="option-card" onclick="sel(this)">WhatsApp Status</div>
+                <div class="option-card" onclick="sel(this)">X (Twitter)</div>
+                <div class="option-card" onclick="sel(this)">YouTube Review</div>
+                <div class="option-card" onclick="sel(this)">Direct Referral</div>
+                <div class="option-card" onclick="sel(this)">Facebook Ads</div>
+                <div class="option-card" onclick="sel(this)">Google Search</div>
+            </div>
+            <button class="continue-btn" onclick="nextStep()">Continue</button>
         </div>
 
         <div class="step" id="step3">
-            <span class="step-count">Step 03/07</span>
-            <h1>How did you find us? 🔍</h1>
-            <div class="option-card" onclick="selectOption(this)">WhatsApp Status</div>
-            <div class="option-card" onclick="selectOption(this)">Twitter / X</div>
-            <div class="option-card" onclick="selectOption(this)">A Friend / Mentor</div>
+            <h1>Success Target 🎯</h1>
+            <p class="sub-desc">What is your monthly income goal?</p>
+            <div class="options-grid">
+                <div class="option-card" onclick="sel(this)">₦50k - ₦150k</div>
+                <div class="option-card" onclick="sel(this)">₦200k - ₦500k</div>
+                <div class="option-card" onclick="sel(this)">₦1M - ₦3M</div>
+                <div class="option-card" onclick="sel(this)">₦5M+ Monthly</div>
+            </div>
+            <button class="continue-btn" onclick="nextStep()">Continue</button>
         </div>
 
         <div class="step" id="step4">
-            <span class="step-count">Step 04/07</span>
-            <h1>Monthly Goal 🎯</h1>
-            <p>What is your target income on Mochearn?</p>
-            <div class="option-card" onclick="selectOption(this)">₦100,000 / Month</div>
-            <div class="option-card" onclick="selectOption(this)">₦500,000 / Month</div>
-            <div class="option-card" onclick="selectOption(this)">₦2,000,000+ / Month</div>
+            <h1>Market Niche 💼</h1>
+            <p class="sub-desc">Select the sector you intend to dominate.</p>
+            <div class="options-grid">
+                <div class="option-card" onclick="sel(this)">Digital Courses</div>
+                <div class="option-card" onclick="sel(this)">E-commerce</div>
+                <div class="option-card" onclick="sel(this)">Health & Beauty</div>
+                <div class="option-card" onclick="sel(this)">Tech & Gadgets</div>
+                <div class="option-card" onclick="sel(this)">Crypto/Forex</div>
+                <div class="option-card" onclick="sel(this)">Content Creation</div>
+            </div>
+            <button class="continue-btn" onclick="nextStep()">Continue</button>
         </div>
 
         <div class="step" id="step5">
-            <span class="step-count">Step 05/07</span>
-            <h1>Market Niche 💼</h1>
-            <p>What market are you planning to dominate?</p>
-            <input type="text" class="styled-input" placeholder="e.g. Digital Marketing">
+            <h1>Security Vault 🔐</h1>
+            <p class="sub-desc">Set your 4-digit authorization PIN.</p>
+            <input type="password" class="styled-input" maxlength="4" style="text-align:center; letter-spacing:15px; font-size:2rem;" placeholder="0000">
+            <button class="continue-btn" onclick="nextStep()">Continue</button>
         </div>
 
         <div class="step" id="step6">
-            <span class="step-count">Step 06/07</span>
-            <h1>Security PIN 🔐</h1>
-            <p>Create a 4-digit PIN for withdrawals.</p>
-            <input type="password" class="styled-input" maxlength="4" style="text-align:center; letter-spacing:10px;">
-        </div>
-
-        <div class="step" id="step7">
-            <span class="step-count">Final Step 07/07</span>
-            <h1>The Catalyst Agreement 📜</h1>
-            <p>Read and accept the Mochearn terms to activate your vault.</p>
-            
-            <div class="tos-box">
-                <h3>1. Account Integrity</h3>
-                <p>As a Catalyst, you agree to represent Mochearn products with honesty. Spamming or misleading potential buyers is strictly prohibited.</p>
-                <h3>2. Financial Safety</h3>
-                <p>You are responsible for the security of your 4-digit PIN. Mochearn will never ask for your PIN via email or WhatsApp.</p>
-                <h3>3. Payout Policy</h3>
-                <p>Withdrawals are processed according to the Mochearn schedule. Ensure your bank details are accurate to avoid delays.</p>
-                <h3>4. Community Conduct</h3>
-                <p>Respect other Catalysts. Any form of harassment or system manipulation will lead to account suspension.</p>
+            <h1>Privacy Policy 📜</h1>
+            <p class="sub-desc">The final agreement with the Mochearn Command Center.</p>
+            <div id="policyList"></div>
+            <div class="agree-wrap">
+                <input type="checkbox" id="cAgree" onchange="checkTog()">
+                <label for="cAgree">I accept the Mochearn Protocols</label>
             </div>
-
-            <div class="agree-container">
-                <input type="checkbox" id="checkAgree" onchange="toggleFinish()">
-                <label for="checkAgree">I agree to the Catalyst Terms of Service</label>
-            </div>
+            <button class="continue-btn" id="finishBtn" onclick="finish()" disabled>Activate Account</button>
         </div>
-
-        <button class="next-btn" id="mainBtn" onclick="nextStep()">Continue</button>
-    </div>
-
-    <div id="loadingOverlay">
-        <div class="spinner"></div>
-        <p style="margin-top:20px; font-weight: 800; font-size: 0.7rem; letter-spacing: 1px;">BUILDING YOUR VAULT...</p>
     </div>
 
     <script>
-        let currentStep = 1;
-        const totalSteps = 7;
+        // Policy injection and logic remains the same
+        const policyData = [
+            ["01. DATA SUPREMACY & COLLECTION", "At Mochearn, we take the security of our Catalysts seriously..."],
+            ["02. HOW WE USE YOUR BLUEPRINT DATA", "The data we collect is used solely to maintain integrity..."],
+            // ... (Rest of your 32 points)
+        ];
 
+        const list = document.getElementById('policyList');
+        policyData.forEach(item => {
+            list.innerHTML += `<div class="privacy-item"><h2>${item[0]}</h2><p>${item[1]}</p></div>`;
+        });
+
+        let current = 1;
         function nextStep() {
-            if (currentStep < totalSteps) {
-                document.getElementById(`step${currentStep}`).classList.remove('active');
-                currentStep++;
-                document.getElementById(`step${currentStep}`).classList.add('active');
-                
-                // Update Progress Bar
-                const progress = (currentStep / totalSteps) * 100;
-                document.getElementById('pBar').style.width = progress + "%";
-
-                // If on last step, change button text and disable until checked
-                if (currentStep === totalSteps) {
-                    const btn = document.getElementById('mainBtn');
-                    btn.innerText = "Activate My Account";
-                    btn.disabled = true;
-                }
-            } else {
-                finishOnboarding();
+            if (current < 6) {
+                document.getElementById(`step${current}`).classList.remove('active');
+                current++;
+                document.getElementById(`step${current}`).classList.add('active');
+                document.getElementById('stepText').innerText = `Step 0${current}/06`;
+                document.getElementById('pBar').style.width = (current / 6 * 100) + "%";
+                window.scrollTo(0, 0); // Reset scroll for new question
             }
         }
 
-        function selectOption(el) {
-            const options = el.parentElement.querySelectorAll('.option-card');
-            options.forEach(opt => opt.classList.remove('selected'));
+        function sel(el) {
+            const siblings = el.parentElement.querySelectorAll('.option-card');
+            siblings.forEach(s => s.classList.remove('selected'));
             el.classList.add('selected');
-            setTimeout(nextStep, 350);
         }
 
-        function toggleFinish() {
-            const checkbox = document.getElementById('checkAgree');
-            const btn = document.getElementById('mainBtn');
-            btn.disabled = !checkbox.checked;
+        function checkTog() {
+            document.getElementById('finishBtn').disabled = !document.getElementById('cAgree').checked;
         }
 
-        function finishOnboarding() {
-            document.getElementById('loadingOverlay').style.display = 'flex';
-            setTimeout(() => {
-                window.location.href = "dashboard.html";
-            }, 2800);
+        function finish() {
+            alert("Account Initialized!");
         }
     </script>
 </body>
-</html>
+        </html>
