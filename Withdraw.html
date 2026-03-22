@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn | Withdrawals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --banker-blue: #007bff;
+            --mochearn-green: #28a745;
+            --danger-red: #dc3545;
+            --text-dark: #111111;
+            --bg-body: #ffffff;
+            --strong-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; color: var(--text-dark); }
+        .header { padding: 18px 5%; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f0f0f0; }
+        .header h1 { font-size: 1rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .container { width: 92%; margin: 25px auto; padding-bottom: 80px; }
+
+        /* BALANCE CARD */
+        .balance-card {
+            background: #111; color: white; border-radius: 20px; padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); margin-bottom: 25px;
+            background-image: linear-gradient(45deg, #111, #333);
+        }
+        .bal-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; opacity: 0.6; letter-spacing: 1px; }
+        .bal-amount { font-size: 2rem; font-weight: 900; margin: 5px 0; }
+
+        /* WITHDRAWAL FORM */
+        .withdraw-card { background: white; border-radius: 18px; padding: 25px; box-shadow: var(--strong-shadow); }
+        .input-group { margin-bottom: 20px; }
+        .input-label { font-size: 0.75rem; font-weight: 800; color: #666; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        
+        .amount-input {
+            width: 100%; padding: 16px; border: 1.5px solid #eee; border-radius: 12px;
+            font-size: 1.2rem; font-weight: 800; outline: none; transition: 0.3s;
+        }
+        .amount-input:focus { border-color: var(--banker-blue); }
+
+        /* VAULT STATUS BUTTON */
+        .vault-btn {
+            width: 100%; padding: 18px; border-radius: 14px; border: none;
+            font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-open { background: var(--banker-blue); color: white; box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3); }
+        .btn-locked { background: #f0f0f0; color: #aaa; cursor: not-allowed; }
+
+        .vault-note { text-align: center; font-size: 0.75rem; font-weight: 700; margin-top: 15px; color: #888; }
+
+        /* HISTORY LIST */
+        .history-section { margin-top: 40px; }
+        .history-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 0; border-bottom: 1px solid #f5f5f5;
+        }
+        .hist-info h4 { margin: 0; font-size: 0.85rem; font-weight: 800; }
+        .hist-info span { font-size: 0.7rem; color: #999; font-weight: 600; }
+        .hist-status { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+        .status-paid { background: rgba(40, 167, 69, 0.1); color: var(--mochearn-green); }
+        .status-wait { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <svg onclick="history.back()" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="cursor:pointer;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <h1>Payout Vault</h1>
+    </div>
+
+    <div class="container">
+        <div class="balance-card">
+            <div class="bal-label">Withdrawable Balance</div>
+            <div class="bal-amount">₦245,500.00</div>
+            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                <div><div class="bal-label">Pending</div><div style="font-weight: 800; font-size: 0.9rem;">₦12,000</div></div>
+                <div><div class="bal-label">Total Paid</div><div style="font-weight: 800; font-size: 0.9rem;">₦1.2M</div></div>
+            </div>
+        </div>
+
+        <div class="withdraw-card">
+            <div class="input-group">
+                <label class="input-label">Enter Amount (Min: ₦5,000)</label>
+                <input type="number" class="amount-input" placeholder="0.00">
+            </div>
+
+            <div id="vaultArea">
+                </div>
+            
+            <p class="vault-note" id="vaultMessage"></p>
+        </div>
+
+        <div class="history-section">
+            <h2 style="font-weight: 900; font-size: 1rem; text-transform: uppercase; margin-bottom: 20px;">Payout History</h2>
+            
+            <div class="history-item">
+                <div class="hist-info"><h4>₦50,000.00</h4><span>March 18, 2026 • GTBank</span></div>
+                <div class="hist-status status-paid">Successful</div>
+            </div>
+
+            <div class="history-item">
+                <div class="hist-info"><h4>₦15,000.00</h4><span>March 12, 2026 • Opay</span></div>
+                <div class="hist-status status-wait">Processing</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // WITHDRAWAL DAYS LOGIC (Tuesday = 2, Friday = 5)
+        function checkVaultStatus() {
+            const now = new Date();
+            const day = now.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+            const hour = now.getHours();
+            
+            const vaultArea = document.getElementById('vaultArea');
+            const vaultMsg = document.getElementById('vaultMessage');
+
+            // Open on Tuesday (2) and Friday (5)
+            if (day === 2 || day === 5) {
+                vaultArea.innerHTML = `<button class="vault-btn btn-open" onclick="processWithdraw()">Request Payout</button>`;
+                vaultMsg.innerHTML = "Vault is currently OPEN. Processing takes 24-48hrs.";
+            } else {
+                vaultArea.innerHTML = `<button class="vault-btn btn-locked">Vault is Closed</button>`;
+                vaultMsg.innerHTML = "The Vault opens only on <b>Tuesdays</b> and <b>Fridays</b>.";
+            }
+        }
+
+        function processWithdraw() {
+            alert("Authorizing with Vault Pin... 🛡️");
+            // You can trigger your PIN modal here!
+        }
+
+        // Run check on load
+        checkVaultStatus();
+    </script>
+</body>
+  </html>
