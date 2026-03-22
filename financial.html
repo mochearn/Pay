@@ -162,71 +162,82 @@
         </div>
     </div>
 
-    <script>
-        const methodsByCountry = {
-            "nigeria": ["Local Bank Transfer", "Opay/Palmpay", "USDT (Crypto)"],
-            "ghana": ["Mobile Money (MTN)", "Telecel Cash", "Local Bank"],
-            "kenya": ["M-Pesa", "Airtel Money", "Local Bank"],
-            "usa": ["ACH Transfer", "PayPal", "USDT (Crypto)"],
-            "united kingdom": ["Swift/IBAN", "Revolut", "PayPal"]
-        };
+  <script>
+    const methodsByCountry = {
+        "nigeria": ["Local Bank Transfer", "Opay/Palmpay", "USDT (Crypto)"],
+        "ghana": ["Mobile Money (MTN)", "Telecel Cash", "Local Bank"],
+        "kenya": ["M-Pesa", "Airtel Money", "Local Bank"],
+        "usa": ["ACH Transfer", "PayPal", "USDT (Crypto)"],
+        "united kingdom": ["Swift/IBAN", "Revolut", "PayPal"],
+        "australia": ["Local Bank (BSB)", "PayPal", "USDT (Crypto)"]
+    };
 
-        function handleCountrySearch() {
-            const val = document.getElementById('countryInput').value.toLowerCase();
-            const select = document.getElementById('payoutMethod');
-            select.innerHTML = '<option value="">-- Select Method --</option>';
-            
-            if (methodsByCountry[val]) {
-                methodsByCountry[val].forEach(m => {
-                    let opt = document.createElement('option');
-                    opt.value = m.toLowerCase();
-                    opt.innerHTML = m;
-                    select.appendChild(opt);
-                });
-            } else if (val.length > 2) {
-                // Default global options for unsupported specific lists
-                ["International Wire", "PayPal", "USDT (Crypto)"].forEach(m => {
-                    let opt = document.createElement('option');
-                    opt.value = m.toLowerCase();
-                    opt.innerHTML = m;
-                    select.appendChild(opt);
-                });
-            }
+    function handleCountrySearch() {
+        const val = document.getElementById('countryInput').value.toLowerCase();
+        const select = document.getElementById('payoutMethod');
+        select.innerHTML = '<option value="">-- Select Method --</option>';
+        
+        // If we have specific country data, use it. Otherwise, use Global Default.
+        let options = methodsByCountry[val] || ["International Bank Wire", "PayPal", "USDT (Crypto)"];
+        
+        options.forEach(m => {
+            let opt = document.createElement('option');
+            opt.value = m.toLowerCase();
+            opt.innerHTML = m;
+            select.appendChild(opt);
+        });
+    }
+
+    function renderFields() {
+        const method = document.getElementById('payoutMethod').value;
+        const container = document.getElementById('dynamicFields');
+        container.innerHTML = '';
+
+        if (method === "") return;
+
+        // Logic for ANY Bank, Opay, or Mobile Money
+        if (method.includes('bank') || method.includes('opay') || method.includes('palmpay') || method.includes('wire') || method.includes('swift') || method.includes('bsb')) {
+            container.innerHTML = `
+                <div class="input-group"><label class="input-label">Bank/Provider Name</label><input type="text" class="styled-input" placeholder="e.g. GTBank or CommBank"></div>
+                <div class="input-group"><label class="input-label">Account Holder Name</label><input type="text" class="styled-input" placeholder="Name on account"></div>
+                <div class="input-group"><label class="input-label">Account Number / BSB / IBAN</label><input type="text" class="styled-input" placeholder="Enter identification number"></div>
+            `;
+        } 
+        else if (method.includes('crypto')) {
+            container.innerHTML = `
+                <div class="input-group"><label class="input-label">USDT Wallet Address (TRC20)</label><input type="text" class="styled-input" placeholder="Paste TRC20 address here..."></div>
+            `;
+        } 
+        else if (method.includes('money') || method.includes('mpesa')) {
+            container.innerHTML = `
+                <div class="input-group"><label class="input-label">Registered Mobile Name</label><input type="text" class="styled-input"></div>
+                <div class="input-group"><label class="input-label">Mobile Wallet Number</label><input type="text" class="styled-input"></div>
+            `;
         }
-
-        function renderFields() {
-            const method = document.getElementById('payoutMethod').value;
-            const container = document.getElementById('dynamicFields');
-            container.innerHTML = '';
-
-            if (method.includes('bank') || method.includes('wire')) {
-                container.innerHTML = `
-                    <div class="input-group"><label class="input-label">Account Name</label><input type="text" class="styled-input"></div>
-                    <div class="input-group"><label class="input-label">Account Number / IBAN</label><input type="text" class="styled-input"></div>
-                `;
-            } else if (method.includes('crypto')) {
-                container.innerHTML = `
-                    <div class="input-group"><label class="input-label">USDT Wallet Address (TRC20)</label><input type="text" class="styled-input" placeholder="Paste address here..."></div>
-                `;
-            } else if (method.includes('money') || method.includes('mpesa')) {
-                container.innerHTML = `
-                    <div class="input-group"><label class="input-label">Registered Name</label><input type="text" class="styled-input"></div>
-                    <div class="input-group"><label class="input-label">Mobile Number</label><input type="text" class="styled-input"></div>
-                `;
-            }
+        else if (method.includes('paypal')) {
+            container.innerHTML = `
+                <div class="input-group"><label class="input-label">PayPal Email Address</label><input type="email" class="styled-input" placeholder="email@example.com"></div>
+            `;
         }
+    }
 
-        function moveFocus(current, nextId) {
-            if (current.value.length >= 1) {
-                document.getElementById(nextId).focus();
-            }
-        }
+    // THE CLEAN PIN LOGIC 🛡️
+    function saveFinancials() {
+        // Show success message
+        const toast = document.getElementById('save-toast');
+        toast.classList.add('show');
 
-        function saveFinancials() {
-            const toast = document.getElementById('save-toast');
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
-    </script>
+        // WIPE THE PIN IMMEDIATELY 🧹
+        const pinInputs = document.querySelectorAll('.pin-digit');
+        pinInputs.forEach(input => {
+            input.value = ''; 
+        });
+
+        // Hide toast after 3 seconds
+        setTimeout(() => { 
+            toast.classList.remove('show'); 
+        }, 3000);
+    }
+  </script>
 </body>
 </html>
