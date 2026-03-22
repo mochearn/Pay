@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn | Transaction History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --banker-blue: #007bff;
+            --mochearn-green: #28a745;
+            --danger-red: #dc3545;
+            --warning-gold: #ffc107;
+            --text-dark: #111111;
+            --bg-body: #ffffff;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; color: var(--text-dark); overflow-x: hidden; }
+        
+        /* HEADER AREA */
+        .header { padding: 30px 6% 10px; }
+        .header h1 { font-size: 1.85rem; font-weight: 900; margin: 0; letter-spacing: -0.8px; }
+
+        /* FILTER PILLS */
+        .filter-row { display: flex; gap: 12px; padding: 15px 6%; margin-bottom: 15px; }
+        .pill {
+            padding: 10px 22px; border-radius: 25px; border: 1.5px solid #eee;
+            font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: 0.2s;
+        }
+        .pill.active { background: #111; color: white; border-color: #111; }
+        .pill-date { display: flex; align-items: center; gap: 6px; }
+
+        /* LIST CONTAINER */
+        .list-container { width: 90%; margin: 0 auto 100px; border: 1.5px solid #f2f2f2; border-radius: 28px; padding: 8px; }
+
+        .item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 12px; border-bottom: 1px solid #f9f9f9; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .item:active { background: #fdfdfd; transform: scale(0.98); }
+        .item:last-child { border-bottom: none; }
+
+        .left-side { display: flex; align-items: center; gap: 15px; }
+        
+        .icon-circle {
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .bg-red { background: rgba(220, 53, 69, 0.08); color: var(--danger-red); }
+        .bg-blue { background: rgba(0, 123, 255, 0.08); color: var(--banker-blue); }
+        .bg-gold { background: rgba(255, 193, 7, 0.08); color: var(--warning-gold); }
+        .bg-green { background: rgba(40, 167, 69, 0.08); color: var(--mochearn-green); }
+
+        .details h4 { margin: 0; font-size: 0.92rem; font-weight: 800; color: #111; }
+        .details p { margin: 4px 0 0; font-size: 0.75rem; color: #999; font-weight: 600; }
+
+        .right-side { text-align: right; }
+        .amount { font-size: 1.05rem; font-weight: 900; display: block; }
+        .neg { color: #d32f2f; }
+        .pos { color: #2e7d32; }
+
+        .status-badge {
+            display: inline-block; padding: 4px 12px; border-radius: 8px;
+            font-size: 0.65rem; font-weight: 900; text-transform: uppercase; margin-top: 6px;
+        }
+        .st-success { background: #f1f8f1; color: var(--mochearn-green); }
+        .st-earned { background: #f0f7ff; color: var(--banker-blue); }
+        .st-pending { background: #fffdf2; color: #eab000; }
+
+        /* RECEIPT OVERLAY (FULL SCREEN) */
+        #receiptOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 10000; display: none; flex-direction: column;
+            animation: slideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .receipt-loader {
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .spinner {
+            width: 45px; height: 45px; border: 4px solid #f3f3f3; border-top: 4px solid #111;
+            border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 18px;
+        }
+        .receipt-loader p { font-size: 0.72rem; font-weight: 800; color: #aaa; letter-spacing: 1.2px; }
+
+        .receipt-body { flex: 1; padding: 30px; display: none; flex-direction: column; }
+        .receipt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .mochearn-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -1.2px; }
+        .close-btn { background: #f5f5f5; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .receipt-main { text-align: center; margin-bottom: 45px; }
+        .success-tick { 
+            width: 64px; height: 64px; background: var(--mochearn-green); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 1.8rem; font-weight: 900;
+        }
+        .receipt-main h2 { font-size: 1rem; color: #777; font-weight: 700; margin-bottom: 8px; }
+        .receipt-main h1 { font-size: 2.8rem; font-weight: 900; margin: 0; letter-spacing: -1.5px; color: #111; }
+
+        .receipt-info { background: #fcfcfc; border: 1.5px solid #f5f5f5; padding: 25px; border-radius: 24px; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 18px; }
+        .info-row:last-child { margin-bottom: 0; }
+        .info-row span { font-size: 0.8rem; color: #999; font-weight: 600; }
+        .info-row strong { font-size: 0.85rem; font-weight: 800; color: #111; }
+
+        .footer-action { margin-top: auto; padding-bottom: 30px; }
+        .share-btn {
+            width: 100%; background: #111; color: white; padding: 20px;
+            border-radius: 18px; border: none; font-weight: 900; font-size: 0.95rem;
+            display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer;
+        }
+
+        /* BOTTOM NAV */
+        .nav-bar {
+            position: fixed; bottom: 0; width: 100%; height: 75px;
+            background: white; border-top: 1px solid #f0f0f0;
+            display: flex; justify-content: space-around; align-items: center; z-index: 500;
+        }
+        .nav-item { text-align: center; color: #aaa; text-decoration: none; transition: 0.3s; }
+        .nav-item.active { color: #111; }
+        .nav-item span { display: block; font-size: 0.65rem; font-weight: 800; margin-top: 5px; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Transaction History</h1>
+    </div>
+
+    <div class="filter-row">
+        <div class="pill active">All</div>
+        <div class="pill pill-date">Date 
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+    </div>
+
+    <div class="list-container">
+        <div class="item" onclick="openReceipt('- ₦5,000.00', 'Bank Withdrawal', 'GTBank Savings')">
+            <div class="left-side">
+                <div class="icon-circle bg-red">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </div>
+                <div class="details">
+                    <h4>Bank Withdrawal</h4>
+                    <p>Today, 10:45 AM</p>
+                </div>
+            </div>
+            <div class="right-side">
+                <span class="amount neg">- ₦5,000</span>
+                <span class="status-badge st-success">Success</span>
+            </div>
+        </div>
+
+        <div class="item" onclick="openReceipt('+ ₦12,500.00', 'Product Sale', 'Casual Shoes')">
+            <div class="left-side">
+                <div class="icon-circle bg-blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><line x1="17" y1="7" x2="7" y2="17"></line><polyline points="17 17 7 17 7 7"></polyline></svg>
+                </div>
+                <div class="details">
+                    <h4>Product Sale (Shoes)</h4>
+                    <p>Yesterday, 04:20 PM</p>
+                </div>
+            </div>
+            <div class="right-side">
+                <span class="amount pos">+ ₦12,500</span>
+                <span class="status-badge st-earned">Earned</span>
+            </div>
+        </div>
+
+        <div class="item" onclick="openReceipt('+ ₦2,000.00', 'Affiliate Fee', 'Tier-1 Referral')">
+            <div class="left-side">
+                <div class="icon-circle bg-gold">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                <div class="details">
+                    <h4>Affiliate Commission</h4>
+                    <p>20 Mar, 09:15 AM</p>
+                </div>
+            </div>
+            <div class="right-side">
+                <span class="amount pos">+ ₦2,000</span>
+                <span class="status-badge st-pending">Pending</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="receiptOverlay">
+        <div id="receiptLoader" class="receipt-loader">
+            <div class="spinner"></div>
+            <p>VERIFYING FROM VAULT...</p>
+        </div>
+
+        <div id="receiptContent" class="receipt-body">
+            <div class="receipt-header">
+                <div class="mochearn-logo">MOCHEARN</div>
+                <button class="close-btn" onclick="closeReceipt()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="3.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div class="receipt-main">
+                <div class="success-tick">✓</div>
+                <h2 id="r-type">Transaction Receipt</h2>
+                <h1 id="r-amount">₦0.00</h1>
+                <p id="r-date">Sunday, March 22, 2026</p>
+            </div>
+
+            <div class="receipt-info">
+                <div class="info-row"><span>Ref Number</span><strong id="r-ref">MC-0000000</strong></div>
+                <div class="info-row"><span>Description</span><strong id="r-desc">External Payout</strong></div>
+                <div class="info-row"><span>Account Status</span><strong style="color:var(--mochearn-green)">COMPLETED</strong></div>
+            </div>
+
+            <div class="footer-action">
+                <button class="share-btn" onclick="window.print()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                    Share Proof of Success
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <a href="#" class="nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            <span>Academy</span>
+        </a>
+        <a href="#" class="nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>Profile</span>
+        </a>
+    </div>
+
+    <script>
+        function openReceipt(amount, type, desc) {
+            const overlay = document.getElementById('receiptOverlay');
+            const loader = document.getElementById('receiptLoader');
+            const content = document.getElementById('receiptContent');
+            
+            overlay.style.display = 'flex';
+            loader.style.display = 'flex';
+            content.style.display = 'none';
+
+            // 1.2s Professional Delay 🏛️
+            setTimeout(() => {
+                loader.style.display = 'none';
+                content.style.display = 'flex';
+                
+                document.getElementById('r-amount').innerText = amount;
+                document.getElementById('r-type').innerText = type;
+                document.getElementById('r-desc').innerText = desc;
+                document.getElementById('r-ref').innerText = "MC-" + Math.floor(Math.random() * 8999999 + 1000000);
+            }, 1200);
+        }
+
+        function closeReceipt() {
+            document.getElementById('receiptOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
