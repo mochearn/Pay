@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn | Send Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --banker-blue: #007bff;
+            --mochearn-green: #28a745;
+            --text-dark: #111111;
+            --bg-body: #ffffff;
+            --strong-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; color: var(--text-dark); }
+        .header { padding: 18px 5%; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f0f0f0; }
+        .header h1 { font-size: 1rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .container { width: 92%; margin: 25px auto; padding-bottom: 80px; }
+
+        /* TAB SWITCHER */
+        .tab-box {
+            display: flex; background: #f5f5f5; padding: 5px; border-radius: 14px; margin-bottom: 25px;
+        }
+        .tab {
+            flex: 1; text-align: center; padding: 12px; font-size: 0.8rem; font-weight: 800;
+            border-radius: 10px; cursor: pointer; transition: 0.3s; color: #888;
+        }
+        .tab.active { background: white; color: var(--banker-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        /* TRANSFER CARD */
+        .transfer-card { background: white; border-radius: 18px; padding: 25px; box-shadow: var(--strong-shadow); }
+        .input-group { margin-bottom: 20px; }
+        .input-label { font-size: 0.75rem; font-weight: 800; color: #666; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        
+        .styled-input, .styled-select {
+            width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px;
+            font-size: 0.95rem; font-weight: 700; outline: none; box-sizing: border-box;
+        }
+
+        /* ACCOUNT VERIFIED BOX */
+        .verified-box {
+            background: rgba(40, 167, 69, 0.05); border: 1px dashed var(--mochearn-green);
+            padding: 12px; border-radius: 10px; margin-top: -10px; margin-bottom: 20px; display: none;
+        }
+        .verified-name { color: var(--mochearn-green); font-weight: 800; font-size: 0.85rem; }
+
+        .send-btn {
+            width: 100%; padding: 18px; border-radius: 14px; border: none;
+            font-weight: 900; font-size: 0.95rem; text-transform: uppercase; cursor: pointer;
+            background: var(--banker-blue); color: white; box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2);
+        }
+
+        .limit-footer { text-align: center; margin-top: 30px; }
+        .limit-text { font-size: 0.7rem; font-weight: 700; color: #aaa; text-transform: uppercase; }
+        .limit-bar { width: 100%; height: 4px; background: #eee; border-radius: 10px; margin-top: 8px; position: relative; }
+        .limit-progress { width: 40%; height: 100%; background: var(--banker-blue); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <svg onclick="history.back()" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="cursor:pointer;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <h1>Transfer Hub</h1>
+    </div>
+
+    <div class="container">
+        <div class="tab-box">
+            <div class="tab active" id="tabInternal" onclick="switchMode('internal')">Mochearn User</div>
+            <div class="tab" id="tabExternal" onclick="switchMode('external')">Other Banks</div>
+        </div>
+
+        <div class="transfer-card">
+            <div id="transferForm">
+                <div class="input-group">
+                    <label class="input-label">Receiver Username</label>
+                    <input type="text" class="styled-input" id="receiverID" placeholder="@username" oninput="verifyUser()">
+                </div>
+            </div>
+
+            <div class="verified-box" id="verifiedBox">
+                <span class="verified-name" id="accountName">Fetching Account...</span>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Amount to Send</label>
+                <input type="number" class="styled-input" placeholder="₦ 0.00" style="font-size: 1.4rem;">
+            </div>
+
+            <div class="input-group" style="display: flex; justify-content: space-between;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: #999;">Transfer Fee:</span>
+                <span id="feeDisplay" style="font-size: 0.75rem; font-weight: 900; color: var(--mochearn-green);">₦0.00</span>
+            </div>
+
+            <button class="send-btn" onclick="openPinModal()">Confirm Transfer</button>
+        </div>
+
+        <div class="limit-footer">
+            <div class="limit-text">Daily Transfer Limit: ₦200k / ₦500k</div>
+            <div class="limit-bar"><div class="limit-progress"></div></div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'internal';
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const form = document.getElementById('transferForm');
+            const fee = document.getElementById('feeDisplay');
+            const vBox = document.getElementById('verifiedBox');
+            vBox.style.display = 'none';
+
+            // UI Tab Switch
+            document.getElementById('tabInternal').classList.toggle('active', mode === 'internal');
+            document.getElementById('tabExternal').classList.toggle('active', mode === 'external');
+
+            if (mode === 'internal') {
+                fee.innerHTML = "₦0.00";
+                fee.style.color = "var(--mochearn-green)";
+                form.innerHTML = `
+                    <div class="input-group">
+                        <label class="input-label">Receiver Username</label>
+                        <input type="text" class="styled-input" id="receiverID" placeholder="@username" oninput="verifyUser()">
+                    </div>
+                `;
+            } else {
+                fee.innerHTML = "₦50.00";
+                fee.style.color = "var(--danger-red)";
+                form.innerHTML = `
+                    <div class="input-group">
+                        <label class="input-label">Select Destination Bank</label>
+                        <select class="styled-select">
+                            <option>Access Bank</option><option>GTBank</option><option>Zenith Bank</option><option>Opay</option><option>Kuda</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Account Number</label>
+                        <input type="number" class="styled-input" id="accNum" placeholder="10 Digits" oninput="verifyUser()">
+                    </div>
+                `;
+            }
+        }
+
+        function verifyUser() {
+            const vBox = document.getElementById('verifiedBox');
+            const name = document.getElementById('accountName');
+            vBox.style.display = 'block';
+            name.innerHTML = "Verifying Account...";
+            
+            setTimeout(() => {
+                name.innerHTML = "✓ BETHUEL OCHOMADA O.";
+            }, 1000);
+        }
+    </script>
+</body>
+      </html>
