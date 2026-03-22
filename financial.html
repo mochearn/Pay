@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn | Financial Settings</title>
+    <title>Mochearn | Financial Settings (NG)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,100 +14,41 @@
             --strong-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            margin: 0; padding: 0;
-            color: var(--text-dark);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .header {
-            padding: 18px 5%;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); margin: 0; color: var(--text-dark); }
+        .header { padding: 18px 5%; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f0f0f0; }
         .header h1 { font-size: 1rem; font-weight: 900; margin: 0; text-transform: uppercase; }
-
         .container { width: 92%; margin: 25px auto; padding-bottom: 80px; }
 
-        /* SECTION TITLE */
         .section-row { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         .section-title { font-weight: 900; font-size: 1.1rem; text-transform: uppercase; margin: 0; }
 
-        /* FORM CARD - PREMIUM DEPTH */
-        .finance-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--strong-shadow);
-            margin-bottom: 25px;
-        }
+        .finance-card { background: white; border-radius: 16px; padding: 25px; box-shadow: var(--strong-shadow); margin-bottom: 25px; }
 
         .input-group { margin-bottom: 20px; }
         .input-label { font-size: 0.75rem; font-weight: 800; color: #666; text-transform: uppercase; margin-bottom: 8px; display: block; }
 
         .styled-input, .styled-select {
-            width: 100%;
-            padding: 14px;
-            border: 1.5px solid #eee;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-sizing: border-box;
-            outline: none;
-            font-family: 'Inter', sans-serif;
+            width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 600; box-sizing: border-box; outline: none;
         }
 
-        .styled-input:focus { border-color: var(--banker-blue); }
-
-        /* DYNAMIC FIELDS WRAPPER */
-        #dynamicFields { margin-top: 10px; }
-
-        /* SECURITY PIN AREA */
-        .pin-box {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
-        }
+        /* PIN INPUTS */
+        .pin-box { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
         .pin-digit {
-            width: 50px;
-            height: 55px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            border: 1.5px solid #eee;
-            border-radius: 10px;
-            outline: none;
+            width: 50px; height: 55px; text-align: center; font-size: 1.5rem;
+            font-weight: 800; border: 1.5px solid #eee; border-radius: 10px; outline: none;
         }
-        .pin-digit:focus { border-color: var(--mochearn-green); }
 
-        /* SAVE BUTTON */
         .save-btn {
-            width: 100%;
-            margin-top: 30px;
-            padding: 18px;
-            background: var(--banker-blue);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            width: 100%; margin-top: 30px; padding: 18px; background: var(--banker-blue);
+            color: white; border: none; border-radius: 12px; font-weight: 900;
+            font-size: 0.95rem; text-transform: uppercase; cursor: pointer;
         }
 
-        /* TOAST POPUP */
         .toast {
             position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            background: #111; color: #fff; padding: 12px 25px;
-            border-radius: 30px; font-size: 0.8rem; font-weight: 700;
-            z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #111; color: #fff; padding: 12px 25px; border-radius: 30px;
+            font-size: 0.8rem; font-weight: 700; z-index: 9999; transition: top 0.4s ease;
         }
         .toast.show { top: 25px; }
     </style>
@@ -124,24 +65,28 @@
     <div class="container">
         <div class="section-row">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--banker-blue)" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-            <h2 class="section-title">Payout Configuration</h2>
+            <h2 class="section-title">Nigerian Payouts</h2>
         </div>
 
         <div class="finance-card">
             <div class="input-group">
-                <label class="input-label">Select Your Country</label>
-                <input type="text" id="countryInput" class="styled-input" placeholder="Type country name..." onkeyup="handleCountrySearch()">
+                <label class="input-label">Region</label>
+                <div class="styled-input" style="background: #f9f9f9; color: #999; display: flex; align-items: center; gap: 8px;">
+                    🇳🇬 Nigeria (Fixed)
+                </div>
             </div>
 
             <div class="input-group">
-                <label class="input-label">Payout Method</label>
-                <select id="payoutMethod" class="styled-select" onchange="renderFields()">
-                    <option value="">-- Choose Country First --</option>
+                <label class="input-label">Choose Payout Method</label>
+                <select id="payoutMethod" class="styled-select" onchange="renderNGFields()">
+                    <option value="">-- Select Method --</option>
+                    <option value="bank">Traditional Local Bank</option>
+                    <option value="fintech">Opay / Palmpay Wallet</option>
+                    <option value="crypto">USDT (Crypto - TRC20)</option>
                 </select>
             </div>
 
-            <div id="dynamicFields">
-                </div>
+            <div id="dynamicFields"></div>
         </div>
 
         <div class="section-row" style="margin-top: 40px;">
@@ -150,94 +95,61 @@
         </div>
 
         <div class="finance-card">
-            <label class="input-label" style="text-align: center;">Enter 4-Digit Transaction Pin to Authorize</label>
+            <label class="input-label" style="text-align: center;">Enter 4-Digit Pin to Authorize</label>
             <div class="pin-box">
-                <input type="password" maxlength="1" class="pin-digit" onkeyup="moveFocus(this, 'p2')">
-                <input type="password" maxlength="1" id="p2" class="pin-digit" onkeyup="moveFocus(this, 'p3')">
-                <input type="password" maxlength="1" id="p3" class="pin-digit" onkeyup="moveFocus(this, 'p4')">
-                <input type="password" maxlength="1" id="p4" class="pin-digit">
+                <input type="password" maxlength="1" class="pin-digit" oninput="moveFocus(this, 0)">
+                <input type="password" maxlength="1" class="pin-digit" oninput="moveFocus(this, 1)">
+                <input type="password" maxlength="1" class="pin-digit" oninput="moveFocus(this, 2)">
+                <input type="password" maxlength="1" class="pin-digit" oninput="moveFocus(this, 3)">
             </div>
             
             <button class="save-btn" onclick="saveFinancials()">Update Financial Records</button>
         </div>
     </div>
 
-  <script>
-    const methodsByCountry = {
-        "nigeria": ["Local Bank Transfer", "Opay/Palmpay", "USDT (Crypto)"],
-        "ghana": ["Mobile Money (MTN)", "Telecel Cash", "Local Bank"],
-        "kenya": ["M-Pesa", "Airtel Money", "Local Bank"],
-        "usa": ["ACH Transfer", "PayPal", "USDT (Crypto)"],
-        "united kingdom": ["Swift/IBAN", "Revolut", "PayPal"],
-        "australia": ["Local Bank (BSB)", "PayPal", "USDT (Crypto)"]
-    };
+    <script>
+        function renderNGFields() {
+            const method = document.getElementById('payoutMethod').value;
+            const container = document.getElementById('dynamicFields');
+            container.innerHTML = '';
 
-    function handleCountrySearch() {
-        const val = document.getElementById('countryInput').value.toLowerCase();
-        const select = document.getElementById('payoutMethod');
-        select.innerHTML = '<option value="">-- Select Method --</option>';
-        
-        // If we have specific country data, use it. Otherwise, use Global Default.
-        let options = methodsByCountry[val] || ["International Bank Wire", "PayPal", "USDT (Crypto)"];
-        
-        options.forEach(m => {
-            let opt = document.createElement('option');
-            opt.value = m.toLowerCase();
-            opt.innerHTML = m;
-            select.appendChild(opt);
-        });
-    }
-
-    function renderFields() {
-        const method = document.getElementById('payoutMethod').value;
-        const container = document.getElementById('dynamicFields');
-        container.innerHTML = '';
-
-        if (method === "") return;
-
-        // Logic for ANY Bank, Opay, or Mobile Money
-        if (method.includes('bank') || method.includes('opay') || method.includes('palmpay') || method.includes('wire') || method.includes('swift') || method.includes('bsb')) {
-            container.innerHTML = `
-                <div class="input-group"><label class="input-label">Bank/Provider Name</label><input type="text" class="styled-input" placeholder="e.g. GTBank or CommBank"></div>
-                <div class="input-group"><label class="input-label">Account Holder Name</label><input type="text" class="styled-input" placeholder="Name on account"></div>
-                <div class="input-group"><label class="input-label">Account Number / BSB / IBAN</label><input type="text" class="styled-input" placeholder="Enter identification number"></div>
-            `;
-        } 
-        else if (method.includes('crypto')) {
-            container.innerHTML = `
-                <div class="input-group"><label class="input-label">USDT Wallet Address (TRC20)</label><input type="text" class="styled-input" placeholder="Paste TRC20 address here..."></div>
-            `;
-        } 
-        else if (method.includes('money') || method.includes('mpesa')) {
-            container.innerHTML = `
-                <div class="input-group"><label class="input-label">Registered Mobile Name</label><input type="text" class="styled-input"></div>
-                <div class="input-group"><label class="input-label">Mobile Wallet Number</label><input type="text" class="styled-input"></div>
-            `;
+            if (method === "bank") {
+                container.innerHTML = `
+                    <div class="input-group"><label class="input-label">Bank Name</label><input type="text" class="styled-input" placeholder="e.g. GTBank, Zenith, Kuda"></div>
+                    <div class="input-group"><label class="input-label">Account Number</label><input type="number" class="styled-input" placeholder="10 Digits"></div>
+                    <div class="input-group"><label class="input-label">Account Holder Name</label><input type="text" class="styled-input" placeholder="Full Name"></div>
+                `;
+            } else if (method === "fintech") {
+                container.innerHTML = `
+                    <div class="input-group"><label class="input-label">Wallet Provider</label><select class="styled-select"><option>Opay</option><option>Palmpay</option></select></div>
+                    <div class="input-group"><label class="input-label">Phone Number (Wallet ID)</label><input type="number" class="styled-input" placeholder="080 / 070 / 090..."></div>
+                    <div class="input-group"><label class="input-label">Verified Name</label><input type="text" class="styled-input" placeholder="Account Name"></div>
+                `;
+            } else if (method === "crypto") {
+                container.innerHTML = `
+                    <div class="input-group"><label class="input-label">USDT Wallet Address (TRC20)</label><input type="text" class="styled-input" placeholder="Paste TRC20 Address"></div>
+                `;
+            }
         }
-        else if (method.includes('paypal')) {
-            container.innerHTML = `
-                <div class="input-group"><label class="input-label">PayPal Email Address</label><input type="email" class="styled-input" placeholder="email@example.com"></div>
-            `;
+
+        // FLUID PIN JUMPING 🏎️
+        const pins = document.querySelectorAll('.pin-digit');
+        function moveFocus(el, index) {
+            if (el.value.length === 1 && index < 3) {
+                pins[index + 1].focus();
+            }
         }
-    }
 
-    // THE CLEAN PIN LOGIC 🛡️
-    function saveFinancials() {
-        // Show success message
-        const toast = document.getElementById('save-toast');
-        toast.classList.add('show');
+        function saveFinancials() {
+            const toast = document.getElementById('save-toast');
+            toast.classList.add('show');
+            
+            // WIPE PIN 🧹
+            pins.forEach(p => p.value = '');
+            pins[0].focus();
 
-        // WIPE THE PIN IMMEDIATELY 🧹
-        const pinInputs = document.querySelectorAll('.pin-digit');
-        pinInputs.forEach(input => {
-            input.value = ''; 
-        });
-
-        // Hide toast after 3 seconds
-        setTimeout(() => { 
-            toast.classList.remove('show'); 
-        }, 3000);
-    }
-  </script>
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+    </script>
 </body>
-</html>
+            </html>
