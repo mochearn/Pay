@@ -15,13 +15,9 @@
 
         body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; color: var(--text-dark); -webkit-font-smoothing: antialiased; }
         
-        /* TOP NAV & BIG BACK ARROW */
         .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 25px; background: white; position: sticky; top: 0; z-index: 100; }
         .nav-left { display: flex; align-items: center; gap: 20px; }
-        .back-btn { 
-            background: none; border: none; color: #111; cursor: pointer; 
-            font-size: 1.8rem; font-weight: 300; display: none; padding: 0; line-height: 1;
-        }
+        .back-btn { background: none; border: none; color: #111; cursor: pointer; font-size: 2rem; font-weight: 300; display: none; padding: 0; line-height: 1; }
         .step-indicator { font-size: 0.75rem; font-weight: 900; color: var(--banker-blue); text-transform: uppercase; letter-spacing: 1px; }
         .skip-btn { background: none; border: none; color: var(--banker-blue); font-weight: 800; font-size: 0.85rem; cursor: pointer; }
 
@@ -40,8 +36,7 @@
             font-size: 1.1rem; font-weight: 700; outline: none; transition: 0.3s; box-sizing: border-box;
             margin-bottom: 20px; color: #111;
         }
-        /* NORMAL PLACEHOLDER FIX */
-        .styled-input::placeholder { font-size: 0.95rem; font-weight: 500; color: #aaa; letter-spacing: 0; }
+        .styled-input::placeholder { font-size: 0.95rem; font-weight: 500; color: #aaa; }
         .styled-input:focus { border-color: var(--banker-blue); background: #fafafa; }
 
         .continue-btn {
@@ -49,50 +44,44 @@
             border-radius: 18px; font-weight: 900; font-size: 0.95rem; cursor: pointer;
             text-transform: uppercase; margin-top: 10px; margin-bottom: 50px;
         }
+        .continue-btn:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
 
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
         .option-card {
             padding: 18px 15px; border: 2px solid #f0f0f0; border-radius: 16px;
-            font-weight: 800; font-size: 0.8rem; cursor: pointer; text-align: center; transition: 0.2s;
+            font-weight: 800; font-size: 0.75rem; cursor: pointer; text-align: center; transition: 0.2s;
         }
         .option-card.selected { border-color: var(--banker-blue); background: rgba(0,123,255,0.04); color: var(--banker-blue); }
 
-        /* PRIVACY POLICY */
-        .privacy-item { margin-bottom: 30px; }
-        .privacy-item h2 { font-size: 0.85rem; font-weight: 900; color: #111; text-transform: uppercase; margin-bottom: 8px; }
-        .privacy-item p { font-size: 0.78rem; color: var(--text-sub); line-height: 1.6; text-align: justify; margin: 0; }
-        .agree-wrap { display: flex; align-items: center; gap: 15px; padding: 20px 0; margin-bottom: 20px; }
-        .agree-wrap input { width: 22px; height: 22px; accent-color: var(--banker-blue); }
-
-        /* TOAST */
+        /* REFINED SLIM TOAST */
         #mToast {
             position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: #111; color: white;
-            padding: 16px 20px; border-radius: 16px; font-weight: 700; font-size: 0.85rem;
+            width: auto; min-width: 220px; max-width: 280px; background: #111; color: white;
+            padding: 14px 24px; border-radius: 50px; font-weight: 700; font-size: 0.8rem;
             display: flex; align-items: center; justify-content: center; z-index: 2000;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center;
         }
 
-        /* INITIALIZATION SCREEN */
         #initScreen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: white; z-index: 3000; display: none; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
         }
-        .init-loader { width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid var(--banker-blue); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 25px; }
-        .init-status { font-weight: 800; font-size: 0.75rem; letter-spacing: 1.5px; color: #777; text-transform: uppercase; }
+        .init-loader { width: 45px; height: 45px; border: 4px solid #f3f3f3; border-top: 4px solid var(--banker-blue); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 25px; }
+        .init-status { font-weight: 800; font-size: 0.7rem; letter-spacing: 1.5px; color: #888; text-transform: uppercase; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body onclick="if(event.target == body) document.activeElement.blur()">
+<body>
 
-    <div id="mToast">Toast Message</div>
+    <div id="mToast">Notification</div>
 
     <div id="initScreen">
         <div class="init-loader"></div>
-        <div class="init-status" id="statusText">Verifying ID...</div>
+        <div class="init-status" id="statusText">Initializing...</div>
     </div>
 
     <div class="top-nav">
@@ -100,7 +89,7 @@
             <button class="back-btn" id="backBtn" onclick="prevStep()">←</button>
             <span class="step-indicator" id="stepText">Step 01/06</span>
         </div>
-        <button class="skip-btn" onclick="nextStep()">Skip</button>
+        <button class="skip-btn" onclick="nextStep(true)">Skip</button>
     </div>
 
     <div class="p-container"><div class="p-bar" id="pBar"></div></div>
@@ -109,58 +98,64 @@
         <div class="step active" id="step1">
             <h1>Display Name 👤</h1>
             <p class="sub-desc">How should your name appear in the Command Center?</p>
-            <input type="text" class="styled-input" placeholder="Enter Full Name" id="nameInput">
-            <button class="continue-btn" onclick="nextStep()">Continue</button>
+            <input type="text" class="styled-input" placeholder="Full Name" id="nameInput" oninput="validate(1)">
+            <button class="continue-btn" id="btn1" onclick="nextStep()" disabled>Continue</button>
         </div>
 
         <div class="step" id="step2">
             <h1>Discovery Source 🔍</h1>
             <p class="sub-desc">How did you find the Mochearn family?</p>
-            <div class="options-grid">
-                <div class="option-card" onclick="sel(this)">AI Recommendation</div>
-                <div class="option-card" onclick="sel(this)">Catalyst Network</div>
-                <div class="option-card" onclick="sel(this)">Google Search</div>
-                <div class="option-card" onclick="sel(this)">Strategic Group</div>
+            <div class="options-grid" id="grid2">
+                <div class="option-card" onclick="sel(this, 2)">WhatsApp Status</div>
+                <div class="option-card" onclick="sel(this, 2)">X (Twitter)</div>
+                <div class="option-card" onclick="sel(this, 2)">YouTube Review</div>
+                <div class="option-card" onclick="sel(this, 2)">Mochearn Catalyst</div>
+                <div class="option-card" onclick="sel(this, 2)">AI Recommendation</div>
+                <div class="option-card" onclick="sel(this, 2)">Google Search</div>
+                <div class="option-card" onclick="sel(this, 2)">Strategic Group</div>
+                <div class="option-card" onclick="sel(this, 2)">Direct Referral</div>
             </div>
-            <button class="continue-btn" onclick="nextStep()">Continue</button>
+            <button class="continue-btn" id="btn2" onclick="nextStep()" disabled>Continue</button>
         </div>
 
         <div class="step" id="step3">
             <h1>Financial Goal 🎯</h1>
             <p class="sub-desc">Select your target monthly earnings.</p>
             <div class="options-grid">
-                <div class="option-card" onclick="sel(this)">₦150k - ₦500k</div>
-                <div class="option-card" onclick="sel(this)">₦500k - ₦1M</div>
-                <div class="option-card" onclick="sel(this)">₦1M - ₦5M</div>
-                <div class="option-card" onclick="sel(this)">₦10M+ Monthly</div>
+                <div class="option-card" onclick="sel(this, 3)">₦150k - ₦500k</div>
+                <div class="option-card" onclick="sel(this, 3)">₦500k - ₦1M</div>
+                <div class="option-card" onclick="sel(this, 3)">₦1M - ₦5M</div>
+                <div class="option-card" onclick="sel(this, 3)">₦10M+ Monthly</div>
             </div>
-            <button class="continue-btn" onclick="nextStep()">Continue</button>
+            <button class="continue-btn" id="btn3" onclick="nextStep()" disabled>Continue</button>
         </div>
 
         <div class="step" id="step4">
             <h1>Market Niche 💼</h1>
             <p class="sub-desc">Choose your sector to dominate.</p>
             <div class="options-grid">
-                <div class="option-card" onclick="sel(this)">Digital Products</div>
-                <div class="option-card" onclick="sel(this)">E-commerce</div>
-                <div class="option-card" onclick="sel(this)">Real Estate</div>
-                <div class="option-card" onclick="sel(this)">Affiliate Tech</div>
+                <div class="option-card" onclick="sel(this, 4)">Digital Products</div>
+                <div class="option-card" onclick="sel(this, 4)">E-commerce</div>
+                <div class="option-card" onclick="sel(this, 4)">Real Estate</div>
+                <div class="option-card" onclick="sel(this, 4)">Affiliate Tech</div>
             </div>
-            <button class="continue-btn" onclick="nextStep()">Continue</button>
+            <button class="continue-btn" id="btn4" onclick="nextStep()" disabled>Continue</button>
         </div>
 
         <div class="step" id="step5">
             <h1>Security Vault 🔐</h1>
             <p class="sub-desc">Set and confirm your 4-digit authorization PIN.</p>
-            <input type="password" class="styled-input" id="pin1" maxlength="4" placeholder="Enter 4-Digit PIN" style="text-align:center; letter-spacing:10px;">
-            <input type="password" class="styled-input" id="pin2" maxlength="4" placeholder="Confirm 4-Digit PIN" style="text-align:center; letter-spacing:10px;">
-            <button class="continue-btn" onclick="nextStep()">Verify PIN</button>
+            <input type="password" class="styled-input" id="pin1" maxlength="4" placeholder="4-Digit PIN" style="text-align:center; letter-spacing:10px;" oninput="validate(5)">
+            <input type="password" class="styled-input" id="pin2" maxlength="4" placeholder="Confirm PIN" style="text-align:center; letter-spacing:10px;" oninput="validate(5)">
+            <button class="continue-btn" id="btn5" onclick="nextStep()" disabled>Verify PIN</button>
         </div>
 
         <div class="step" id="step6">
             <h1>Privacy Policy 📜</h1>
             <p class="sub-desc">Final Command Center Protocols.</p>
-            <div id="policyList"></div>
+            <div id="policyList" style="margin-bottom:20px;">
+                <p style="font-size: 0.8rem; color: #555; line-height: 1.6;">Full Mochearn Data Supremacy terms sit here... (32 points summarized)</p>
+            </div>
             <div class="agree-wrap">
                 <input type="checkbox" id="cAgree" onchange="checkTog()">
                 <label for="cAgree" style="font-weight:800; font-size:0.85rem;">I accept the Mochearn Protocols</label>
@@ -170,20 +165,27 @@
     </div>
 
     <script>
-        const policyData = [["01. DATA SUPREMACY", "At Mochearn, we take the security of our Catalysts seriously..."], ["02. BLUEPRINT USAGE", "The data we collect is used solely to maintain integrity..."]];
-        const list = document.getElementById('policyList');
-        policyData.forEach(item => { list.innerHTML += `<div class="privacy-item"><h2>${item[0]}</h2><p>${item[1]}</p></div>`; });
-
         let current = 1;
-        function updateUI() {
-            document.getElementById('stepText').innerText = `Step 0${current}/06`;
-            document.getElementById('pBar').style.width = (current / 6 * 100) + "%";
-            document.getElementById('backBtn').style.display = current > 1 ? "block" : "none";
-            window.scrollTo(0,0);
+
+        function validate(step) {
+            const btn = document.getElementById(`btn${step}`);
+            if(step === 1) btn.disabled = document.getElementById('nameInput').value.trim().length < 3;
+            if(step === 5) {
+                const p1 = document.getElementById('pin1').value;
+                const p2 = document.getElementById('pin2').value;
+                btn.disabled = (p1.length < 4 || p2.length < 4);
+            }
         }
 
-        function nextStep() {
-            if(current === 5) {
+        function sel(el, step) {
+            const siblings = el.parentElement.querySelectorAll('.option-card');
+            siblings.forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById(`btn${step}`).disabled = false;
+        }
+
+        function nextStep(isSkip = false) {
+            if(!isSkip && current === 5) {
                 const p1 = document.getElementById('pin1').value;
                 const p2 = document.getElementById('pin2').value;
                 if(p1 === "" || p2 === "") { showToast("Please type your password"); return; }
@@ -207,10 +209,11 @@
             }
         }
 
-        function sel(el) {
-            const siblings = el.parentElement.querySelectorAll('.option-card');
-            siblings.forEach(s => s.classList.remove('selected'));
-            el.classList.add('selected');
+        function updateUI() {
+            document.getElementById('stepText').innerText = `Step 0${current}/06`;
+            document.getElementById('pBar').style.width = (current / 6 * 100) + "%";
+            document.getElementById('backBtn').style.display = current > 1 ? "block" : "none";
+            window.scrollTo(0,0);
         }
 
         function showToast(msg) {
@@ -225,16 +228,23 @@
         function activate() {
             document.getElementById('initScreen').style.display = 'flex';
             const status = document.getElementById('statusText');
-            const logs = ["Verifying Identity...", "Securing Vault...", "Setting your name...", "Preparing your account...", "Finalizing Command Center..."];
+            const logs = [
+                "Synchronizing Identity...",
+                "Securing Mochearn Vault...",
+                "Mapping Personal Blueprint...",
+                "Mochearn at work...",
+                "Building your Dashboard...",
+                "Finalizing Command Center..."
+            ];
             let i = 0;
             const timer = setInterval(() => {
                 status.innerText = logs[i];
                 i++;
                 if(i === logs.length) {
                     clearInterval(timer);
-                    setTimeout(() => { location.href = "dashboard.html"; }, 2000); // 2-second final pause
+                    setTimeout(() => { location.href = "dashboard.html"; }, 1500);
                 }
-            }, 1800); // Slower, professional pace
+            }, 2200); // Sharp, professional pace
         }
     </script>
 </body>
