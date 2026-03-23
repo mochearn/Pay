@@ -15,6 +15,7 @@
 
         body { font-family: 'Inter', sans-serif; background: var(--bg-body); margin: 0; color: var(--text-dark); -webkit-font-smoothing: antialiased; }
         
+        /* NAVIGATION */
         .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 25px; background: white; position: sticky; top: 0; z-index: 100; }
         .nav-left { display: flex; align-items: center; gap: 20px; }
         .back-btn { background: none; border: none; color: #111; cursor: pointer; font-size: 2rem; font-weight: 300; display: none; padding: 0; line-height: 1; }
@@ -31,14 +32,16 @@
         h1 { font-size: 1.8rem; font-weight: 900; margin: 0 0 10px 0; letter-spacing: -1px; }
         .sub-desc { font-size: 0.9rem; color: var(--text-sub); font-weight: 500; margin-bottom: 35px; line-height: 1.5; }
 
+        /* INPUTS */
         .styled-input {
             width: 100%; padding: 20px; border: 2.5px solid #f0f0f0; border-radius: 18px;
             font-size: 1.1rem; font-weight: 700; outline: none; transition: 0.3s; box-sizing: border-box;
             margin-bottom: 20px; color: #111;
         }
-        .styled-input::placeholder { font-size: 0.95rem; font-weight: 500; color: #aaa; }
+        .styled-input::placeholder { font-size: 0.95rem; font-weight: 500; color: #aaa; letter-spacing: 0; }
         .styled-input:focus { border-color: var(--banker-blue); background: #fafafa; }
 
+        /* BUTTONS */
         .continue-btn {
             width: 100%; background: #111; color: white; border: none; padding: 20px;
             border-radius: 18px; font-weight: 900; font-size: 0.95rem; cursor: pointer;
@@ -46,6 +49,7 @@
         }
         .continue-btn:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
 
+        /* OPTIONS */
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
         .option-card {
             padding: 18px 15px; border: 2px solid #f0f0f0; border-radius: 16px;
@@ -53,16 +57,30 @@
         }
         .option-card.selected { border-color: var(--banker-blue); background: rgba(0,123,255,0.04); color: var(--banker-blue); }
 
-        /* REFINED SLIM TOAST */
+        /* PRIVACY POLICY SCROLL BOX */
+        .policy-box { 
+            height: 300px; overflow-y: auto; border: 2px solid #f0f0f0; 
+            border-radius: 18px; padding: 20px; margin-bottom: 25px;
+            background: #fafafa;
+        }
+        .privacy-item { margin-bottom: 25px; }
+        .privacy-item h2 { font-size: 0.8rem; font-weight: 900; color: #111; text-transform: uppercase; margin-bottom: 8px; }
+        .privacy-item p { font-size: 0.8rem; color: var(--text-sub); line-height: 1.6; text-align: left; margin: 0; }
+
+        .agree-wrap { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; }
+        .agree-wrap input { width: 22px; height: 22px; accent-color: var(--banker-blue); }
+
+        /* TOAST */
         #mToast {
             position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            width: auto; min-width: 220px; max-width: 280px; background: #111; color: white;
+            width: auto; min-width: 220px; background: #111; color: white;
             padding: 14px 24px; border-radius: 50px; font-weight: 700; font-size: 0.8rem;
             display: flex; align-items: center; justify-content: center; z-index: 2000;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
+        /* INIT SCREEN */
         #initScreen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: white; z-index: 3000; display: none; flex-direction: column;
@@ -81,7 +99,7 @@
 
     <div id="initScreen">
         <div class="init-loader"></div>
-        <div class="init-status" id="statusText">Initializing...</div>
+        <div class="init-status" id="statusText">Verifying ID...</div>
     </div>
 
     <div class="top-nav">
@@ -98,7 +116,7 @@
         <div class="step active" id="step1">
             <h1>Display Name 👤</h1>
             <p class="sub-desc">How should your name appear in the Command Center?</p>
-            <input type="text" class="styled-input" placeholder="Full Name" id="nameInput" oninput="validate(1)">
+            <input type="text" class="styled-input" placeholder="Enter Full Name" id="nameInput" oninput="validate(1)">
             <button class="continue-btn" id="btn1" onclick="nextStep()" disabled>Continue</button>
         </div>
 
@@ -121,7 +139,7 @@
         <div class="step" id="step3">
             <h1>Financial Goal 🎯</h1>
             <p class="sub-desc">Select your target monthly earnings.</p>
-            <div class="options-grid">
+            <div class="options-grid" id="grid3">
                 <div class="option-card" onclick="sel(this, 3)">₦150k - ₦500k</div>
                 <div class="option-card" onclick="sel(this, 3)">₦500k - ₦1M</div>
                 <div class="option-card" onclick="sel(this, 3)">₦1M - ₦5M</div>
@@ -133,7 +151,7 @@
         <div class="step" id="step4">
             <h1>Market Niche 💼</h1>
             <p class="sub-desc">Choose your sector to dominate.</p>
-            <div class="options-grid">
+            <div class="options-grid" id="grid4">
                 <div class="option-card" onclick="sel(this, 4)">Digital Products</div>
                 <div class="option-card" onclick="sel(this, 4)">E-commerce</div>
                 <div class="option-card" onclick="sel(this, 4)">Real Estate</div>
@@ -145,17 +163,18 @@
         <div class="step" id="step5">
             <h1>Security Vault 🔐</h1>
             <p class="sub-desc">Set and confirm your 4-digit authorization PIN.</p>
-            <input type="password" class="styled-input" id="pin1" maxlength="4" placeholder="4-Digit PIN" style="text-align:center; letter-spacing:10px;" oninput="validate(5)">
-            <input type="password" class="styled-input" id="pin2" maxlength="4" placeholder="Confirm PIN" style="text-align:center; letter-spacing:10px;" oninput="validate(5)">
+            <input type="password" class="styled-input" id="pin1" maxlength="4" placeholder="Enter 4-Digit PIN" style="text-align:center; letter-spacing:10px;" oninput="validate(5)">
+            <input type="password" class="styled-input" id="pin2" maxlength="4" placeholder="Confirm 4-Digit PIN" style="text-align:center; letter-spacing:10px;" oninput="validate(5)">
             <button class="continue-btn" id="btn5" onclick="nextStep()" disabled>Verify PIN</button>
         </div>
 
         <div class="step" id="step6">
             <h1>Privacy Policy 📜</h1>
             <p class="sub-desc">Final Command Center Protocols.</p>
-            <div id="policyList" style="margin-bottom:20px;">
-                <p style="font-size: 0.8rem; color: #555; line-height: 1.6;">Full Mochearn Data Supremacy terms sit here... (32 points summarized)</p>
-            </div>
+            
+            <div class="policy-box" id="policyContent">
+                </div>
+
             <div class="agree-wrap">
                 <input type="checkbox" id="cAgree" onchange="checkTog()">
                 <label for="cAgree" style="font-weight:800; font-size:0.85rem;">I accept the Mochearn Protocols</label>
@@ -165,6 +184,38 @@
     </div>
 
     <script>
+        const protocols = [
+            ["01. DATA SUPREMACY & COLLECTION", "At Mochearn, we take the security of our Catalysts and Vendors seriously. We collect information that you provide directly to us when you create an account, participate in the J-System, or communicate with the Command Center. This includes your name, email address, payment information, and any other data required to authenticate your identity within our ecosystem."],
+            ["02. HOW WE USE YOUR BLUEPRINT DATA", "The data we collect is used solely to maintain the integrity of the Mochearn platform. We use it to authenticate your access to premium modules, process payments for Vendors accurately, and monitor for fraudulent activities. Your data is your passport within the Mochearn Command Center."],
+            ["03. COOKIES & TRACKING PROTOCOLS", "Mochearn uses \"Cookies\" to enhance your experience. These are small files stored on your device that help us remember your preferences and stay logged into the Command Center. Without cookies, the interactive nature of the Mochearn website would be compromised."],
+            ["04. THIRD-PARTY ACCESS & VENDORS", "We do not sell your data. Mochearn is an elite system, not a data brokerage. We only share information with trusted third-party service providers (like payment processors) who are required by contract to keep your information confidential."],
+            ["05. SECURITY & ENCRYPTION STANDARDS", "We implement high-grade encryption to protect your data. Every piece of information sent between your device and our servers is shielded. However, no system is 100% invincible. You are responsible for keeping your password and account details secure."],
+            ["06. YOUR DATA RIGHTS", "As a member of the Mochearn ecosystem, you have the right to request a copy of the data we hold about you. You can also request that we delete your data if you choose to leave the platform. Once deleted, this action is final—there is no recovery."],
+            ["07. INTERNATIONAL TRANSFERS", "Mochearn is a global force. Your data may be stored and processed in countries outside of your own. By using our platform, you consent to this international flow of information, knowing that we maintain high-level security across all regions."],
+            ["08. IP ADDRESS & GEOLOCATION", "We monitor IP addresses to prevent account sharing or unauthorized access from high-risk regions. If a login attempt occurs from a suspicious location, the Command Center will freeze the account until manual identity verification is completed."],
+            ["09. BIOMETRIC AUTHENTICATION", "We may implement biometric authentication through third-party integrators. Mochearn does not store your raw biometric data; we receive an encrypted \"Success Token\" from your device to confirm your identity securely."],
+            ["10. RETENTION POLICY", "For active accounts, we retain all transactional data and login logs indefinitely. If you close your account, your data is moved to our \"Cold Storage\" vault for 24 months before a final \"Wipe Command\" is issued."],
+            ["11. COMMUNICATION LOGS", "Every message sent through the Support Hub or Command Center is recorded for quality control and dispute resolution. These logs ensure that professional integrity is maintained across the Mochearn network."],
+            ["12. ANTI-FRAUD MONITORING", "Mochearn utilizes automated watchdog scripts to analyze user behavior. If the system flags your behavior as \"Non-Human\" or \"Malicious,\" your hardware ID and browser fingerprint will be moved to an investigation queue."],
+            ["13. CHILDREN’S DATA PRIVACY", "Mochearn is for individuals over the age of 18. We do not knowingly collect data from minors. If we discover a minor has provided information, we will delete it with unpitying speed."],
+            ["14. AFFILIATE DATA SHARING", "When interacting via an affiliate link, certain data (like username and date) is shared with the affiliate for tracking. They never see your full payment details or private security questions."],
+            ["15. DEVICE FINGERPRINTING", "To prevent account cloning, Mochearn collects non-identifying technical data (screen resolution, OS version) to create a \"Digital Signature\" for your device."],
+            ["16. TRANSACTIONAL LOGGING", "Every financial interaction is logged with a unique cryptographic hash. These logs serve as the ultimate truth in the event of an Official Resolution or payment dispute."],
+            ["17. BEHAVIORAL ANALYTICS", "We use heatmaps to see which buttons are clicked and which sections are read. This data is anonymized and used to upgrade the Mochearn experience to be more efficient."],
+            ["18. BREACH NOTIFICATION", "In the event of a breach, Mochearn will notify all affected users via email within 72 hours. We believe in total transparency when it comes to community safety."],
+            ["19. THIRD-PARTY API INTEGRATION", "We transmit the bare minimum data to vetted API partners for services like WhatsApp notifications. They do not have access to your private Mochearn vault."],
+            ["20. DATA PORTABILITY", "You can request an export of your personal data in CSV or JSON format. Note that this does not include proprietary Mochearn code or J-System blueprints."],
+            ["21. GOVERNING LAW", "Mochearn operates under the digital laws of the Federal Republic of Nigeria. Any disputes will be handled through official legal channels in Osogbo, Osun State."],
+            ["22. THE RIGHT TO BE FORGOTTEN", "You can invoke a \"Hard Delete\" of your account. Within 30 days, all personal identifiers will be scrubbed from our active databases permanently."],
+            ["23. NETWORK LATENCY DATA", "We monitor the speed of your connection to our servers. This helps us optimize the delivery of the Mochearn blueprints so that users in low-bandwidth areas still experience \"Sharp\" performance without lag."]
+        ];
+
+        // Inject protocols
+        const policyContainer = document.getElementById('policyContent');
+        protocols.forEach(p => {
+            policyContainer.innerHTML += `<div class="privacy-item"><h2>${p[0]}</h2><p>${p[1]}</p></div>`;
+        });
+
         let current = 1;
 
         function validate(step) {
@@ -242,9 +293,9 @@
                 i++;
                 if(i === logs.length) {
                     clearInterval(timer);
-                    setTimeout(() => { location.href = "dashboard.html"; }, 1500);
+                    setTimeout(() => { location.href = "dashboard.html"; }, 2000);
                 }
-            }, 2200); // Sharp, professional pace
+            }, 2000);
         }
     </script>
 </body>
