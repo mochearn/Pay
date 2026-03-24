@@ -293,35 +293,29 @@
         }
     }
 </script>
-    <div class="menu-profile-section">
-    <a href="vendor-profile.html" class="profile-link-wrapper">
+<div class="menu-welcome-section">
+    <a href="vendor-profile.html" class="welcome-wrapper">
         
-        <div class="profile-avatar">
-            <img src="https://via.placeholder.com/100" alt="Vendor Profile">
+        <div class="user-avatar">
+            <img src="https://via.placeholder.com/100" alt="Profile Picture">
         </div>
 
-        <div class="profile-info">
-            <div class="name-badge-row">
-                <span class="vendor-full-name">Vendor Name</span>
-                <svg class="verify-badge" width="14" height="14" viewBox="0 0 24 24" fill="#007bff">
-                    <path d="M12 2l2.4 2.4L17 4l.6 3.4 3.4.6-.4 2.6 2.4 2.4-2.4 2.4.4 2.6-3.4.6-.6 3.4-2.6-.4L12 22l-2.4-2.4L7 20l-.6-3.4-3.4-.6.4-2.6-2.4-2.4 2.4-2.4-.4-2.6 3.4-.6.6-3.4 2.6.4L12 2zM10 14.5l5-5-1.5-1.5L10 11.5l-2-2-1.5 1.5 3.5 3.5z"/>
-                </svg>
-            </div>
-            <span class="vendor-username">@vendor_handle</span>
+        <div class="welcome-text-col">
+            <span class="welcome-msg">Welcome, Bethuel</span>
+            <span class="full-name-sub">Bethuel [Your Surname]</span>
         </div>
 
     </a>
 </div>
 
 <style>
-    /* Premium Profile Box Styling */
-    .menu-profile-section {
+    .menu-welcome-section {
         padding: 10px 0 25px 0;
         border-bottom: 1px solid #f0f0f0;
         margin-bottom: 20px;
     }
 
-    .profile-link-wrapper {
+    .welcome-wrapper {
         display: flex;
         align-items: center;
         gap: 15px;
@@ -329,53 +323,44 @@
         -webkit-tap-highlight-color: transparent;
     }
 
-    .profile-avatar {
-        width: 52px;
-        height: 52px;
+    .user-avatar {
+        width: 55px;
+        height: 55px;
         border-radius: 16px;
         background: #f8f9fa;
         overflow: hidden;
-        border: 1.5px solid #eee;
+        border: 1px solid #eeeeee;
+        flex-shrink: 0;
     }
 
-    .profile-avatar img {
+    .user-avatar img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .profile-info {
+    .welcome-text-col {
         display: flex;
         flex-direction: column;
         gap: 2px;
     }
 
-    .name-badge-row {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+    .welcome-msg {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #888;
+        text-transform: capitalize;
     }
 
-    .vendor-full-name {
-        font-size: 0.95rem;
+    .full-name-sub {
+        font-size: 1.05rem;
         font-weight: 900;
         color: #111;
     }
 
-    .vendor-username {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #888;
-    }
-
-    .verify-badge {
-        flex-shrink: 0;
-    }
-
-    /* Feedback on tap */
-    .profile-link-wrapper:active {
-        opacity: 0.7;
-        transform: scale(0.98);
+    /* Professional touch on tap */
+    .welcome-wrapper:active {
+        opacity: 0.8;
     }
 </style>
  <style>
