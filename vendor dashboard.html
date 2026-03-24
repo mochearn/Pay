@@ -152,41 +152,41 @@
         </header>
 
     </div>
-<div class="broadcast-box">
-    <div class="broadcast-content">
-        <span class="broadcast-label">📢 System Update</span>
-        <p class="broadcast-text">Welcome to the Vendor Command Center. Start uploading your blueprints to begin scaling your revenue today.</p>
-    </div>
+<div class="announcement-card">
+    <span class="announcement-text">Mochearn Systems: All Engines Nominal.</span>
+    <button class="close-announcement">×</button>
 </div>
 
 <style>
-    .broadcast-box {
-        background: var(--m-blue);
-        border-radius: 20px;
-        padding: 20px;
+    .announcement-card {
+        background-color: #ebebeb; /* Exact grey from your screenshot */
+        border: 1px solid #e0e0e0;
+        border-radius: 18px;
+        padding: 35px 25px; /* Large padding as seen in screenshot */
         margin-bottom: 25px;
-        color: var(--m-white);
-        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
     }
 
-    .broadcast-label {
-        font-size: 0.65rem;
+    .announcement-text {
+        font-size: 0.95rem;
+        color: #444;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+    }
+
+    .close-announcement {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
         font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        background: rgba(255, 255, 255, 0.2);
-        padding: 4px 10px;
-        border-radius: 50px;
-        display: inline-block;
-        margin-bottom: 12px;
+        color: #111;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
     }
-
-    .broadcast-text {
-        font-size: 0.9rem;
-        font-weight: 600;
-        line-height: 1.5;
-        margin: 0;
-    }
-    </style>
+</style>
 </body>
     </html>
