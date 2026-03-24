@@ -259,5 +259,90 @@
     // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
+    <div class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-label">Today's Revenue</span>
+        <span class="stat-value">₦45,000</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Today's Sales</span>
+        <span class="stat-value">12</span>
+    </div>
+    <div class="stat-card blue-tint">
+        <span class="stat-label">Total Revenue</span>
+        <span class="stat-value">₦2.4M</span>
+    </div>
+
+    <div class="stat-card">
+        <span class="stat-label">Active Catalysts</span>
+        <span class="stat-value">158</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Pending Payouts</span>
+        <span class="stat-value">₦82,000</span>
+    </div>
+    <div class="stat-card green-tint">
+        <span class="stat-label">Available Balance</span>
+        <span class="stat-value">₦410,500</span>
+    </div>
+
+    <div class="stat-card">
+        <span class="stat-label">Refunds/Claims</span>
+        <span class="stat-value">0</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">System Fees</span>
+        <span class="stat-value">₦12,400</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Total Payouts</span>
+        <span class="stat-value">₦1.8M</span>
+    </div>
+</div>
+
+<style>
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Default for mobile */
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    /* For wider screens, we move to 3 columns to show the 9-grid properly */
+    @media (min-width: 480px) {
+        .stats-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .stat-card {
+        background: var(--m-white);
+        padding: 20px 15px;
+        border-radius: 18px;
+        border: 1px solid #eee;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: var(--m-gray);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+        font-size: 1.1rem;
+        font-weight: 900;
+        color: var(--m-dark);
+    }
+
+    /* Specific Tints for Importance */
+    .blue-tint { border-left: 4px solid var(--m-blue); }
+    .green-tint { border-left: 4px solid #28a745; }
+</style>
 </body>
     </html>
