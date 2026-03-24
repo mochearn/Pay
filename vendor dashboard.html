@@ -259,18 +259,32 @@
     // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
-    <div class="stats-grid">
-    <div class="stat-card">
+<div class="stats-grid">
+    
+    <div class="stat-card blue-tint">
         <span class="stat-label">Today's Revenue</span>
         <span class="stat-value">₦45,000</span>
     </div>
+    <div class="stat-card green-tint">
+        <span class="stat-label">Available Balance</span>
+        <span class="stat-value">₦410,500</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Affiliate Commissions</span>
+        <span class="stat-value">₦12,200</span>
+    </div>
+
     <div class="stat-card">
         <span class="stat-label">Today's Sales</span>
         <span class="stat-value">12</span>
     </div>
-    <div class="stat-card blue-tint">
-        <span class="stat-label">Total Revenue</span>
-        <span class="stat-value">₦2.4M</span>
+    <div class="stat-card">
+        <span class="stat-label">EPC (Earnings/Click)</span>
+        <span class="stat-value">₦850</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-label">Conversion Rate</span>
+        <span class="stat-value">8.4%</span>
     </div>
 
     <div class="stat-card">
@@ -278,71 +292,77 @@
         <span class="stat-value">158</span>
     </div>
     <div class="stat-card">
-        <span class="stat-label">Pending Payouts</span>
-        <span class="stat-value">₦82,000</span>
+        <span class="stat-label">Direct Sales</span>
+        <span class="stat-value">4</span>
     </div>
-    <div class="stat-card green-tint">
-        <span class="stat-label">Available Balance</span>
-        <span class="stat-value">₦410,500</span>
+    <div class="stat-card">
+        <span class="stat-label">Catalyst Sales</span>
+        <span class="stat-value">8</span>
     </div>
 
     <div class="stat-card">
-        <span class="stat-label">Refunds/Claims</span>
-        <span class="stat-value">0</span>
+        <span class="stat-label">Total Revenue</span>
+        <span class="stat-value">₦2.4M</span>
     </div>
     <div class="stat-card">
-        <span class="stat-label">System Fees</span>
-        <span class="stat-value">₦12,400</span>
+        <span class="stat-label">Pending Settlement</span>
+        <span class="stat-value">₦82,000</span>
     </div>
     <div class="stat-card">
         <span class="stat-label">Total Payouts</span>
         <span class="stat-value">₦1.8M</span>
     </div>
+
 </div>
 
 <style>
+    /* STRICT 3-COLUMN ALIGNMENT */
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Default for mobile */
-        gap: 12px;
+        grid-template-columns: repeat(3, 1fr); /* Forced 3 columns for Admin look */
+        gap: 10px;
         margin-bottom: 25px;
-    }
-
-    /* For wider screens, we move to 3 columns to show the 9-grid properly */
-    @media (min-width: 480px) {
-        .stats-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
+        width: 100%;
     }
 
     .stat-card {
         background: var(--m-white);
-        padding: 20px 15px;
-        border-radius: 18px;
-        border: 1px solid #eee;
+        padding: 15px 10px;
+        border-radius: 15px;
+        border: 1px solid #eeeeee;
         display: flex;
         flex-direction: column;
-        gap: 5px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        justify-content: center;
+        min-height: 85px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
 
     .stat-label {
-        font-size: 0.65rem;
-        font-weight: 700;
+        font-size: 0.6rem;
+        font-weight: 800;
         color: var(--m-gray);
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
+        margin-bottom: 4px;
+        line-height: 1.2;
     }
 
     .stat-value {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         font-weight: 900;
         color: var(--m-dark);
+        word-break: break-word;
     }
 
-    /* Specific Tints for Importance */
-    .blue-tint { border-left: 4px solid var(--m-blue); }
-    .green-tint { border-left: 4px solid #28a745; }
-</style>
+    /* Tints for the main money cards */
+    .blue-tint { border-top: 3px solid var(--m-blue); }
+    .green-tint { border-top: 3px solid #28a745; }
+
+    /* Fix for very small screens to keep text readable */
+    @media (max-width: 360px) {
+        .stat-value { font-size: 0.85rem; }
+        .stat-label { font-size: 0.55rem; }
+    }
+    </style>
 </body>
     </html>
