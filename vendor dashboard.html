@@ -778,5 +778,86 @@
         margin-top: 2px;
     }
     </style>
+    <div class="financial-actions-footer">
+    <div class="actions-grid">
+        
+        <button class="finance-btn withdraw-btn" onclick="triggerWithdraw()">
+            <svg class="btn-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+            Withdraw to Bank
+        </button>
+
+        <button class="finance-btn transfer-btn" onclick="triggerTransfer()">
+            <svg class="btn-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="17 1 21 5 17 9"></polyline>
+                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                <polyline points="7 23 3 19 7 15"></polyline>
+                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+            Internal Transfer
+        </button>
+
+    </div>
+</div>
+
+<style>
+    .financial-actions-footer {
+        padding: 30px 15px 50px 15px; /* Added extra bottom padding for the scroll */
+        background: #fdfdfd;
+        border-top: 1px solid #f0f0f0;
+        margin-top: 20px;
+    }
+
+    .actions-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .finance-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 18px 10px;
+        border-radius: 16px;
+        font-size: 0.85rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        border: none;
+    }
+
+    /* Professional Dark Theme for Withdraw */
+    .withdraw-btn {
+        background: #111111;
+        color: #ffffff;
+    }
+
+    /* Premium Light Theme for Transfer */
+    .transfer-btn {
+        background: #ffffff;
+        color: #111111;
+        border: 1.5px solid #eeeeee;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .btn-svg {
+        stroke: currentColor;
+    }
+
+    /* High-end feedback */
+    .finance-btn:active {
+        transform: scale(0.95);
+        opacity: 0.9;
+    }
+
+    .withdraw-btn:active {
+        background: #000000;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+</style>
 </body>
     </html>
