@@ -259,112 +259,128 @@
     // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
-<div class="stats-grid">
-    
-    <div class="stat-card blue-tint" onclick="cardPulse(this)">
-        <span class="stat-label">Today's Revenue</span>
-        <span class="stat-value">₦45,000</span>
-    </div>
-    <div class="stat-card green-tint" onclick="cardPulse(this)">
-        <span class="stat-label">Available Balance</span>
-        <span class="stat-value">₦410,500</span>
-    </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Affiliate Commission</span>
-        <span class="stat-value">₦12,200</span>
-    </div>
+<div class="stats-container">
+    <div class="stats-grid" id="mainStatsGrid">
+        
+        <div class="stat-card blue-tint" onclick="toggleCard(this)">
+            <span class="stat-label">Today's Revenue</span>
+            <span class="stat-value">₦45,000</span>
+        </div>
+        <div class="stat-card green-tint" onclick="toggleCard(this)">
+            <span class="stat-label">Available Balance</span>
+            <span class="stat-value">₦410,500</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Affiliate Commission</span>
+            <span class="stat-value">₦12,200</span>
+        </div>
 
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Today's Sales</span>
-        <span class="stat-value">12</span>
-    </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Earnings Per Click</span>
-        <span class="stat-value">₦850</span>
-    </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Conversion Rate</span>
-        <span class="stat-value">8.4%</span>
-    </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Today's Sales</span>
+            <span class="stat-value">12</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Earnings Per Click</span>
+            <span class="stat-value">₦850</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Conversion Rate</span>
+            <span class="stat-value">8.4%</span>
+        </div>
 
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Active Catalysts</span>
-        <span class="stat-value">158</span>
-    </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Direct Sales</span>
-        <span class="stat-value">4</span>
-    </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Catalyst Sales</span>
-        <span class="stat-value">8</span>
-    </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Active Catalysts</span>
+            <span class="stat-value">158</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Direct Sales</span>
+            <span class="stat-value">4</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Catalyst Sales</span>
+            <span class="stat-value">8</span>
+        </div>
 
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Total Revenue</span>
-        <span class="stat-value">₦200,000,000</span> </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Pending Settlement</span>
-        <span class="stat-value">₦82,000</span>
-    </div>
-    <div class="stat-card" onclick="cardPulse(this)">
-        <span class="stat-label">Total Payouts</span>
-        <span class="stat-value">₦1.8M</span>
-    </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Total Revenue</span>
+            <span class="stat-value">₦2.4M</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Pending Settlement</span>
+            <span class="stat-value">₦82,000</span>
+        </div>
+        <div class="stat-card" onclick="toggleCard(this)">
+            <span class="stat-label">Total Payouts</span>
+            <span class="stat-value">₦1.8M</span>
+        </div>
 
+    </div>
 </div>
 
 <style>
+    /* New Container for screen padding */
+    .stats-container {
+        padding: 0 15px; /* Fixed: Giving side space from screen walls */
+        margin-top: 35px; /* Breathe space from box above */
+        margin-bottom: 30px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
-        margin-top: 35px; /* Added breathe space from broadcast box */
-        margin-bottom: 30px;
         width: 100%;
     }
 
     .stat-card {
         background: var(--m-white);
-        padding: 15px 8px;
+        padding: 12px 8px; /* Fixed: Reduced vertical padding for shorter height */
         border-radius: 18px;
         border: 1px solid #eeeeee;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Re-tuned transition for a more "snappy" magic feel */
+        transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), 
+                    box-shadow 0.35s cubic-bezier(0.19, 1, 0.22, 1); 
         cursor: pointer;
-        min-height: 95px; /* Slightly taller for full text */
+        min-height: 85px; /* Slightly shorter height */
+        box-sizing: border-box;
+        position: relative;
+        -webkit-tap-highlight-color: transparent; /* Removes blue mobile flash */
     }
 
-    /* THE LIFT & SHADOW ANIMATION */
-    .stat-card:active {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 123, 255, 0.25);
+    /* 🔥 STICKY LIFT STATE (Activated by JS) */
+    .stat-card.active-lift {
+        transform: translateY(-10px); /* Slightly higher for more effect */
+        box-shadow: 0 20px 30px rgba(0, 123, 255, 0.2); /* Deep blue magic shadow */
         border-color: var(--m-blue);
+        z-index: 10; /* Ensures shadow overlays other cards */
     }
 
     .stat-label {
-        font-size: 0.52rem; /* Adjusted for full words */
+        font-size: 0.52rem; 
         font-weight: 800;
         color: var(--m-gray);
         text-transform: uppercase;
         letter-spacing: 0.3px;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
         line-height: 1.2;
     }
 
-    /* AUTO-SCALING NUMBERS: This ensures long numbers never break the card */
+    /* Auto-scaling numbers for the millions */
     .stat-value {
         font-size: 0.9rem;
         font-weight: 900;
         color: var(--m-dark);
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; /* Puts "..." if it's somehow still too long */
+        text-overflow: ellipsis;
     }
 
-    /* Small screens tweak to ensure full words fit */
+    /* Small screens tweak */
     @media (max-width: 380px) {
         .stat-value { font-size: 0.8rem; }
         .stat-label { font-size: 0.48rem; }
@@ -375,14 +391,31 @@
 </style>
 
 <script>
-    function cardPulse(el) {
-        el.style.transform = "translateY(-8px)";
-        el.style.boxShadow = "0 15px 30px rgba(0, 123, 255, 0.2)";
-        setTimeout(() => {
-            el.style.transform = "translateY(0)";
-            el.style.boxShadow = "none";
-        }, 400);
+    function toggleCard(clickedCard) {
+        // Find if any other card is already lifted
+        const currentlyLifted = document.querySelector('.stat-card.active-lift');
+
+        // If another card is lifted, put it down
+        if (currentlyLifted && currentlyLifted !== clickedCard) {
+            currentlyLifted.classList.remove('active-lift');
+        }
+
+        // Toggle the sticky lift on the clicked card
+        clickedCard.classList.toggle('active-lift');
+
+        // 🔥 Added: Stop propagation so the 'body' click doesn't immediately fire
+        event.stopPropagation(); 
     }
+
+    // New: If user taps anywhere else on the screen, put any lifted card down
+    document.addEventListener('click', function(event) {
+        const currentlyLifted = document.querySelector('.stat-card.active-lift');
+        
+        // If something is lifted and we clicked outside the grid
+        if (currentlyLifted && !event.target.closest('#mainStatsGrid')) {
+            currentlyLifted.classList.remove('active-lift');
+        }
+    });
     </script>
 </body>
     </html>
