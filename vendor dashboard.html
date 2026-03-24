@@ -778,56 +778,63 @@
         margin-top: 2px;
     }
     </style>
-    <div class="financial-actions-footer">
-    <div class="actions-grid">
+  <div class="financial-actions-section">
+    <div class="actions-flex-container">
         
         <button class="finance-btn withdraw-btn" onclick="triggerWithdraw()">
-            <svg class="btn-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
             </svg>
-            Withdraw to Bank
+            <span class="btn-text">Withdraw to Bank</span>
         </button>
 
         <button class="finance-btn transfer-btn" onclick="triggerTransfer()">
-            <svg class="btn-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="btn-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="17 1 21 5 17 9"></polyline>
                 <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
                 <polyline points="7 23 3 19 7 15"></polyline>
                 <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
             </svg>
-            Internal Transfer
+            <span class="btn-text">Internal Transfer</span>
         </button>
 
     </div>
 </div>
 
 <style>
-    .financial-actions-footer {
-        padding: 30px 15px 50px 15px; /* Added extra bottom padding for the scroll */
-        background: #fdfdfd;
-        border-top: 1px solid #f0f0f0;
-        margin-top: 20px;
+    /* PAGE INTEGRATION: Placing on the gray background directly */
+    .financial-actions-section {
+        padding: 0 15px 50px 15px; /* Extra bottom space for scrolling */
+        margin-top: -10px; /* Fixed: Moving them up a bit closer to the list above */
+        width: 100%;
+        box-sizing: border-box;
     }
 
-    .actions-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
+    /* FLEX Container: Ensures text stays straight on one line */
+    .actions-flex-container {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .finance-btn {
         display: flex;
+        flex: 1; /* Both buttons share space, but adapt text */
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        padding: 18px 10px;
+        gap: 8px;
+        padding: 18px 0; /* Shorter vertical, wider horizontal */
         border-radius: 16px;
-        font-size: 0.85rem;
+        font-size: 0.82rem; /* Adjusted slightly for fit */
         font-weight: 800;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
         border: none;
+        white-space: nowrap; /* 🔥 Critical: Keeps words straight */
+        overflow: hidden; /* Ensures it doesn't break parent if screen is tiny */
     }
 
     /* Professional Dark Theme for Withdraw */
@@ -848,16 +855,23 @@
         stroke: currentColor;
     }
 
+    /* Adjusts text box for flexibility */
+    .btn-text {
+        flex-shrink: 0; /* Text will not shrink, the SVG might slightly */
+    }
+
     /* High-end feedback */
     .finance-btn:active {
         transform: scale(0.95);
         opacity: 0.9;
     }
 
-    .withdraw-btn:active {
-        background: #000000;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    /* Small Screen Handling to maintain "Straight Words" rule */
+    @media (max-width: 360px) {
+        .btn-text { font-size: 0.75rem; }
+        .finance-btn { gap: 5px; }
+        .btn-svg { width: 16px; height: 16px; }
     }
-</style>
+                </style>
 </body>
     </html>
