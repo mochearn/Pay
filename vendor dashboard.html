@@ -261,54 +261,53 @@
 </script>
 <div class="stats-grid">
     
-    <div class="stat-card blue-tint">
+    <div class="stat-card blue-tint" onclick="cardPulse(this)">
         <span class="stat-label">Today's Revenue</span>
         <span class="stat-value">₦45,000</span>
     </div>
-    <div class="stat-card green-tint">
+    <div class="stat-card green-tint" onclick="cardPulse(this)">
         <span class="stat-label">Available Balance</span>
         <span class="stat-value">₦410,500</span>
     </div>
-    <div class="stat-card">
-        <span class="stat-label">Affiliate Commissions</span>
+    <div class="stat-card" onclick="cardPulse(this)">
+        <span class="stat-label">Affiliate Commission</span>
         <span class="stat-value">₦12,200</span>
     </div>
 
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Today's Sales</span>
         <span class="stat-value">12</span>
     </div>
-    <div class="stat-card">
-        <span class="stat-label">EPC (Earnings/Click)</span>
+    <div class="stat-card" onclick="cardPulse(this)">
+        <span class="stat-label">Earnings Per Click</span>
         <span class="stat-value">₦850</span>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Conversion Rate</span>
         <span class="stat-value">8.4%</span>
     </div>
 
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Active Catalysts</span>
         <span class="stat-value">158</span>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Direct Sales</span>
         <span class="stat-value">4</span>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Catalyst Sales</span>
         <span class="stat-value">8</span>
     </div>
 
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Total Revenue</span>
-        <span class="stat-value">₦2.4M</span>
-    </div>
-    <div class="stat-card">
+        <span class="stat-value">₦200,000,000</span> </div>
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Pending Settlement</span>
         <span class="stat-value">₦82,000</span>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="cardPulse(this)">
         <span class="stat-label">Total Payouts</span>
         <span class="stat-value">₦1.8M</span>
     </div>
@@ -316,53 +315,74 @@
 </div>
 
 <style>
-    /* STRICT 3-COLUMN ALIGNMENT */
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Forced 3 columns for Admin look */
+        grid-template-columns: repeat(3, 1fr);
         gap: 10px;
-        margin-bottom: 25px;
+        margin-top: 35px; /* Added breathe space from broadcast box */
+        margin-bottom: 30px;
         width: 100%;
     }
 
     .stat-card {
         background: var(--m-white);
-        padding: 15px 10px;
-        border-radius: 15px;
+        padding: 15px 8px;
+        border-radius: 18px;
         border: 1px solid #eeeeee;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-height: 85px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        min-height: 95px; /* Slightly taller for full text */
+    }
+
+    /* THE LIFT & SHADOW ANIMATION */
+    .stat-card:active {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 123, 255, 0.25);
+        border-color: var(--m-blue);
     }
 
     .stat-label {
-        font-size: 0.6rem;
+        font-size: 0.52rem; /* Adjusted for full words */
         font-weight: 800;
         color: var(--m-gray);
         text-transform: uppercase;
         letter-spacing: 0.3px;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         line-height: 1.2;
     }
 
+    /* AUTO-SCALING NUMBERS: This ensures long numbers never break the card */
     .stat-value {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         font-weight: 900;
         color: var(--m-dark);
-        word-break: break-word;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Puts "..." if it's somehow still too long */
     }
 
-    /* Tints for the main money cards */
-    .blue-tint { border-top: 3px solid var(--m-blue); }
-    .green-tint { border-top: 3px solid #28a745; }
-
-    /* Fix for very small screens to keep text readable */
-    @media (max-width: 360px) {
-        .stat-value { font-size: 0.85rem; }
-        .stat-label { font-size: 0.55rem; }
+    /* Small screens tweak to ensure full words fit */
+    @media (max-width: 380px) {
+        .stat-value { font-size: 0.8rem; }
+        .stat-label { font-size: 0.48rem; }
     }
-    </style>
+
+    .blue-tint { border-top: 4px solid var(--m-blue); }
+    .green-tint { border-top: 4px solid #28a745; }
+</style>
+
+<script>
+    function cardPulse(el) {
+        el.style.transform = "translateY(-8px)";
+        el.style.boxShadow = "0 15px 30px rgba(0, 123, 255, 0.2)";
+        setTimeout(() => {
+            el.style.transform = "translateY(0)";
+            el.style.boxShadow = "none";
+        }, 400);
+    }
+    </script>
 </body>
     </html>
