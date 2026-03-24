@@ -293,6 +293,66 @@
         }
     }
 </script>
+ <style>
+    #intel-hub-container { 
+    width: 90%; 
+    margin: 0 auto; /* THIS IS THE MAGIC: It balances the left and right space */
+    display: flex; 
+    justify-content: center; 
+    padding-top: 10px; 
+     }
+
+    #intel-hub { 
+        width: 90%; max-width: 330px; 
+        background: rgba(0, 0, 0, 0.1); /* 10% Opacity */
+        backdrop-filter: blur(3px);
+        border: 2px solid #dee2cf; /* Solid Black Border */
+        border-radius: 12px; 
+        min-height: 60px; 
+        padding: 12px 16px;
+        display: flex; align-items: center; gap: 12px; 
+        position: relative;
+    }
+
+    .hub-content { 
+        flex-grow: 1; font-size: 0.8rem; font-weight: 500; 
+        color: #444444; /* Light Black / Grey Text */
+        line-height: 1.4; word-wrap: break-word; 
+    }
+
+    .close-hub-btn { 
+        cursor: pointer; font-size: 1.4rem; color: #000; 
+        display: none; font-weight: bold;
+    }
+
+    /* THE COMPLEX POP-UP OVERLAY */
+    #hub-overlay {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center;
+    }
+    .pop-up-card {
+        background: #fff; width: 85%; max-width: 300px; padding: 25px; border-radius: 15px; text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .pop-up-card p { font-size: 0.75rem; color: #333; line-height: 1.6; margin-bottom: 20px; font-weight: 600; }
+    
+    .pop-btn-group { display: flex; flex-direction: column; gap: 8px; }
+    .pop-btn { 
+        padding: 8px; 
+        border-radius: 10%; /* 10% Curved edges as requested */
+        border: none; 
+        font-size: 0.7rem; 
+        font-weight: 700; 
+        text-transform: uppercase; 
+        cursor: pointer;
+        background: #e0e0e0; /* Light Grey */
+        color: #000; /* Black Text */
+        transition: background 0.2s;
+    }
+    .pop-btn:hover { background: #d0d0d0; }
+
+    .hub-hidden { display: none !important; }
+</style>
 
 <div id="intel-hub-container">
     <div id="intel-hub">
@@ -340,6 +400,32 @@
     // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
+    <script>
+    // THE MESSAGE LOOP ENGINE
+    const reports = [
+        "Check the command center for new tasks. 🎁",
+        "Your empire is growing—12% increase today. 📈",
+        "Earnings are ready for verification. 💰",
+        "Security protocols are active and nominal. 🛡️"
+    ];
+    
+    let reportIndex = 0;
+    const reportElement = document.getElementById('status-report');
+
+    function startMessageLoop() {
+        setInterval(() => {
+            reportElement.style.opacity = 0; // Fade out
+            setTimeout(() => {
+                reportIndex = (reportIndex + 1) % reports.length;
+                reportElement.innerText = reports[reportIndex];
+                reportElement.style.opacity = 1; // Fade in
+            }, 500); // Half-second for the swap
+        }, 7000); // 7 Seconds per message
+    }
+
+    // Start the loop immediately
+    startMessageLoop();
+    </script>
    <div class="product-blueprint-wrapper">
     <div class="blueprint-card">
         
