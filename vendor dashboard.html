@@ -259,6 +259,187 @@
     // Default init
     setIntelligenceHub("Mochearn Systems: All Engines Nominal.");
 </script>
+    <div class="product-blueprint-container">
+    <div class="blueprint-card">
+        
+        <div class="blueprint-header">
+            <div class="product-info">
+                <span class="product-badge">Active Product</span>
+                <h3 class="product-name">The J-System Masterclass</h3>
+            </div>
+            <div class="traffic-stat">
+                <span class="stat-num">1,240</span>
+                <span class="stat-text">Total Visits Today</span>
+            </div>
+        </div>
+
+        <div class="link-wrapper">
+            <span class="link-label">Your Live Sales Page Link:</span>
+            <div class="link-box">
+                <input type="text" value="https://mochearn.com/j-system/v-ref882" id="vendorLink" readonly>
+                <button class="copy-btn" onclick="copyVendorLink()">Copy</button>
+            </div>
+        </div>
+
+        <div class="blueprint-actions">
+            <button class="action-btn secondary">Edit Product</button>
+            <button class="action-btn primary">+ Add New Asset</button>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .product-blueprint-container {
+        padding: 0 15px;
+        margin-bottom: 30px;
+        box-sizing: border-box;
+    }
+
+    .blueprint-card {
+        background: var(--m-white);
+        border: 1px solid #eeeeee;
+        border-radius: 20px;
+        padding: 25px 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .blueprint-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .product-badge {
+        background: #e8f5e9;
+        color: #28a745;
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+
+    .product-name {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 900;
+        color: var(--m-dark);
+    }
+
+    .traffic-stat {
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-num {
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: var(--m-blue);
+    }
+
+    .stat-text {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: var(--m-gray);
+        text-transform: uppercase;
+    }
+
+    .link-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .link-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--m-gray);
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .link-box {
+        background: #f8f9fa;
+        border: 1px dashed #ced4da;
+        border-radius: 12px;
+        display: flex;
+        padding: 5px;
+        align-items: center;
+    }
+
+    .link-box input {
+        background: transparent;
+        border: none;
+        padding: 10px;
+        flex: 1;
+        font-size: 0.85rem;
+        color: var(--m-dark);
+        font-weight: 600;
+        outline: none;
+    }
+
+    .copy-btn {
+        background: var(--m-dark);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .blueprint-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .action-btn {
+        padding: 15px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 800;
+        cursor: pointer;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .action-btn.primary {
+        background: var(--m-blue);
+        color: white;
+    }
+
+    .action-btn.secondary {
+        background: #f0f0f0;
+        color: var(--m-dark);
+    }
+
+    .action-btn:active {
+        transform: scale(0.96);
+    }
+</style>
+
+<script>
+    function copyVendorLink() {
+        var copyText = document.getElementById("vendorLink");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        
+        // Quick visual feedback
+        const btn = document.querySelector('.copy-btn');
+        btn.innerHTML = "Copied!";
+        btn.style.background = "#28a745";
+        setTimeout(() => {
+            btn.innerHTML = "Copy";
+            btn.style.background = "#111111";
+        }, 2000);
+    }
+</script>
 <div class="stats-container">
     <div class="stats-grid" id="mainStatsGrid">
         
