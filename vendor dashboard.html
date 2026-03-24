@@ -20,7 +20,6 @@
             margin: 0; 
             padding: 0;
             color: var(--m-dark);
-            -webkit-font-smoothing: antialiased;
         }
 
         /* 🟢 FIXED TOP NAV */
@@ -40,17 +39,24 @@
             border-bottom: 1px solid #eeeeee;
         }
 
-        /* Visible Menu Button */
-        .menu-btn {
+        /* CUSTOM CSS MENU ICON (PHYSICAL LINES) */
+        .menu-trigger {
             background: none;
             border: none;
-            font-size: 1.6rem; /* Large and Sharp */
-            font-weight: 300;
-            color: var(--m-dark);
             cursor: pointer;
             padding: 0;
+            width: 30px;
+            height: 20px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--m-dark);
+            border-radius: 5px;
         }
 
         .nav-title {
@@ -61,7 +67,7 @@
             color: var(--m-dark);
         }
 
-        /* Bell with Background Card */
+        /* Bell Card */
         .icon-card {
             background: #f0f0f0;
             width: 40px;
@@ -87,10 +93,7 @@
             margin-bottom: 25px;
         }
 
-        /* White Profile Box Link */
-        .avatar-link {
-            text-decoration: none;
-        }
+        .avatar-link { text-decoration: none; }
 
         .avatar-box {
             width: 55px;
@@ -107,10 +110,7 @@
             border: 1px solid #eee;
         }
 
-        .welcome-msg {
-            display: flex;
-            flex-direction: column;
-        }
+        .welcome-msg { display: flex; flex-direction: column; }
 
         .label-text {
             font-size: 0.75rem;
@@ -131,7 +131,10 @@
 <body>
 
     <nav class="top-nav">
-        <button class="menu-btn">☰</button>
+        <button class="menu-trigger">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line" style="width: 15px;"></div> </button>
         <div class="nav-title">Vendor Dashboard</div>
         <div class="icon-card">🔔</div>
     </nav>
@@ -151,4 +154,4 @@
     </div>
 
 </body>
-</html>
+    </html>
