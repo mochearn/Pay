@@ -23,7 +23,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 🟢 THE FLOATING TOP ROLL */
+        /* 🟢 FIXED TOP ROLL */
         .top-nav {
             position: fixed;
             top: 0;
@@ -40,23 +40,38 @@
             border-bottom: 1px solid #eeeeee;
         }
 
-        .menu-icon {
+        .menu-btn {
             font-size: 1.5rem;
             cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
             color: var(--m-dark);
         }
 
         .nav-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--m-dark);
         }
 
-        /* 🔵 THE GREETING BLOCK (STRETCHED BELOW NAV) */
+        .icon-card {
+            background: #f0f0f0;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* 🔵 GREETING BLOCK */
         .main-wrapper {
-            margin-top: 70px; /* Space for the floating nav */
+            margin-top: 70px; 
             padding: 25px 20px;
         }
 
@@ -67,10 +82,15 @@
             margin-bottom: 25px;
         }
 
+        /* White Profile Link Box */
+        .avatar-link {
+            text-decoration: none;
+        }
+
         .avatar-box {
             width: 55px;
             height: 55px;
-            background: #e9ecef;
+            background: var(--m-white); /* Pure White as requested */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -78,8 +98,8 @@
             font-weight: 900;
             font-size: 1.3rem;
             color: var(--m-blue);
-            border: 2px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Professional lift */
+            border: 1px solid #eee;
         }
 
         .welcome-msg {
@@ -106,15 +126,17 @@
 <body>
 
     <nav class="top-nav">
-        <div class="menu-icon">☰</div>
+        <button class="menu-btn">☰</button>
         <div class="nav-title">Vendor Dashboard</div>
-        <div class="notif-bell" style="font-size: 1.2rem;">🔔</div>
+        <div class="icon-card">🔔</div>
     </nav>
 
     <div class="main-wrapper">
         
         <header class="profile-section">
-            <div class="avatar-box">M</div>
+            <a href="profile.html" class="avatar-link">
+                <div class="avatar-box">M</div>
+            </a>
             <div class="welcome-msg">
                 <span class="label-text">Executive Vendor 👋</span>
                 <span class="user-name">Mochearn Admin</span>
@@ -124,4 +146,4 @@
     </div>
 
 </body>
-    </html>
+</html>
