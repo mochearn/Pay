@@ -129,7 +129,197 @@
     </style>
 </head>
 <body>
+<div id="sideMenuOverlay" class="menu-overlay" onclick="toggleMochearnMenu()"></div>
 
+<div id="mochearnSideMenu" class="side-nav">
+    
+    <div class="nav-header">
+        <h2 class="brand-name">Mochearn <span class="vendor-tag">Vendor</span></h2>
+        <button class="close-btn" onclick="toggleMochearnMenu()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
+    <div class="nav-links">
+        
+        <a href="#" class="nav-item active">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="#" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <span>Product Inventory</span>
+        </a>
+
+        <a href="#" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            <span>Revenue & Payouts</span>
+        </a>
+
+        <a href="#" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Catalyst Army</span>
+        </a>
+
+        <a href="#" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Marketing Vault</span>
+        </a>
+
+        <a href="#" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Account Settings</span>
+        </a>
+
+    </div>
+
+    <div class="nav-footer">
+        <a href="#" class="nav-item support-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Contact Support</span>
+        </a>
+        <a href="#" class="nav-item logout-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span>Log Out</span>
+        </a>
+    </div>
+
+</div>
+
+<style>
+    /* 1. SIDE NAV MAIN STYLE */
+    .side-nav {
+        position: fixed;
+        top: 0;
+        left: -300px; /* Hidden by default */
+        width: 280px;
+        height: 100vh;
+        background: #ffffff;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        transition: left 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        padding: 25px 20px;
+        box-sizing: border-box;
+    }
+
+    /* Menu Open State */
+    .side-nav.open {
+        left: 0;
+    }
+
+    /* 2. OVERLAY */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: none; /* Hidden by default */
+        z-index: 999;
+        backdrop-filter: blur(2px);
+    }
+
+    /* 3. HEADER */
+    .nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .brand-name {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: #111;
+        margin: 0;
+    }
+
+    .vendor-tag {
+        font-size: 0.65rem;
+        background: #007bff;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: #888;
+        cursor: pointer;
+    }
+
+    /* 4. NAV LINKS */
+    .nav-links {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-item {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 14px 15px;
+        border-radius: 12px;
+        color: #666;
+        font-size: 0.9rem;
+        font-weight: 700;
+        transition: all 0.3s;
+    }
+
+    .nav-item.active {
+        background: #f0f7ff;
+        color: #007bff;
+    }
+
+    .nav-item:hover {
+        background: #f8f9fa;
+        color: #111;
+    }
+
+    .nav-icon {
+        stroke: currentColor;
+    }
+
+    /* 5. FOOTER */
+    .nav-footer {
+        border-top: 1px solid #f0f0f0;
+        padding-top: 20px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .support-link { color: #555; }
+    .logout-link { color: #dc3545; }
+    .logout-link:hover { background: #fff5f5; }
+
+</style>
+
+<script>
+    function toggleMochearnMenu() {
+        const menu = document.getElementById('mochearnSideMenu');
+        const overlay = document.getElementById('sideMenuOverlay');
+        
+        if (menu.classList.contains('open')) {
+            menu.classList.remove('open');
+            overlay.style.display = 'none';
+        } else {
+            menu.classList.add('open');
+            overlay.style.display = 'block';
+        }
+    }
+    </script>
     <nav class="top-nav">
         <button class="menu-trigger">
             <div class="menu-line"></div>
