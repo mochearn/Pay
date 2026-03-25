@@ -10,10 +10,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); padding-bottom: 50px; overflow-x: hidden; }
 
-        /* FLOATING PILL NOTIFICATION */
+        /* FLOATING PILL NOTIFICATION (30% OPACITY VIBE) */
         #warningBar { 
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-120px);
-            width: 90%; max-width: 400px; background: rgba(0, 0, 0, 0.75); 
+            width: 90%; max-width: 400px; background: rgba(0, 0, 0, 0.7); 
             backdrop-filter: blur(8px); color: #fff; padding: 15px 25px; 
             display: flex; justify-content: space-between; align-items: center; 
             z-index: 9999; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 50px;
@@ -27,64 +27,48 @@
 
         .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 50px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); min-height: 500px; }
 
-        /* SPACED STEP INDICATORS - ONE LINE */
-        .step-nav { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 60px; 
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 20px;
-            gap: 40px; /* Increased gap for breathing room */
-        }
+        /* SPACED STEP INDICATORS */
+        .step-nav { display: flex; justify-content: space-between; margin-bottom: 60px; border-bottom: 1px solid #eee; padding-bottom: 20px; gap: 40px; }
         .step { font-size: 0.7rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; white-space: nowrap; }
         .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
 
-        /* SMOOTH SLIDE ANIMATION */
+        /* ANIMATION */
         .form-part { display: none; }
         .form-part.active { display: block; animation: slideIn 0.6s ease forwards; }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
         .form-group { margin-bottom: 30px; }
         label { display: block; font-weight: 800; font-size: 0.85rem; color: #333; margin-bottom: 5px; }
         .hint { font-size: 0.7rem; color: #999; margin-bottom: 10px; display: block; line-height: 1.3; }
         
-        /* THE GUIDANCE TEXT (DASHED BOX VIBE) */
-        .guide-note { background: #f8faf9; border: 1px dashed #cedbd6; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.8rem; color: #444; line-height: 1.5; }
-        .guide-note b { color: var(--emerald); }
-
         input, select, .trigger-btn { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; outline: none; font-size: 1rem; background: #fafafa; transition: 0.3s; }
         input:focus { border-color: var(--emerald); background: #fff; }
 
-        /* DROPDOWN BUTTON */
         .trigger-btn { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 2px solid #eee; cursor: pointer; font-weight: 700; color: #555; }
-        .trigger-btn:hover { border-color: var(--emerald); }
-        .arrow-icon { font-size: 1rem; transition: 0.3s; }
         .trigger-btn.open .arrow-icon { transform: rotate(180deg); }
 
-        /* VERTICAL OPTIONS LIST */
-        .options-list { display: none; margin-top: 15px; animation: fadeIn 0.4s ease; }
-        .option-item { border: 2px solid #f4f4f4; padding: 22px; margin-bottom: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s; }
-        .option-item:hover { border-color: var(--emerald); background: #f9fdfc; }
+        .options-list { display: none; margin-top: 15px; }
+        .option-item { border: 2px solid #f4f4f4; padding: 22px; margin-bottom: 15px; border-radius: 12px; cursor: pointer; }
         .option-item.selected { border-color: var(--emerald); background: #f4fcf9; }
         .option-item h4 { color: var(--emerald); font-size: 0.95rem; margin-bottom: 6px; font-weight: 900; }
         .option-item p { font-size: 0.78rem; color: #777; line-height: 1.5; }
 
         .sub-form { display: none; padding: 30px; background: #fcfcfc; border-radius: 12px; margin-top: 20px; border-left: 6px solid var(--emerald); }
 
-        .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: right; cursor: pointer; transition: 0.3s; }
-        .btn-prev { background: #eee; color: #666; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: left; cursor: pointer; }
+        /* REDESIGNED UPLOAD BOX */
+        .upload-vibe-box { border: 2px dashed #b5dbcc; background-color: #f7f9f8; padding: 30px; border-radius: 12px; text-align: center; transition: 0.3s; cursor: pointer; }
+        .upload-vibe-box:hover { border-color: var(--emerald); background-color: #f0f7f4; }
+        .upload-icon { font-size: 1.8rem; display: block; margin-bottom: 10px; }
+        .file-chosen-btn { display: inline-block; margin-top: 15px; background: #eee; color: #333; padding: 10px 20px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; border: 1px solid #ddd; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: right; cursor: pointer; }
+        .btn-prev { background: #eee; color: #666; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: left; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div id="warningBar">
-    <p style="font-size: 0.8rem;">Fill at least one box to move on 🛡️</p>
+    <p style="font-size: 0.8rem;">Fill a box to continue 🛡️</p>
     <button class="skip-btn" onclick="forceSkip()">SKIP</button>
 </div>
 
@@ -143,34 +127,33 @@
             <div class="options-list" id="opts">
                 <div class="option-item" onclick="selectGate(this, 'ext')">
                     <h4>Option 1: External Link</h4>
-                    <p>Best if you already have a high-converting website built on WordPress or Wix.</p>
+                    <p>Redirect traffic to your existing website (WordPress/Wix).</p>
                 </div>
                 <div class="option-item" onclick="selectGate(this, 'cust')">
                     <h4>Option 2: Custom Upload (Elite)</h4>
-                    <p>Upload your professional HTML code directly to Mochearn's secure servers.</p>
+                    <p>You designed your own HTML/CSS code. Upload and we host it.</p>
                 </div>
             </div>
         </div>
 
         <div id="f-ext" class="sub-form">
-            <div class="guide-note">
-                <b>Guide:</b> Please insert the <b>Direct URL</b> of your sales page. Mochearn will use this link to track your traffic, but remember to paste your unique Payment Link on your site's "Buy Now" button later.
-            </div>
             <label>External Sales Page URL</label>
             <input type="url" placeholder="https://yourwebsite.com/sales-page">
         </div>
 
         <div id="f-cust" class="sub-form">
-            <div class="guide-note">
-                <b>Guide:</b> Upload your web assets as a <b>.zip file</b>. Ensure your main file is named <b>index.html</b>. Mochearn will host this page on our secure cloud, giving you 100% control over design.
-            </div>
             <label>Upload Web Assets (.zip)</label>
-            <input type="file" style="padding: 10px;">
+            <div class="upload-vibe-box" onclick="document.getElementById('fileUpload').click()">
+                <span class="upload-icon">📦</span>
+                <p style="font-size: 0.8rem; color: #666; font-weight: 500;">Click to browse files or drag & drop</p>
+                <span class="file-chosen-btn">Choose File</span>
+                <input type="file" id="fileUpload" style="display:none;">
+            </div>
         </div>
 
         <div class="form-group" style="margin-top: 20px;">
             <label>Support WhatsApp Number</label>
-            <span class="hint">Where buyers can reach you for inquiries</span>
+            <span class="hint">Where buyers can reach you</span>
             <input type="text" placeholder="e.g. 08123456789">
         </div>
 
@@ -182,24 +165,14 @@
 
 <script>
     let currentStep = 1;
-
     function validateStep(now, next) {
         let inputs = document.querySelectorAll('#part' + now + ' input');
         let filled = false;
         inputs.forEach(i => { if(i.value) filled = true; });
-
-        if (!filled) {
-            document.getElementById('warningBar').classList.add('show');
-        } else {
-            goTo(next);
-        }
+        if (!filled) { document.getElementById('warningBar').classList.add('show'); } 
+        else { goTo(next); }
     }
-
-    function forceSkip() {
-        document.getElementById('warningBar').classList.remove('show');
-        goTo(currentStep + 1);
-    }
-
+    function forceSkip() { document.getElementById('warningBar').classList.remove('show'); goTo(currentStep + 1); }
     function goTo(s) {
         currentStep = s;
         document.getElementById('warningBar').classList.remove('show');
@@ -210,19 +183,12 @@
             document.getElementById('s' + s).classList.add('active');
         }, 50);
     }
-
     function toggleOptions() { 
         let list = document.getElementById('opts');
         let btn = document.getElementById('dropBtn');
-        if(list.style.display === 'block') {
-            list.style.display = 'none';
-            btn.classList.remove('open');
-        } else {
-            list.style.display = 'block';
-            btn.classList.add('open');
-        }
+        list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+        btn.classList.toggle('open');
     }
-
     function selectGate(el, type) {
         document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
         el.classList.add('selected');
@@ -231,6 +197,5 @@
         toggleOptions();
     }
 </script>
-
 </body>
     </html>
