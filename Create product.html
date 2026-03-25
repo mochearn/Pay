@@ -10,31 +10,33 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); padding-bottom: 50px; }
 
-        /* THE EMERALD HEADER */
         .studio-header { background: var(--emerald); color: white; padding: 50px 20px; text-align: center; margin-bottom: 40px; }
         .studio-header h1 { font-size: 1.8rem; font-weight: 900; }
-        .studio-header p { opacity: 0.8; font-size: 0.85rem; margin-top: 8px; }
-
-        /* THE SQUARE FORM CONTAINER */
+        
         .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 0px; padding: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
 
-        /* SPACED STEP INDICATORS */
+        /* STEP INDICATORS */
         .step-nav { display: flex; justify-content: space-between; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 20px; gap: 20px; }
-        .step { font-size: 0.75rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; }
+        .step { font-size: 0.75rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; transition: 0.3s; }
         .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
 
-        /* GLOBAL FORM STYLES */
+        /* FORM VISIBILITY LOGIC */
+        .form-part { display: none; animation: fadeIn 0.4s ease; }
+        .form-part.active { display: block; }
+
         .form-group { margin-bottom: 30px; }
         label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 12px; color: #333; }
-        input, select, textarea { width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 8px; outline: none; font-size: 1rem; background: #fff; transition: 0.3s; }
+        input, select, textarea { width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 8px; outline: none; font-size: 1rem; background: #fff; }
         input:focus, select:focus, textarea:focus { border-color: var(--emerald); }
-        .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; cursor: pointer; float: right; font-size: 0.9rem; }
         
-        /* PART 2 SPECIFIC STYLES */
-        .sub-form { display: none; background: #fcfcfc; padding: 20px; border-left: 4px solid var(--emerald); margin-bottom: 25px; animation: slideDown 0.3s ease; }
-        .upload-box { border: 2px dashed #ddd; padding: 30px; text-align: center; border-radius: 12px; cursor: pointer; color: #888; font-weight: 700; transition: 0.3s; }
-        .upload-box:hover { border-color: var(--emerald); color: var(--emerald); background: #f4fcf9; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; cursor: pointer; float: right; font-size: 0.9rem; }
+        .btn-prev { background: #eee; color: #666; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; cursor: pointer; float: left; font-size: 0.9rem; }
+
+        /* SUB-FORM STYLES */
+        .sub-form { display: none; background: #fcfcfc; padding: 20px; border-left: 4px solid var(--emerald); margin-bottom: 25px; }
+        .upload-box { border: 2px dashed #ddd; padding: 30px; text-align: center; border-radius: 12px; cursor: pointer; color: #888; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -47,94 +49,63 @@
 <div class="wizard-container">
     
     <div class="step-nav">
-        <span class="step active">1. Identity</span>
-        <span class="step">2. Sales Gateway</span>
-        <span class="step">3. Academy Builder</span>
-        <span class="step">4. Review</span>
+        <span class="step active" id="stepIndicator1">1. Identity</span>
+        <span class="step" id="stepIndicator2">2. Sales Gateway</span>
+        <span class="step" id="stepIndicator3">3. Academy Builder</span>
+        <span class="step" id="stepIndicator4">4. Review</span>
     </div>
 
-    <div id="part1">
+    <div id="part1" class="form-part active">
         <div class="form-group">
             <label>Product Name</label>
             <input type="text" placeholder="e.g. Digital Marketing Masterclass">
         </div>
-
         <div class="form-group">
             <label>Category</label>
             <select>
                 <option>Affiliate Marketing</option>
                 <option>E-commerce</option>
                 <option>Graphic Design</option>
-                <option>Web Development</option>
-                <option>Personal Finance</option>
             </select>
         </div>
-
         <div class="form-group">
             <label>Selling Price (₦)</label>
             <input type="number" placeholder="15000">
         </div>
-
         <div class="form-group">
             <label>Catalyst Commission (%)</label>
             <input type="number" placeholder="50">
         </div>
-
-        <button class="btn-next">Next Step</button>
+        <button type="button" class="btn-next" onclick="goToStep(2)">Next Step</button>
         <div style="clear: both;"></div>
     </div>
-    <div id="part2" style="margin-top: 40px; border-top: 2px solid #f0f0f0; padding-top: 40px;">
-        
+
+    <div id="part2" class="form-part">
         <div class="form-group">
             <label>Select Hosting Protocol</label>
             <select id="hostingProtocol" onchange="toggleGateway(this.value)">
                 <option value="">-- Choose Deployment Method --</option>
-                <option value="default">Option 1: Mochearn Default (Automatic Generation)</option>
-                <option value="external">Option 2: External Link (My Own Website)</option>
-                <option value="custom">Option 3: Custom Upload (HTML/CSS Elite)</option>
+                <option value="default">Option 1: Mochearn Default</option>
+                <option value="external">Option 2: External Link</option>
+                <option value="custom">Option 3: Custom Upload</option>
             </select>
         </div>
 
         <div id="form-default" class="sub-form">
-            <div class="form-group">
-                <label>Main Headline</label>
-                <input type="text" placeholder="e.g. Master the Art of High-Ticket Sales">
-            </div>
-            <div class="form-group">
-                <label>Key Benefits (Bullet Points)</label>
-                <textarea rows="3" placeholder="Benefit 1&#10;Benefit 2&#10;Benefit 3"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Hero Video or Image URL</label>
-                <input type="text" placeholder="Paste link here">
-            </div>
-            <div class="form-group">
-                <label>About the Vendor (Short Bio)</label>
-                <textarea rows="2" placeholder="Tell your students who you are..."></textarea>
-            </div>
+            <label>Main Headline</label>
+            <input type="text" placeholder="e.g. Master Sales">
         </div>
 
         <div id="form-external" class="sub-form">
-            <div class="form-group">
-                <label>External Sales Page URL</label>
-                <input type="url" placeholder="https://yourwebsite.com/product-page">
-            </div>
+            <label>Sales Page URL</label>
+            <input type="url" placeholder="https://site.com">
         </div>
 
         <div id="form-custom" class="sub-form">
-            <div class="form-group">
-                <label>Upload Web Assets (.zip or .html)</label>
-                <div class="upload-box" onclick="document.getElementById('fileUpload').click()">
-                    <span>Click to Upload Files</span>
-                    <input type="file" id="fileUpload" style="display:none;">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Preferred Page Slug</label>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <span style="font-size: 0.8rem; color: #888;">mochearn.com/p/</span>
-                    <input type="text" placeholder="product-name" style="margin-bottom: 0;">
-                </div>
+            <label>Upload Assets</label>
+            <div class="upload-box" onclick="document.getElementById('fileUpload').click()">
+                <span>Click to Upload Files</span>
+                <input type="file" id="fileUpload" style="display:none;">
             </div>
         </div>
 
@@ -143,23 +114,33 @@
             <input type="text" placeholder="e.g. 08123456789">
         </div>
 
-        <button type="button" class="btn-next" style="background: #eee; color: #666; float: left; border-radius: 5px;">Previous</button>
-        <button type="button" class="btn-next" style="border-radius: 5px;">Next Step</button>
+        <button type="button" class="btn-prev" onclick="goToStep(1)">Previous</button>
+        <button type="button" class="btn-next" onclick="goToStep(3)">Next Step</button>
         <div style="clear: both;"></div>
     </div>
-    </div>
+
+</div>
 
 <script>
+    function goToStep(stepNumber) {
+        // Hide all parts
+        document.querySelectorAll('.form-part').forEach(part => part.classList.remove('active'));
+        // Show target part
+        document.getElementById('part' + stepNumber).classList.add('active');
+
+        // Update indicators
+        document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+        document.getElementById('stepIndicator' + stepNumber).classList.add('active');
+    }
+
     function toggleGateway(val) {
         document.getElementById('form-default').style.display = 'none';
         document.getElementById('form-external').style.display = 'none';
         document.getElementById('form-custom').style.display = 'none';
 
-        if(val === 'default') document.getElementById('form-default').style.display = 'block';
-        if(val === 'external') document.getElementById('form-external').style.display = 'block';
-        if(val === 'custom') document.getElementById('form-custom').style.display = 'block';
+        if(val) document.getElementById('form-' + val).style.display = 'block';
     }
 </script>
 
 </body>
-                                            </html>
+    </html>
