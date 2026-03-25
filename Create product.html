@@ -11,72 +11,30 @@
         body { background: var(--bg); padding-bottom: 50px; }
 
         /* THE EMERALD HEADER */
-        .studio-header { 
-            background: var(--emerald); 
-            color: white; 
-            padding: 50px 20px; 
-            text-align: center;
-            /* Space given between header and card */
-            margin-bottom: 40px; 
-        }
+        .studio-header { background: var(--emerald); color: white; padding: 50px 20px; text-align: center; margin-bottom: 40px; }
         .studio-header h1 { font-size: 1.8rem; font-weight: 900; }
         .studio-header p { opacity: 0.8; font-size: 0.85rem; margin-top: 8px; }
 
         /* THE SQUARE FORM CONTAINER */
-        .wizard-container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background: #fff; 
-            border-radius: 0px; /* Removed the curve as requested */
-            padding: 50px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
-        }
+        .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 0px; padding: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
 
         /* SPACED STEP INDICATORS */
-        .step-nav { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 50px; 
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 20px;
-            gap: 20px; /* Prevents them from kissing */
-        }
-        .step { 
-            font-size: 0.75rem; 
-            font-weight: 800; 
-            color: #ccc; 
-            text-transform: uppercase; 
-            flex: 1; 
-            text-align: center;
-        }
+        .step-nav { display: flex; justify-content: space-between; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 20px; gap: 20px; }
+        .step { font-size: 0.75rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; }
         .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
 
-        /* FORM GROUPS */
+        /* GLOBAL FORM STYLES */
         .form-group { margin-bottom: 30px; }
         label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 12px; color: #333; }
-        input, select { 
-            width: 100%; 
-            padding: 18px; 
-            border: 2px solid #f0f0f0; 
-            border-radius: 8px; /* Slight edge for inputs, but card is square */
-            outline: none; 
-            font-size: 1rem; 
-            background: #fff;
-        }
-        input:focus { border-color: var(--emerald); }
-
-        .btn-next { 
-            background: var(--emerald); 
-            color: #fff; 
-            border: none; 
-            padding: 18px 45px; 
-            border-radius: 5px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            float: right;
-            font-size: 0.9rem;
-        }
-        .btn-next:hover { background: #0a5241; }
+        input, select, textarea { width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 8px; outline: none; font-size: 1rem; background: #fff; transition: 0.3s; }
+        input:focus, select:focus, textarea:focus { border-color: var(--emerald); }
+        .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; cursor: pointer; float: right; font-size: 0.9rem; }
+        
+        /* PART 2 SPECIFIC STYLES */
+        .sub-form { display: none; background: #fcfcfc; padding: 20px; border-left: 4px solid var(--emerald); margin-bottom: 25px; animation: slideDown 0.3s ease; }
+        .upload-box { border: 2px dashed #ddd; padding: 30px; text-align: center; border-radius: 12px; cursor: pointer; color: #888; font-weight: 700; transition: 0.3s; }
+        .upload-box:hover { border-color: var(--emerald); color: var(--emerald); background: #f4fcf9; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -125,32 +83,57 @@
         <button class="btn-next">Next Step</button>
         <div style="clear: both;"></div>
     </div>
-<div id="part2" style="margin-top: 40px; border-top: 2px solid #f0f0f0; padding-top: 40px;">
+    <div id="part2" style="margin-top: 40px; border-top: 2px solid #f0f0f0; padding-top: 40px;">
         
         <div class="form-group">
-            <label>How will you host your Sales Page?</label>
-            
-            <div class="hosting-card" onclick="selectHost(this)">
-                <input type="radio" name="host" id="opt1" checked>
-                <div class="card-info">
-                    <strong>Option 1: Mochearn Default</strong>
-                    <p>Use our high-converting template. No website needed.</p>
+            <label>Select Hosting Protocol</label>
+            <select id="hostingProtocol" onchange="toggleGateway(this.value)">
+                <option value="">-- Choose Deployment Method --</option>
+                <option value="default">Option 1: Mochearn Default (Automatic Generation)</option>
+                <option value="external">Option 2: External Link (My Own Website)</option>
+                <option value="custom">Option 3: Custom Upload (HTML/CSS Elite)</option>
+            </select>
+        </div>
+
+        <div id="form-default" class="sub-form">
+            <div class="form-group">
+                <label>Main Headline</label>
+                <input type="text" placeholder="e.g. Master the Art of High-Ticket Sales">
+            </div>
+            <div class="form-group">
+                <label>Key Benefits (Bullet Points)</label>
+                <textarea rows="3" placeholder="Benefit 1&#10;Benefit 2&#10;Benefit 3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Hero Video or Image URL</label>
+                <input type="text" placeholder="Paste link here">
+            </div>
+            <div class="form-group">
+                <label>About the Vendor (Short Bio)</label>
+                <textarea rows="2" placeholder="Tell your students who you are..."></textarea>
+            </div>
+        </div>
+
+        <div id="form-external" class="sub-form">
+            <div class="form-group">
+                <label>External Sales Page URL</label>
+                <input type="url" placeholder="https://yourwebsite.com/product-page">
+            </div>
+        </div>
+
+        <div id="form-custom" class="sub-form">
+            <div class="form-group">
+                <label>Upload Web Assets (.zip or .html)</label>
+                <div class="upload-box" onclick="document.getElementById('fileUpload').click()">
+                    <span>Click to Upload Files</span>
+                    <input type="file" id="fileUpload" style="display:none;">
                 </div>
             </div>
-
-            <div class="hosting-card" onclick="selectHost(this)">
-                <input type="radio" name="host" id="opt2">
-                <div class="card-info">
-                    <strong>Option 2: External Link</strong>
-                    <p>Redirect customers to your existing website or landing page.</p>
-                </div>
-            </div>
-
-            <div class="hosting-card" onclick="selectHost(this)">
-                <input type="radio" name="host" id="opt3">
-                <div class="card-info">
-                    <strong>Option 3: Custom Upload (Elite)</strong>
-                    <p>Upload your own designed HTML files for a fully custom look.</p>
+            <div class="form-group">
+                <label>Preferred Page Slug</label>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span style="font-size: 0.8rem; color: #888;">mochearn.com/p/</span>
+                    <input type="text" placeholder="product-name" style="margin-bottom: 0;">
                 </div>
             </div>
         </div>
@@ -160,43 +143,23 @@
             <input type="text" placeholder="e.g. 08123456789">
         </div>
 
-        <div style="margin-top: 30px;">
-            <button type="button" class="btn-next" style="background: #eee; color: #666; float: left; border-radius: 5px;">Previous</button>
-            <button type="button" class="btn-next" style="border-radius: 5px;">Next Step</button>
-            <div style="clear: both;"></div>
-        </div>
-
-        <style>
-            .hosting-card {
-                border: 2px solid #f0f0f0;
-                padding: 20px;
-                margin-bottom: 15px;
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                cursor: pointer;
-                transition: 0.2s;
-            }
-            .hosting-card:hover { border-color: var(--emerald); background: #f9fdfc; }
-            .hosting-card.selected { border-color: var(--emerald); background: #f4fcf9; }
-            .hosting-card input[type="radio"] { width: auto; margin-bottom: 0; accent-color: var(--emerald); cursor: pointer; }
-            .card-info strong { font-size: 0.95rem; color: var(--emerald); display: block; margin-bottom: 4px; }
-            .card-info p { font-size: 0.8rem; color: #777; line-height: 1.4; }
-        </style>
-
-        <script>
-            function selectHost(el) {
-                var cards = document.getElementsByClassName("hosting-card");
-                for (var i = 0; i < cards.length; i++) {
-                    cards[i].classList.remove("selected");
-                }
-                el.classList.add("selected");
-                el.querySelector('input[type="radio"]').checked = true;
-            }
-        </script>
+        <button type="button" class="btn-next" style="background: #eee; color: #666; float: left; border-radius: 5px;">Previous</button>
+        <button type="button" class="btn-next" style="border-radius: 5px;">Next Step</button>
+        <div style="clear: both;"></div>
     </div>
-    ```
-</div>
+    </div>
+
+<script>
+    function toggleGateway(val) {
+        document.getElementById('form-default').style.display = 'none';
+        document.getElementById('form-external').style.display = 'none';
+        document.getElementById('form-custom').style.display = 'none';
+
+        if(val === 'default') document.getElementById('form-default').style.display = 'block';
+        if(val === 'external') document.getElementById('form-external').style.display = 'block';
+        if(val === 'custom') document.getElementById('form-custom').style.display = 'block';
+    }
+</script>
 
 </body>
                                             </html>
