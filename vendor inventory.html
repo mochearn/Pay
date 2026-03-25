@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Inventory | Mochearn Command</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f8f9fa; color: #1a1a1a; padding: 20px; }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* HEADER SECTION */
+        .inventory-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 30px; 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .header-info h1 { font-size: 1.5rem; font-weight: 800; color: #007bff; }
+        .header-info p { font-size: 0.85rem; color: #666; margin-top: 5px; }
+        
+        .add-product-btn { 
+            background: #1a1a1a; 
+            color: #fff; 
+            padding: 12px 24px; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .add-product-btn:hover { background: #007bff; transform: translateY(-2px); }
+
+        /* STATS MINI-CARDS */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #eee; text-align: center; }
+        .stat-num { display: block; font-size: 1.2rem; font-weight: 800; color: #111; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; font-weight: 700; }
+
+        /* PRODUCT TABLE/LIST */
+        .inventory-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        
+        thead { background: #fafafa; border-bottom: 2px solid #eee; }
+        th { padding: 15px; text-align: left; font-size: 0.75rem; text-transform: uppercase; color: #888; font-weight: 800; }
+        td { padding: 20px 15px; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; vertical-align: middle; }
+
+        /* PRODUCT INFO CELL */
+        .product-cell { display: flex; align-items: center; gap: 15px; }
+        .product-img { width: 50px; height: 50px; background: #eef2ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .product-details .name { display: block; font-weight: 700; color: #111; }
+        .product-details .id { font-size: 0.75rem; color: #999; }
+
+        /* STATUS BADGES */
+        .badge { padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+        .active { background: #e6fffa; color: #2dcc70; }
+        .pending { background: #fff9e6; color: #f1c40f; }
+        
+        /* ACTION BUTTONS */
+        .actions { display: flex; gap: 8px; }
+        .btn-action { 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+            border: 1px solid #eee; 
+            background: #fff; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: 0.2s;
+            text-decoration: none;
+            color: #444;
+        }
+        .btn-action:hover { border-color: #007bff; color: #007bff; background: #f0f7ff; }
+        .btn-edit-academy { background: #007bff; color: #fff; border: none; }
+        .btn-edit-academy:hover { background: #0056b3; color: #fff; }
+
+        @media (max-width: 768px) {
+            .inventory-header { flex-direction: column; text-align: center; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <header class="inventory-header">
+        <div class="header-info">
+            <h1>Product Inventory 📦</h1>
+            <p>Welcome back, Bethuel. Manage your Academy products and sales force.</p>
+        </div>
+        <button class="add-product-btn" onclick="alert('Opening Mochearn Studio...')">+ Create New Course</button>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-num">03</span>
+            <span class="stat-label">Total Products</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-num">₦2,450,000</span>
+            <span class="stat-label">Total Revenue</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-num">1,240</span>
+            <span class="stat-label">Active Catalysts</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-num">85%</span>
+            <span class="stat-label">Avg. Commission</span>
+        </div>
+    </div>
+
+    <div class="inventory-card">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Details</th>
+                        <th>Price</th>
+                        <th>Commission</th>
+                        <th>Sales</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-img">🚀</div>
+                                <div class="product-details">
+                                    <span class="name">The J-System (Main)</span>
+                                    <span class="id">ID: MC-9901</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><b>₦20,000</b></td>
+                        <td>50% (₦10,000)</td>
+                        <td><b>842</b></td>
+                        <td><span class="badge active">Live</span></td>
+                        <td>
+                            <div class="actions">
+                                <a href="academy.html" class="btn-action btn-edit-academy">Edit Academy</a>
+                                <button class="btn-action">Sales Page</button>
+                                <button class="btn-action">Settings</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-img">👟</div>
+                                <div class="product-details">
+                                    <span class="name">E-com Shoe Masterclass</span>
+                                    <span class="id">ID: MC-8820</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><b>₦15,000</b></td>
+                        <td>40% (₦6,000)</td>
+                        <td><b>156</b></td>
+                        <td><span class="badge active">Live</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-action btn-edit-academy">Edit Academy</button>
+                                <button class="btn-action">Sales Page</button>
+                                <button class="btn-action">Settings</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="product-cell">
+                                <div class="product-img">🛡️</div>
+                                <div class="product-details">
+                                    <span class="name">Anti-Scam Shield 2.0</span>
+                                    <span class="id">ID: MC-4432</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><b>₦5,000</b></td>
+                        <td>70% (₦3,500)</td>
+                        <td><b>0</b></td>
+                        <td><span class="badge pending">Under Review</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-action" disabled style="opacity: 0.5;">Lock Academy</button>
+                                <button class="btn-action">View Draft</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+    </html>
