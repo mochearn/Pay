@@ -3,80 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn Studio | Step 1</title>
+    <title>Mochearn Studio | Create Product</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --emerald: #0e6954; --bg: #f4f7f6; }
+        :root { --emerald: #0e6954; --bg: #fcfcfc; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg); padding: 20px; }
+        body { background: var(--bg); padding-bottom: 50px; }
 
-        /* THE CONTAINER */
-        .studio-box { 
-            max-width: 700px; 
-            margin: 40px auto; 
+        /* THE ROYAL EMERALD HEADER */
+        .studio-header { 
+            background: var(--emerald); 
+            color: white; 
+            padding: 40px 20px; 
+            text-align: center; 
+            margin-bottom: -40px; /* Pulls the form box up into the header */
+        }
+        .studio-header h1 { font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .studio-header p { opacity: 0.8; font-size: 0.85rem; margin-top: 8px; font-weight: 400; }
+
+        /* THE FORM CONTAINER */
+        .wizard-container { 
+            max-width: 750px; 
+            margin: 0 auto; 
             background: #fff; 
             border-radius: 20px; 
             padding: 40px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08); 
+            position: relative;
         }
 
-        .studio-header { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
-        .studio-header h2 { color: var(--emerald); font-weight: 900; }
-        .step-tag { font-size: 0.7rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        /* STEP NAVIGATION INDICATOR */
+        .step-nav { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 40px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 20px; 
+        }
+        .step { font-size: 0.75rem; font-weight: 800; color: #ddd; text-transform: uppercase; }
+        .step.active { color: var(--emerald); }
 
-        /* FORM ELEMENTS */
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; color: #333; }
+        /* FORM GROUPS */
+        .form-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; color: #333; }
         input, select { 
             width: 100%; 
-            padding: 15px; 
-            border: 2px solid #eee; 
+            padding: 16px; 
+            border: 2px solid #f0f0f0; 
             border-radius: 12px; 
             outline: none; 
             font-size: 1rem; 
             transition: 0.3s; 
+            background: #fafafa;
         }
-        input:focus { border-color: var(--emerald); }
+        input:focus { border-color: var(--emerald); background: #fff; }
 
+        /* CLEANED BUTTON */
         .btn-next { 
             background: var(--emerald); 
             color: #fff; 
             border: none; 
-            padding: 15px 30px; 
+            padding: 16px 35px; 
             border-radius: 12px; 
-            font-weight: 700; 
+            font-weight: 800; 
             cursor: pointer; 
             float: right;
-            margin-top: 20px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(14, 105, 84, 0.2); }
     </style>
 </head>
 <body>
 
-<div class="studio-box">
-    <div class="studio-header">
-        <span class="step-tag">Step 1 of 4</span>
-        <h2>Product Identity 🏷️</h2>
+<header class="studio-header">
+    <h1>Mochearn Studio 🏗️</h1>
+    <p>The J-System is built for scale. Let's create your next empire.</p>
+</header>
+
+<div class="wizard-container">
+    
+    <div class="step-nav">
+        <span class="step active">1. Identity</span>
+        <span class="step">2. Sales Gateway</span>
+        <span class="step">3. Academy Builder</span>
+        <span class="step">4. Review</span>
     </div>
 
     <div id="part1">
         <div class="form-group">
-            <label>What is the Name of your Product?</label>
-            <input type="text" placeholder="e.g. The J-System 2.0">
+            <label>Product Name</label>
+            <input type="text" placeholder="e.g. Wealth Vault: Masterclass Edition">
         </div>
 
         <div class="form-group">
             <label>Category</label>
             <select>
-                <option>Affiliate Marketing</option>
-                <option>Digital Skills</option>
-                <option>E-commerce</option>
+                <option>Affiliate Marketing (J-System Style)</option>
+                <option>E-commerce & Dropshipping</option>
+                <option>Digital Product Creation</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label>Price (₦)</label>
-            <input type="number" placeholder="20000">
+            <label>Selling Price (₦)</label>
+            <input type="number" placeholder="25000">
         </div>
 
         <div class="form-group">
@@ -84,9 +118,11 @@
             <input type="number" placeholder="50">
         </div>
 
-        <button class="btn-next">Continue to Gateway ⮕</button>
+        <button class="btn-next">Next Step</button>
+        <div style="clear: both;"></div>
     </div>
+
 </div>
 
 </body>
-  </html>
+    </html>
