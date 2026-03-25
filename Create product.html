@@ -10,78 +10,80 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); padding-bottom: 50px; }
 
-        /* THE ROYAL EMERALD HEADER */
+        /* THE EMERALD HEADER */
         .studio-header { 
             background: var(--emerald); 
             color: white; 
-            padding: 40px 20px; 
-            text-align: center; 
-            margin-bottom: -40px; /* Pulls the form box up into the header */
+            padding: 50px 20px; 
+            text-align: center;
+            /* Space given between header and card */
+            margin-bottom: 40px; 
         }
-        .studio-header h1 { font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .studio-header p { opacity: 0.8; font-size: 0.85rem; margin-top: 8px; font-weight: 400; }
+        .studio-header h1 { font-size: 1.8rem; font-weight: 900; }
+        .studio-header p { opacity: 0.8; font-size: 0.85rem; margin-top: 8px; }
 
-        /* THE FORM CONTAINER */
+        /* THE SQUARE FORM CONTAINER */
         .wizard-container { 
-            max-width: 750px; 
+            max-width: 800px; 
             margin: 0 auto; 
             background: #fff; 
-            border-radius: 20px; 
-            padding: 40px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08); 
-            position: relative;
+            border-radius: 0px; /* Removed the curve as requested */
+            padding: 50px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
         }
 
-        /* STEP NAVIGATION INDICATOR */
+        /* SPACED STEP INDICATORS */
         .step-nav { 
             display: flex; 
             justify-content: space-between; 
-            margin-bottom: 40px; 
+            margin-bottom: 50px; 
             border-bottom: 1px solid #eee; 
-            padding-bottom: 20px; 
+            padding-bottom: 20px;
+            gap: 20px; /* Prevents them from kissing */
         }
-        .step { font-size: 0.75rem; font-weight: 800; color: #ddd; text-transform: uppercase; }
-        .step.active { color: var(--emerald); }
+        .step { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: #ccc; 
+            text-transform: uppercase; 
+            flex: 1; 
+            text-align: center;
+        }
+        .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
 
         /* FORM GROUPS */
-        .form-group { margin-bottom: 25px; }
-        label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; color: #333; }
+        .form-group { margin-bottom: 30px; }
+        label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 12px; color: #333; }
         input, select { 
             width: 100%; 
-            padding: 16px; 
+            padding: 18px; 
             border: 2px solid #f0f0f0; 
-            border-radius: 12px; 
+            border-radius: 8px; /* Slight edge for inputs, but card is square */
             outline: none; 
             font-size: 1rem; 
-            transition: 0.3s; 
-            background: #fafafa;
+            background: #fff;
         }
-        input:focus { border-color: var(--emerald); background: #fff; }
+        input:focus { border-color: var(--emerald); }
 
-        /* CLEANED BUTTON */
         .btn-next { 
             background: var(--emerald); 
             color: #fff; 
             border: none; 
-            padding: 16px 35px; 
-            border-radius: 12px; 
+            padding: 18px 45px; 
+            border-radius: 5px; 
             font-weight: 800; 
             cursor: pointer; 
             float: right;
-            margin-top: 10px;
             font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
-        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(14, 105, 84, 0.2); }
+        .btn-next:hover { background: #0a5241; }
     </style>
 </head>
 <body>
 
 <header class="studio-header">
     <h1>Mochearn Studio 🏗️</h1>
-    <p>The J-System is built for scale. Let's create your next empire.</p>
+    <p>The system is built for scale. Let's create your next empire.</p>
 </header>
 
 <div class="wizard-container">
@@ -96,21 +98,23 @@
     <div id="part1">
         <div class="form-group">
             <label>Product Name</label>
-            <input type="text" placeholder="e.g. Wealth Vault: Masterclass Edition">
+            <input type="text" placeholder="e.g. Digital Marketing Masterclass">
         </div>
 
         <div class="form-group">
             <label>Category</label>
             <select>
-                <option>Affiliate Marketing (J-System Style)</option>
-                <option>E-commerce & Dropshipping</option>
-                <option>Digital Product Creation</option>
+                <option>Affiliate Marketing</option>
+                <option>E-commerce</option>
+                <option>Graphic Design</option>
+                <option>Web Development</option>
+                <option>Personal Finance</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Selling Price (₦)</label>
-            <input type="number" placeholder="25000">
+            <input type="number" placeholder="15000">
         </div>
 
         <div class="form-group">
@@ -125,4 +129,4 @@
 </div>
 
 </body>
-    </html>
+                                            </html>
