@@ -13,7 +13,7 @@
         /* FLOATING PILL NOTIFICATION */
         #warningBar { 
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-120px);
-            width: 90%; max-width: 400px; background: rgba(0, 0, 0, 0.7); 
+            width: 90%; max-width: 400px; background: rgba(0, 0, 0, 0.75); 
             backdrop-filter: blur(8px); color: #fff; padding: 15px 25px; 
             display: flex; justify-content: space-between; align-items: center; 
             z-index: 9999; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 50px;
@@ -21,16 +21,22 @@
         #warningBar.show { transform: translateX(-50%) translateY(0); }
         .skip-btn { color: var(--emerald); border: none; background: none; font-weight: 900; cursor: pointer; margin-left: 15px; text-transform: uppercase; }
 
-        /* HEADER RESTORED */
         .studio-header { background: var(--emerald); color: white; padding: 60px 20px; text-align: center; margin-bottom: 40px; }
         .studio-header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
         .studio-header p { opacity: 0.8; font-size: 0.9rem; font-weight: 400; }
 
         .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 50px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); min-height: 500px; }
 
-        /* STEP INDICATORS */
-        .step-nav { display: flex; justify-content: space-between; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .step { font-size: 0.75rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; }
+        /* SPACED STEP INDICATORS - ONE LINE */
+        .step-nav { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 60px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 20px;
+            gap: 40px; /* Increased gap for breathing room */
+        }
+        .step { font-size: 0.7rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; white-space: nowrap; }
         .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
 
         /* SMOOTH SLIDE ANIMATION */
@@ -46,13 +52,17 @@
         label { display: block; font-weight: 800; font-size: 0.85rem; color: #333; margin-bottom: 5px; }
         .hint { font-size: 0.7rem; color: #999; margin-bottom: 10px; display: block; line-height: 1.3; }
         
+        /* THE GUIDANCE TEXT (DASHED BOX VIBE) */
+        .guide-note { background: #f8faf9; border: 1px dashed #cedbd6; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 0.8rem; color: #444; line-height: 1.5; }
+        .guide-note b { color: var(--emerald); }
+
         input, select, .trigger-btn { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; outline: none; font-size: 1rem; background: #fafafa; transition: 0.3s; }
         input:focus { border-color: var(--emerald); background: #fff; }
 
-        /* DROPDOWN BUTTON WITH ICON */
+        /* DROPDOWN BUTTON */
         .trigger-btn { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 2px solid #eee; cursor: pointer; font-weight: 700; color: #555; }
         .trigger-btn:hover { border-color: var(--emerald); }
-        .arrow-icon { font-size: 1.2rem; transition: 0.3s; }
+        .arrow-icon { font-size: 1rem; transition: 0.3s; }
         .trigger-btn.open .arrow-icon { transform: rotate(180deg); }
 
         /* VERTICAL OPTIONS LIST */
@@ -63,11 +73,10 @@
         .option-item h4 { color: var(--emerald); font-size: 0.95rem; margin-bottom: 6px; font-weight: 900; }
         .option-item p { font-size: 0.78rem; color: #777; line-height: 1.5; }
 
-        .sub-form { display: none; padding: 30px; background: #fcfcfc; border-radius: 12px; margin-top: 20px; border-left: 6px solid var(--emerald); box-shadow: inset 0 0 10px rgba(0,0,0,0.02); }
+        .sub-form { display: none; padding: 30px; background: #fcfcfc; border-radius: 12px; margin-top: 20px; border-left: 6px solid var(--emerald); }
 
         .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: right; cursor: pointer; transition: 0.3s; }
         .btn-prev { background: #eee; color: #666; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: left; cursor: pointer; }
-        .btn-next:hover { opacity: 0.9; transform: translateY(-2px); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -75,7 +84,7 @@
 <body>
 
 <div id="warningBar">
-    <p style="font-size: 0.8rem;">Please fill a field to continue 🛡️</p>
+    <p style="font-size: 0.8rem;">Fill at least one box to move on 🛡️</p>
     <button class="skip-btn" onclick="forceSkip()">SKIP</button>
 </div>
 
@@ -125,40 +134,44 @@
     <div id="part2" class="form-part">
         <div class="form-group">
             <label>Sales Gateway Protocol</label>
-            <span class="hint">How will customers find your product?</span>
+            <span class="hint">Choose how customers land on your offer</span>
             <div class="trigger-btn" id="dropBtn" onclick="toggleOptions()">
                 <span>Choose Deployment Method</span>
-                <span class="arrow-icon">▾</span>
+                <span class="arrow-icon">▼</span>
             </div>
             
             <div class="options-list" id="opts">
                 <div class="option-item" onclick="selectGate(this, 'ext')">
                     <h4>Option 1: External Link</h4>
-                    <p>Redirect traffic to your existing website. Best if you already have a landing page.</p>
+                    <p>Best if you already have a high-converting website built on WordPress or Wix.</p>
                 </div>
                 <div class="option-item" onclick="selectGate(this, 'cust')">
                     <h4>Option 2: Custom Upload (Elite)</h4>
-                    <p>Upload your own HTML/CSS files. We host them securely on our servers.</p>
+                    <p>Upload your professional HTML code directly to Mochearn's secure servers.</p>
                 </div>
             </div>
         </div>
 
         <div id="f-ext" class="sub-form">
+            <div class="guide-note">
+                <b>Guide:</b> Please insert the <b>Direct URL</b> of your sales page. Mochearn will use this link to track your traffic, but remember to paste your unique Payment Link on your site's "Buy Now" button later.
+            </div>
             <label>External Sales Page URL</label>
-            <span class="hint">Enter the full link to your website</span>
-            <input type="url" placeholder="https://mysite.com/sales-page">
+            <input type="url" placeholder="https://yourwebsite.com/sales-page">
         </div>
 
         <div id="f-cust" class="sub-form">
+            <div class="guide-note">
+                <b>Guide:</b> Upload your web assets as a <b>.zip file</b>. Ensure your main file is named <b>index.html</b>. Mochearn will host this page on our secure cloud, giving you 100% control over design.
+            </div>
             <label>Upload Web Assets (.zip)</label>
-            <span class="hint">Ensure your main file is named index.html</span>
             <input type="file" style="padding: 10px;">
         </div>
 
         <div class="form-group" style="margin-top: 20px;">
             <label>Support WhatsApp Number</label>
-            <span class="hint">Where buyers can reach you</span>
-            <input type="text" placeholder="08123456789">
+            <span class="hint">Where buyers can reach you for inquiries</span>
+            <input type="text" placeholder="e.g. 08123456789">
         </div>
 
         <button type="button" class="btn-prev" onclick="goTo(1)">Previous</button>
@@ -190,12 +203,8 @@
     function goTo(s) {
         currentStep = s;
         document.getElementById('warningBar').classList.remove('show');
-        
-        // Hide all
         document.querySelectorAll('.form-part').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.step').forEach(st => st.classList.remove('active'));
-        
-        // Show next with animation
         setTimeout(() => {
             document.getElementById('part' + s).classList.add('active');
             document.getElementById('s' + s).classList.add('active');
@@ -219,7 +228,6 @@
         el.classList.add('selected');
         document.querySelectorAll('.sub-form').forEach(f => f.style.display = 'none');
         document.getElementById('f-' + type).style.display = 'block';
-        // Auto-close dropdown for professional feel
         toggleOptions();
     }
 </script>
