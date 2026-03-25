@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn Studio | Create New Course</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* BRAND COLOR: #692d61 (Royal Plum) */
+        :root { --royal-plum: #692d61; --soft-plum: #f5edf4; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #fcfafc; color: #1a1a1a; padding-bottom: 50px; }
+
+        .studio-header { background: var(--royal-plum); color: white; padding: 30px 20px; text-align: center; margin-bottom: 40px; }
+        .studio-header h1 { font-size: 1.8rem; font-weight: 800; }
+        .studio-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 5px; }
+
+        .wizard-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(105, 45, 97, 0.1); padding: 40px; }
+
+        /* STEP INDICATORS */
+        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 40px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .step { font-weight: 800; font-size: 0.75rem; color: #ccc; text-transform: uppercase; }
+        .step.active { color: var(--royal-plum); }
+
+        .form-section { display: none; }
+        .form-section.active { display: block; animation: fadeIn 0.4s ease; }
+
+        label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; color: #444; }
+        input, select, textarea { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 12px; margin-bottom: 25px; font-size: 1rem; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--royal-plum); }
+
+        /* OPTION CARDS FOR HOSTING */
+        .hosting-options { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; }
+        .option-card { border: 2px solid #eee; padding: 20px; border-radius: 15px; cursor: pointer; transition: 0.3s; position: relative; }
+        .option-card:hover { border-color: var(--royal-plum); background: var(--soft-plum); }
+        .option-card input { position: absolute; opacity: 0; }
+        .option-card.selected { border-color: var(--royal-plum); background: var(--soft-plum); }
+        .option-card h4 { font-size: 1rem; margin-bottom: 5px; color: var(--royal-plum); }
+        .option-card p { font-size: 0.8rem; color: #666; line-height: 1.4; }
+
+        /* NAVIGATION BUTTONS */
+        .nav-btns { display: flex; justify-content: space-between; margin-top: 30px; }
+        .btn { padding: 15px 35px; border-radius: 12px; font-weight: 800; cursor: pointer; border: none; font-size: 0.9rem; transition: 0.3s; }
+        .btn-prev { background: #eee; color: #666; }
+        .btn-next { background: var(--royal-plum); color: white; }
+        .btn-next:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(105, 45, 97, 0.3); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<header class="studio-header">
+    <h1>Mochearn Studio 🏗️</h1>
+    <p>The J-System is built for scale. Let's create your next empire.</p>
+</header>
+
+<div class="wizard-container">
+    <div class="step-indicator">
+        <span class="step active" id="s1">1. Identity</span>
+        <span class="step" id="s2">2. Sales Gateway</span>
+        <span class="step" id="s3">3. Academy Builder</span>
+        <span class="step" id="s4">4. Final Review</span>
+    </div>
+
+    <form id="productForm">
+        
+        <div class="form-section active" id="step1">
+            <label>Product Name</label>
+            <input type="text" placeholder="e.g. The J-System 2.0">
+
+            <label>Product Category</label>
+            <select>
+                <option>Affiliate Marketing</option>
+                <option>E-commerce</option>
+                <option>Business & Wealth</option>
+            </select>
+
+            <label>Sale Price (₦)</label>
+            <input type="number" placeholder="20000">
+
+            <label>Catalyst Commission (%)</label>
+            <input type="number" placeholder="50">
+        </div>
+
+        <div class="form-section" id="step2">
+            <label>How will you host your Sales Page?</label>
+            <div class="hosting-options">
+                <div class="option-card" onclick="selectOption(this)">
+                    <h4>Option 1: Mochearn Default</h4>
+                    <p>We build a high-converting page for you using our Royal Plum theme.</p>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                    <h4>Option 2: External Link</h4>
+                    <p>You already have a website (WordPress/Wix). Just give us the link.</p>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                    <h4>Option 3: Custom Upload (Elite)</h4>
+                    <p>You designed your own HTML/CSS code. Upload the files and we host it.</p>
+                </div>
+            </div>
+
+            <label>Support WhatsApp Number</label>
+            <input type="text" placeholder="e.g. 08123456789">
+        </div>
+
+        <div class="form-section" id="step3">
+            <label>Academy Content Type</label>
+            <div class="hosting-options">
+                <div class="option-card selected">
+                    <h4>Internal Mochearn Hosting</h4>
+                    <p>Upload your videos, text, and scripts directly to our Academy player.</p>
+                </div>
+            </div>
+            
+            <label>First Module Name</label>
+            <input type="text" placeholder="e.g. Introduction to Wealth">
+            
+            <label>Upload Lesson Video (URL or File)</label>
+            <input type="text" placeholder="Paste Video Link (YouTube/Vimeo) or click to upload">
+            
+            <label>The Weapons Room (WhatsApp Script)</label>
+            <textarea rows="4" placeholder="Paste the script your Catalysts will copy..."></textarea>
+        </div>
+
+        <div class="form-section" id="step4">
+            <div style="text-align: center; padding: 20px;">
+                <h2 style="color: var(--royal-plum);">Ready for Review? 🛡️</h2>
+                <p style="margin: 15px 0; color: #666;">Once you submit, the Mochearn Admin will check your product within 24 hours. If it meets our standards, it goes LIVE!</p>
+                <div style="background: var(--soft-plum); padding: 20px; border-radius: 12px; text-align: left; font-size: 0.85rem;">
+                    <b>Vendor Agreement:</b> By clicking submit, you agree that your content is original and follows the Mochearn quality protocol.
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <button type="button" class="btn btn-prev" id="prevBtn" onclick="nextPrev(-1)" style="display:none;">Back</button>
+            <button type="button" class="btn btn-next" id="nextBtn" onclick="nextPrev(1)">Next Step</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    var currentTab = 0;
+    showTab(currentTab);
+
+    function showTab(n) {
+        var x = document.getElementsByClassName("form-section");
+        x[n].style.display = "block";
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit Product 🚀";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next Step";
+        }
+        fixStepIndicator(n);
+    }
+
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("form-section");
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+        if (currentTab >= x.length) {
+            alert("Product Submitted to Mochearn Admin! 🏛️");
+            return false;
+        }
+        showTab(currentTab);
+    }
+
+    function fixStepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        x[n].className += " active";
+    }
+
+    function selectOption(el) {
+        var options = document.getElementsByClassName("option-card");
+        for (var i = 0; i < options.length; i++) {
+            options[i].classList.remove("selected");
+        }
+        el.classList.add("selected");
+    }
+</script>
+
+</body>
+  </html>
