@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); padding-bottom: 50px; overflow-x: hidden; }
 
-        /* FLOATING PILL NOTIFICATION (30% OPACITY VIBE) */
+        /* FLOATING PILL NOTIFICATION */
         #warningBar { 
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-120px);
             width: 90%; max-width: 400px; background: rgba(0, 0, 0, 0.7); 
@@ -25,11 +25,18 @@
         .studio-header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
         .studio-header p { opacity: 0.8; font-size: 0.9rem; font-weight: 400; }
 
-        .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 50px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); min-height: 500px; }
+        .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 40px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); min-height: 500px; }
 
-        /* SPACED STEP INDICATORS */
-        .step-nav { display: flex; justify-content: space-between; margin-bottom: 60px; border-bottom: 1px solid #eee; padding-bottom: 20px; gap: 40px; }
-        .step { font-size: 0.7rem; font-weight: 800; color: #ccc; text-transform: uppercase; flex: 1; text-align: center; white-space: nowrap; }
+        /* FIXED WIZARD NAV: Center-aligned and contained */
+        .step-nav { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            margin-bottom: 60px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 20px;
+            width: 100%;
+        }
+        .step { font-size: 0.65rem; font-weight: 800; color: #ccc; text-transform: uppercase; text-align: center; }
         .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
 
         /* ANIMATION */
@@ -81,7 +88,7 @@
     <div class="step-nav">
         <span class="step active" id="s1">1. Identity</span>
         <span class="step" id="s2">2. Sales Gateway</span>
-        <span class="step" id="s3">3. Academy Builder</span>
+        <span class="step" id="s3">3. Academy</span>
         <span class="step" id="s4">4. Review</span>
     </div>
 
