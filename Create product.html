@@ -27,7 +27,7 @@
 
         .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 40px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); min-height: 500px; }
 
-        /* FIXED WIZARD NAV: Center-aligned and contained */
+        /* FIXED WIZARD NAV */
         .step-nav { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
@@ -134,22 +134,24 @@
             <div class="options-list" id="opts">
                 <div class="option-item" onclick="selectGate(this, 'ext')">
                     <h4>Option 1: External Link</h4>
-                    <p>Redirect traffic to your existing website (WordPress/Wix).</p>
+                    <p>Redirect traffic to your existing website. Use this if you already have a high-converting page on WordPress, Wix, or other platforms.</p>
                 </div>
                 <div class="option-item" onclick="selectGate(this, 'cust')">
                     <h4>Option 2: Custom Upload (Elite)</h4>
-                    <p>You designed your own HTML/CSS code. Upload and we host it.</p>
+                    <p>Upload your professional HTML code directly. This gives you 100% design control while Mochearn handles the secure hosting.</p>
                 </div>
             </div>
         </div>
 
         <div id="f-ext" class="sub-form">
             <label>External Sales Page URL</label>
+            <span class="hint">Add your well-built website link so users can land there and see your offer.</span>
             <input type="url" placeholder="https://yourwebsite.com/sales-page">
         </div>
 
         <div id="f-cust" class="sub-form">
             <label>Upload Web Assets (.zip)</label>
+            <span class="hint">Upload your custom code files here to give your sales page a unique, elite look.</span>
             <div class="upload-vibe-box" onclick="document.getElementById('fileUpload').click()">
                 <span class="upload-icon">📦</span>
                 <p style="font-size: 0.8rem; color: #666; font-weight: 500;">Click to browse files or drag & drop</p>
@@ -160,7 +162,7 @@
 
         <div class="form-group" style="margin-top: 20px;">
             <label>Support WhatsApp Number</label>
-            <span class="hint">Where buyers can reach you</span>
+            <span class="hint">Provide your number so buyers can reach you for inquiries.</span>
             <input type="text" placeholder="e.g. 08123456789">
         </div>
 
