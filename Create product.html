@@ -171,7 +171,57 @@
         <div style="clear: both;"></div>
     </div>
 </div>
+<div id="part3" class="form-part">
+        <div class="form-group">
+            <label>Hosting Protocol</label>
+            <span class="hint">How will your students access the value?</span>
+            <select id="hostType" onchange="toggleAcademyOptions()">
+                <option value="native">Option 1: Host Inside Mochearn (Recommended)</option>
+                <option value="ext_site">Option 2: External Website</option>
+                <option value="embed">Option 3: Embedded Website</option>
+            </select>
+        </div>
 
+        <div id="native-fields">
+            <div class="sub-form" style="display:block; border-left: 6px solid #000;">
+                <label>Main Lesson / Module 1</label>
+                <input type="text" placeholder="Module Name (e.g. Introduction to Wealth)" style="margin-bottom:15px;">
+                <input type="url" placeholder="Video Link (YouTube, Vimeo, or Drive)" style="margin-bottom:15px;">
+                <textarea placeholder="Brief description of what they will learn..." style="width:100%; padding:15px; border-radius:8px; border:2px solid #f2f2f2; background:#fafafa;"></textarea>
+            </div>
+
+            <div class="trigger-btn" onclick="document.getElementById('catalyst-tools').style.display = 'block'" style="margin-top:20px; background:#f4fcf9; border-color:var(--emerald);">
+                <span style="color:var(--emerald)">🛠️ Open Elite Catalyst Tools (Optional)</span>
+                <span>▼</span>
+            </div>
+
+            <div id="catalyst-tools" class="sub-form" style="display:none; margin-top:10px;">
+                <div class="form-group">
+                    <label>Sales Challenge URL</label>
+                    <span class="hint">Host your custom-designed challenge page here.</span>
+                    <input type="url" placeholder="https://yourwebsite.com/challenge-page">
+                </div>
+
+                <div id="resource-list">
+                    <label>Promotional Materials & Scripts</label>
+                    <span class="hint">Add Google Drive links, PDFs, or Swipe files.</span>
+                    <div class="resource-row">
+                        <input type="text" placeholder="File Name (e.g. WhatsApp Script)" style="width:40%; display:inline-block; margin-right:2%;">
+                        <input type="url" placeholder="Paste Link Here" style="width:56%; display:inline-block;">
+                    </div>
+                </div>
+
+                <p style="font-size: 0.65rem; color: var(--emerald); font-weight: 700; margin-top: 15px; text-align: center;">
+                    Note: You can add more lessons and tools once your product is live.
+                </p>
+                <button type="button" class="add-more-btn" onclick="addResource()">+ Add Another Resource</button>
+            </div>
+        </div>
+
+        <button type="button" class="btn-prev" onclick="goTo(2)" style="margin-top:30px;">Previous</button>
+        <button type="button" class="btn-next" onclick="validateStep(3, 4)" style="margin-top:30px;">Next Step</button>
+        <div style="clear: both;"></div>
+    </div>
 <script>
     let currentStep = 1;
     function validateStep(now, next) {
