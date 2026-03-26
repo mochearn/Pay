@@ -174,92 +174,93 @@
 <div id="part3" class="form-part">
     
     <style>
-        .add-more-btn { 
-            width: 100%; background: none; border: 2px dashed #ccc; color: #888; 
-            padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 15px;
+        /* MOBILE SPACING & PLACEHOLDER FIX */
+        #part3 { margin-top: -20px; } 
+        .p3-input { margin-bottom: 12px; font-size: 0.9rem !important; }
+        .p3-textarea { 
+            width: 100%; padding: 15px; border: 2px solid #f2f2f2; 
+            border-radius: 8px; font-size: 0.9rem; background: #fafafa; 
+            height: 90px; resize: none; 
         }
-        .add-more-btn:hover { border-color: var(--emerald); color: var(--emerald); }
-        .resource-row { margin-bottom: 10px; display: flex; gap: 10px; }
-        .p3-textarea { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; font-size: 1rem; background: #fafafa; transition: 0.3s; height: 100px; resize: vertical; margin-bottom: 15px; }
-        .p3-textarea:focus { border-color: var(--emerald); background: #fff; outline: none; }
-        .tool-trigger { margin-top: 20px; background: #f4fcf9 !important; border: 2px solid var(--emerald) !important; color: var(--emerald) !important; }
+        .live-note { 
+            font-size: 0.65rem; color: #888; font-weight: 600; 
+            margin-top: 8px; display: block; 
+        }
+        .tool-trigger { 
+            margin-top: 15px; background: #f4fcf9 !important; 
+            border: 2px solid var(--emerald) !important; 
+            color: var(--emerald) !important; font-size: 0.85rem !important;
+        }
     </style>
 
     <div class="form-group">
         <label>Hosting Protocol</label>
-        <span class="hint">How will your students access the value?</span>
+        <span class="hint">How will students access the value?</span>
         <select id="hostType">
-            <option value="native">Option 1: Host Inside Mochearn (Recommended)</option>
-            <option value="ext_site">Option 2: External Website</option>
-            <option value="embed">Option 3: Embedded Website</option>
+            <option value="native">Option 1: Inside Mochearn</option>
+            <option value="ext_site">Option 2: External Site</option>
+            <option value="embed">Option 3: Embedded Site</option>
         </select>
     </div>
 
     <div id="native-fields">
-        <div class="sub-form" style="display:block; border-left: 6px solid #000;">
+        <div class="sub-form" style="display:block; border-left: 5px solid var(--emerald); padding: 20px;">
             <label>Main Lesson / Module 1</label>
-            <input type="text" placeholder="Module Name (e.g. Introduction to Wealth)" style="margin-bottom:15px;">
-            <input type="url" placeholder="Video Link (YouTube, Vimeo, or Drive)" style="margin-bottom:15px;">
-            <textarea class="p3-textarea" placeholder="Brief description of what they will learn..."></textarea>
+            <input type="text" class="p3-input" placeholder="Module Name (e.g. Intro)">
+            <input type="url" class="p3-input" placeholder="Video Link (YouTube/Drive)">
+            <textarea class="p3-textarea" placeholder="Brief lesson description..."></textarea>
+            
+            <span class="live-note">💡 You can add more modules once your product is live.</span>
         </div>
 
         <div class="trigger-btn tool-trigger" onclick="toggleCatalystTools()">
-            <span>🛠️ Open Elite Catalyst Tools (Optional)</span>
+            <span>🛠️ Elite Catalyst Tools (Optional)</span>
             <span id="tool-arrow">▼</span>
         </div>
 
         <div id="catalyst-tools" class="sub-form" style="display:none; margin-top:10px;">
             <div class="form-group">
                 <label>Sales Challenge URL</label>
-                <span class="hint">Host your custom-designed challenge page here.</span>
-                <input type="url" placeholder="https://yourwebsite.com/challenge-page">
+                <input type="url" placeholder="https://challenge-page.com">
             </div>
 
             <div id="resource-list">
-                <label>Promotional Materials & Scripts</label>
-                <span class="hint">Add Google Drive links, PDFs, or Swipe files.</span>
-                <div class="resource-row">
-                    <input type="text" placeholder="File Name" style="width:40%;">
-                    <input type="url" placeholder="Link (Drive/Cloud)" style="width:56%;">
+                <label>Materials & Scripts</label>
+                <div class="resource-row" style="display: flex; gap: 5px; margin-bottom: 8px;">
+                    <input type="text" placeholder="File Name" style="width:45%; font-size: 0.8rem;">
+                    <input type="url" placeholder="Link" style="width:53%; font-size: 0.8rem;">
                 </div>
             </div>
-
-            <p style="font-size: 0.65rem; color: var(--emerald); font-weight: 700; margin-top: 15px; text-align: center;">
-                Note: You can add more lessons and tools once your product is live.
-            </p>
-            <button type="button" class="add-more-btn" onclick="addResourceRow()">+ Add Another Resource</button>
+            <button type="button" class="add-more-btn" onclick="addResourceRow()" style="font-size: 0.8rem; padding: 10px;">+ Add Resource</button>
         </div>
     </div>
 
-    <button type="button" class="btn-prev" onclick="goTo(2)" style="margin-top:30px;">Previous</button>
-    <button type="button" class="btn-next" onclick="validateStep(3, 4)" style="margin-top:30px;">Next Step</button>
-    <div style="clear: both;"></div>
+    <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+        <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
+        <button type="button" class="btn-next" onclick="validateStep(3, 4)">Next Step</button>
+    </div>
 
     <script>
         function toggleCatalystTools() {
             const tools = document.getElementById('catalyst-tools');
             const arrow = document.getElementById('tool-arrow');
-            if (tools.style.display === 'none') {
-                tools.style.display = 'block';
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                tools.style.display = 'none';
-                arrow.style.transform = 'rotate(0deg)';
-            }
+            const isOpen = tools.style.display === 'block';
+            tools.style.display = isOpen ? 'none' : 'block';
+            arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
         }
-
         function addResourceRow() {
             const container = document.getElementById('resource-list');
             const div = document.createElement('div');
             div.className = 'resource-row';
+            div.style.cssText = "display: flex; gap: 5px; margin-bottom: 8px;";
             div.innerHTML = `
-                <input type="text" placeholder="File Name" style="width:40%;">
-                <input type="url" placeholder="Link (Drive/Cloud)" style="width:56%;">
+                <input type="text" placeholder="File Name" style="width:45%; font-size: 0.8rem;">
+                <input type="url" placeholder="Link" style="width:53%; font-size: 0.8rem;">
             `;
             container.appendChild(div);
         }
     </script>
-                    </div>
+    </div>
 <script>
     let currentStep = 1;
     function validateStep(now, next) {
