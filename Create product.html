@@ -179,6 +179,7 @@
         .benefit-card li { font-size: 0.75rem; color: #0e6954; font-weight: 700; margin-bottom: 5px; }
         .p3-input { margin-bottom: 15px; font-size: 0.95rem !important; }
         .p3-textarea { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; font-size: 1rem; background: #fafafa; height: 100px; resize: none; }
+        .add-more-btn { width: 100%; background: #f9f9f9; border: 1px solid #ddd; color: #555; padding: 14px; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.85rem; }
         .p3-nav-btns { margin-top: 40px; display: flex; justify-content: space-between; gap: 20px; }
         .p3-nav-btns button { padding: 14px 30px !important; font-size: 0.85rem !important; flex: 1; }
     </style>
@@ -186,6 +187,9 @@
     <div class="form-group">
         <span class="hosting-header">Hosting Protocol 🏗️</span>
         <span class="hint">How will your students access the value?</span>
+        <p style="font-size: 0.75rem; color: #777; line-height: 1.4; margin-bottom: 15px;">
+            Select how you want to deliver your digital assets. Whether you're hosting directly on Mochearn or using your own private server, this ensures your customers get instant access after payment.
+        </p>
         <select id="hostType" onchange="switchHosting()">
             <option value="native">Option 1: Host Inside Mochearn (Recommended)</option>
             <option value="ext_site">Option 2: External Website</option>
@@ -199,7 +203,30 @@
             <input type="text" class="p3-input" placeholder="Module Name (e.g. Introduction to Wealth)">
             <input type="url" class="p3-input" placeholder="Video Link (YouTube, Vimeo, or Drive)">
             <textarea class="p3-textarea" placeholder="Brief description of what they will learn..."></textarea>
-            <span style="font-size: 0.7rem; color: var(--emerald); font-weight: 700; margin-top: 10px; display: block;">💡 Note: Add more modules later in the Studio.</span>
+            <span style="font-size: 0.7rem; color: var(--emerald); font-weight: 700; margin-top: 10px; display: block;">💡 Note: You can add more modules once your product is live.</span>
+        </div>
+
+        <p style="font-size: 0.8rem; font-weight: 700; color: #444; margin: 25px 0 10px 0;">
+            Do you have a Sales Challenge, Promotional Scripts, or Marketing Assets for your army? 🛡️
+        </p>
+        <div class="trigger-btn" onclick="toggleCatalystTools()" style="background: #f4fcf9 !important; border: 2px solid var(--emerald) !important; color: var(--emerald) !important;">
+            <span>🛠️ Open Elite Catalyst Tools (Optional)</span>
+            <span id="tool-arrow">▼</span>
+        </div>
+        <div id="catalyst-tools" class="sub-form" style="display:none; margin-top:15px;">
+            <div class="form-group">
+                <label>Sales Challenge URL</label>
+                <span class="hint">Host your custom-designed challenge page here.</span>
+                <input type="url" placeholder="https://yourwebsite.com/challenge-page">
+            </div>
+            <div id="resource-list">
+                <label>Promotional Materials & Scripts</label>
+                <div class="resource-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" placeholder="File Name" style="width:40%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">
+                    <input type="url" placeholder="Paste Link Here" style="width:56%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">
+                </div>
+            </div>
+            <button type="button" class="add-more-btn" onclick="addResourceRow()">+ Add More</button>
         </div>
     </div>
 
@@ -214,9 +241,9 @@
         </div>
         <div class="sub-form" style="display:block; border-left: 6px solid #333; padding: 25px;">
             <label>External Academy URL</label>
-            <input type="url" class="p3-input" placeholder="https://your-site.com/login">
+            <input type="url" class="p3-input" placeholder="https://your-private-site.com/login">
             <label>Access Instructions</label>
-            <textarea class="p3-textarea" placeholder="Explain how they get their login credentials..."></textarea>
+            <textarea class="p3-textarea" placeholder="Explain how they get their login details..."></textarea>
         </div>
     </div>
 
@@ -231,12 +258,7 @@
         </div>
         <div class="sub-form" style="display:block; border-left: 6px solid #1a73e8; padding: 25px;">
             <label>Portal Embed Link</label>
-            <span class="hint">Ensure your site allows "iFrame" embedding.</span>
             <input type="url" class="p3-input" placeholder="https://your-academy-portal.com">
-            
-            <p style="font-size: 0.7rem; color: #666; font-style: italic;">
-                Note: Option 3 is best for vendors with private membership dashboards.
-            </p>
         </div>
     </div>
 
@@ -252,8 +274,23 @@
             const target = document.getElementById('section-' + type);
             if(target) target.style.display = 'block';
         }
+        function toggleCatalystTools() {
+            const tools = document.getElementById('catalyst-tools');
+            const arrow = document.getElementById('tool-arrow');
+            const isOpen = tools.style.display === 'block';
+            tools.style.display = isOpen ? 'none' : 'block';
+            arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+        function addResourceRow() {
+            const container = document.getElementById('resource-list');
+            const div = document.createElement('div');
+            div.className = 'resource-row';
+            div.style.cssText = "display: flex; gap: 10px; margin-bottom: 10px;";
+            div.innerHTML = `<input type="text" placeholder="File Name" style="width:40%; padding: 12px; border: 1px solid #eee; border-radius: 5px;"><input type="url" placeholder="Paste Link Here" style="width:56%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">`;
+            container.appendChild(div);
+        }
     </script>
-    </div>
+            </div>
 <script>
     let currentStep = 1;
     function validateStep(now, next) {
