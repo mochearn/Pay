@@ -264,7 +264,7 @@
 
     <div class="p3-nav-btns">
         <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
-        <button type="button" class="btn-next" onclick="validateStep(3, 4)">Next Step</button>
+   <button type="button" class="btn-next" onclick="updateReview(); validateStep(3, 4)">Next Step</button>
     </div>
 
     <script>
@@ -342,21 +342,48 @@
     <button type="button" class="launch-btn" onclick="deploySystem()">DEPLOY PRODUCT 🚀</button>
     <button type="button" class="btn-prev" onclick="goTo(3)" style="margin-top: 20px; width: 100%; background: none; border: 1px solid #ccc;">Back to Edit</button>
 
-    <script>
-        // This function pulls the data from earlier steps to show here
-        function updateReview() {
-            document.getElementById('rev-name').innerText = document.getElementById('pName').value || "Unnamed Product";
-            document.getElementById('rev-cat').innerText = document.getElementById('pCat').value || "Uncategorized";
-            document.getElementById('rev-price').innerText = "₦" + (document.getElementById('pPrice').value || "0");
-            document.getElementById('rev-comm').innerText = (document.getElementById('pComm').value || "0") + "%";
-            document.getElementById('rev-host').innerText = document.getElementById('hostType').value.toUpperCase();
-        }
+<script>
+    // 🏛️ This function pulls data from Parts 1, 2, and 3 to show on the final screen
+    function updateReview() {
+        const pName = document.getElementById('pName').value || "Unnamed Product";
+        const pCat = document.getElementById('pCat').value || "Uncategorized";
+        const pPrice = document.getElementById('pPrice').value || "0";
+        const pComm = document.getElementById('pComm').value || "0";
+        const hostType = document.getElementById('hostType').value;
 
-        function deploySystem() {
-            alert("Congratulations! Your empire is now LIVE. ⚔️🔥");
-            // Here you would add the actual form submission logic
+        // Displaying the values
+        document.getElementById('rev-name').innerText = pName;
+        document.getElementById('rev-cat').innerText = pCat;
+        document.getElementById('rev-price').innerText = "₦" + Number(pPrice).toLocaleString();
+        document.getElementById('rev-comm').innerText = pComm + "%";
+        
+        // Pretty name for the hosting mode
+        let hostName = "Mochearn Native";
+        if(hostType === 'ext_site') hostName = "External Website";
+        if(hostType === 'embed') hostName = "Embedded Portal";
+        document.getElementById('rev-host').innerText = hostName;
+    }
+
+    // 🛡️ Logic for the Legal Guard Checkbox
+    function toggleDeployBtn() {
+        const checkbox = document.getElementById('tos-check');
+        const btn = document.getElementById('final-deploy-btn');
+        if(checkbox.checked) {
+            btn.classList.add('active');
+            btn.disabled = false;
+            btn.style.background = "#0e6954"; // Active Emerald
+        } else {
+            btn.classList.remove('active');
+            btn.disabled = true;
+            btn.style.background = "#ccc"; // Disabled Grey
         }
-    </script>
+    }
+
+    function deploySystem() {
+        alert("Congratulations! Your empire is officially LIVE on Mochearn. ⚔️🔥✨");
+        // Final backend submission would go here
+    }
+</script>
     </div>
 <script>
     let currentStep = 1;
