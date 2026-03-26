@@ -291,6 +291,73 @@
         }
     </script>
             </div>
+    <div id="part4" class="form-part">
+    
+    <style>
+        .review-header { font-size: 1.4rem; font-weight: 900; color: #333; margin-bottom: 20px; display: block; text-align: center; }
+        .review-card { background: #fafafa; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .review-item { display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 8px; }
+        .review-label { font-size: 0.8rem; color: #888; font-weight: 600; }
+        .review-value { font-size: 0.85rem; color: #333; font-weight: 800; }
+        
+        .launch-btn { 
+            width: 100%; background: var(--emerald); color: #fff; border: none; 
+            padding: 20px; border-radius: 8px; font-weight: 900; font-size: 1.1rem; 
+            cursor: pointer; transition: 0.3s; margin-top: 20px; box-shadow: 0 10px 20px rgba(14, 105, 84, 0.2);
+        }
+        .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(14, 105, 84, 0.3); }
+        
+        .congrats-note { font-size: 0.75rem; color: #777; text-align: center; line-height: 1.5; margin-top: 15px; }
+    </style>
+
+    <span class="review-header">Final Review 🛡️</span>
+
+    <div class="review-card">
+        <div class="review-item">
+            <span class="review-label">Product Name</span>
+            <span class="review-value" id="rev-name">---</span>
+        </div>
+        <div class="review-item">
+            <span class="review-label">Category</span>
+            <span class="review-value" id="rev-cat">---</span>
+        </div>
+        <div class="review-item">
+            <span class="review-label">Selling Price</span>
+            <span class="review-value" id="rev-price">₦0.00</span>
+        </div>
+        <div class="review-item">
+            <span class="review-label">Commission</span>
+            <span class="review-value" id="rev-comm">0%</span>
+        </div>
+        <div class="review-item">
+            <span class="review-label">Hosting Mode</span>
+            <span class="review-value" id="rev-host">---</span>
+        </div>
+    </div>
+
+    <p class="congrats-note">
+        By clicking deploy, your product will be listed on the <b>Mochearn Marketplace</b> and your Sales Funnel will be live for Catalysts to push.
+    </p>
+
+    <button type="button" class="launch-btn" onclick="deploySystem()">DEPLOY PRODUCT 🚀</button>
+    <button type="button" class="btn-prev" onclick="goTo(3)" style="margin-top: 20px; width: 100%; background: none; border: 1px solid #ccc;">Back to Edit</button>
+
+    <script>
+        // This function pulls the data from earlier steps to show here
+        function updateReview() {
+            document.getElementById('rev-name').innerText = document.getElementById('pName').value || "Unnamed Product";
+            document.getElementById('rev-cat').innerText = document.getElementById('pCat').value || "Uncategorized";
+            document.getElementById('rev-price').innerText = "₦" + (document.getElementById('pPrice').value || "0");
+            document.getElementById('rev-comm').innerText = (document.getElementById('pComm').value || "0") + "%";
+            document.getElementById('rev-host').innerText = document.getElementById('hostType').value.toUpperCase();
+        }
+
+        function deploySystem() {
+            alert("Congratulations! Your empire is now LIVE. ⚔️🔥");
+            // Here you would add the actual form submission logic
+        }
+    </script>
+    </div>
 <script>
     let currentStep = 1;
     function validateStep(now, next) {
