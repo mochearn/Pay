@@ -368,69 +368,85 @@
                 </style>
 <script>
     let currentStep = 1;
+
     function validateStep(now, next) {
         let inputs = document.querySelectorAll('#part' + now + ' input');
         let filled = false;
         inputs.forEach(i => { if(i.value) filled = true; });
-        if (!filled) { document.getElementById('warningBar').classList.add('show'); } 
-        else { goTo(next); }
+        if (!filled) { 
+            document.getElementById('warningBar').classList.add('show'); 
+        } else { 
+            goTo(next); 
+        }
     }
+
     function forceSkip() { 
         document.getElementById('warningBar').classList.remove('show'); 
-        // 🛡️ Force the jump to the next step
         goTo(currentStep + 1); 
     }
+
     function goTo(s) {
-        // 🛡️ Safety Guard: Only wake up Step 3 if the function exists
-        if (s === 3 && typeof initStep3 === "function") { 
-            initStep3(); 
+        // 🛡️ THE FIX: Wake up Step 3 directly
+        if (s === 3) { 
+            setTimeout(() => { switchHosting(); }, 100); 
         }
         
         currentStep = s;
         document.getElementById('warningBar').classList.remove('show');
         
-        // Hide all parts and de-activate steps
         document.querySelectorAll('.form-part').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.step').forEach(st => st.classList.remove('active'));
         
-        // Show the target part and step with a tiny delay for smoothness
         setTimeout(() => {
             const targetPart = document.getElementById('part' + s);
             const targetStep = document.getElementById('s' + s);
             if (targetPart) targetPart.classList.add('active');
             if (targetStep) targetStep.classList.add('active');
-            window.scrollTo(0, 0); // Jump to top of new part
+            window.scrollTo(0, 0);
         }, 50);
     }
+
     function toggleOptions() { 
         let list = document.getElementById('opts');
         let btn = document.getElementById('dropBtn');
         list.style.display = (list.style.display === 'block') ? 'none' : 'block';
         btn.classList.toggle('open');
     }
+
     function selectGate(el, type) {
         document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
         el.classList.add('selected');
-        document.querySelectorAll('.sub-form').forEach(f => f.style.display = 'none');
+        document.querySelectorAll('#part2 .sub-form').forEach(f => f.style.display = 'none');
         document.getElementById('f-' + type).style.display = 'block';
         toggleOptions();
     }
-    // ... your goTo and validateStep functions are up here ...
+
+    // 🛡️ THE MASTER SWITCH
+    function switchHosting() {
+        const type = document.getElementById('hostType').value;
+        // Hide all 3 sections
+        document.getElementById('section-native').style.display = 'none';
+        document.getElementById('section-ext_site').style.display = 'none';
+        document.getElementById('section-embed').style.display = 'none';
+
+        // Show the chosen one
+        const target = document.getElementById('section-' + type);
+        if (target) {
+            target.style.display = 'block';
+        }
+    }
 
     function updateReview() {
-        // 1. Grab data from the earlier steps
         const name = document.getElementById('pName')?.value || "---";
         const price = document.getElementById('pPrice')?.value || "0";
         const comm = document.getElementById('pComm')?.value || "0";
         const host = document.getElementById('hostType')?.value || "native";
 
-        // 2. Find the active Link
         let activeLink = "Not provided";
         if (host === "native") activeLink = document.getElementById('nativeLink')?.value;
-        if (host === "ext_site") activeLink = document.getElementById('extLink')?.value;
-        if (host === "embed") activeLink = document.getElementById('embedLink')?.value;
+        if (host === "ext_site") activeLink = document.querySelector('#section-ext_site input')?.value;
+        if (host === "embed") activeLink = document.querySelector('#section-embed input')?.value;
 
-        // 3. Inject it into your Part 4 IDs
         if (document.getElementById('audit-name')) document.getElementById('audit-name').innerText = name;
         if (document.getElementById('audit-price')) {
             document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString() + " | Commission: " + comm + "%";
@@ -439,7 +455,6 @@
         if (document.getElementById('audit-link')) document.getElementById('audit-link').innerText = "Link: " + (activeLink || "Not provided");
     }
 
-    // 🛡️ Add these helper functions for Part 4 buttons
     function slideToDeal() {
         document.getElementById('audit-stage').style.display = 'none';
         document.getElementById('deal-stage').style.display = 'block';
@@ -449,34 +464,6 @@
         document.getElementById('deal-stage').style.display = 'none';
         document.getElementById('audit-stage').style.display = 'block';
     }
-</script>
-<script>
-    function switchHosting() {
-    const type = document.getElementById('hostType').value;
-    console.log("Mochearn System: Switching to " + type); // 🛡️ Debugging line
-
-    // 1. Hide EVERY possible section first
-    const sections = ['section-native', 'section-ext_site', 'section-embed'];
-    sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.style.display = 'none';
-        }
-    });
-
-    // 2. Force the selected one to show
-    const target = document.getElementById('section-' + type);
-    if (target) {
-        target.style.display = 'block';
-    } else {
-        console.log("Mochearn System: Error - Section section-" + type + " not found!");
-    }
-}
-
-// 🛡️ The Wake-Up call for Step 3
-function initStep3() {
-    switchHosting(); 
-        }
 </script>
 </body>
     </html>
