@@ -398,29 +398,38 @@
     }
 
 function goTo(step) {
-    // 1. Find all sections with class 'setup-stage'
-    const allStages = document.querySelectorAll('.setup-stage');
-    
-    // 2. Hide every single one
-    allStages.forEach(stage => {
-        stage.style.display = 'none';
-        stage.classList.remove('active-slide');
+    // 🛡️ STEP A: Check if we need to show the "Fill the box" pop-up
+    if (step === 2) {
+        const prodName = document.getElementById('pName').value;
+        const prodPrice = document.getElementById('pPrice').value;
+        
+        // If the boxes are empty, show the professional pop-up
+        if (!prodName || !prodPrice) {
+            showMochearnPopup(2); // ⚔️ Trigger the Pop-up
+            return; // 🚫 Stop here until they click 'Skip' or 'Fill'
+        }
+    }
+
+    // 🛡️ STEP B: If they filled it or clicked Skip, proceed
+    // Hide everything first
+    document.querySelectorAll('.setup-stage').forEach(s => {
+        s.style.display = 'none';
+        s.classList.remove('active-slide');
     });
 
-    // 3. Show ONLY the one we want
-    const targetId = 'part' + step;
-    const targetStage = document.getElementById(targetId);
-    
-    if (targetStage) {
-        targetStage.style.display = 'block';
-        // Add a tiny delay for a smooth fade-in
-        setTimeout(() => {
-            targetStage.classList.add('active-slide');
-        }, 10);
-        window.scrollTo(0, 0); 
-    } else {
-        console.error("Mochearn Error: Could not find " + targetId);
+    // Show the target
+    const target = document.getElementById('part' + step);
+    if (target) {
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('active-slide'), 10);
+        window.scrollTo(0, 0);
+        
+        // Update Review if we reach the end
+        if (step === 4 && typeof updateReview === 'function') updateReview();
     }
+    
+    // 🛡️ Close the pop-up if it was open
+    closeMochearnPopup();
     }
     function toggleOptions() { 
         let list = document.getElementById('opts');
