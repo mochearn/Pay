@@ -395,27 +395,25 @@
         goTo(currentStep + 1); 
     }
 
-    function goTo(s) {
-        // 🛡️ THE FIX: Wake up Step 3 directly
-        if (s === 3) { 
-            setTimeout(() => { switchHosting(); }, 100); 
-        }
-        
-        currentStep = s;
-        document.getElementById('warningBar').classList.remove('show');
-        
-        document.querySelectorAll('.form-part').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.step').forEach(st => st.classList.remove('active'));
-        
-        setTimeout(() => {
-            const targetPart = document.getElementById('part' + s);
-            const targetStep = document.getElementById('s' + s);
-            if (targetPart) targetPart.classList.add('active');
-            if (targetStep) targetStep.classList.add('active');
-            window.scrollTo(0, 0);
-        }, 50);
-    }
+ function goTo(step) {
+    // 🛡️ Hide all sections first
+    document.querySelectorAll('.setup-stage').forEach(stage => {
+        stage.style.display = 'none';
+        stage.classList.remove('active-slide');
+    });
 
+    // 🛡️ Show the specific step
+    const target = document.getElementById('part' + step);
+    if (target) {
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('active-slide'), 10);
+    }
+    
+    // 🛡️ Special: If going to Audit (Step 4), update the text
+    if (step === 4) {
+        updateReview();
+    }
+    }
     function toggleOptions() { 
         let list = document.getElementById('opts');
         let btn = document.getElementById('dropBtn');
