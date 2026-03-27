@@ -389,121 +389,64 @@
     </div>
     </div>
 <script>
-    let currentStep = 1;
-
-    function validateStep(now, next) {
-        let inputs = document.querySelectorAll('#part' + now + ' input');
-        let filled = false;
-        inputs.forEach(i => { if(i.value) filled = true; });
-        if (!filled) { 
-            document.getElementById('warningBar').classList.add('show'); 
-        } else { 
-            goTo(next); 
-        }
-    }
-
-    function forceSkip() { 
-        document.getElementById('warningBar').classList.remove('show'); 
-        goTo(currentStep + 1); 
-    }
-
+      // 🛡️ MOCHEARN NAVIGATION ENGINE
 function goTo(step) {
-    // 🛡️ STEP A: Validation Check for Step 1
+    // 1. Validation for Part 1
     if (step === 2) {
-        const nameInput = document.getElementById('pName');
-        const priceInput = document.getElementById('pPrice');
-
-        // Check if inputs exist AND if they are empty
-        if (nameInput && priceInput) {
-            if (nameInput.value.trim() === "" || priceInput.value.trim() === "") {
-                showMochearnPopup(2); // ⚔️ Trigger Pop-up
-                return; // 🚫 Stop here
-            }
+        const name = document.getElementById('pName').value.trim();
+        const price = document.getElementById('pPrice').value.trim();
+        if (!name || !price) {
+            showMochearnPopup(2); // ⚔️ Show Pop-up if empty
+            return;
         }
     }
 
-    // 🛡️ STEP B: The "Clean Switch"
-    // 1. Hide every section with our new class name
+    // 2. Hide ALL sections
     document.querySelectorAll('.setup-stage').forEach(stage => {
         stage.style.display = 'none';
         stage.classList.remove('active-slide');
     });
 
-    // 2. Show the target section
+    // 3. Show the Target Section
     const target = document.getElementById('part' + step);
     if (target) {
         target.style.display = 'block';
-        setTimeout(() => {
-            target.classList.add('active-slide');
-        }, 10);
+        setTimeout(() => target.classList.add('active-slide'), 10);
         window.scrollTo(0, 0);
     }
-    }
-    function toggleOptions() { 
-        let list = document.getElementById('opts');
-        let btn = document.getElementById('dropBtn');
-        list.style.display = (list.style.display === 'block') ? 'none' : 'block';
-        btn.classList.toggle('open');
-    }
+    
+    // 4. Update Header Tabs (Optional but professional)
+    document.querySelectorAll('.step').forEach((s, index) => {
+        s.classList.toggle('active', (index + 1) === step);
+    });
 
-    function selectGate(el, type) {
-        document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
-        el.classList.add('selected');
-        document.querySelectorAll('#part2 .sub-form').forEach(f => f.style.display = 'none');
-        document.getElementById('f-' + type).style.display = 'block';
-        toggleOptions();
-    }
-
-    // 🛡️ THE MASTER SWITCH
-    function switchHosting() {
-        const type = document.getElementById('hostType').value;
-        // Hide all 3 sections
-        document.getElementById('section-native').style.display = 'none';
-        document.getElementById('section-ext_site').style.display = 'none';
-        document.getElementById('section-embed').style.display = 'none';
-
-        // Show the chosen one
-        const target = document.getElementById('section-' + type);
-        if (target) {
-            target.style.display = 'block';
-        }
-    }
-
- function updateReview() {
-    // 🛡️ Grab all details from Part 1, 2, and 3
-    const name = document.getElementById('pName')?.value || "Unnamed Product";
-    const cat = document.getElementById('pCat')?.value || "Not Selected";
-    const price = document.getElementById('pPrice')?.value || "0";
-    const comm = document.getElementById('pComm')?.value || "0";
-    const whatsapp = document.querySelector('#part2 input[type="text"]')?.value || "Not Provided";
-    const host = document.getElementById('hostType')?.value || "native";
-
-    // 🛡️ Find the Link
-    let activeLink = "Not provided";
-    if (host === "native") activeLink = document.getElementById('nativeLink')?.value;
-    if (host === "ext_site") activeLink = document.querySelector('#section-ext_site input')?.value;
-    if (host === "embed") activeLink = document.querySelector('#section-embed input')?.value;
-
-    // 🛡️ Inject into the new List IDs
-    if (document.getElementById('audit-name')) document.getElementById('audit-name').innerText = name;
-    if (document.getElementById('audit-cat')) document.getElementById('audit-cat').innerText = "Category: " + cat;
-    if (document.getElementById('audit-price')) document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString();
-    if (document.getElementById('audit-comm')) document.getElementById('audit-comm').innerText = "Catalyst Commission: " + comm + "%";
-    if (document.getElementById('audit-support')) document.getElementById('audit-support').innerText = "WhatsApp: " + whatsapp;
-    if (document.getElementById('audit-host')) document.getElementById('audit-host').innerText = "Mode: " + host.toUpperCase();
-    if (document.getElementById('audit-link')) document.getElementById('audit-link').innerText = "Link: " + (activeLink || "Not provided");
+    closeMochearnPopup(); // Always close if it was open
+    if (step === 4) updateReview();
 }
 
-    function slideToDeal() {
-        document.getElementById('audit-stage').style.display = 'none';
-        document.getElementById('deal-stage').style.display = 'block';
+// 🛡️ POP-UP CONTROL
+function showMochearnPopup(nextStep) {
+    const popup = document.getElementById('validation-popup');
+    if (popup) {
+        popup.style.display = 'flex';
+        document.getElementById('skip-btn').onclick = function() {
+            forceGoTo(nextStep);
+        };
     }
+}
 
-    function slideToAudit() {
-        document.getElementById('deal-stage').style.display = 'none';
-        document.getElementById('audit-stage').style.display = 'block';
-    }
-// 🛡️ 1. The Math Logic (Make sure this is inside your script)
+function forceGoTo(step) {
+    document.querySelectorAll('.setup-stage').forEach(s => s.style.display = 'none');
+    document.getElementById('part' + step).style.display = 'block';
+    closeMochearnPopup();
+}
+
+function closeMochearnPopup() {
+    const popup = document.getElementById('validation-popup');
+    if (popup) popup.style.display = 'none';
+}
+
+// 🛡️ PROFIT CALCULATION (Part 4)
 function selectPlan(plan) {
     const price = Number(document.getElementById('pPrice').value) || 0;
     const commPct = Number(document.getElementById('pComm').value) || 0;
@@ -527,19 +470,41 @@ function selectPlan(plan) {
     }
 }
 
-// 🛡️ 2. The Missing Functions (To stop the "Freeze")
-function simulatePayment() {
-    alert("🛡️ Redirecting to Secure Payment Gateway...");
+// 🛡️ GATEWAY FUNCTIONS (Part 2)
+function toggleOptions() { 
+    let list = document.getElementById('opts');
+    let btn = document.getElementById('dropBtn');
+    list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+    btn.classList.toggle('open');
 }
 
-function startExecution() {
-    document.getElementById('btn-text').innerText = "REVIEWING...";
-    document.getElementById('btn-spinner').style.display = 'block';
+function selectGate(el, type) {
+    document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+    document.querySelectorAll('#part2 .sub-form').forEach(f => f.style.display = 'none');
+    document.getElementById('f-' + type).style.display = 'block';
+    toggleOptions();
+}
+
+// 🛡️ FINAL REVIEW ENGINE
+function updateReview() {
+    const name = document.getElementById('pName')?.value || "Unnamed Product";
+    const price = document.getElementById('pPrice')?.value || "0";
+    const comm = document.getElementById('pComm')?.value || "0";
     
-    setTimeout(() => {
-        alert("🚀 Product Submitted Successfully to the Mochearn Chamber!");
-        // You can add location.reload() here later
-    }, 2000);
-    }
+    document.getElementById('audit-name').innerText = name;
+    document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString();
+    document.getElementById('audit-comm').innerText = "Commission: " + comm + "%";
+}
+
+function slideToDeal() {
+    document.getElementById('audit-stage').style.display = 'none';
+    document.getElementById('deal-stage').style.display = 'block';
+}
+
+function slideToAudit() {
+    document.getElementById('deal-stage').style.display = 'none';
+    document.getElementById('audit-stage').style.display = 'block';
+        }      
 </body>
     </html>
