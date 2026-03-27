@@ -167,7 +167,7 @@
         </div>
 
         <button type="button" class="btn-prev" onclick="goTo(1)">Previous</button>
-        <button type="button" class="btn-next" onclick="validateStep(2, 3)">Next Step</button>
+        <button type="button" class="btn-next" onclick="initStep3(); goTo(3)">Next Step</button>
         <div style="clear: both;"></div>
     </div>
 <div id="part3" class="form-part">
@@ -268,19 +268,28 @@
     </div>
 
     <script>
-   function switchHosting() {
+  /* 🛡️ REPLACEMENT FOR STEP 3 LOGIC */
+function switchHosting() {
     const type = document.getElementById('hostType').value;
     
-    // 🛡️ COMMAND: Hide every section first so they don't overlap
-    document.getElementById('section-native').style.display = 'none';
-    document.getElementById('section-ext_site').style.display = 'none';
-    document.getElementById('section-embed').style.display = 'none';
+    // 1. Hide every section first
+    const sections = ['section-native', 'section-ext_site', 'section-embed'];
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
 
-    // 🛡️ COMMAND: Force the selected one to show as a "Block"
+    // 2. Force the selected one to show
     const target = document.getElementById('section-' + type);
     if (target) {
         target.style.display = 'block';
     }
+}
+
+/* 🛡️ ADD THIS NEW FUNCTION BELOW THE ONE ABOVE */
+// This ensures Step 3 is "Awake" the moment you land on it
+function initStep3() {
+    switchHosting(); 
 }
         function toggleCatalystTools() {
             const tools = document.getElementById('catalyst-tools');
@@ -299,189 +308,90 @@
         }
     </script>
             </div>
-<div id="part4" class="form-part" style="overflow: hidden; position: relative; min-height: 550px;">
+<div id="part4" class="form-part" style="overflow: hidden; position: relative; min-height: 500px;">
     
     <div id="audit-stage" class="review-slide active-slide">
-        <span class="review-header" style="font-size: 1.4rem; font-weight: 900; color: #333; margin-bottom: 5px; display: block; text-align: center;">Audit Chamber 🔍</span>
-        <p style="text-align: center; font-size: 0.75rem; color: #888; margin-bottom: 25px;">Verify every detail before committing to the Mochearn Network.</p>
-
-        <div class="audit-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">IDENTITY & SALES</label>
-                <span onclick="goTo(1)" style="font-size: 0.65rem; color: var(--emerald); font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
+        <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">Audit Chamber 🔍</span>
+        
+        <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">PRODUCT IDENTITY</label>
+                <span onclick="goTo(1)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
             </div>
-            <p style="font-size: 0.9rem; font-weight: 800; color: #222;" id="audit-name">---</p>
-            <p style="font-size: 0.75rem; color: #666; margin-top: 4px;" id="audit-sales-info">Price: ₦0 | Commission: 0%</p>
+            <p id="audit-name" style="font-size: 0.9rem; font-weight: 800; color: #222; margin-top: 5px;">---</p>
+            <p id="audit-price" style="font-size: 0.75rem; color: #666;">Price: ₦0 | Commission: 0%</p>
         </div>
 
-        <div class="audit-card" style="margin-top: 15px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
                 <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">ACADEMY CONFIG</label>
-                <span onclick="goTo(3)" style="font-size: 0.65rem; color: var(--emerald); font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
+                <span onclick="goTo(3)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
             </div>
-            <p style="font-size: 0.8rem; font-weight: 700; color: #222;" id="audit-host">Mode: ---</p>
-            <p style="font-size: 0.7rem; color: #888; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="audit-link">Link: Not provided</p>
+            <p id="audit-host" style="font-size: 0.8rem; font-weight: 700; color: #222; margin-top: 5px;">Mode: ---</p>
+            <p id="audit-link" style="font-size: 0.7rem; color: #888; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Link: Not provided</p>
         </div>
 
-        <button type="button" class="launch-btn" onclick="slideToDeal()" style="width: 100%; margin-top: 30px; background: #333; color: #fff; padding: 20px; border-radius: 8px; font-weight: 900; border: none; cursor: pointer;">
+        <button type="button" class="launch-btn" onclick="slideToDeal()" style="width: 100%; margin-top: 30px; background: #333; color: #fff; height: 55px; border-radius: 8px; font-weight: 900; border: none; cursor: pointer;">
             PROCEED TO PROFIT DEAL ➡️
         </button>
     </div>
 
-    <div id="deal-stage" class="review-slide next-slide">
-        <span class="review-header" style="font-size: 1.4rem; font-weight: 900; color: #333; margin-bottom: 5px; display: block; text-align: center;">The Profit Deal 💰</span>
-        <p style="text-align: center; font-size: 0.75rem; color: #888; margin-bottom: 20px;">Secure your payout protocol and launch.</p>
-
+    <div id="deal-stage" class="review-slide next-slide" style="display:none;">
+        <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">The Profit Deal 💰</span>
+        
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <div id="plan-std" onclick="selectPlan('standard')" class="plan-box active-plan">
-                <span style="font-size: 0.8rem; font-weight: 900;">Standard</span>
-                <span style="font-size: 0.6rem; display: block;">10% Platform Fee</span>
+            <div id="plan-std" onclick="selectPlan('standard')" class="plan-card active-plan" style="flex: 1; border: 2px solid var(--emerald); padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; background: #f4fcf9;">
+                <span style="font-size: 0.75rem; font-weight: 900; display: block;">Standard Plan</span>
+                <span style="font-size: 0.6rem; color: #e63946;">10% Platform Fee</span>
             </div>
-            <div id="plan-pro" onclick="selectPlan('empire')" class="plan-box">
-                <span style="font-size: 0.8rem; font-weight: 900;">Empire Pass ⚔️</span>
-                <span style="font-size: 0.6rem; display: block;">0% Fee (₦35k/yr)</span>
-            </div>
-        </div>
-
-        <div class="audit-card" style="background: #fafafa; border: 2px solid #eee;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <label style="font-size: 0.6rem; font-weight: 900; color: #999;">NET PAYOUT</label>
-                    <p id="deal-vendor-pay" style="font-size: 1.1rem; font-weight: 900; color: var(--emerald);">₦0</p>
-                </div>
-                <div style="text-align: right;">
-                    <label style="font-size: 0.6rem; font-weight: 900; color: #999;">CATALYST CUT</label>
-                    <p id="deal-cat-pay" style="font-size: 0.9rem; font-weight: 800; color: #333;">₦0</p>
-                </div>
+            <div id="plan-pro" onclick="selectPlan('empire')" class="plan-card" style="flex: 1; border: 2px solid #eee; padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; background: #fff;">
+                <span style="font-size: 0.75rem; font-weight: 900; display: block;">Empire Pass ⚔️</span>
+                <span style="font-size: 0.6rem; color: var(--emerald);">0% Fee (₦35k/yr)</span>
             </div>
         </div>
 
-        <div style="display: flex; gap: 12px; margin-top: 25px; align-items: flex-start;">
-            <input type="checkbox" id="tos-check" onchange="toggleDeployBtn()" style="width: 22px; height: 22px; accent-color: var(--emerald); cursor: pointer;">
-            <label for="tos-check" style="font-size: 0.75rem; color: #444; font-weight: 700; line-height: 1.4;">
-                I accept the <b style="color: var(--emerald);">Mochearn Vendor Policy</b>. I understand my product is subject to a 24-hour review.
-            </label>
+        <div style="background: #fafafa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid var(--emerald);">
+            <p id="deal-vendor-pay" style="font-weight: 900; color: #333; font-size: 1.1rem; margin-bottom: 5px;">Your Profit: ₦0</p>
+            <p id="deal-cat-pay" style="font-size: 0.8rem; color: #666; margin-bottom: 3px;">Catalyst Cut: ₦0</p>
+            <p id="deal-mochearn" style="font-size: 0.8rem; color: #e63946; font-weight: 700;">Mochearn Fee: 10%</p>
         </div>
 
-        <button type="button" id="final-deploy-btn" class="launch-btn" onclick="startExecution()" disabled 
-                style="width: 100%; height: 65px; background: #ccc; color: #fff; border: none; border-radius: 8px; font-weight: 900; font-size: 1.1rem; cursor: not-allowed; transition: 0.3s; margin-top: 25px; display: flex; align-items: center; justify-content: center; gap: 15px;">
-            <span id="btn-text">SUBMIT FOR REVIEW 🚀</span>
-            <div id="btn-spinner" class="spinner-circle" style="display: none;"></div>
-        </button>
+        <div id="payment-gate">
+            <button type="button" id="pay-btn" class="launch-btn" onclick="simulatePayment()" style="width: 100%; background: #333; color: #fff; height: 60px; border-radius: 8px; font-weight: 900; border: none; display: none;">PAY & ACTIVATE EMPIRE PASS 💳</button>
+            
+            <button type="button" id="final-deploy-btn" class="launch-btn" onclick="startExecution()" style="width: 100%; background: var(--emerald); color: #fff; height: 60px; border-radius: 8px; font-weight: 900; border: none; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span id="btn-text">SUBMIT FOR REVIEW 🚀</span>
+                <div id="btn-spinner" class="spinner-circle" style="display: none;"></div>
+            </button>
+        </div>
         
         <p onclick="slideToAudit()" style="text-align: center; margin-top: 15px; font-size: 0.75rem; color: #888; font-weight: 700; cursor: pointer;">← Go back to Audit</p>
     </div>
 
-    <div id="success-screen" style="display: none; text-align: center; padding: 50px 10px;">
+    <div id="success-screen" style="display: none; text-align: center; padding: 40px 10px;">
         <div style="font-size: 4rem; margin-bottom: 20px;">🛡️</div>
-        <h2 style="font-size: 1.8rem; font-weight: 900; color: var(--emerald);">Submission Received!</h2>
-        <p style="color: #666; margin-bottom: 30px;">Your empire is being verified. Check the Inventory for status updates.</p>
-        <button onclick="location.href='inventory.html'" style="width: 100%; background: #333; color: #fff; padding: 20px; border-radius: 8px; font-weight: 900; border: none;">GO TO INVENTORY 📋</button>
+        <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--emerald); margin-bottom: 10px;">Submission Successful!</h2>
+        <p style="font-size: 0.9rem; color: #555; line-height: 1.5;">Your product is now in the <b>Mochearn Review Chamber</b>. Reviews take 12-24 hours. Check your inventory for updates.</p>
+        <button type="button" onclick="location.href='inventory.html'" style="width: 100%; background: #333; color: #fff; padding: 20px; border-radius: 8px; font-weight: 900; border: none; margin-top: 30px; cursor: pointer;">GO TO INVENTORY 📋</button>
     </div>
 </div>
 
 <style>
-    /* 🛡️ ELITE SMOOTH TRANSITIONS */
-    .review-slide {
-        position: absolute; width: 100%; top: 0; left: 0;
-        transition: all 0.5s ease-in-out; opacity: 0; pointer-events: none;
-    }
-    .active-slide { opacity: 1; pointer-events: auto; transform: translateX(0); }
-    .next-slide { transform: translateX(100%); }
-    .prev-slide { transform: translateX(-100%); }
-
-    /* AUDIT CARDS */
-    .audit-card { background: #fff; border: 1px solid #eee; padding: 18px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-
-    /* PLAN BOXES */
-    .plan-box { flex: 1; border: 2px solid #eee; padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; }
-    .active-plan { border-color: var(--emerald); background: #f4fcf9; }
-
-    /* TURNING SPINNER */
+    /* CSS for transitions and spinner */
+    .review-slide { position: absolute; width: 100%; transition: 0.5s ease-in-out; }
+    .next-slide { transform: translateX(100%); opacity: 0; }
+    .active-slide { transform: translateX(0); opacity: 1; }
+    .prev-slide { transform: translateX(-100%); opacity: 0; }
+    
     .spinner-circle {
-        width: 22px; height: 22px;
-        border: 4px solid rgba(255,255,255,0.2);
-        border-top: 4px solid #fff;
+        width: 20px; height: 20px;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-top: 3px solid #fff;
         border-radius: 50%;
         animation: spin-round 0.8s linear infinite;
     }
     @keyframes spin-round { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-</style>
-
-<script>
-    let currentPlan = 'standard';
-
-    // 🏎️ THE SMOOTH SLIDE LOGIC
-    function slideToDeal() {
-        updateReview(); // Make sure data is fresh
-        document.getElementById('audit-stage').classList.replace('active-slide', 'prev-slide');
-        document.getElementById('deal-stage').classList.replace('next-slide', 'active-slide');
-    }
-
-    function slideToAudit() {
-        document.getElementById('deal-stage').classList.replace('active-slide', 'next-slide');
-        document.getElementById('audit-stage').classList.replace('prev-slide', 'active-slide');
-    }
-
-    function selectPlan(plan) {
-        currentPlan = plan;
-        document.getElementById('plan-std').className = (plan === 'standard') ? 'plan-box active-plan' : 'plan-box';
-        document.getElementById('plan-pro').className = (plan === 'empire') ? 'plan-box active-plan' : 'plan-box';
-        updateReview();
-        toggleDeployBtn(); // Update button text immediately
-    }
-
-    function updateReview() {
-        const name = document.getElementById('pName').value || "New Project";
-        const price = Number(document.getElementById('pPrice').value) || 0;
-        const comm = Number(document.getElementById('pComm').value) || 0;
-        const host = document.getElementById('hostType').value;
-
-        // Stage 1 Audit Update
-        document.getElementById('audit-name').innerText = name;
-        document.getElementById('audit-sales-info').innerText = "Price: ₦" + price.toLocaleString() + " | Commission: " + comm + "%";
-        document.getElementById('audit-host').innerText = "Mode: " + host.toUpperCase();
-        
-        // Stage 2 Deal Update
-        const mFee = (currentPlan === 'standard') ? 0.10 : 0.00;
-        const catPay = price * (comm / 100);
-        const mPay = price * mFee;
-        const vendorPay = price - catPay - mPay;
-
-        document.getElementById('deal-vendor-pay').innerText = "₦" + vendorPay.toLocaleString();
-        document.getElementById('deal-cat-pay').innerText = "₦" + catPay.toLocaleString();
-    }
-
-    function toggleDeployBtn() {
-        const check = document.getElementById('tos-check');
-        const btn = document.getElementById('final-deploy-btn');
-        const txt = document.getElementById('btn-text');
-        
-        btn.disabled = !check.checked;
-        btn.style.background = check.checked ? (currentPlan === 'standard' ? "var(--emerald)" : "#333") : "#ccc";
-        btn.style.cursor = check.checked ? "pointer" : "not-allowed";
-        
-        if(check.checked) {
-            txt.innerText = (currentPlan === 'standard') ? "SUBMIT FOR REVIEW 🚀" : "PAY & ACTIVATE EMPIRE PASS 💳";
-        }
-    }
-
-    function startExecution() {
-        const btn = document.getElementById('final-deploy-btn');
-        const spinner = document.getElementById('btn-spinner');
-        const txt = document.getElementById('btn-text');
-
-        btn.disabled = true;
-        spinner.style.display = 'block';
-        txt.innerText = (currentPlan === 'standard') ? "Processing Audit..." : "Processing Empire Payment...";
-
-        setTimeout(() => {
-            document.getElementById('deal-stage').style.display = 'none';
-            document.getElementById('success-screen').style.display = 'block';
-            window.scrollTo(0,0);
-        }, 10000); // The 10-second Elite delay
-    }
-                </script>
+                </style>
 <script>
     let currentStep = 1;
     function validateStep(now, next) {
