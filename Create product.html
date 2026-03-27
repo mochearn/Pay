@@ -270,22 +270,27 @@
     <script>
 function switchHosting() {
     const type = document.getElementById('hostType').value;
-    
-    // 🛡️ 1. Hide every possible hosting section first
+    console.log("Mochearn System: Switching to " + type); // 🛡️ Debugging line
+
+    // 1. Hide EVERY possible section first
     const sections = ['section-native', 'section-ext_site', 'section-embed'];
     sections.forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
+        if (el) {
+            el.style.display = 'none';
+        }
     });
 
-    // 🛡️ 2. Find the one the user selected and FORCE it to display
+    // 2. Force the selected one to show
     const target = document.getElementById('section-' + type);
     if (target) {
         target.style.display = 'block';
+    } else {
+        console.log("Mochearn System: Error - Section section-" + type + " not found!");
     }
 }
 
-// 🛡️ 3. The "Alarm Clock" for Step 3
+// 🛡️ The Wake-Up call for Step 3
 function initStep3() {
     switchHosting(); 
         }
