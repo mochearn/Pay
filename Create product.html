@@ -268,29 +268,20 @@
     </div>
 
     <script>
-  /* 🛡️ REPLACEMENT FOR STEP 3 LOGIC */
 function switchHosting() {
     const type = document.getElementById('hostType').value;
     
-    // 1. Hide every section first
-    const sections = ['section-native', 'section-ext_site', 'section-embed'];
-    sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-    });
+    // 1. Hide every section
+    document.getElementById('section-native').style.display = 'none';
+    document.getElementById('section-ext_site').style.display = 'none';
+    document.getElementById('section-embed').style.display = 'none';
 
-    // 2. Force the selected one to show
+    // 2. Show the one you picked
     const target = document.getElementById('section-' + type);
     if (target) {
         target.style.display = 'block';
     }
-}
-
-/* 🛡️ ADD THIS NEW FUNCTION BELOW THE ONE ABOVE */
-// This ensures Step 3 is "Awake" the moment you land on it
-function initStep3() {
-    switchHosting(); 
-}
+        }
         function toggleCatalystTools() {
             const tools = document.getElementById('catalyst-tools');
             const arrow = document.getElementById('tool-arrow');
