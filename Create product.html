@@ -97,7 +97,7 @@
         <div class="form-group">
             <label>Product Name</label>
             <span class="hint">Make it magnetic for Catalysts to push</span>
-            <input type="text" id="pName" placeholder="e.g. Wealth Vault Masterclass">
+          
         </div>
         <div class="form-group">
             <label>Category</label>
@@ -398,46 +398,36 @@
     }
 
 function goTo(step) {
-    // 🛡️ STEP A: Check if we need to show the "Fill the box" pop-up
+    // 🛡️ STEP A: Validation Check for Step 1
     if (step === 2) {
-        const prodName = document.getElementById('pName').value;
-        const prodPrice = document.getElementById('pPrice').value;
-        
-        // If the boxes are empty, show the professional pop-up
-        if (!prodName || !prodPrice) {
-            showMochearnPopup(2); // ⚔️ Trigger the Pop-up
-            return; // 🚫 Stop here until they click 'Skip' or 'Fill'
+        const nameInput = document.getElementById('pName');
+        const priceInput = document.getElementById('pPrice');
+
+        // Check if inputs exist AND if they are empty
+        if (nameInput && priceInput) {
+            if (nameInput.value.trim() === "" || priceInput.value.trim() === "") {
+                showMochearnPopup(2); // ⚔️ Trigger Pop-up
+                return; // 🚫 Stop here
+            }
         }
     }
 
-// 🛡️ STEP B: If they filled it or clicked Skip, proceed
-    // 1. Hide every single part using the new class name
-    document.querySelectorAll('.setup-stage').forEach(s => {
-        s.style.display = 'none';
-        s.classList.remove('active-slide');
+    // 🛡️ STEP B: The "Clean Switch"
+    // 1. Hide every section with our new class name
+    document.querySelectorAll('.setup-stage').forEach(stage => {
+        stage.style.display = 'none';
+        stage.classList.remove('active-slide');
     });
 
-    // 2. Show ONLY the next part using the 'part' ID
+    // 2. Show the target section
     const target = document.getElementById('part' + step);
     if (target) {
         target.style.display = 'block';
-        setTimeout(() => target.classList.add('active-slide'), 10);
+        setTimeout(() => {
+            target.classList.add('active-slide');
+        }, 10);
         window.scrollTo(0, 0);
     }
-
-    // Show the target
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        setTimeout(() => target.classList.add('active-slide'), 10);
-        window.scrollTo(0, 0);
-        
-        // Update Review if we reach the end
-        if (step === 4 && typeof updateReview === 'function') updateReview();
-    }
-    
-    // 🛡️ Close the pop-up if it was open
-    closeMochearnPopup();
     }
     function toggleOptions() { 
         let list = document.getElementById('opts');
