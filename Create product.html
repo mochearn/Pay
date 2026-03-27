@@ -264,23 +264,30 @@
 
     <div class="p3-nav-btns">
         <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
-   <button type="button" class="btn-next" onclick="updateReview(); validateStep(3, 4)">Next Step</button>
+<button type="button" class="btn-next" onclick="updateReview(); validateStep(3, 4)">Next Step</button>
     </div>
 
     <script>
 function switchHosting() {
     const type = document.getElementById('hostType').value;
     
-    // 1. Hide every section
-    document.getElementById('section-native').style.display = 'none';
-    document.getElementById('section-ext_site').style.display = 'none';
-    document.getElementById('section-embed').style.display = 'none';
+    // 🛡️ 1. Hide every possible hosting section first
+    const sections = ['section-native', 'section-ext_site', 'section-embed'];
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
 
-    // 2. Show the one you picked
+    // 🛡️ 2. Find the one the user selected and FORCE it to display
     const target = document.getElementById('section-' + type);
     if (target) {
         target.style.display = 'block';
     }
+}
+
+// 🛡️ 3. The "Alarm Clock" for Step 3
+function initStep3() {
+    switchHosting(); 
         }
         function toggleCatalystTools() {
             const tools = document.getElementById('catalyst-tools');
@@ -391,6 +398,11 @@ function switchHosting() {
         inputs.forEach(i => { if(i.value) filled = true; });
         if (!filled) { document.getElementById('warningBar').classList.add('show'); } 
         else { goTo(next); }
+    }
+    function forceSkip() { 
+        document.getElementById('warningBar').classList.remove('show'); 
+        // 🛡️ Force the jump to the next step
+        goTo(currentStep + 1); 
     }
     function goTo(s) {
         // 🛡️ Safety Guard: Only wake up Step 3 if the function exists
