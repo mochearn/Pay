@@ -230,37 +230,34 @@
         </div>
     </div>
 
-    <div id="section-ext_site" class="hosting-section" style="display:none;">
-        <div class="benefit-card">
-            <label style="color:#0e6954; font-size: 0.8rem;">🛡️ EXTERNAL SECURITY GUIDE</label>
-            <ul>
-                <li>• Ensure your site is password-protected.</li>
-                <li>• Students will leave Mochearn to access your site.</li>
-                <li>• Link sharing is harder to track on external browsers.</li>
-            </ul>
-        </div>
-        <div class="sub-form" style="display:block; border-left: 6px solid #333; padding: 25px;">
-            <label>External Academy URL</label>
-            <input type="url" class="p3-input" placeholder="https://your-private-site.com/login">
-            <label>Access Instructions</label>
-            <textarea class="p3-textarea" placeholder="Explain how they get their login details..."></textarea>
-        </div>
+<div id="section-ext_site" class="hosting-section" style="display:none;">
+    <div class="benefit-card">
+        <label style="color:#0e6954; font-size: 0.8rem;">🛡️ EXTERNAL SECURITY GUIDE</label>
+        <ul>
+            <li>• Ensure your site is password-protected.</li>
+            <li>• Students will leave Mochearn to access your site.</li>
+        </ul>
     </div>
+    <div style="padding: 25px; background: #fcfcfc; border-radius: 12px; border-left: 6px solid #333;">
+        <label>External Academy URL</label>
+        <input type="url" id="extLink" class="p3-input" placeholder="https://your-private-site.com/login">
+        <label>Access Instructions</label>
+        <textarea class="p3-textarea" placeholder="Explain how they get their login details..."></textarea>
+    </div>
+</div>
 
-    <div id="section-embed" class="hosting-section" style="display:none;">
-        <div class="benefit-card">
-            <label style="color:#0e6954; font-size: 0.8rem;">✨ THE ELITE EMBED BENEFIT</label>
-            <ul>
-                <li>• <b>Anti-Share:</b> Your URL remains hidden from students.</li>
-                <li>• <b>Seamless:</b> Your site loads inside the Mochearn Dashboard.</li>
-                <li>• <b>Retention:</b> Students stay focused in your academy environment.</li>
-            </ul>
-        </div>
-        <div class="sub-form" style="display:block; border-left: 6px solid #1a73e8; padding: 25px;">
-            <label>Portal Embed Link</label>
-            <input type="url" class="p3-input" placeholder="https://your-academy-portal.com">
-        </div>
+<div id="section-embed" class="hosting-section" style="display:none;">
+    <div class="benefit-card">
+        <label style="color:#0e6954; font-size: 0.8rem;">✨ THE ELITE EMBED BENEFIT</label>
+        <ul>
+            <li>• <b>Anti-Share:</b> Your URL remains hidden.</li>
+        </ul>
     </div>
+    <div style="padding: 25px; background: #fcfcfc; border-radius: 12px; border-left: 6px solid #1a73e8;">
+        <label>Portal Embed Link</label>
+        <input type="url" id="embedLink" class="p3-input" placeholder="https://your-academy-portal.com">
+    </div>
+</div>
 
     <div class="p3-nav-btns">
         <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
