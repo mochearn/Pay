@@ -371,103 +371,29 @@
     </div>
     </div>
 <script>
-            function toggleCatalystTools() {
-            const tools = document.getElementById('catalyst-tools');
-            const arrow = document.getElementById('tool-arrow');
-            const isOpen = tools.style.display === 'block';
-            tools.style.display = isOpen ? 'none' : 'block';
-            arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-        function addResourceRow() {
-            const container = document.getElementById('resource-list');
-            const div = document.createElement('div');
-            div.className = 'resource-row';
-            div.style.cssText = "display: flex; gap: 10px; margin-bottom: 10px;";
-            div.innerHTML = `<input type="text" placeholder="File Name" style="width:40%; padding: 12px; border: 1px solid #eee; border-radius: 5px;"><input type="url" placeholder="Paste Link Here" style="width:56%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">`;
-            container.appendChild(div);
-    }
-      // 🛡️ MOCHEARN NAVIGATION ENGINE
-function goTo(step) {
-    // 1. Validation for Part 1
-    if (step === 2) {
-        const name = document.getElementById('pName').value.trim();
-        const price = document.getElementById('pPrice').value.trim();
-        if (!name || !price) {
-            showMochearnPopup(2); // ⚔️ Show Pop-up if empty
-            return;
-        }
-    }
+// 🛡️ EMERGENCY TEST FUNCTION
+function testSystem(step) {
+    console.log("Button Clicked! Target Step: " + step);
+    alert("System Triggered! Moving to Part " + step); // 🚨 This MUST pop up!
 
-    // 2. Hide ALL sections
-    document.querySelectorAll('.setup-stage').forEach(stage => {
-        stage.style.display = 'none';
-        stage.classList.remove('active-slide');
+    // 1. Hide everything with the class 'setup-stage'
+    const allStages = document.querySelectorAll('.setup-stage');
+    allStages.forEach(s => {
+        s.style.display = 'none';
+        s.classList.remove('active-slide');
     });
 
-    // 3. Show the Target Section
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        setTimeout(() => target.classList.add('active-slide'), 10);
-        window.scrollTo(0, 0);
-    }
-    
-    // 4. Update Header Tabs (Optional but professional)
-    document.querySelectorAll('.step').forEach((s, index) => {
-        s.classList.toggle('active', (index + 1) === step);
-    });
-
-    closeMochearnPopup(); // Always close if it was open
-    if (step === 4) updateReview();
-}
-
-// 🛡️ POP-UP CONTROL
-function showMochearnPopup(nextStep) {
-    const popup = document.getElementById('validation-popup');
-    if (popup) {
-        popup.style.display = 'flex';
-        document.getElementById('skip-btn').onclick = function() {
-            forceGoTo(nextStep);
-        };
-    }
-}
-
-function forceGoTo(step) {
-    document.querySelectorAll('.setup-stage').forEach(s => s.style.display = 'none');
-    document.getElementById('part' + step).style.display = 'block';
-    closeMochearnPopup();
-}
-
-function closeMochearnPopup() {
-    const popup = document.getElementById('validation-popup');
-    if (popup) popup.style.display = 'none';
-}
-
-// 🛡️ PROFIT CALCULATION (Part 4)
-function selectPlan(plan) {
-    const price = Number(document.getElementById('pPrice').value) || 0;
-    const commPct = Number(document.getElementById('pComm').value) || 0;
-    
-    const catCut = (price * commPct) / 100;
-    const mochearnFee = (plan === 'standard') ? (price * 0.10) : 0;
-    const yourProfit = price - catCut - mochearnFee;
-
-    document.getElementById('deal-vendor-pay').innerText = "Your Profit: ₦" + yourProfit.toLocaleString();
-    document.getElementById('deal-cat-pay').innerText = "Catalyst Cut: ₦" + catCut.toLocaleString();
-    
-    const feeLabel = document.getElementById('deal-mochearn');
-    if (plan === 'standard') {
-        feeLabel.innerText = "Mochearn Fee: 10% (₦" + mochearnFee.toLocaleString() + ")";
-        document.getElementById('pay-btn').style.display = 'none';
-        document.getElementById('final-deploy-btn').style.display = 'flex';
+    // 2. Show the next part
+    const nextPart = document.getElementById('part' + step);
+    if (nextPart) {
+        nextPart.style.display = 'block';
+        nextPart.classList.add('active-slide');
     } else {
-        feeLabel.innerText = "Mochearn Fee: 0% (Empire Pass Active ⚔️)";
-        document.getElementById('pay-btn').style.display = 'block';
-        document.getElementById('final-deploy-btn').style.display = 'none';
+        alert("Error: I can't find id='part" + step + "' in your HTML!");
     }
 }
 
-// 🛡️ GATEWAY FUNCTIONS (Part 2)
+// 🛡️ RE-ADD YOUR OTHER FUNCTIONS BELOW HERE
 function toggleOptions() { 
     let list = document.getElementById('opts');
     let btn = document.getElementById('dropBtn');
@@ -482,26 +408,6 @@ function selectGate(el, type) {
     document.getElementById('f-' + type).style.display = 'block';
     toggleOptions();
 }
-
-// 🛡️ FINAL REVIEW ENGINE
-function updateReview() {
-    const name = document.getElementById('pName')?.value || "Unnamed Product";
-    const price = document.getElementById('pPrice')?.value || "0";
-    const comm = document.getElementById('pComm')?.value || "0";
-    
-    document.getElementById('audit-name').innerText = name;
-    document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString();
-    document.getElementById('audit-comm').innerText = "Commission: " + comm + "%";
-}
-
-function slideToDeal() {
-    document.getElementById('audit-stage').style.display = 'none';
-    document.getElementById('deal-stage').style.display = 'block';
-}
-
-function slideToAudit() {
-    document.getElementById('deal-stage').style.display = 'none';
-    document.getElementById('audit-stage').style.display = 'block';
-        }      
+</script>
 </body>
     </html>
