@@ -378,6 +378,16 @@
     }
     @keyframes spin-round { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
                 </style>
+    <div id="validation-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: flex-start; justify-content: center; padding-top: 50px;">
+    <div style="background: #fff; width: 90%; max-width: 400px; padding: 25px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); text-align: center;">
+        <h3 style="color: #333; margin-bottom: 10px; font-weight: 900;">INCOMPLETE PROTOCOL 🛡️</h3>
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 25px;">Omo, you haven't filled in your product details. Would you like to finish it now or skip to the next step?</p>
+        
+        <button onclick="closeMochearnPopup()" style="width: 100%; background: var(--emerald); color: #fff; padding: 15px; border: none; border-radius: 8px; font-weight: 800; margin-bottom: 10px; cursor: pointer;">FINISH FILLING ✍️</button>
+        
+        <p id="skip-btn" style="color: #888; font-size: 0.75rem; text-decoration: underline; cursor: pointer; font-weight: 700;">SKIP FOR NOW →</p>
+    </div>
+    </div>
 <script>
     let currentStep = 1;
 
