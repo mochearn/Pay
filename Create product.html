@@ -70,6 +70,19 @@
 
         .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: right; cursor: pointer; }
         .btn-prev { background: #eee; color: #666; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: left; cursor: pointer; }
+
+        /* CSS for Part 4 transitions and spinner */
+        .review-slide { position: absolute; width: 100%; transition: 0.5s ease-in-out; display: none; }
+        .active-slide { display: block; opacity: 1; }
+        
+        .spinner-circle {
+            width: 20px; height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin-round 0.8s linear infinite;
+        }
+        @keyframes spin-round { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -134,35 +147,32 @@
             <div class="options-list" id="opts">
                 <div class="option-item" onclick="selectGate(this, 'ext')">
                     <h4>Option 1: External Link</h4>
-                    <p>Redirect traffic to your existing website. Use this if you already have a high-converting page on WordPress or Wix.</p>
+                    <p>Redirect traffic to your existing website.</p>
                 </div>
                 <div class="option-item" onclick="selectGate(this, 'cust')">
                     <h4>Option 2: Custom Upload (Elite)</h4>
-                    <p>Upload your professional HTML code directly. This gives you 100% design control while Mochearn handles the secure hosting.</p>
+                    <p>Upload your professional HTML code directly.</p>
                 </div>
             </div>
         </div>
 
         <div id="f-ext" class="sub-form">
             <label>External Sales Page URL</label>
-            <span class="hint">Insert your website URL here so Catalysts can drive traffic to it. Note: We will provide your unique <b>Mochearn Checkout Link</b> to put on your "Buy Now" buttons later.</span>
             <input type="url" placeholder="https://yourwebsite.com/sales-page">
         </div>
 
         <div id="f-cust" class="sub-form">
             <label>Upload Web Assets (.zip)</label>
-            <span class="hint">Upload your custom code files here to give your sales page a unique, elite look hosted on our system.</span>
             <div class="upload-vibe-box" onclick="document.getElementById('fileUpload').click()">
                 <span class="upload-icon">📦</span>
-                <p style="font-size: 0.8rem; color: #666; font-weight: 500;">Click to browse files or drag & drop</p>
+                <p>Click to browse files</p>
                 <span class="file-chosen-btn">Choose File</span>
                 <input type="file" id="fileUpload" style="display:none;">
             </div>
         </div>
 
-        <div class="form-group" style="margin-top: 20px;">
+        <div class="form-group">
             <label>Support WhatsApp Number</label>
-            <span class="hint">Provide your number so buyers can reach you for inquiries.</span>
             <input type="text" placeholder="e.g. 08123456789">
         </div>
 
@@ -170,230 +180,101 @@
         <button type="button" class="btn-next" onclick="validateStep(2, 3)">Next Step</button>
         <div style="clear: both;"></div>
     </div>
-<div id="part3" class="form-part">
-    
-    <style>
-        .hosting-header { font-size: 1.4rem; font-weight: 900; color: #333; margin-bottom: 8px; display: block; }
-        .benefit-card { background: #f4fcf9; border: 1px solid #b5dbcc; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .benefit-card ul { list-style: none; padding: 0; }
-        .benefit-card li { font-size: 0.75rem; color: #0e6954; font-weight: 700; margin-bottom: 5px; }
-        .p3-input { margin-bottom: 15px; font-size: 0.95rem !important; }
-        .p3-textarea { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; font-size: 1rem; background: #fafafa; height: 100px; resize: none; }
-        .add-more-btn { width: 100%; background: #f9f9f9; border: 1px solid #ddd; color: #555; padding: 14px; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.85rem; }
-        .p3-nav-btns { margin-top: 40px; display: flex; justify-content: space-between; gap: 20px; }
-        .p3-nav-btns button { padding: 14px 30px !important; font-size: 0.85rem !important; flex: 1; }
-    </style>
 
-    <div class="form-group">
+    <div id="part3" class="form-part">
+        <style>
+            .hosting-header { font-size: 1.4rem; font-weight: 900; color: #333; margin-bottom: 8px; display: block; }
+            .p3-input { margin-bottom: 15px; font-size: 0.95rem !important; }
+            .p3-textarea { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; height: 100px; resize: none; background: #fafafa; }
+            .p3-nav-btns { margin-top: 40px; display: flex; justify-content: space-between; gap: 20px; }
+        </style>
+
         <span class="hosting-header">Hosting Protocol 🏗️</span>
-        <span class="hint">How will your students access the value?</span>
-        <p style="font-size: 0.75rem; color: #777; line-height: 1.4; margin-bottom: 15px;">
-            Select how you want to deliver your digital assets. Whether you're hosting directly on Mochearn or using your own private server, this ensures your customers get instant access after payment.
-        </p>
         <select id="hostType" onchange="switchHosting()">
             <option value="native">Option 1: Host Inside Mochearn (Recommended)</option>
             <option value="ext_site">Option 2: External Website</option>
             <option value="embed">Option 3: Embedded Website</option>
         </select>
+
+        <div id="section-native" class="hosting-section">
+            <div class="sub-form" style="display:block;">
+                <label>Main Lesson / Module 1</label>
+                <input type="text" class="p3-input" placeholder="Module Name">
+                <input type="url" id="nativeLink" class="p3-input" placeholder="Video Link">
+                <textarea class="p3-textarea" placeholder="Description..."></textarea>
+            </div>
+        </div>
+
+        <div id="section-ext_site" class="hosting-section" style="display:none;">
+            <div class="sub-form" style="display:block;">
+                <label>External Academy URL</label>
+                <input type="url" id="extLink" class="p3-input" placeholder="https://your-site.com">
+            </div>
+        </div>
+
+        <div id="section-embed" class="hosting-section" style="display:none;">
+            <div class="sub-form" style="display:block;">
+                <label>Portal Embed Link</label>
+                <input type="url" id="embedLink" class="p3-input" placeholder="https://embed-link.com">
+            </div>
+        </div>
+
+        <div class="p3-nav-btns">
+            <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
+            <button type="button" class="btn-next" onclick="updateReview(); validateStep(3, 4)">Next Step</button>
+        </div>
     </div>
 
-    <div id="section-native" class="hosting-section">
-        <div class="sub-form" style="display:block; border-left: 6px solid var(--emerald); padding: 25px;">
-            <label>Main Lesson / Module 1</label>
-            <input type="text" class="p3-input" placeholder="Module Name (e.g. Introduction to Wealth)">
-            <input type="url" class="p3-input" placeholder="Video Link (YouTube, Vimeo, or Drive)">
-            <textarea class="p3-textarea" placeholder="Brief description of what they will learn..."></textarea>
-            <span style="font-size: 0.7rem; color: var(--emerald); font-weight: 700; margin-top: 10px; display: block;">💡 Note: You can add more modules once your product is live.</span>
-        </div>
-
-        <p style="font-size: 0.8rem; font-weight: 700; color: #444; margin: 25px 0 10px 0;">
-            Do you have a Sales Challenge, Promotional Scripts, or Marketing Assets for your army? 🛡️ open the catalyst tools below 👇 to add them.
-        </p>
-        <div class="trigger-btn" onclick="toggleCatalystTools()" style="background: #f4fcf9 !important; border: 2px solid var(--emerald) !important; color: var(--emerald) !important;">
-            <span>🛠️ Open Elite Catalyst Tools (Optional)</span>
-            <span id="tool-arrow">▼</span>
-        </div>
-        <div id="catalyst-tools" class="sub-form" style="display:none; margin-top:15px;">
-            <div class="form-group">
-                <label>Sales Challenge URL</label>
-                <span class="hint">Host your custom-designed challenge page here.</span>
-                <input type="url" placeholder="https://yourwebsite.com/challenge-page">
-            </div>
-            <div id="resource-list">
-                <label>Promotional Materials & Scripts</label>
-                <div class="resource-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <input type="text" placeholder="File Name" style="width:40%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">
-                    <input type="url" placeholder="Paste Link Here" style="width:56%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">
+    <div id="part4" class="form-part">
+        <div id="audit-stage" class="review-slide active-slide">
+            <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">Audit Chamber 🔍</span>
+            <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between;">
+                    <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">PRODUCT IDENTITY</label>
+                    <span onclick="goTo(1)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
                 </div>
+                <p id="audit-name" style="font-size: 0.9rem; font-weight: 800; color: #222;">---</p>
+                <p id="audit-price" style="font-size: 0.75rem; color: #666;">Price: ₦0 | Commission: 0%</p>
             </div>
-            <button type="button" class="add-more-btn" onclick="addResourceRow()">+ Add More</button>
-        </div>
-    </div>
-
-    <div id="section-ext_site" class="hosting-section" style="display:none;">
-        <div class="benefit-card">
-            <label style="color:#0e6954; font-size: 0.8rem;">🛡️ EXTERNAL SECURITY GUIDE</label>
-            <ul>
-                <li>• Ensure your site is password-protected.</li>
-                <li>• Students will leave Mochearn to access your site.</li>
-                <li>• Link sharing is harder to track on external browsers.</li>
-            </ul>
-        </div>
-        <div class="sub-form" style="display:block; border-left: 6px solid #333; padding: 25px;">
-            <label>External Academy URL</label>
-            <input type="url" class="p3-input" placeholder="https://your-private-site.com/login">
-            <label>Access Instructions</label>
-            <textarea class="p3-textarea" placeholder="Explain how they get their login details..."></textarea>
-        </div>
-    </div>
-
-    <div id="section-embed" class="hosting-section" style="display:none;">
-        <div class="benefit-card">
-            <label style="color:#0e6954; font-size: 0.8rem;">✨ THE ELITE EMBED BENEFIT</label>
-            <ul>
-                <li>• <b>Anti-Share:</b> Your URL remains hidden from students.</li>
-                <li>• <b>Seamless:</b> Your site loads inside the Mochearn Dashboard.</li>
-                <li>• <b>Retention:</b> Students stay focused in your academy environment.</li>
-            </ul>
-        </div>
-        <div class="sub-form" style="display:block; border-left: 6px solid #1a73e8; padding: 25px;">
-            <label>Portal Embed Link</label>
-            <input type="url" class="p3-input" placeholder="https://your-academy-portal.com">
-        </div>
-    </div>
-
-    <div class="p3-nav-btns">
-        <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
-   <button type="button" class="btn-next" onclick="updateReview(); validateStep(3, 4)">Next Step</button>
-    </div>
-
-    <script>
-  /* 🛡️ REPLACEMENT FOR STEP 3 LOGIC */
-function switchHosting() {
-    const type = document.getElementById('hostType').value;
-    
-    // 1. Hide every section first
-    const sections = ['section-native', 'section-ext_site', 'section-embed'];
-    sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-    });
-
-    // 2. Force the selected one to show
-    const target = document.getElementById('section-' + type);
-    if (target) {
-        target.style.display = 'block';
-    }
-}
-
-/* 🛡️ ADD THIS NEW FUNCTION BELOW THE ONE ABOVE */
-// This ensures Step 3 is "Awake" the moment you land on it
-function initStep3() {
-    switchHosting(); 
-}
-        function toggleCatalystTools() {
-            const tools = document.getElementById('catalyst-tools');
-            const arrow = document.getElementById('tool-arrow');
-            const isOpen = tools.style.display === 'block';
-            tools.style.display = isOpen ? 'none' : 'block';
-            arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-        function addResourceRow() {
-            const container = document.getElementById('resource-list');
-            const div = document.createElement('div');
-            div.className = 'resource-row';
-            div.style.cssText = "display: flex; gap: 10px; margin-bottom: 10px;";
-            div.innerHTML = `<input type="text" placeholder="File Name" style="width:40%; padding: 12px; border: 1px solid #eee; border-radius: 5px;"><input type="url" placeholder="Paste Link Here" style="width:56%; padding: 12px; border: 1px solid #eee; border-radius: 5px;">`;
-            container.appendChild(div);
-        }
-    </script>
+            <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px;">
+                <div style="display: flex; justify-content: space-between;">
+                    <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">ACADEMY CONFIG</label>
+                    <span onclick="goTo(3)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
+                </div>
+                <p id="audit-host" style="font-size: 0.8rem; font-weight: 700;">Mode: ---</p>
+                <p id="audit-link" style="font-size: 0.7rem; color: #888;">Link: Not provided</p>
             </div>
-<div id="part4" class="form-part" style="overflow: hidden; position: relative; min-height: 500px;">
-    
-    <div id="audit-stage" class="review-slide active-slide">
-        <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">Audit Chamber 🔍</span>
-        
-        <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">PRODUCT IDENTITY</label>
-                <span onclick="goTo(1)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
-            </div>
-            <p id="audit-name" style="font-size: 0.9rem; font-weight: 800; color: #222; margin-top: 5px;">---</p>
-            <p id="audit-price" style="font-size: 0.75rem; color: #666;">Price: ₦0 | Commission: 0%</p>
+            <button type="button" class="launch-btn" onclick="slideToDeal()" style="width: 100%; margin-top: 30px; background: #333; color: #fff; height: 55px; border-radius: 8px; border:none; font-weight:900;">PROCEED TO PROFIT DEAL ➡️</button>
         </div>
 
-        <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">ACADEMY CONFIG</label>
-                <span onclick="goTo(3)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
+        <div id="deal-stage" class="review-slide" style="display:none;">
+            <span class="review-header" style="text-align: center; display: block; font-weight: 900;">The Profit Deal 💰</span>
+            <div style="display: flex; gap: 10px; margin: 20px 0;">
+                <div id="plan-std" onclick="selectPlan('standard')" style="flex: 1; border: 2px solid var(--emerald); padding: 10px; border-radius: 8px; text-align: center; background: #f4fcf9;">Standard</div>
+                <div id="plan-pro" onclick="selectPlan('empire')" style="flex: 1; border: 2px solid #eee; padding: 10px; border-radius: 8px; text-align: center;">Empire Pass ⚔️</div>
             </div>
-            <p id="audit-host" style="font-size: 0.8rem; font-weight: 700; color: #222; margin-top: 5px;">Mode: ---</p>
-            <p id="audit-link" style="font-size: 0.7rem; color: #888; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Link: Not provided</p>
-        </div>
-
-        <button type="button" class="launch-btn" onclick="slideToDeal()" style="width: 100%; margin-top: 30px; background: #333; color: #fff; height: 55px; border-radius: 8px; font-weight: 900; border: none; cursor: pointer;">
-            PROCEED TO PROFIT DEAL ➡️
-        </button>
-    </div>
-
-    <div id="deal-stage" class="review-slide next-slide" style="display:none;">
-        <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">The Profit Deal 💰</span>
-        
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <div id="plan-std" onclick="selectPlan('standard')" class="plan-card active-plan" style="flex: 1; border: 2px solid var(--emerald); padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; background: #f4fcf9;">
-                <span style="font-size: 0.75rem; font-weight: 900; display: block;">Standard Plan</span>
-                <span style="font-size: 0.6rem; color: #e63946;">10% Platform Fee</span>
+            <div style="background: #fafafa; padding: 20px; border-radius: 10px; border-left: 5px solid var(--emerald);">
+                <p id="deal-vendor-pay" style="font-weight: 900;">Your Profit: ₦0</p>
+                <p id="deal-mochearn" style="font-size: 0.8rem; color: #e63946;">Mochearn Fee: 10%</p>
             </div>
-            <div id="plan-pro" onclick="selectPlan('empire')" class="plan-card" style="flex: 1; border: 2px solid #eee; padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; background: #fff;">
-                <span style="font-size: 0.75rem; font-weight: 900; display: block;">Empire Pass ⚔️</span>
-                <span style="font-size: 0.6rem; color: var(--emerald);">0% Fee (₦35k/yr)</span>
+            <div id="payment-gate" style="margin-top:20px;">
+                <button type="button" id="pay-btn" class="launch-btn" onclick="simulatePayment()" style="width: 100%; background: #333; color: #fff; height: 60px; border-radius: 8px; display: none; font-weight:900; border:none;">PAY & ACTIVATE 💳</button>
+                <button type="button" id="final-deploy-btn" class="launch-btn" onclick="startExecution()" style="width: 100%; background: var(--emerald); color: #fff; height: 60px; border-radius: 8px; font-weight:900; border:none;">SUBMIT FOR REVIEW 🚀</button>
             </div>
         </div>
 
-        <div style="background: #fafafa; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid var(--emerald);">
-            <p id="deal-vendor-pay" style="font-weight: 900; color: #333; font-size: 1.1rem; margin-bottom: 5px;">Your Profit: ₦0</p>
-            <p id="deal-cat-pay" style="font-size: 0.8rem; color: #666; margin-bottom: 3px;">Catalyst Cut: ₦0</p>
-            <p id="deal-mochearn" style="font-size: 0.8rem; color: #e63946; font-weight: 700;">Mochearn Fee: 10%</p>
+        <div id="success-screen" style="display: none; text-align: center; padding: 40px 10px;">
+            <h2>Submission Successful! 🛡️</h2>
+            <button type="button" onclick="location.href='inventory.html'" style="width: 100%; background: #333; color: #fff; padding: 20px; border-radius: 8px; margin-top:20px; border:none; font-weight:900;">GO TO INVENTORY 📋</button>
         </div>
-
-        <div id="payment-gate">
-            <button type="button" id="pay-btn" class="launch-btn" onclick="simulatePayment()" style="width: 100%; background: #333; color: #fff; height: 60px; border-radius: 8px; font-weight: 900; border: none; display: none;">PAY & ACTIVATE EMPIRE PASS 💳</button>
-            
-            <button type="button" id="final-deploy-btn" class="launch-btn" onclick="startExecution()" style="width: 100%; background: var(--emerald); color: #fff; height: 60px; border-radius: 8px; font-weight: 900; border: none; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <span id="btn-text">SUBMIT FOR REVIEW 🚀</span>
-                <div id="btn-spinner" class="spinner-circle" style="display: none;"></div>
-            </button>
-        </div>
-        
-        <p onclick="slideToAudit()" style="text-align: center; margin-top: 15px; font-size: 0.75rem; color: #888; font-weight: 700; cursor: pointer;">← Go back to Audit</p>
-    </div>
-
-    <div id="success-screen" style="display: none; text-align: center; padding: 40px 10px;">
-        <div style="font-size: 4rem; margin-bottom: 20px;">🛡️</div>
-        <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--emerald); margin-bottom: 10px;">Submission Successful!</h2>
-        <p style="font-size: 0.9rem; color: #555; line-height: 1.5;">Your product is now in the <b>Mochearn Review Chamber</b>. Reviews take 12-24 hours. Check your inventory for updates.</p>
-        <button type="button" onclick="location.href='inventory.html'" style="width: 100%; background: #333; color: #fff; padding: 20px; border-radius: 8px; font-weight: 900; border: none; margin-top: 30px; cursor: pointer;">GO TO INVENTORY 📋</button>
     </div>
 </div>
 
-<style>
-    /* CSS for transitions and spinner */
-    .review-slide { position: absolute; width: 100%; transition: 0.5s ease-in-out; }
-    .next-slide { transform: translateX(100%); opacity: 0; }
-    .active-slide { transform: translateX(0); opacity: 1; }
-    .prev-slide { transform: translateX(-100%); opacity: 0; }
-    
-    .spinner-circle {
-        width: 20px; height: 20px;
-        border: 3px solid rgba(255,255,255,0.3);
-        border-top: 3px solid #fff;
-        border-radius: 50%;
-        animation: spin-round 0.8s linear infinite;
-    }
-    @keyframes spin-round { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-                </style>
 <script>
     let currentStep = 1;
+    let selectedPlan = 'standard';
+    let hasPaidEmpire = false;
+
     function validateStep(now, next) {
         let inputs = document.querySelectorAll('#part' + now + ' input');
         let filled = false;
@@ -401,27 +282,101 @@ function initStep3() {
         if (!filled) { document.getElementById('warningBar').classList.add('show'); } 
         else { goTo(next); }
     }
+
     function forceSkip() { document.getElementById('warningBar').classList.remove('show'); goTo(currentStep + 1); }
+
     function goTo(s) {
-        if (step === 3) { initStep3(); }
+        if (s === 3) initStep3();
         currentStep = s;
         document.getElementById('warningBar').classList.remove('show');
         document.querySelectorAll('.form-part').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.step').forEach(st => st.classList.remove('active'));
-        setTimeout(() => {
-            document.getElementById('part' + s).classList.add('active');
-            document.getElementById('s' + s).classList.add('active');
-        }, 50);
+        
+        document.getElementById('part' + s).classList.add('active');
+        document.getElementById('s' + s).classList.add('active');
+        window.scrollTo(0, 0);
     }
+
+    // STEP 3 LOGIC
+    function initStep3() { switchHosting(); }
+    function switchHosting() {
+        const type = document.getElementById('hostType').value;
+        const sections = ['section-native', 'section-ext_site', 'section-embed'];
+        sections.forEach(id => document.getElementById(id).style.display = 'none');
+        document.getElementById('section-' + type).style.display = 'block';
+    }
+
+    // STEP 4 LOGIC
+    function slideToDeal() {
+        document.getElementById('audit-stage').style.display = 'none';
+        document.getElementById('deal-stage').style.display = 'block';
+    }
+
+    function slideToAudit() {
+        document.getElementById('deal-stage').style.display = 'none';
+        document.getElementById('audit-stage').style.display = 'block';
+    }
+
+    function selectPlan(plan) {
+        selectedPlan = plan;
+        document.getElementById('plan-std').style.borderColor = (plan === 'standard') ? 'var(--emerald)' : '#eee';
+        document.getElementById('plan-pro').style.borderColor = (plan === 'empire') ? 'var(--emerald)' : '#eee';
+        
+        const payBtn = document.getElementById('pay-btn');
+        const deployBtn = document.getElementById('final-deploy-btn');
+
+        if(plan === 'empire' && !hasPaidEmpire) {
+            payBtn.style.display = 'block';
+            deployBtn.style.display = 'none';
+        } else {
+            payBtn.style.display = 'none';
+            deployBtn.style.display = 'block';
+        }
+        updateReview();
+    }
+
+    function simulatePayment() {
+        document.getElementById('pay-btn').innerText = "Processing Payment...";
+        setTimeout(() => {
+            hasPaidEmpire = true;
+            alert("Payment Successful!");
+            selectPlan('empire');
+        }, 2000);
+    }
+
+    function updateReview() {
+        const name = document.getElementById('pName').value || "Unnamed Product";
+        const price = Number(document.getElementById('pPrice').value) || 0;
+        const comm = Number(document.getElementById('pComm').value) || 0;
+        const host = document.getElementById('hostType').value;
+        
+        let link = "Not provided";
+        if(host === 'native') link = document.getElementById('nativeLink').value;
+        if(host === 'ext_site') link = document.getElementById('extLink').value;
+        if(host === 'embed') link = document.getElementById('embedLink').value;
+
+        document.getElementById('audit-name').innerText = name;
+        document.getElementById('audit-price').innerText = "Price: ₦" + price.toLocaleString() + " | Commission: " + comm + "%";
+        document.getElementById('audit-host').innerText = "Mode: " + host.toUpperCase();
+        document.getElementById('audit-link').innerText = "Link: " + (link || "Not provided");
+
+        const mFee = (selectedPlan === 'standard') ? 0.10 : 0.00;
+        const vendorProfit = price - (price * (comm/100)) - (price * mFee);
+        document.getElementById('deal-vendor-pay').innerText = "Your Profit: ₦" + vendorProfit.toLocaleString();
+        document.getElementById('deal-mochearn').innerText = "Mochearn Fee: " + (mFee * 100) + "%";
+    }
+
+    function startExecution() {
+        document.getElementById('deal-stage').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+    }
+
     function toggleOptions() { 
         let list = document.getElementById('opts');
-        let btn = document.getElementById('dropBtn');
         list.style.display = (list.style.display === 'block') ? 'none' : 'block';
-        btn.classList.toggle('open');
     }
+    
     function selectGate(el, type) {
-        document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
-        el.classList.add('selected');
         document.querySelectorAll('.sub-form').forEach(f => f.style.display = 'none');
         document.getElementById('f-' + type).style.display = 'block';
         toggleOptions();
