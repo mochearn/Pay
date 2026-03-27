@@ -410,12 +410,20 @@ function goTo(step) {
         }
     }
 
-    // 🛡️ STEP B: If they filled it or clicked Skip, proceed
-    // Hide everything first
+// 🛡️ STEP B: If they filled it or clicked Skip, proceed
+    // 1. Hide every single part using the new class name
     document.querySelectorAll('.setup-stage').forEach(s => {
         s.style.display = 'none';
         s.classList.remove('active-slide');
     });
+
+    // 2. Show ONLY the next part using the 'part' ID
+    const target = document.getElementById('part' + step);
+    if (target) {
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('active-slide'), 10);
+        window.scrollTo(0, 0);
+    }
 
     // Show the target
     const target = document.getElementById('part' + step);
