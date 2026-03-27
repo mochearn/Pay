@@ -284,31 +284,40 @@
             </div>
 <div id="part4" class="form-part" style="overflow: hidden; position: relative; min-height: 500px;">
     
-    <div id="audit-stage" class="review-slide active-slide">
-        <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">Audit Chamber 🔍</span>
+ <div id="audit-stage" class="review-slide active-slide">
+    <h2 style="text-align: center; font-weight: 900; margin-bottom: 25px; color: var(--emerald);">Final Review 📜</h2>
+    
+    <div style="background: #fff; border-top: 4px solid var(--emerald); padding: 20px; border-radius: 5px;">
+        <div style="margin-bottom: 20px;">
+            <label style="color: #999; font-size: 0.65rem; text-transform: uppercase;">Product Identity</label>
+            <p style="font-size: 1rem; font-weight: 800; color: #222;" id="audit-name">---</p>
+            <p style="font-size: 0.85rem; color: #666;" id="audit-cat">Category: ---</p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="color: #999; font-size: 0.65rem; text-transform: uppercase;">Financials</label>
+            <p style="font-size: 0.9rem; font-weight: 700; color: #333;" id="audit-price">Price: ₦0</p>
+            <p style="font-size: 0.85rem; color: var(--emerald); font-weight: 700;" id="audit-comm">Commission: 0%</p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="color: #999; font-size: 0.65rem; text-transform: uppercase;">Gateway & Support</label>
+            <p style="font-size: 0.85rem; color: #444;" id="audit-support">WhatsApp: ---</p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="color: #999; font-size: 0.65rem; text-transform: uppercase;">Academy Configuration</label>
+            <p style="font-size: 0.85rem; font-weight: 700; color: #222;" id="audit-host">Mode: ---</p>
+            <p style="font-size: 0.75rem; color: #888; word-break: break-all;" id="audit-link">Link: Not provided</p>
+        </div>
         
-        <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">PRODUCT IDENTITY</label>
-                <span onclick="goTo(1)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
-            </div>
-            <p id="audit-name" style="font-size: 0.9rem; font-weight: 800; color: #222; margin-top: 5px;">---</p>
-            <p id="audit-price" style="font-size: 0.75rem; color: #666;">Price: ₦0 | Commission: 0%</p>
-        </div>
-
-        <div class="audit-card" style="border: 2px solid #f2f2f2; padding: 15px; border-radius: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label style="font-size: 0.65rem; font-weight: 900; color: var(--emerald);">ACADEMY CONFIG</label>
-                <span onclick="goTo(3)" style="color: var(--emerald); font-size: 0.65rem; font-weight: 900; cursor: pointer;">[ ✏️ EDIT ]</span>
-            </div>
-            <p id="audit-host" style="font-size: 0.8rem; font-weight: 700; color: #222; margin-top: 5px;">Mode: ---</p>
-            <p id="audit-link" style="font-size: 0.7rem; color: #888; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Link: Not provided</p>
-        </div>
-
-        <button type="button" class="launch-btn" onclick="slideToDeal()" style="width: 100%; margin-top: 30px; background: #333; color: #fff; height: 55px; border-radius: 8px; font-weight: 900; border: none; cursor: pointer;">
-            PROCEED TO PROFIT DEAL ➡️
-        </button>
+        <button onclick="goTo(1)" style="width: 100%; padding: 12px; background: #f2f2f2; border: none; border-radius: 5px; font-weight: 800; color: #666; cursor: pointer; margin-top: 10px;">✏️ Edit Details</button>
     </div>
+
+    <button type="button" class="launch-btn" onclick="slideToDeal()" style="width: 100%; margin-top: 25px; background: var(--emerald); color: #fff; height: 55px; border-radius: 8px; font-weight: 900; border: none; cursor: pointer;">
+        PROCEED TO PROFIT DEAL ➡️
+    </button>
+                </div>
 
     <div id="deal-stage" class="review-slide next-slide" style="display:none;">
         <span class="review-header" style="text-align: center; display: block; font-weight: 900; margin-bottom: 20px;">The Profit Deal 💰</span>
@@ -436,24 +445,30 @@
         }
     }
 
-    function updateReview() {
-        const name = document.getElementById('pName')?.value || "---";
-        const price = document.getElementById('pPrice')?.value || "0";
-        const comm = document.getElementById('pComm')?.value || "0";
-        const host = document.getElementById('hostType')?.value || "native";
+ function updateReview() {
+    // 🛡️ Grab all details from Part 1, 2, and 3
+    const name = document.getElementById('pName')?.value || "Unnamed Product";
+    const cat = document.getElementById('pCat')?.value || "Not Selected";
+    const price = document.getElementById('pPrice')?.value || "0";
+    const comm = document.getElementById('pComm')?.value || "0";
+    const whatsapp = document.querySelector('#part2 input[type="text"]')?.value || "Not Provided";
+    const host = document.getElementById('hostType')?.value || "native";
 
-        let activeLink = "Not provided";
-        if (host === "native") activeLink = document.getElementById('nativeLink')?.value;
-        if (host === "ext_site") activeLink = document.querySelector('#section-ext_site input')?.value;
-        if (host === "embed") activeLink = document.querySelector('#section-embed input')?.value;
+    // 🛡️ Find the Link
+    let activeLink = "Not provided";
+    if (host === "native") activeLink = document.getElementById('nativeLink')?.value;
+    if (host === "ext_site") activeLink = document.querySelector('#section-ext_site input')?.value;
+    if (host === "embed") activeLink = document.querySelector('#section-embed input')?.value;
 
-        if (document.getElementById('audit-name')) document.getElementById('audit-name').innerText = name;
-        if (document.getElementById('audit-price')) {
-            document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString() + " | Commission: " + comm + "%";
-        }
-        if (document.getElementById('audit-host')) document.getElementById('audit-host').innerText = "Mode: " + host.toUpperCase();
-        if (document.getElementById('audit-link')) document.getElementById('audit-link').innerText = "Link: " + (activeLink || "Not provided");
-    }
+    // 🛡️ Inject into the new List IDs
+    if (document.getElementById('audit-name')) document.getElementById('audit-name').innerText = name;
+    if (document.getElementById('audit-cat')) document.getElementById('audit-cat').innerText = "Category: " + cat;
+    if (document.getElementById('audit-price')) document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString();
+    if (document.getElementById('audit-comm')) document.getElementById('audit-comm').innerText = "Catalyst Commission: " + comm + "%";
+    if (document.getElementById('audit-support')) document.getElementById('audit-support').innerText = "WhatsApp: " + whatsapp;
+    if (document.getElementById('audit-host')) document.getElementById('audit-host').innerText = "Mode: " + host.toUpperCase();
+    if (document.getElementById('audit-link')) document.getElementById('audit-link').innerText = "Link: " + (activeLink || "Not provided");
+}
 
     function slideToDeal() {
         document.getElementById('audit-stage').style.display = 'none';
