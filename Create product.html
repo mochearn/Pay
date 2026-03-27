@@ -167,7 +167,7 @@
         </div>
 
         <button type="button" class="btn-prev" onclick="goTo(1)">Previous</button>
-        <button type="button" class="btn-next" onclick="initStep3(); goTo(3)">Next Step</button>
+        <button type="button" class="btn-next" onclick="validateStep(2, 3)">Next Step</button>
         <div style="clear: both;"></div>
     </div>
 <div id="part3" class="form-part">
@@ -403,6 +403,7 @@ function initStep3() {
     }
     function forceSkip() { document.getElementById('warningBar').classList.remove('show'); goTo(currentStep + 1); }
     function goTo(s) {
+        if (step === 3) { initStep3(); }
         currentStep = s;
         document.getElementById('warningBar').classList.remove('show');
         document.querySelectorAll('.form-part').forEach(p => p.classList.remove('active'));
