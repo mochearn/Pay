@@ -444,6 +444,65 @@ function updateWizardHeader(step) {
         }
     });
 }
+        // 🛡️ THE CALM TOGGLE (Part 2)
+function toggleOptions() { 
+    let list = document.getElementById('opts');
+    let btn = document.getElementById('dropBtn');
+    
+    // Check if it's already open
+    const isOpen = list.style.display === 'block';
+
+    if (!isOpen) {
+        // 🐢 Calm Opening
+        list.style.display = 'block';
+        list.style.opacity = '0';
+        list.style.transform = 'translateY(-10px)';
+        list.style.transition = '0.3s ease-out';
+        
+        setTimeout(() => {
+            list.style.opacity = '1';
+            list.style.transform = 'translateY(0)';
+            btn.classList.add('open');
+        }, 10);
+    } else {
+        // 🐢 Calm Closing
+        list.style.opacity = '0';
+        list.style.transform = 'translateY(-10px)';
+        
+        setTimeout(() => {
+            list.style.display = 'none';
+            btn.classList.remove('open');
+        }, 300);
+    }
+}
+
+// 🛡️ THE SELECTION ENGINE
+function selectGate(el, type) {
+    // 1. Highlight the chosen one
+    document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+
+    // 2. Hide all sub-forms first
+    document.querySelectorAll('#part2 .sub-form').forEach(f => {
+        f.style.display = 'none';
+        f.style.opacity = '0';
+    });
+
+    // 3. Calmly reveal the chosen sub-form
+    const targetForm = document.getElementById('f-' + type);
+    if (targetForm) {
+        targetForm.style.display = 'block';
+        setTimeout(() => {
+            targetForm.style.opacity = '1';
+            targetForm.style.transition = '0.5s';
+        }, 50);
+    }
+
+    // 4. Close the dropdown after selection
+    setTimeout(() => {
+        toggleOptions();
+    }, 400); // Wait for the user to see their selection first 🛡️✨
+        }
     </script>
 </body>
     </html>
