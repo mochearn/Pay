@@ -74,7 +74,10 @@
     </style>
 </head>
 <body>
-
+<div id="mochearnNotify" style="position: fixed; top: -100px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); color: white; padding: 12px 20px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <p style="font-size: 0.8rem; font-weight: 600;">Please fill at least one box 🛡️</p>
+    <span onclick="forceGoTo(2)" style="color: var(--emerald); font-weight: 900; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">SKIP →</span>
+    </div>
 <div id="warningBar">
     <p style="font-size: 0.8rem;">Fill a box to continue 🛡️</p>
     <button class="skip-btn" onclick="forceSkip()">SKIP</button>
@@ -119,7 +122,7 @@
             <span class="hint">Attractive rates pull more army</span>
             <input type="number" id="pComm" placeholder="50">
         </div>
-      <button type="button" onclick="goTo(2)" style="width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer;">
+     <button type="button" onclick="goTo(2)" style="width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase;">
     NEXT STEP →
     </button>
         <div style="clear: both;"></div>
@@ -370,157 +373,70 @@
         <p id="skip-btn" style="color: #888; font-size: 0.75rem; text-decoration: underline; cursor: pointer; font-weight: 700;">SKIP FOR NOW →</p>
     </div>
     </div>
-<script>
-let currentStep = 1;
-
-// 1. 🛡️ POP-UP CONTROL (Added this so showMochearnPopup(2) works!)
-function showMochearnPopup(nextStep) {
-    const popup = document.getElementById('validation-popup');
-    if (popup) {
-        popup.style.display = 'flex';
-        // Connect the skip text to the jump function
-        document.getElementById('skip-btn').onclick = function() {
-            forceGoTo(nextStep);
-        };
-    }
-}
-
-function closeMochearnPopup() {
-    const popup = document.getElementById('validation-popup');
-    if (popup) popup.style.display = 'none';
-}
-
-function forceGoTo(step) {
-    // Direct jump without checking inputs
-    document.querySelectorAll('.setup-stage').forEach(s => s.style.display = 'none');
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        updateStepTabs(step);
-    }
-    closeMochearnPopup();
-}
-
-// 2. 🛡️ NAVIGATION ENGINE (Your original logic)
-function goTo(step) {
-    currentStep = step;
-    
-    // Validation Check for Step 1
+    <script>
+        function goTo(step) {
+    // 🛡️ 1. CHECK IF MOVING FROM PART 1 TO 2
     if (step === 2) {
-        const nameInput = document.getElementById('pName');
-        const priceInput = document.getElementById('pPrice');
+        const name = document.getElementById('pName').value.trim();
+        const price = document.getElementById('pPrice').value.trim();
+        const comm = document.getElementById('pComm').value.trim();
 
-        if (nameInput && priceInput) {
-            if (nameInput.value.trim() === "" || priceInput.value.trim() === "") {
-                showMochearnPopup(2); 
-                return; 
-            }
+        // If EVERYTHING is empty, slide the notification down
+        if (!name && !price && !comm) {
+            const bar = document.getElementById('mochearnNotify');
+            bar.style.top = "20px"; // Slides it down from the top
+            
+            // Auto-hide it after 4 seconds if they don't click anything
+            setTimeout(() => { bar.style.top = "-100px"; }, 4000);
+            return; // Stop here
         }
     }
 
-    // The "Clean Switch"
-    document.querySelectorAll('.setup-stage').forEach(stage => {
-        stage.style.display = 'none';
-        stage.classList.remove('active-slide');
+    // 🛡️ 2. THE SMOOTH ANIMATION SWITCH
+    // Hide all parts
+    document.querySelectorAll('.setup-stage').forEach(part => {
+        part.style.display = 'none';
+        part.classList.remove('active-slide');
     });
 
+    // Show the next part with the slide-in animation
     const target = document.getElementById('part' + step);
     if (target) {
         target.style.display = 'block';
+        // Small delay to trigger the CSS animation
         setTimeout(() => {
             target.classList.add('active-slide');
         }, 10);
-        updateStepTabs(step); // Added this for the top UI
+        
+        // Update the Wizard Header (1, 2, 3, 4)
+        updateWizardHeader(step);
         window.scrollTo(0, 0);
     }
     
-    if (step === 4) updateReview();
+    // Hide the notification bar if it was showing
+    document.getElementById('mochearnNotify').style.top = "-100px";
 }
 
-function updateStepTabs(step) {
+// 🛡️ 3. FORCE JUMP (FOR THE SKIP TEXT)
+function forceGoTo(step) {
+    document.getElementById('mochearnNotify').style.top = "-100px";
+    // We bypass the check and just go
+    document.querySelectorAll('.setup-stage').forEach(p => p.style.display = 'none');
+    document.getElementById('part' + step).style.display = 'block';
+    document.getElementById('part' + step).classList.add('active-slide');
+    updateWizardHeader(step);
+}
+
+// 🛡️ 4. WIZARD HEADER UPDATER
+function updateWizardHeader(step) {
     document.querySelectorAll('.step').forEach((s, i) => {
-        s.classList.toggle('active', (i + 1) === step);
+        if ((i + 1) === step) {
+            s.classList.add('active');
+        } else {
+            s.classList.remove('active');
+        }
     });
 }
-
-// 3. 🛡️ YOUR SAVED GATEWAY FUNCTIONS
-function toggleOptions() {
-    let list = document.getElementById('opts');
-    let btn = document.getElementById('dropBtn');
-    list.style.display = (list.style.display === 'block') ? 'none' : 'block';
-    btn.classList.toggle('open');
-}
-
-function selectGate(el, type) {
-    document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
-    el.classList.add('selected');
-    document.querySelectorAll('#part2 .sub-form').forEach(f => f.style.display = 'none');
-    document.getElementById('f-' + type).style.display = 'block';
-    toggleOptions();
-}
-
-function switchHosting() {
-    const type = document.getElementById('hostType').value;
-    document.getElementById('section-native').style.display = 'none';
-    document.getElementById('section-ext_site').style.display = 'none';
-    document.getElementById('section-embed').style.display = 'none';
-
-    const target = document.getElementById('section-' + type);
-    if (target) { target.style.display = 'block'; }
-}
-
-// 4. 🛡️ YOUR SAVED REVIEW & MATH ENGINE
-function updateReview() {
-    const name = document.getElementById('pName')?.value || "Unnamed Product";
-    const cat = document.getElementById('pCat')?.value || "Not Selected";
-    const price = document.getElementById('pPrice')?.value || "0";
-    const comm = document.getElementById('pComm')?.value || "0";
-    const whatsapp = document.querySelector('#part2 input[placeholder*="081"]')?.value || "Not Provided";
-    const host = document.getElementById('hostType')?.value || "native";
-
-    if (document.getElementById('audit-name')) document.getElementById('audit-name').innerText = name;
-    if (document.getElementById('audit-price')) document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString();
-    if (document.getElementById('audit-comm')) document.getElementById('audit-comm').innerText = "Commission: " + comm + "%";
-}
-
-function selectPlan(plan) {
-    const price = Number(document.getElementById('pPrice').value) || 0;
-    const commPct = Number(document.getElementById('pComm').value) || 0;
-    const catCut = (price * commPct) / 100;
-    const mochearnFee = (plan === 'standard') ? (price * 0.10) : 0;
-    const yourProfit = price - catCut - mochearnFee;
-
-    document.getElementById('deal-vendor-pay').innerText = "Your Profit: ₦" + yourProfit.toLocaleString();
-    document.getElementById('deal-cat-pay').innerText = "Catalyst Cut: ₦" + catCut.toLocaleString();
-    const feeLabel = document.getElementById('deal-mochearn');
-    if (plan === 'standard') {
-        feeLabel.innerText = "Mochearn Fee: 10% (₦" + mochearnFee.toLocaleString() + ")";
-        document.getElementById('pay-btn').style.display = 'none';
-        document.getElementById('final-deploy-btn').style.display = 'flex';
-    } else {
-        feeLabel.innerText = "Mochearn Fee: 0% (Empire Pass Active ⚔️)";
-        document.getElementById('pay-btn').style.display = 'block';
-        document.getElementById('final-deploy-btn').style.display = 'none';
-    }
-}
-
-function slideToDeal() {
-    document.getElementById('audit-stage').style.display = 'none';
-    document.getElementById('deal-stage').style.display = 'block';
-}
-
-function slideToAudit() {
-    document.getElementById('deal-stage').style.display = 'none';
-    document.getElementById('audit-stage').style.display = 'block';
-}
-
-function startExecution() {
-    document.getElementById('btn-text').innerText = "REVIEWING...";
-    document.getElementById('btn-spinner').style.display = 'block';
-    setTimeout(() => {
-        alert("🚀 Product Submitted Successfully to the Mochearn Chamber!");
-    }, 2000);
-}
-</script>
+    </script>
 </body>
     </html>
