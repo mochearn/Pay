@@ -119,9 +119,9 @@
             <span class="hint">Attractive rates pull more army</span>
             <input type="number" id="pComm" placeholder="50">
         </div>
-      <button type="button" onclick="testSystem(2)" style="width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer;">
+      <button type="button" onclick="goTo(2)" style="width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer;">
     NEXT STEP →
-                </button>
+    </button>
         <div style="clear: both;"></div>
     </div>
 
@@ -371,29 +371,69 @@
     </div>
     </div>
 <script>
-// 🛡️ EMERGENCY TEST FUNCTION
-function testSystem(step) {
-    console.log("Button Clicked! Target Step: " + step);
-    alert("System Triggered! Moving to Part " + step); // 🚨 This MUST pop up!
+// 🛡️ THE MASTER ENGINE
+function goTo(step) {
+    // 1. Validation for Part 1 (Only if moving to Step 2)
+    if (step === 2) {
+        const name = document.getElementById('pName').value.trim();
+        const price = document.getElementById('pPrice').value.trim();
+        
+        if (!name || !price) {
+            // 🚨 Instead of an alert, we show your Mochearn Popup
+            showMochearnPopup(2); 
+            return; // Stop here until they fill or skip
+        }
+    }
 
-    // 1. Hide everything with the class 'setup-stage'
-    const allStages = document.querySelectorAll('.setup-stage');
-    allStages.forEach(s => {
-        s.style.display = 'none';
-        s.classList.remove('active-slide');
+    // 2. Hide all parts
+    document.querySelectorAll('.setup-stage, .form-part').forEach(part => {
+        part.style.display = 'none';
+        part.classList.remove('active-slide');
     });
 
-    // 2. Show the next part
-    const nextPart = document.getElementById('part' + step);
-    if (nextPart) {
-        nextPart.style.display = 'block';
-        nextPart.classList.add('active-slide');
-    } else {
-        alert("Error: I can't find id='part" + step + "' in your HTML!");
+    // 3. Show the next part
+    const target = document.getElementById('part' + step);
+    if (target) {
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('active-slide'), 10);
+        
+        // Update the top navigation dots/tabs
+        updateStepTabs(step);
+        window.scrollTo(0, 0);
     }
 }
 
-// 🛡️ RE-ADD YOUR OTHER FUNCTIONS BELOW HERE
+// 🛡️ POP-UP CONTROLS
+function showMochearnPopup(nextStep) {
+    const popup = document.getElementById('validation-popup');
+    if (popup) {
+        popup.style.display = 'flex';
+        // Set the Skip button to jump to the next step
+        document.getElementById('skip-btn').onclick = function() {
+            forceGoTo(nextStep);
+        };
+    }
+}
+
+function forceGoTo(step) {
+    // Hide everything and jump
+    document.querySelectorAll('.setup-stage, .form-part').forEach(p => p.style.display = 'none');
+    document.getElementById('part' + step).style.display = 'block';
+    closeMochearnPopup();
+}
+
+function closeMochearnPopup() {
+    const popup = document.getElementById('validation-popup');
+    if (popup) popup.style.display = 'none';
+}
+
+function updateStepTabs(step) {
+    document.querySelectorAll('.step').forEach((s, i) => {
+        s.classList.toggle('active', (i + 1) === step);
+    });
+}
+
+// 🛡️ YOUR OTHER FUNCTIONS (Gateway & Catalyst Tools)
 function toggleOptions() { 
     let list = document.getElementById('opts');
     let btn = document.getElementById('dropBtn');
@@ -408,6 +448,6 @@ function selectGate(el, type) {
     document.getElementById('f-' + type).style.display = 'block';
     toggleOptions();
 }
-</script>
+    </script>
 </body>
     </html>
