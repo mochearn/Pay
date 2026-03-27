@@ -480,6 +480,46 @@
         document.getElementById('deal-stage').style.display = 'none';
         document.getElementById('audit-stage').style.display = 'block';
     }
+    function selectPlan(plan) {
+    // 1. UI: Highlight the selected plan
+    document.querySelectorAll('.plan-card').forEach(c => {
+        c.style.borderColor = "#eee";
+        c.style.background = "#fff";
+    });
+    
+    const activeId = (plan === 'standard') ? 'plan-std' : 'plan-pro';
+    const activeCard = document.getElementById(activeId);
+    if (activeCard) {
+        activeCard.style.borderColor = "var(--emerald)";
+        activeCard.style.background = "#f4fcf9";
+    }
+
+    // 2. Logic: Grab numbers from Step 1
+    const price = Number(document.getElementById('pPrice').value) || 0;
+    const commPct = Number(document.getElementById('pComm').value) || 0;
+    
+    // 3. Math: Calculate the split
+    const catCut = (price * commPct) / 100;
+    const mochearnFee = (plan === 'standard') ? (price * 0.10) : 0;
+    const yourProfit = price - catCut - mochearnFee;
+
+    // 4. Update the Display Labels
+    document.getElementById('deal-vendor-pay').innerText = "Your Profit: ₦" + yourProfit.toLocaleString();
+    document.getElementById('deal-cat-pay').innerText = "Catalyst Cut: ₦" + catCut.toLocaleString();
+    
+    const feeDisplay = document.getElementById('deal-mochearn');
+    if (plan === 'standard') {
+        feeDisplay.innerText = "Mochearn Fee: 10% (₦" + mochearnFee.toLocaleString() + ")";
+        feeDisplay.style.color = "#e63946";
+    } else {
+        feeDisplay.innerText = "Mochearn Fee: 0% (Empire Pass Active ⚔️)";
+        feeDisplay.style.color = "var(--emerald)";
+    }
+    
+    // 5. Toggle the Buttons
+    document.getElementById('pay-btn').style.display = (plan === 'empire') ? 'block' : 'none';
+    document.getElementById('final-deploy-btn').style.display = (plan === 'standard') ? 'flex' : 'none';
+    }
 </script>
 </body>
     </html>
