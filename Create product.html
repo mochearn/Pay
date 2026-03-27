@@ -397,23 +397,29 @@
         goTo(currentStep + 1); 
     }
 
- function goTo(step) {
-    // 🛡️ Hide all sections first
-    document.querySelectorAll('.setup-stage').forEach(stage => {
+function goTo(step) {
+    // 1. Find all sections with class 'setup-stage'
+    const allStages = document.querySelectorAll('.setup-stage');
+    
+    // 2. Hide every single one
+    allStages.forEach(stage => {
         stage.style.display = 'none';
         stage.classList.remove('active-slide');
     });
 
-    // 🛡️ Show the specific step
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        setTimeout(() => target.classList.add('active-slide'), 10);
-    }
+    // 3. Show ONLY the one we want
+    const targetId = 'part' + step;
+    const targetStage = document.getElementById(targetId);
     
-    // 🛡️ Special: If going to Audit (Step 4), update the text
-    if (step === 4) {
-        updateReview();
+    if (targetStage) {
+        targetStage.style.display = 'block';
+        // Add a tiny delay for a smooth fade-in
+        setTimeout(() => {
+            targetStage.classList.add('active-slide');
+        }, 10);
+        window.scrollTo(0, 0); 
+    } else {
+        console.error("Mochearn Error: Could not find " + targetId);
     }
     }
     function toggleOptions() { 
