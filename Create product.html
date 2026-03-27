@@ -439,6 +439,40 @@ function initStep3() {
         document.getElementById('f-' + type).style.display = 'block';
         toggleOptions();
     }
+    // ... your goTo and validateStep functions are up here ...
+
+    function updateReview() {
+        // 1. Grab data from the earlier steps
+        const name = document.getElementById('pName')?.value || "---";
+        const price = document.getElementById('pPrice')?.value || "0";
+        const comm = document.getElementById('pComm')?.value || "0";
+        const host = document.getElementById('hostType')?.value || "native";
+
+        // 2. Find the active Link
+        let activeLink = "Not provided";
+        if (host === "native") activeLink = document.getElementById('nativeLink')?.value;
+        if (host === "ext_site") activeLink = document.getElementById('extLink')?.value;
+        if (host === "embed") activeLink = document.getElementById('embedLink')?.value;
+
+        // 3. Inject it into your Part 4 IDs
+        if (document.getElementById('audit-name')) document.getElementById('audit-name').innerText = name;
+        if (document.getElementById('audit-price')) {
+            document.getElementById('audit-price').innerText = "Price: ₦" + Number(price).toLocaleString() + " | Commission: " + comm + "%";
+        }
+        if (document.getElementById('audit-host')) document.getElementById('audit-host').innerText = "Mode: " + host.toUpperCase();
+        if (document.getElementById('audit-link')) document.getElementById('audit-link').innerText = "Link: " + (activeLink || "Not provided");
+    }
+
+    // 🛡️ Add these helper functions for Part 4 buttons
+    function slideToDeal() {
+        document.getElementById('audit-stage').style.display = 'none';
+        document.getElementById('deal-stage').style.display = 'block';
+    }
+
+    function slideToAudit() {
+        document.getElementById('deal-stage').style.display = 'none';
+        document.getElementById('audit-stage').style.display = 'block';
+    }
 </script>
 </body>
     </html>
