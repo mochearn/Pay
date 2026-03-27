@@ -119,11 +119,13 @@
             <span class="hint">Attractive rates pull more army</span>
             <input type="number" id="pComm" placeholder="50">
         </div>
-        <button type="button" class="btn-next" onclick="validateStep(1, 2)">Next Step</button>
+       <button type="button" onclick="goTo(2)" style="width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 8px; font-weight: 800; font-size: 0.9rem; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; text-transform: uppercase;">
+    NEXT STEP <span style="font-size: 1.2rem; line-height: 0;">→</span>
+    </button>
         <div style="clear: both;"></div>
     </div>
 
-    <div id="part2" class="form-part">
+<div id="part2" class="setup-stage">
         <div class="form-group">
             <label>Sales Gateway Protocol</label>
             <span class="hint">Choose how customers land on your offer</span>
