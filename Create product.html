@@ -122,7 +122,7 @@
             <span class="hint">Attractive rates pull more army</span>
             <input type="number" id="pComm" placeholder="50">
         </div>
-     <button type="button" onclick="goTo(2)" style="width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase;">
+  <button type="button" onclick="goTo(2)" style="width: 220px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 30px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s; box-shadow: 0 4px 15px rgba(14, 105, 84, 0.3);">
     NEXT STEP →
     </button>
         <div style="clear: both;"></div>
@@ -374,48 +374,55 @@
     </div>
     </div>
     <script>
-        function goTo(step) {
-    // 🛡️ 1. CHECK IF MOVING FROM PART 1 TO 2
+function goTo(step) {
+    // 🛡️ 1. CHECK VALIDATION
     if (step === 2) {
         const name = document.getElementById('pName').value.trim();
         const price = document.getElementById('pPrice').value.trim();
-        const comm = document.getElementById('pComm').value.trim();
-
-        // If EVERYTHING is empty, slide the notification down
-        if (!name && !price && !comm) {
+        if (!name && !price) {
             const bar = document.getElementById('mochearnNotify');
-            bar.style.top = "20px"; // Slides it down from the top
-            
-            // Auto-hide it after 4 seconds if they don't click anything
+            bar.style.top = "20px";
             setTimeout(() => { bar.style.top = "-100px"; }, 4000);
-            return; // Stop here
+            return;
         }
     }
 
-    // 🛡️ 2. THE SMOOTH ANIMATION SWITCH
-    // Hide all parts
-    document.querySelectorAll('.setup-stage').forEach(part => {
-        part.style.display = 'none';
-        part.classList.remove('active-slide');
-    });
-
-    // Show the next part with the slide-in animation
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        // Small delay to trigger the CSS animation
-        setTimeout(() => {
-            target.classList.add('active-slide');
-        }, 10);
-        
-        // Update the Wizard Header (1, 2, 3, 4)
-        updateWizardHeader(step);
-        window.scrollTo(0, 0);
-    }
+    // 🛡️ 2. THE "CALM DOWN" TRANSITION
+    const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
     
-    // Hide the notification bar if it was showing
-    document.getElementById('mochearnNotify').style.top = "-100px";
-}
+    // Fade out the current part slightly first
+    if (currentPart) {
+        currentPart.style.opacity = "0.5";
+        currentPart.style.transform = "translateX(-10px)";
+        currentPart.style.transition = "0.3s";
+    }
+
+    // ⏳ Wait 250ms (The "Human" Delay) before switching
+    setTimeout(() => {
+        // Hide all
+        document.querySelectorAll('.setup-stage').forEach(part => {
+            part.style.display = 'none';
+            part.classList.remove('active-slide');
+            part.style.opacity = "1"; // Reset opacity for next time
+            part.style.transform = "translateX(0)";
+        });
+
+        // Show Next
+        const target = document.getElementById('part' + step);
+        if (target) {
+            target.style.display = 'block';
+            // Trigger the CSS Slide Animation
+            setTimeout(() => {
+                target.classList.add('active-slide');
+            }, 50);
+            
+            updateWizardHeader(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        document.getElementById('mochearnNotify').style.top = "-100px";
+    }, 250); // This is the "calm" delay 🐢✨
+        }
 
 // 🛡️ 3. FORCE JUMP (FOR THE SKIP TEXT)
 function forceGoTo(step) {
