@@ -167,7 +167,7 @@
         </div>
 
         <button type="button" class="btn-prev" onclick="goTo(1)">Previous</button>
-        <button type="button" class="btn-next" onclick="validateStep(2, 3)">Next Step</button>
+    <button type="button" class="btn-next" onclick="validateStep(2, 3)">Next Step</button>
         <div style="clear: both;"></div>
     </div>
 <div id="part3" class="form-part">
@@ -392,16 +392,26 @@ function switchHosting() {
         if (!filled) { document.getElementById('warningBar').classList.add('show'); } 
         else { goTo(next); }
     }
-    function forceSkip() { document.getElementById('warningBar').classList.remove('show'); goTo(currentStep + 1); }
     function goTo(s) {
-        if (s === 3) { initStep3(); }
+        // 🛡️ Safety Guard: Only wake up Step 3 if the function exists
+        if (s === 3 && typeof initStep3 === "function") { 
+            initStep3(); 
+        }
+        
         currentStep = s;
         document.getElementById('warningBar').classList.remove('show');
+        
+        // Hide all parts and de-activate steps
         document.querySelectorAll('.form-part').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.step').forEach(st => st.classList.remove('active'));
+        
+        // Show the target part and step with a tiny delay for smoothness
         setTimeout(() => {
-            document.getElementById('part' + s).classList.add('active');
-            document.getElementById('s' + s).classList.add('active');
+            const targetPart = document.getElementById('part' + s);
+            const targetStep = document.getElementById('s' + s);
+            if (targetPart) targetPart.classList.add('active');
+            if (targetStep) targetStep.classList.add('active');
+            window.scrollTo(0, 0); // Jump to top of new part
         }, 50);
     }
     function toggleOptions() { 
