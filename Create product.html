@@ -407,27 +407,19 @@
  <p id="skip-btn" style="color: #888; font-size: 0.75rem; text-decoration: underline; cursor: pointer; font-weight: 700;">SKIP FOR NOW →</p>
     </div>
     </div>
-    <script>
-        function goTo(step) {
-    // 🛡️ SECURITY GATE 1: Part 1 -> Part 2
+<script>let notifyTimer;
+
+// 🛡️ THE MAIN NAVIGATION ENGINE
+function goTo(step) {
     if (step === 2) {
         const name = document.getElementById('pName').value.trim();
-        if (!name) { 
-            showMochearnNotify(2); // Slide down the pill for Step 2
-            return; 
-        }
+        if (!name) { showMochearnNotify(2); return; }
+    }
+    if (step === 3) {
+        const methodSelected = document.querySelector('.option-item.selected');
+        if (!methodSelected) { showMochearnNotify(3); return; }
     }
 
-   if (step === 3) {
-    // 🛡️ Make sure this class '.option-item.selected' exists in your Part 2
-    const methodSelected = document.querySelector('.option-item.selected');
-    if (!methodSelected) { 
-        showMochearnNotify(3); 
-        return; 
-    }
-}
-
-    // 🐢 THE "CALM" TRANSITION ENGINE
     const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
     if (currentPart) {
         currentPart.style.opacity = "0.5";
@@ -435,63 +427,26 @@
     }
 
     setTimeout(() => {
-        // Hide All
         document.querySelectorAll('.setup-stage').forEach(part => {
             part.style.display = 'none';
             part.classList.remove('active-slide');
             part.style.opacity = "1";
         });
 
-        // Show Next
         const target = document.getElementById('part' + step);
         if (target) {
             target.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(() => {
-                target.classList.add('active-slide');
-            }, 50);
+            setTimeout(() => { target.classList.add('active-slide'); }, 50);
             updateWizardHeader(step);
         }
         hideMochearnNotify();
-    }, 250); // The "Mochearn" Delay 🛡️✨
-}
-
-// 🛡️ THE DYNAMIC SKIP LOGIC
-function forceGoTo(step) {
-    hideMochearnNotify();
-    // Even the skip must be "Calm" 🐢
-    setTimeout(() => {
-        document.querySelectorAll('.setup-stage').forEach(p => p.style.display = 'none');
-        const target = document.getElementById('part' + step);
-        if (target) {
-            target.style.display = 'block';
-            target.classList.add('active-slide');
-            updateWizardHeader(step);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
     }, 250);
 }
 
-let notifyTimer;
-
-function showMochearnNotify(nextStep) {
-    const bar = document.getElementById('mochearnNotify');
-    const skipBtn = bar.querySelector('span');
-    bar.style.top = "20px";
-    skipBtn.onclick = function() { forceGoTo(nextStep); };
-    if (notifyTimer) clearTimeout(notifyTimer);
-    notifyTimer = setTimeout(() => { bar.style.top = "-100px"; }, 5000);
-}
-
-function hideMochearnNotify() {
-    document.getElementById('mochearnNotify').style.top = "-100px";
-    if (notifyTimer) clearTimeout(notifyTimer);
-}
-
+// 🛡️ THE DYNAMIC SKIP LOGIC (FIXED)
 function forceGoTo(step) {
     hideMochearnNotify();
-    
-    // 🛡️ THE CLEAN SWEEP: This stops the "Long Roll"
     document.querySelectorAll('.setup-stage').forEach(p => {
         p.style.display = 'none'; 
         p.classList.remove('active-slide');
@@ -508,86 +463,83 @@ function forceGoTo(step) {
     }, 250);
 }
 
+// 🛡️ THE NOTIFICATION SYSTEM
+function showMochearnNotify(nextStep) {
+    const bar = document.getElementById('mochearnNotify');
+    const skipBtn = bar.querySelector('span');
+    bar.style.top = "20px";
+    skipBtn.onclick = function() { forceGoTo(nextStep); };
+    if (notifyTimer) clearTimeout(notifyTimer);
+    notifyTimer = setTimeout(() => { bar.style.top = "-100px"; }, 5000);
+}
+
 function hideMochearnNotify() {
-    document.getElementById('mochearnNotify').style.top = "-100px";
-        }
+    const bar = document.getElementById('mochearnNotify');
+    if (bar) bar.style.top = "-100px";
+    if (notifyTimer) clearTimeout(notifyTimer);
+}
+
+// 🛡️ THE WIZARD HEADER SYNC
 function updateWizardHeader(step) {
-    // 🛡️ 1. Find all your spans
     const steps = document.querySelectorAll('.step');
-    
     steps.forEach((s, i) => {
-        // 🛡️ 2. If the index matches the current step, make it Emerald
         if ((i + 1) === step) {
             s.classList.add('active');
             s.style.color = "var(--emerald)";
             s.style.borderBottom = "2px solid var(--emerald)";
         } else {
-            // 🛡️ 3. Otherwise, keep it "Calm" and Gray
             s.classList.remove('active');
             s.style.color = "#ccc";
             s.style.borderBottom = "none";
         }
     });
 }
-        // 🛡️ THE CALM TOGGLE (Part 2)
+
+// 🛡️ THE SELECTION DROPDOWN (Part 2)
 function toggleOptions() { 
     let list = document.getElementById('opts');
     let btn = document.getElementById('dropBtn');
-    
-    // Check if it's already open
     const isOpen = list.style.display === 'block';
 
     if (!isOpen) {
-        // 🐢 Calm Opening
         list.style.display = 'block';
         list.style.opacity = '0';
         list.style.transform = 'translateY(-10px)';
-        list.style.transition = '0.3s ease-out';
-        
         setTimeout(() => {
             list.style.opacity = '1';
             list.style.transform = 'translateY(0)';
+            list.style.transition = '0.3s ease-out';
             btn.classList.add('open');
         }, 10);
     } else {
-        // 🐢 Calm Closing
         list.style.opacity = '0';
         list.style.transform = 'translateY(-10px)';
-        
-        setTimeout(() => {
-            list.style.display = 'none';
-            btn.classList.remove('open');
-        }, 300);
+        setTimeout(() => { list.style.display = 'none'; btn.classList.remove('open'); }, 300);
     }
 }
 
-// 🛡️ THE SELECTION ENGINE
 function selectGate(el, type) {
-    // 1. Highlight the chosen one
     document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
     el.classList.add('selected');
-
-    // 2. Hide all sub-forms first
     document.querySelectorAll('#part2 .sub-form').forEach(f => {
         f.style.display = 'none';
         f.style.opacity = '0';
     });
-
-    // 3. Calmly reveal the chosen sub-form
     const targetForm = document.getElementById('f-' + type);
     if (targetForm) {
         targetForm.style.display = 'block';
-        setTimeout(() => {
-            targetForm.style.opacity = '1';
-            targetForm.style.transition = '0.5s';
-        }, 50);
+        setTimeout(() => { targetForm.style.opacity = '1'; targetForm.style.transition = '0.5s'; }, 50);
     }
+    setTimeout(() => { toggleOptions(); }, 400);
+}
 
-    // 4. Close the dropdown after selection
-    setTimeout(() => {
-        toggleOptions();
-    }, 400); // Wait for the user to see their selection first 🛡️✨
-        }
-    </script>
+// 🛡️ PART 3 SWITCHER (Add this so Option 1, 2, 3 work)
+function switchHosting() {
+    const type = document.getElementById('hostType').value;
+    document.querySelectorAll('.hosting-section').forEach(sec => sec.style.display = 'none');
+    const target = document.getElementById('section-' + type);
+    if (target) target.style.display = 'block';
+}
+</script>
 </body>
     </html>
