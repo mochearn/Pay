@@ -413,16 +413,14 @@
         }
     }
 
-    // 🛡️ SECURITY GATE 2: Part 2 -> Part 3 (THE FIX)
-    if (step === 3) {
-        // This looks for the "selected" class on your deployment options
-        const methodSelected = document.querySelector('.option-item.selected');
-        
-        if (!methodSelected) {
-            showMochearnNotify(3); // 🚨 Slide down the pill for Step 3
-            return; // 🚫 Stop the jump!
-        }
+   if (step === 3) {
+    // 🛡️ Make sure this class '.option-item.selected' exists in your Part 2
+    const methodSelected = document.querySelector('.option-item.selected');
+    if (!methodSelected) { 
+        showMochearnNotify(3); 
+        return; 
     }
+}
 
     // 🐢 THE "CALM" TRANSITION ENGINE
     const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
