@@ -299,7 +299,7 @@
     </button>
             </div>
             </div>
-<div id="part4" class="form-part" style="overflow: hidden; position: relative; min-height: 500px;">
+<div id="part4" class="setup-stage" style="overflow: hidden; position: relative; min-height: 500px; display: none;">
     
  <div id="audit-stage" class="review-slide active-slide">
     <h2 style="text-align: center; font-weight: 900; margin-bottom: 25px; color: var(--emerald);">Final Review 📜</h2>
@@ -487,8 +487,14 @@ function hideMochearnNotify() {
 
 function forceGoTo(step) {
     hideMochearnNotify();
+    
+    // 🛡️ THE CLEAN SWEEP: This stops the "Long Roll"
+    document.querySelectorAll('.setup-stage').forEach(p => {
+        p.style.display = 'none'; 
+        p.classList.remove('active-slide');
+    });
+
     setTimeout(() => {
-        document.querySelectorAll('.setup-stage').forEach(p => p.style.display = 'none');
         const target = document.getElementById('part' + step);
         if (target) {
             target.style.display = 'block';
