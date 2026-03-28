@@ -380,70 +380,87 @@
         
         <button onclick="closeMochearnPopup()" style="width: 100%; background: var(--emerald); color: #fff; padding: 15px; border: none; border-radius: 8px; font-weight: 800; margin-bottom: 10px; cursor: pointer;">FINISH FILLING ✍️</button>
         
-        <p id="skip-btn" style="color: #888; font-size: 0.75rem; text-decoration: underline; cursor: pointer; font-weight: 700;">SKIP FOR NOW →</p>
+ <p id="skip-btn" style="color: #888; font-size: 0.75rem; text-decoration: underline; cursor: pointer; font-weight: 700;">SKIP FOR NOW →</p>
     </div>
     </div>
     <script>
-function goTo(step) {
-    // 🛡️ 1. CHECK VALIDATION
+        function goTo(step) {
+    // 🛡️ SECURITY GATE 1: Part 1 -> Part 2
     if (step === 2) {
         const name = document.getElementById('pName').value.trim();
-        const price = document.getElementById('pPrice').value.trim();
-        if (!name && !price) {
-            const bar = document.getElementById('mochearnNotify');
-            bar.style.top = "20px";
-            setTimeout(() => { bar.style.top = "-100px"; }, 4000);
-            return;
+        if (!name) { 
+            showMochearnNotify(2); // Slide down the pill for Step 2
+            return; 
         }
     }
 
-    // 🛡️ 2. THE "CALM DOWN" TRANSITION
+    // 🛡️ SECURITY GATE 2: Part 2 -> Part 3 (THE FIX)
+    if (step === 3) {
+        // This looks for the "selected" class on your deployment options
+        const methodSelected = document.querySelector('.option-item.selected');
+        
+        if (!methodSelected) {
+            showMochearnNotify(3); // 🚨 Slide down the pill for Step 3
+            return; // 🚫 Stop the jump!
+        }
+    }
+
+    // 🐢 THE "CALM" TRANSITION ENGINE
     const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
-    
-    // Fade out the current part slightly first
     if (currentPart) {
         currentPart.style.opacity = "0.5";
-        currentPart.style.transform = "translateX(-10px)";
         currentPart.style.transition = "0.3s";
     }
 
-    // ⏳ Wait 250ms (The "Human" Delay) before switching
     setTimeout(() => {
-        // Hide all
+        // Hide All
         document.querySelectorAll('.setup-stage').forEach(part => {
             part.style.display = 'none';
             part.classList.remove('active-slide');
-            part.style.opacity = "1"; // Reset opacity for next time
-            part.style.transform = "translateX(0)";
+            part.style.opacity = "1";
         });
 
         // Show Next
         const target = document.getElementById('part' + step);
         if (target) {
             target.style.display = 'block';
-            // Trigger the CSS Slide Animation
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => {
                 target.classList.add('active-slide');
             }, 50);
-            
+            updateWizardHeader(step);
+        }
+        hideMochearnNotify();
+    }, 250); // The "Mochearn" Delay 🛡️✨
+}
+
+// 🛡️ THE DYNAMIC SKIP LOGIC
+function forceGoTo(step) {
+    hideMochearnNotify();
+    // Even the skip must be "Calm" 🐢
+    setTimeout(() => {
+        document.querySelectorAll('.setup-stage').forEach(p => p.style.display = 'none');
+        const target = document.getElementById('part' + step);
+        if (target) {
+            target.style.display = 'block';
+            target.classList.add('active-slide');
             updateWizardHeader(step);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        document.getElementById('mochearnNotify').style.top = "-100px";
-    }, 250); // This is the "calm" delay 🐢✨
-        }
-
-// 🛡️ 3. FORCE JUMP (FOR THE SKIP TEXT)
-function forceGoTo(step) {
-    document.getElementById('mochearnNotify').style.top = "-100px";
-    // We bypass the check and just go
-    document.querySelectorAll('.setup-stage').forEach(p => p.style.display = 'none');
-    document.getElementById('part' + step).style.display = 'block';
-    document.getElementById('part' + step).classList.add('active-slide');
-    updateWizardHeader(step);
+    }, 250);
 }
 
+function showMochearnNotify(nextStep) {
+    const bar = document.getElementById('mochearnNotify');
+    bar.style.top = "20px";
+    const skipBtn = bar.querySelector('span');
+    // This tells the "SKIP" button where to go based on the current block
+    skipBtn.onclick = function() { forceGoTo(nextStep); };
+}
+
+function hideMochearnNotify() {
+    document.getElementById('mochearnNotify').style.top = "-100px";
+        }
 function updateWizardHeader(step) {
     // 🛡️ 1. Find all your spans
     const steps = document.querySelectorAll('.step');
