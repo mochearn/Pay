@@ -394,24 +394,10 @@
  <p id="skip-btn" style="color: #888; font-size: 0.75rem; text-decoration: underline; cursor: pointer; font-weight: 700;">SKIP FOR NOW →</p>
     </div>
     </div>
-<script>
-    // 🛡️ THE HOSTING SWITCHER: This makes Part 3 work!
-function switchHosting() {
-    const type = document.getElementById('hostType').value;
-    
-    // 1. Hide all sections first (native, ext_site, embed)
-    document.querySelectorAll('.hosting-section').forEach(sec => {
-        sec.style.display = 'none';
-    });
-    
-    // 2. Show only the one the user selected
-    const target = document.getElementById('section-' + type);
-    if (target) {
-        target.style.display = 'block';
-    }
-    }
-let notifyTimer;
+ <script>
+     let notifyTimer;
 
+// 🛡️ THE NAVIGATION ENGINE
 function goTo(step) {
     if (step === 2) {
         const name = document.getElementById('pName').value.trim();
@@ -422,39 +408,46 @@ function goTo(step) {
         if (!methodSelected) { showMochearnNotify(3); return; }
     }
 
-    // 🐢 Fade out current
-    document.querySelectorAll('.setup-stage').forEach(p => p.style.opacity = "0.5");
+    const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
+    if (currentPart) {
+        currentPart.style.opacity = "0.5";
+        currentPart.style.transition = "0.3s";
+    }
 
     setTimeout(() => {
         document.querySelectorAll('.setup-stage').forEach(part => {
-            part.classList.remove('active-slide');
             part.style.display = 'none';
+            part.classList.remove('active-slide');
+            part.style.opacity = "1";
         });
 
         const target = document.getElementById('part' + step);
         if (target) {
             target.style.display = 'block';
-            target.classList.add('active-slide');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => { target.classList.add('active-slide'); }, 50);
             updateWizardHeader(step);
         }
         hideMochearnNotify();
     }, 250);
 }
 
+// 🛡️ THE SKIP ENGINE
 function forceGoTo(step) {
     hideMochearnNotify();
     document.querySelectorAll('.setup-stage').forEach(p => {
+        p.style.display = 'none'; 
         p.classList.remove('active-slide');
-        p.style.display = 'none';
     });
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        target.classList.add('active-slide');
-        updateWizardHeader(step);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    setTimeout(() => {
+        const target = document.getElementById('part' + step);
+        if (target) {
+            target.style.display = 'block';
+            target.classList.add('active-slide');
+            updateWizardHeader(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, 250);
 }
 
 function showMochearnNotify(nextStep) {
@@ -477,16 +470,13 @@ function updateWizardHeader(step) {
     steps.forEach((s, i) => {
         if ((i + 1) === step) {
             s.classList.add('active');
-            s.style.color = "var(--emerald)";
-            s.style.borderBottom = "2px solid var(--emerald)";
         } else {
             s.classList.remove('active');
-            s.style.color = "#ccc";
-            s.style.borderBottom = "none";
         }
     });
 }
 
+// 🛡️ PART 2 DROPDOWN LOGIC
 function toggleOptions() { 
     let list = document.getElementById('opts');
     let btn = document.getElementById('dropBtn');
@@ -509,12 +499,17 @@ function selectGate(el, type) {
     setTimeout(() => { toggleOptions(); }, 400);
 }
 
+// 🛡️ PART 3 HOSTING SWITCHER
 function switchHosting() {
     const type = document.getElementById('hostType').value;
-    document.querySelectorAll('.hosting-section').forEach(sec => sec.style.display = 'none');
+    document.querySelectorAll('.hosting-section').forEach(sec => {
+        sec.style.display = 'none';
+    });
     const target = document.getElementById('section-' + type);
-    if (target) target.style.display = 'block';
+    if (target) {
+        target.style.display = 'block';
     }
+     }
 </script>
 </body>
     </html>
