@@ -270,10 +270,15 @@
     </div>
 </div>
 
-    <div class="p3-nav-btns">
-        <button type="button" class="btn-prev" onclick="goTo(2)">Previous</button>
-<button type="button" class="btn-next" onclick="updateReview(); validateStep(3, 4)">Next Step</button>
-    </div>
+<div style="display: flex; justify-content: center; gap: 15px; margin-top: 40px; padding-bottom: 20px;">
+    <button type="button" onclick="goTo(2)" style="width: 140px; background: #f2f2f2; color: #666; height: 50px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase;">
+        ← BACK
+    </button>
+
+    <button type="button" onclick="goTo(4)" style="width: 180px; background: var(--emerald); color: #fff; height: 50px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(14, 105, 84, 0.2);">
+        FINAL REVIEW →
+    </button>
+            </div>
             </div>
 <div id="part4" class="form-part" style="overflow: hidden; position: relative; min-height: 500px;">
     
@@ -439,13 +444,21 @@ function forceGoTo(step) {
     updateWizardHeader(step);
 }
 
-// 🛡️ 4. WIZARD HEADER UPDATER
 function updateWizardHeader(step) {
-    document.querySelectorAll('.step').forEach((s, i) => {
+    // 🛡️ 1. Find all your spans
+    const steps = document.querySelectorAll('.step');
+    
+    steps.forEach((s, i) => {
+        // 🛡️ 2. If the index matches the current step, make it Emerald
         if ((i + 1) === step) {
             s.classList.add('active');
+            s.style.color = "var(--emerald)";
+            s.style.borderBottom = "2px solid var(--emerald)";
         } else {
+            // 🛡️ 3. Otherwise, keep it "Calm" and Gray
             s.classList.remove('active');
+            s.style.color = "#ccc";
+            s.style.borderBottom = "none";
         }
     });
 }
