@@ -395,6 +395,21 @@
     </div>
     </div>
 <script>
+    // 🛡️ THE HOSTING SWITCHER: This makes Part 3 work!
+function switchHosting() {
+    const type = document.getElementById('hostType').value;
+    
+    // 1. Hide all sections first (native, ext_site, embed)
+    document.querySelectorAll('.hosting-section').forEach(sec => {
+        sec.style.display = 'none';
+    });
+    
+    // 2. Show only the one the user selected
+    const target = document.getElementById('section-' + type);
+    if (target) {
+        target.style.display = 'block';
+    }
+    }
 let notifyTimer;
 
 function goTo(step) {
