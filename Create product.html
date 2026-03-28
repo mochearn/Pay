@@ -450,12 +450,34 @@ function forceGoTo(step) {
     }, 250);
 }
 
+let notifyTimer;
+
 function showMochearnNotify(nextStep) {
     const bar = document.getElementById('mochearnNotify');
-    bar.style.top = "20px";
     const skipBtn = bar.querySelector('span');
-    // This tells the "SKIP" button where to go based on the current block
+    bar.style.top = "20px";
     skipBtn.onclick = function() { forceGoTo(nextStep); };
+    if (notifyTimer) clearTimeout(notifyTimer);
+    notifyTimer = setTimeout(() => { bar.style.top = "-100px"; }, 5000);
+}
+
+function hideMochearnNotify() {
+    document.getElementById('mochearnNotify').style.top = "-100px";
+    if (notifyTimer) clearTimeout(notifyTimer);
+}
+
+function forceGoTo(step) {
+    hideMochearnNotify();
+    setTimeout(() => {
+        document.querySelectorAll('.setup-stage').forEach(p => p.style.display = 'none');
+        const target = document.getElementById('part' + step);
+        if (target) {
+            target.style.display = 'block';
+            target.classList.add('active-slide');
+            updateWizardHeader(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, 250);
 }
 
 function hideMochearnNotify() {
