@@ -6,25 +6,25 @@
     <title>Mochearn Studio | Create Product</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 🛡️ This hides every part by default */
+/* 🛡️ THE MASTER TOGGLE: Paste this inside your <style> tag at the TOP */
 .setup-stage {
-    display: none; 
+    display: none !important; 
     width: 100%;
     opacity: 0;
     transition: opacity 0.4s ease;
 }
 
-/* 🛡️ This ONLY shows the part the system is currently on */
+/* 🛡️ THE REVEAL: This forces the "Blank" screens to show up */
 .setup-stage.active-slide {
     display: block !important;
-    opacity: 1;
+    opacity: 1 !important;
 }
 
-/* 🛡️ Extra space so Desktop Mode doesn't squash the content */
+/* 🛡️ DESKTOP MODE SAFETY: Give every part room to breathe */
 #part1, #part2, #part3, #part4 {
-    min-height: 500px;
-    padding-bottom: 50px;
-    }
+    min-height: 600px;
+    padding-bottom: 80px;
+}
         :root { --emerald: #0e6954; --bg: #fcfcfc; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); padding-bottom: 50px; overflow-x: hidden; }
@@ -206,20 +206,7 @@
    </button>
     </div>
 <div id="part3" class="setup-stage" style="display: none; min-height: 500px;">
-    
-    <style>
-        .hosting-header { font-size: 1.4rem; font-weight: 900; color: #333; margin-bottom: 8px; display: block; }
-        .benefit-card { background: #f4fcf9; border: 1px solid #b5dbcc; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .benefit-card ul { list-style: none; padding: 0; }
-        .benefit-card li { font-size: 0.75rem; color: #0e6954; font-weight: 700; margin-bottom: 5px; }
-        .p3-input { margin-bottom: 15px; font-size: 0.95rem !important; }
-        .p3-textarea { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; font-size: 1rem; background: #fafafa; height: 100px; resize: none; }
-        .add-more-btn { width: 100%; background: #f9f9f9; border: 1px solid #ddd; color: #555; padding: 14px; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 15px; font-size: 0.85rem; }
-        .p3-nav-btns { margin-top: 40px; display: flex; justify-content: space-between; gap: 20px; }
-        .p3-nav-btns button { padding: 14px 30px !important; font-size: 0.85rem !important; flex: 1; }
-    </style>
-
-    <div class="form-group">
+ <div class="form-group">
         <span class="hosting-header">Hosting Protocol 🏗️</span>
         <span class="hint">How will your students access the value?</span>
         <p style="font-size: 0.75rem; color: #777; line-height: 1.4; margin-bottom: 15px;">
