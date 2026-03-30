@@ -453,38 +453,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 /**
- * THE BULLETPROOF GATEWAY: Restores Step 1 and Fixes Step 2 Skip
+ * THE MASTER KEY: Direct & Stable Navigation
  */
 function goTo(step) {
-    // 🛡️ 1. STEP 1 SECURITY: Check Name before moving to Step 2
-    // We check if we are CURRENTLY on Step 1 trying to go to 2
-    const currentActive = document.querySelector('.setup-stage.active-slide');
-    if (currentActive && currentActive.id === 'part1' && step === 2) {
-        const nameInput = document.getElementById('pName');
-        if (!nameInput || !nameInput.value.trim()) {
+    // 🛡️ SECURITY: If trying to go to Step 2, Name MUST exist
+    if (step === 2) {
+        const pName = document.getElementById('pName');
+        if (!pName || !pName.value.trim()) {
             showMochearnNotify("Product name required to continue 🛡️");
             return;
         }
     }
 
-    // 🛡️ 2. STEP 2 SECURITY: Check Gateway before moving to Step 3
+    // 🛡️ SECURITY: If trying to go to Step 3, Gateway MUST be picked
     if (step === 3 && !window.isSkipping) {
         const extForm = document.getElementById('f-ext');
         const custForm = document.getElementById('f-cust');
         
-        // Smart Check: Is any gateway form visible?
-        const hasSelected = (extForm && extForm.style.display === 'block') || 
-                          (custForm && custForm.style.display === 'block');
+        // Check if the user has picked Option 1 or Option 2
+        const isExtVisible = extForm && extForm.style.display === 'block';
+        const isCustVisible = custForm && custForm.style.display === 'block';
 
-        if (!hasSelected) {
+        if (!isExtVisible && !isCustVisible) {
             showMochearnNotify("Please select a deployment method 🛡️");
             return;
         }
     }
     
+    // 🛡️ CLEARANCE: If they passed the checks (or skipped), move them!
     window.isSkipping = false; 
     executeSwitch(step);
-     }
+}
 
 /**
  * THE SKIP REPAIR: Fixes the Step 2 Skip Button
