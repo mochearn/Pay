@@ -395,123 +395,94 @@
     </div>
     </div>
  <script>
-let notifyTimer;
+     // 🛡️ MOCHEARN STUDIO: MASTER ENGINE (PHASE 1)
 
-// 🛡️ 1. THE MAIN NAVIGATION (The "Door Opener")
+/**
+ * THE MAIN GATEWAY
+ * Handles moving between the building blocks of your empire.
+ */
 function goTo(step) {
-    // Security check for Step 1
+    // 1. SECURITY CHECK: Validate Step 1 before allowing entry to Step 2
     if (step === 2) {
-        const name = document.getElementById('pName').value.trim();
-        if (!name) { showMochearnNotify(2); return; }
-    }
-    
-    // Security check for Step 2
-    if (step === 3) {
-        const methodSelected = document.querySelector('.option-item.selected');
-        if (!methodSelected) { showMochearnNotify(3); return; }
-    }
-
-    // Calm Transition
-    const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
-    if (currentPart) { currentPart.style.opacity = "0.5"; }
-
-    setTimeout(() => {
-        // Hide All Sections
-        document.querySelectorAll('.setup-stage').forEach(part => {
-            part.style.display = 'none';
-            part.classList.remove('active-slide');
-            part.style.opacity = "1";
-        });
-
-        // Show the Target Section
-        const target = document.getElementById('part' + step);
-        if (target) {
-            target.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(() => { target.classList.add('active-slide'); }, 50);
-            updateWizardHeader(step);
+        const productName = document.getElementById('pName').value.trim();
+        
+        if (!productName) {
+            showMochearnNotify("Product Name is required to proceed 🛡️", 2);
+            return;
         }
-        hideMochearnNotify();
-    }, 250);
+    }
+
+    // 2. THE TRANSITION: Smoothly swap the screens
+    executeSwitch(step);
 }
 
-// 🛡️ 2. THE FORCE SKIP (For the Pill Notification)
-function forceGoTo(step) {
-    hideMochearnNotify();
-    document.querySelectorAll('.setup-stage').forEach(p => {
-        p.style.display = 'none'; 
-        p.classList.remove('active-slide');
+/**
+ * THE SWITCHBOARD: Physically hides and shows Parts
+ */
+function executeSwitch(step) {
+    // Hide all stages and remove active classes
+    document.querySelectorAll('.setup-stage').forEach(part => {
+        part.style.display = 'none';
+        part.classList.remove('active-slide');
     });
+
+    // Show the target stage
     const target = document.getElementById('part' + step);
     if (target) {
         target.style.display = 'block';
-        target.classList.add('active-slide');
+        // Small delay to allow the CSS transition to kick in
+        setTimeout(() => {
+            target.classList.add('active-slide');
+        }, 10);
+        
+        // Update Header & Scroll to top
         updateWizardHeader(step);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-// 🛡️ 3. THE NOTIFICATION PILL
-function showMochearnNotify(nextStep) {
+/**
+ * THE NOTIFICATION PILL: Drops from the top
+ */
+function showMochearnNotify(message, nextStep) {
     const bar = document.getElementById('mochearnNotify');
-    const skipBtn = bar.querySelector('span');
-    bar.style.top = "20px";
-    skipBtn.onclick = function() { forceGoTo(nextStep); };
-    if (notifyTimer) clearTimeout(notifyTimer);
-    notifyTimer = setTimeout(() => { bar.style.top = "-100px"; }, 5000);
+    const textElement = bar.querySelector('p');
+    
+    textElement.innerText = message;
+    bar.style.top = "20px"; // Drop down
+
+    // Auto-hide after 5 seconds if they don't click skip
+    setTimeout(() => {
+        hideMochearnNotify();
+    }, 5000);
 }
 
 function hideMochearnNotify() {
     const bar = document.getElementById('mochearnNotify');
-    if (bar) bar.style.top = "-100px";
+    bar.style.top = "-100px";
 }
 
-// 🛡️ 4. THE PROGRESS HEADER (1, 2, 3, 4)
+/**
+ * THE SKIP ENGINE: For when they want to bypass validation
+ */
+function forceGoTo(step) {
+    hideMochearnNotify();
+    executeSwitch(step);
+}
+
+/**
+ * THE TRACKER: Syncs the 1, 2, 3, 4 progress bar
+ */
 function updateWizardHeader(step) {
     const steps = document.querySelectorAll('.step');
     steps.forEach((s, i) => {
         if ((i + 1) === step) {
             s.classList.add('active');
-            s.style.color = "var(--emerald)";
-            s.style.borderBottom = "2px solid var(--emerald)";
         } else {
             s.classList.remove('active');
-            s.style.color = "#ccc";
-            s.style.borderBottom = "none";
         }
     });
-}
-
-// 🛡️ 5. PART 2 DROPDOWN & SELECTION
-function toggleOptions() { 
-    let list = document.getElementById('opts');
-    let btn = document.getElementById('dropBtn');
-    const isOpen = list.style.display === 'block';
-    if (!isOpen) {
-        list.style.display = 'block';
-        btn.classList.add('open');
-    } else {
-        list.style.display = 'none';
-        btn.classList.remove('open');
-    }
-}
-
-function selectGate(el, type) {
-    document.querySelectorAll('.option-item').forEach(i => i.classList.remove('selected'));
-    el.classList.add('selected');
-    document.querySelectorAll('#part2 .sub-form').forEach(f => f.style.display = 'none');
-    const targetForm = document.getElementById('f-' + type);
-    if (targetForm) targetForm.style.display = 'block';
-    setTimeout(() => { toggleOptions(); }, 400);
-}
-
-// 🛡️ 6. PART 3 ACADEMY SWITCHER (Critical!)
-function switchHosting() {
-    const type = document.getElementById('hostType').value;
-    document.querySelectorAll('.hosting-section').forEach(sec => sec.style.display = 'none');
-    const target = document.getElementById('section-' + type);
-    if (target) target.style.display = 'block';
-    }
-</script>
+     }
+ </script>
 </body>
     </html>
