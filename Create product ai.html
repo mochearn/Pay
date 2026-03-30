@@ -395,92 +395,78 @@
     </div>
     </div>
  <script>
-     // 🛡️ MOCHEARN STUDIO: MASTER ENGINE (PHASE 1)
+// 🛡️ MOCHEARN SMART ENGINE (PHASE 1 - UPDATED)
+let notifyTimer;
 
-/**
- * THE MAIN GATEWAY
- * Handles moving between the building blocks of your empire.
- */
+// 1. THE TYPING DETECTOR: Removes warning when user starts typing
+document.addEventListener('DOMContentLoaded', () => {
+    const pNameInput = document.getElementById('pName');
+    if(pNameInput) {
+        pNameInput.addEventListener('input', () => {
+            if (pNameInput.value.trim().length > 0) {
+                hideMochearnNotify();
+            }
+        });
+    }
+});
+
 function goTo(step) {
-    // 1. SECURITY CHECK: Validate Step 1 before allowing entry to Step 2
     if (step === 2) {
-        const productName = document.getElementById('pName').value.trim();
-        
-        if (!productName) {
-            showMochearnNotify("Product Name is required to proceed 🛡️", 2);
+        const name = document.getElementById('pName').value.trim();
+        // 🛡️ SMART CHECK: Is name empty?
+        if (!name) {
+            showMochearnNotify("Product name required to continue 🛡️", 2);
             return;
         }
+        // 🛡️ FUTURE CHECK: Here is where we will check if Name Exists in Database
     }
-
-    // 2. THE TRANSITION: Smoothly swap the screens
     executeSwitch(step);
 }
 
-/**
- * THE SWITCHBOARD: Physically hides and shows Parts
- */
 function executeSwitch(step) {
-    // Hide all stages and remove active classes
     document.querySelectorAll('.setup-stage').forEach(part => {
         part.style.display = 'none';
         part.classList.remove('active-slide');
     });
-
-    // Show the target stage
     const target = document.getElementById('part' + step);
     if (target) {
         target.style.display = 'block';
-        // Small delay to allow the CSS transition to kick in
-        setTimeout(() => {
-            target.classList.add('active-slide');
-        }, 10);
-        
-        // Update Header & Scroll to top
-        updateWizardHeader(step);
+        setTimeout(() => { target.classList.add('active-slide'); }, 10);
+        updateHeader(step);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-/**
- * THE NOTIFICATION PILL: Drops from the top
- */
 function showMochearnNotify(message, nextStep) {
     const bar = document.getElementById('mochearnNotify');
-    const textElement = bar.querySelector('p');
+    // Force a slim, straight-line style
+    bar.style.display = "flex";
+    bar.style.flexDirection = "row";
+    bar.style.alignItems = "center";
+    bar.style.padding = "8px 20px"; // Reduced padding for "Skinny" look
     
-    textElement.innerText = message;
-    bar.style.top = "20px"; // Drop down
+    bar.querySelector('p').innerText = message;
+    bar.style.top = "20px";
 
-    // Auto-hide after 5 seconds if they don't click skip
-    setTimeout(() => {
-        hideMochearnNotify();
-    }, 5000);
+    if (notifyTimer) clearTimeout(notifyTimer);
+    notifyTimer = setTimeout(hideMochearnNotify, 5000);
 }
 
 function hideMochearnNotify() {
     const bar = document.getElementById('mochearnNotify');
-    bar.style.top = "-100px";
+    if(bar) bar.style.top = "-100px";
 }
 
-/**
- * THE SKIP ENGINE: For when they want to bypass validation
- */
 function forceGoTo(step) {
     hideMochearnNotify();
     executeSwitch(step);
 }
 
-/**
- * THE TRACKER: Syncs the 1, 2, 3, 4 progress bar
- */
-function updateWizardHeader(step) {
+function updateHeader(step) {
     const steps = document.querySelectorAll('.step');
     steps.forEach((s, i) => {
-        if ((i + 1) === step) {
-            s.classList.add('active');
-        } else {
-            s.classList.remove('active');
-        }
+        if ((i + 1) === step) s.classList.add('active');
+        else s.classList.remove('active');
     });
      }
  </script>
