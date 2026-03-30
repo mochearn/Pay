@@ -453,29 +453,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 /**
- * THE REPAIRED GATEWAY: Handles Step 1 Name Check & Step 3 Reveal
+ * THE BULLETPROOF GATEWAY: Restores Step 1 and Fixes Step 2 Skip
  */
 function goTo(step) {
     // 🛡️ 1. STEP 1 SECURITY: Check Name before moving to Step 2
-    if (step === 2) {
+    // We check if we are CURRENTLY on Step 1 trying to go to 2
+    const currentActive = document.querySelector('.setup-stage.active-slide');
+    if (currentActive && currentActive.id === 'part1' && step === 2) {
         const nameInput = document.getElementById('pName');
-        const nameValue = nameInput ? nameInput.value.trim() : "";
-        
-        if (!nameValue) {
+        if (!nameInput || !nameInput.value.trim()) {
             showMochearnNotify("Product name required to continue 🛡️");
             return;
         }
     }
 
-    // 🛡️ 2. STEP 3 REVEAL: Ensure Part 3 content exists
-    if (step === 3) {
-        const p3 = document.getElementById('part3');
-        if (p3) p3.style.display = 'block'; 
+    // 🛡️ 2. STEP 2 SECURITY: Check Gateway before moving to Step 3
+    if (step === 3 && !window.isSkipping) {
+        const extForm = document.getElementById('f-ext');
+        const custForm = document.getElementById('f-cust');
         
-        const isExtVisible = document.getElementById('f-ext').style.display === 'block';
-        const isCustVisible = document.getElementById('f-cust').style.display === 'block';
-        
-        if (!isExtVisible && !isCustVisible && !window.isSkipping) {
+        // Smart Check: Is any gateway form visible?
+        const hasSelected = (extForm && extForm.style.display === 'block') || 
+                          (custForm && custForm.style.display === 'block');
+
+        if (!hasSelected) {
             showMochearnNotify("Please select a deployment method 🛡️");
             return;
         }
@@ -483,7 +484,7 @@ function goTo(step) {
     
     window.isSkipping = false; 
     executeSwitch(step);
-}
+     }
 
 /**
  * THE SKIP REPAIR: Fixes the Step 2 Skip Button
