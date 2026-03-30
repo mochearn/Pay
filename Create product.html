@@ -395,32 +395,35 @@
     </div>
     </div>
  <script>
-     let notifyTimer;
+let notifyTimer;
 
-// 🛡️ THE NAVIGATION ENGINE
+// 🛡️ 1. THE MAIN NAVIGATION (The "Door Opener")
 function goTo(step) {
+    // Security check for Step 1
     if (step === 2) {
         const name = document.getElementById('pName').value.trim();
         if (!name) { showMochearnNotify(2); return; }
     }
+    
+    // Security check for Step 2
     if (step === 3) {
         const methodSelected = document.querySelector('.option-item.selected');
         if (!methodSelected) { showMochearnNotify(3); return; }
     }
 
+    // Calm Transition
     const currentPart = document.querySelector('.setup-stage[style*="display: block"]');
-    if (currentPart) {
-        currentPart.style.opacity = "0.5";
-        currentPart.style.transition = "0.3s";
-    }
+    if (currentPart) { currentPart.style.opacity = "0.5"; }
 
     setTimeout(() => {
+        // Hide All Sections
         document.querySelectorAll('.setup-stage').forEach(part => {
             part.style.display = 'none';
             part.classList.remove('active-slide');
             part.style.opacity = "1";
         });
 
+        // Show the Target Section
         const target = document.getElementById('part' + step);
         if (target) {
             target.style.display = 'block';
@@ -432,24 +435,23 @@ function goTo(step) {
     }, 250);
 }
 
-// 🛡️ THE SKIP ENGINE
+// 🛡️ 2. THE FORCE SKIP (For the Pill Notification)
 function forceGoTo(step) {
     hideMochearnNotify();
     document.querySelectorAll('.setup-stage').forEach(p => {
         p.style.display = 'none'; 
         p.classList.remove('active-slide');
     });
-    setTimeout(() => {
-        const target = document.getElementById('part' + step);
-        if (target) {
-            target.style.display = 'block';
-            target.classList.add('active-slide');
-            updateWizardHeader(step);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }, 250);
+    const target = document.getElementById('part' + step);
+    if (target) {
+        target.style.display = 'block';
+        target.classList.add('active-slide');
+        updateWizardHeader(step);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
+// 🛡️ 3. THE NOTIFICATION PILL
 function showMochearnNotify(nextStep) {
     const bar = document.getElementById('mochearnNotify');
     const skipBtn = bar.querySelector('span');
@@ -462,28 +464,32 @@ function showMochearnNotify(nextStep) {
 function hideMochearnNotify() {
     const bar = document.getElementById('mochearnNotify');
     if (bar) bar.style.top = "-100px";
-    if (notifyTimer) clearTimeout(notifyTimer);
 }
 
+// 🛡️ 4. THE PROGRESS HEADER (1, 2, 3, 4)
 function updateWizardHeader(step) {
     const steps = document.querySelectorAll('.step');
     steps.forEach((s, i) => {
         if ((i + 1) === step) {
             s.classList.add('active');
+            s.style.color = "var(--emerald)";
+            s.style.borderBottom = "2px solid var(--emerald)";
         } else {
             s.classList.remove('active');
+            s.style.color = "#ccc";
+            s.style.borderBottom = "none";
         }
     });
 }
 
-// 🛡️ PART 2 DROPDOWN LOGIC
+// 🛡️ 5. PART 2 DROPDOWN & SELECTION
 function toggleOptions() { 
     let list = document.getElementById('opts');
     let btn = document.getElementById('dropBtn');
     const isOpen = list.style.display === 'block';
     if (!isOpen) {
         list.style.display = 'block';
-        setTimeout(() => { btn.classList.add('open'); }, 10);
+        btn.classList.add('open');
     } else {
         list.style.display = 'none';
         btn.classList.remove('open');
@@ -499,17 +505,13 @@ function selectGate(el, type) {
     setTimeout(() => { toggleOptions(); }, 400);
 }
 
-// 🛡️ PART 3 HOSTING SWITCHER
+// 🛡️ 6. PART 3 ACADEMY SWITCHER (Critical!)
 function switchHosting() {
     const type = document.getElementById('hostType').value;
-    document.querySelectorAll('.hosting-section').forEach(sec => {
-        sec.style.display = 'none';
-    });
+    document.querySelectorAll('.hosting-section').forEach(sec => sec.style.display = 'none');
     const target = document.getElementById('section-' + type);
-    if (target) {
-        target.style.display = 'block';
+    if (target) target.style.display = 'block';
     }
-     }
 </script>
 </body>
     </html>
