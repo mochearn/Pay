@@ -6,6 +6,16 @@
     <title>Mochearn Studio | Create Product</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        body { 
+    background: #f4f7f6; 
+    padding: 0; 
+    margin: 0;
+    overflow-x: hidden; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+        }
 /* 🛡️ THE MASTER TOGGLE: Paste this inside your <style> tag at the TOP */
 .setup-stage {
     display: none !important; 
@@ -27,7 +37,6 @@
 }
         :root { --emerald: #0e6954; --bg: #fcfcfc; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg); padding-bottom: 50px; overflow-x: hidden; }
 
         /* FLOATING PILL NOTIFICATION */
         #warningBar { 
@@ -43,8 +52,22 @@
         .studio-header { background: var(--emerald); color: white; padding: 60px 20px; text-align: center; margin-bottom: 40px; }
         .studio-header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
         .studio-header p { opacity: 0.8; font-size: 0.9rem; font-weight: 400; }
+.wizard-container { 
+    width: 95%; 
+    max-width: 1000px; /* This expands for laptops! */
+    margin: 40px auto; 
+    background: #fff; 
+    padding: 40px; 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05); 
+    border-radius: 20px;
+    min-height: 600px; 
+}
 
-        .wizard-container { max-width: 800px; margin: 0 auto; background: #fff; padding: 40px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); min-height: 500px; }
+/* This keeps the inputs centered and professional on big screens */
+.form-group { 
+    max-width: 450px; 
+    margin: 0 auto 30px auto; 
+    }
 
         /* FIXED WIZARD NAV */
         .step-nav { 
@@ -89,7 +112,6 @@
 
         .btn-next { background: var(--emerald); color: #fff; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: right; cursor: pointer; }
         .btn-prev { background: #eee; color: #666; border: none; padding: 18px 45px; border-radius: 5px; font-weight: 800; float: left; cursor: pointer; }
-  body { max-width: 420px !important; margin: 0 auto !important; border: 1px solid #eee; box-shadow: 0 0 50px rgba(0,0,0,0.1); min-height: 100vh; }
         #part3.active-slide {
     display: block !important;
     visibility: visible !important;
