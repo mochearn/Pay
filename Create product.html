@@ -3,253 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochearn Studio | Product Creation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>Mochearn Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --emerald: #0e6954; 
-            --bg-soft: #f4f7f6; 
-            --white: #ffffff;
-            --text-main: #1a1a1a;
-            --text-hint: #888888;
-            --border: #e2e8f0;
-        }
-
+        :root { --emerald: #0e6954; --bg: #fcfcfc; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
-        /* DESKTOP ENGINE: Centers the app in a professional frame */
-        body { 
-            background: var(--bg-soft); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-            color: var(--text-main);
-        }
-
-        /* THE STUDIO CARD: Adjusts for Mobile vs Desktop */
-        .studio-card { 
+        
+        /* Desktop Mode Framework */
+        body { background: #f0f0f0; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        
+        .main-container { 
+            background: var(--bg); 
             width: 100%; 
-            max-width: 480px; 
-            background: var(--white); 
+            max-width: 420px; 
             min-height: 100vh; 
-            display: flex; 
-            flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            box-shadow: 0 0 50px rgba(0,0,0,0.1); 
             position: relative;
-            overflow: hidden;
         }
 
         @media (min-width: 768px) {
-            .studio-card { 
-                min-height: 750px; 
-                border-radius: 24px; 
-                margin: 20px;
-            }
+            .main-container { min-height: 800px; margin: 20px; border-radius: 20px; overflow: hidden; }
         }
 
-        /* COMPACT NOTIFICATION PILL */
-        #notificationBar {
-            position: absolute;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #222;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            transition: 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        #notificationBar.show { top: 20px; }
-        #notificationBar span { font-size: 0.75rem; font-weight: 600; }
-        #skipBtn { color: var(--emerald); font-weight: 800; cursor: pointer; border-left: 1px solid #444; padding-left: 10px; }
+        /* Header Section */
+        .studio-header { background: var(--emerald); color: white; padding: 60px 20px; text-align: center; }
+        .studio-header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+        .studio-header p { opacity: 0.8; font-size: 0.9rem; }
 
-        /* HEADER */
-        .header { background: var(--emerald); color: #fff; padding: 40px 20px; text-align: center; }
-        .header h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; }
-        .header p { font-size: 0.8rem; opacity: 0.8; margin-top: 5px; }
+        /* Wizard Progress */
+        .step-nav { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid #eee; padding: 20px 0; }
+        .step { font-size: 0.65rem; font-weight: 800; color: #ccc; text-transform: uppercase; text-align: center; }
+        .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 10px; }
 
-        /* WIZARD TRACKER */
-        .tracker { 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 20px 10px; 
-            border-bottom: 1px solid var(--border);
-        }
-        .step-label { font-size: 0.65rem; font-weight: 800; color: #cbd5e1; text-transform: uppercase; }
-        .step-label.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 5px; }
+        /* Form Content - Centered & Sleek */
+        .wizard-container { padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
+        .setup-stage { display: none; width: 100%; opacity: 0; transition: 0.4s; text-align: center; }
+        .setup-stage.active-slide { display: block; opacity: 1; }
 
-        /* FORM ENGINE */
-        .content-area { padding: 30px 20px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; }
-        .stage { display: none; width: 100%; opacity: 0; transition: 0.4s ease; text-align: center; }
-        .stage.active { display: block; opacity: 1; }
-
-        .form-group { margin-bottom: 30px; width: 100%; max-width: 340px; margin-left: auto; margin-right: auto; }
-        label { display: block; font-weight: 800; font-size: 0.85rem; margin-bottom: 4px; }
-        .hint { font-size: 0.7rem; color: var(--text-hint); margin-bottom: 12px; display: block; }
+        .form-group { margin-bottom: 25px; width: 100%; max-width: 320px; }
+        label { display: block; font-weight: 800; font-size: 0.85rem; color: #333; margin-bottom: 5px; }
+        .hint { font-size: 0.7rem; color: #999; margin-bottom: 10px; display: block; }
         
-        input, select { 
-            width: 100%; 
-            padding: 14px; 
-            border: 1.5px solid var(--border); 
-            border-radius: 10px; 
-            background: #fafafa; 
-            font-size: 0.95rem; 
-            text-align: center; 
-            outline: none;
-            transition: 0.2s;
-        }
+        input, select { width: 100%; padding: 16px; border: 2px solid #f2f2f2; border-radius: 8px; font-size: 0.95rem; background: #fafafa; text-align: center; outline: none; }
         input:focus { border-color: var(--emerald); background: #fff; }
 
-        /* NAVIGATION BUTTONS */
-        .nav-actions { margin-top: auto; padding: 20px; width: 100%; max-width: 340px; }
-        .btn-primary { 
+        /* Buttons - Simple & Spaced */
+        .btn-nav { 
             width: 100%; 
+            max-width: 320px;
             background: var(--emerald); 
             color: #fff; 
-            padding: 16px; 
+            height: 55px; 
             border: none; 
             border-radius: 12px; 
             font-weight: 800; 
-            font-size: 0.9rem;
             cursor: pointer; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(14, 105, 84, 0.2);
+            text-transform: uppercase; 
+            margin-top: 40px; 
         }
-        .btn-back { 
-            background: none; 
-            border: none; 
-            color: #999; 
-            font-weight: 700; 
-            margin-bottom: 15px; 
-            cursor: pointer; 
-            font-size: 0.8rem;
-            text-transform: uppercase;
+        .btn-back { background: none; color: #999; border: none; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-top: 15px; font-size: 0.75rem; }
+
+        /* Sleek Notification Pill */
+        #mochearnNotify { 
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%); 
+            width: 90%; max-width: 350px; background: #111; color: white; 
+            padding: 10px 20px; border-radius: 50px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 10000; transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
         }
+        #mochearnNotify.show { top: 20px; }
+        #skipBtn { color: var(--emerald); font-weight: 900; font-size: 0.7rem; cursor: pointer; border-left: 1px solid #333; padding-left: 12px; }
     </style>
 </head>
 <body>
 
-<div id="notificationBar">
-    <span id="notifText">Please complete the required field</span>
+<div id="mochearnNotify">
+    <p id="notifyText" style="font-size: 0.75rem; font-weight: 600;">Required field missing 🛡️</p>
     <span id="skipBtn">SKIP →</span>
 </div>
 
-<div class="studio-card">
-    <header class="header">
-        <h1>MOCHEARN STUDIO</h1>
-        <p>Architecting Digital Excellence</p>
+<div class="main-container">
+    <header class="studio-header">
+        <h1>Mochearn Studio 🏗️</h1>
+        <p>The system is built for scale. Let's create your next empire.</p>
     </header>
 
-    <div class="tracker">
-        <span class="step-label active" id="s1">Identity</span>
-        <span class="step-label" id="s2">Gateway</span>
-        <span class="step-label" id="s3">Academy</span>
-        <span class="step-label" id="s4">Review</span>
+    <div class="step-nav">
+        <span class="step active" id="s1">1. Identity</span>
+        <span class="step" id="s2">2. Gateway</span>
+        <span class="step" id="s3">3. Academy</span>
+        <span class="step" id="s4">4. Review</span>
     </div>
 
-    <div class="content-area">
-        <div id="part1" class="stage active">
+    <div class="wizard-container">
+        <div id="part1" class="setup-stage active-slide" style="display: block;">
             <div class="form-group">
                 <label>Product Name</label>
-                <span class="hint">Professional title for the digital asset</span>
-                <input type="text" id="pName" placeholder="Enter name">
+                <span class="hint">Make it magnetic for Catalysts to push</span>
+                <input type="text" id="pName" placeholder="e.g. Wealth Vault Masterclass">
             </div>
-
             <div class="form-group">
-                <label>Product Category</label>
-                <span class="hint">Select industry sector</span>
+                <label>Category</label>
+                <span class="hint">Choose the correct sector</span>
                 <select id="pCat">
                     <option value="">Select Category</option>
-                    <option>Business & Finance</option>
-                    <option>Digital Marketing</option>
-                    <option>Technology</option>
+                    <option>Affiliate Marketing</option>
+                    <option>E-commerce</option>
                 </select>
             </div>
-
-            <div class="form-group">
-                <label>Price (₦)</label>
-                <input type="number" id="pPrice" placeholder="0.00">
-            </div>
-
-            <div class="nav-actions">
-                <button class="btn-primary" onclick="navigateTo(2)">Next</button>
-            </div>
+            <button type="button" class="btn-nav" onclick="goTo(2)">Next</button>
         </div>
 
-        <div id="part2" class="stage">
-            <div style="margin-top: 50px;">
-                <p style="font-weight: 800; color: var(--emerald);">PHASE 2 LOADED</p>
-            </div>
-            <div class="nav-actions">
-                <button class="btn-back" onclick="navigateTo(1)">Back</button>
-                <button class="btn-primary" onclick="navigateTo(3)">Next</button>
-            </div>
+        <div id="part2" class="setup-stage">
+            <h2 style="margin-top: 30px; color: var(--emerald);">Gateway Stage</h2>
+            <button type="button" class="btn-nav" onclick="goTo(3)">Next</button>
+            <button type="button" class="btn-back" onclick="goTo(1)">Back</button>
         </div>
     </div>
 </div>
 
 <script>
-    let notificationTimeout;
+    let notifyTimer;
 
-    function navigateTo(step) {
-        // Validation for Identity Stage
+    function goTo(step) {
         if (step === 2) {
-            const nameInput = document.getElementById('pName').value.trim();
-            if (!nameInput) {
-                triggerNotification("Product name is required", 2);
-                return;
-            }
+            const name = document.getElementById('pName').value.trim();
+            if (!name) { showNotification("Product name is required", 2); return; }
         }
 
-        // Logic to switch stages
-        document.querySelectorAll('.stage').forEach(el => {
-            el.classList.remove('active');
-            el.style.display = 'none';
+        document.querySelectorAll('.setup-stage').forEach(part => {
+            part.style.display = 'none';
+            part.classList.remove('active-slide');
+            part.style.opacity = "0";
         });
 
         const target = document.getElementById('part' + step);
         if (target) {
             target.style.display = 'block';
-            setTimeout(() => { target.classList.add('active'); }, 50);
-            updateTracker(step);
+            setTimeout(() => {
+                target.classList.add('active-slide');
+                target.style.opacity = "1";
+            }, 50);
+            updateHeader(step);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        closeNotification();
     }
 
-    function triggerNotification(msg, step) {
-        const bar = document.getElementById('notificationBar');
-        document.getElementById('notifText').innerText = msg;
+    function showNotification(message, nextStep) {
+        const bar = document.getElementById('mochearnNotify');
+        document.getElementById('notifyText').innerText = message;
         bar.classList.add('show');
-
-        document.getElementById('skipBtn').onclick = () => {
-            closeNotification();
-            navigateTo(step);
+        
+        document.getElementById('skipBtn').onclick = function() {
+            bar.classList.remove('show');
+            goTo(nextStep);
         };
 
-        if (notificationTimeout) clearTimeout(notificationTimeout);
-        notificationTimeout = setTimeout(closeNotification, 4000);
+        if (notifyTimer) clearTimeout(notifyTimer);
+        notifyTimer = setTimeout(() => { bar.classList.remove('show'); }, 5000);
     }
 
-    function closeNotification() {
-        document.getElementById('notificationBar').classList.remove('show');
-    }
-
-    function updateTracker(step) {
-        document.querySelectorAll('.step-label').forEach((el, index) => {
-            if (index + 1 === step) {
-                el.classList.add('active');
-            } else {
-                el.classList.remove('active');
-            }
+    function updateHeader(step) {
+        const steps = document.querySelectorAll('.step');
+        steps.forEach((s, i) => {
+            if ((i + 1) === step) s.classList.add('active');
+            else s.classList.remove('active');
         });
     }
 </script>
