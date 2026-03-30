@@ -453,26 +453,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 /**
- * THE MASTER KEY: Direct & Stable Navigation
+ * THE DIAGNOSTIC KEY: Tells us exactly why it won't move
  */
 function goTo(step) {
-    // 🛡️ SECURITY: If trying to go to Step 2, Name MUST exist
+    console.log("Button clicked! Trying to go to step: " + step);
+
+    // 🛡️ SECURITY: Moving to Step 2
     if (step === 2) {
-        const pName = document.getElementById('pName');
-        if (!pName || !pName.value.trim()) {
+        const pNameInput = document.getElementById('pName');
+        
+        // Check if the input even exists in your HTML
+        if (!pNameInput) {
+            alert("SYSTEM ERROR: I cannot find the 'pName' input in your HTML! 🛡️");
+            return;
+        }
+
+        const nameValue = pNameInput.value.trim();
+        console.log("Product Name found: " + nameValue);
+
+        if (nameValue === "") {
             showMochearnNotify("Product name required to continue 🛡️");
             return;
         }
     }
 
-    // 🛡️ SECURITY: If trying to go to Step 3, Gateway MUST be picked
+    // 🛡️ SECURITY: Moving to Step 3
     if (step === 3 && !window.isSkipping) {
         const extForm = document.getElementById('f-ext');
         const custForm = document.getElementById('f-cust');
         
-        // Check if the user has picked Option 1 or Option 2
-        const isExtVisible = extForm && extForm.style.display === 'block';
-        const isCustVisible = custForm && custForm.style.display === 'block';
+        const isExtVisible = extForm && (extForm.style.display === 'block' || extForm.offsetParent !== null);
+        const isCustVisible = custForm && (custForm.style.display === 'block' || custForm.offsetParent !== null);
 
         if (!isExtVisible && !isCustVisible) {
             showMochearnNotify("Please select a deployment method 🛡️");
@@ -480,10 +491,9 @@ function goTo(step) {
         }
     }
     
-    // 🛡️ CLEARANCE: If they passed the checks (or skipped), move them!
     window.isSkipping = false; 
     executeSwitch(step);
-}
+     }
 
 /**
  * THE SKIP REPAIR: Fixes the Step 2 Skip Button
