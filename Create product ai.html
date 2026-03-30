@@ -440,39 +440,87 @@
     </div>
     </div>
  <script>
-// 🛡️ MOCHEARN SMART ENGINE (PHASE 1 - UPDATED)
+// 🛡️ MOCHEARN SMART ENGINE: PHASE 2 (GATEWAY)
 let notifyTimer;
 
-// 1. THE TYPING DETECTOR: Removes warning when user starts typing
+// 1. TYPING & SELECTION SAVER
 document.addEventListener('DOMContentLoaded', () => {
     const pNameInput = document.getElementById('pName');
     if(pNameInput) {
         pNameInput.addEventListener('input', () => {
-            if (pNameInput.value.trim().length > 0) {
-                hideMochearnNotify();
-            }
+            if (pNameInput.value.trim().length > 0) hideMochearnNotify();
         });
     }
 });
 
+/**
+ * THE MAIN GATEWAY: Controls all movement
+ */
 function goTo(step) {
+    // 🛡️ VALIDATION: Moving from 1 to 2
     if (step === 2) {
         const name = document.getElementById('pName').value.trim();
-        // 🛡️ SMART CHECK: Is name empty?
         if (!name) {
-            showMochearnNotify("Product name required to continue 🛡️", 2);
+            showMochearnNotify("Product name required to continue 🛡️");
             return;
         }
-        // 🛡️ FUTURE CHECK: Here is where we will check if Name Exists in Database
     }
+    
+    // 🛡️ VALIDATION: Moving from 2 to 3
+    if (step === 3) {
+        // Check if any sub-form is actually visible (meaning they picked an option)
+        const isExtVisible = document.getElementById('f-ext').style.display === 'block';
+        const isCustVisible = document.getElementById('f-cust').style.display === 'block';
+        
+        if (!isExtVisible && !isCustVisible) {
+            showMochearnNotify("Please select a deployment method 🛡️");
+            return;
+        }
+    }
+
     executeSwitch(step);
 }
 
+/**
+ * STEP 2 ENGINE: The Dropdown & Option Switcher
+ */
+function toggleOptions() {
+    const opts = document.getElementById('opts');
+    const btn = document.getElementById('dropBtn');
+    const isOpen = opts.style.display === 'block';
+    
+    opts.style.display = isOpen ? 'none' : 'block';
+    btn.classList.toggle('open', !isOpen);
+}
+
+function selectGate(element, type) {
+    // 1. Clear previous selections
+    document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected'));
+    document.querySelectorAll('.sub-form').forEach(form => form.style.display = 'none');
+    
+    // 2. Highlight chosen option
+    element.classList.add('selected');
+    
+    // 3. Show the specific form (External or Custom)
+    const targetForm = document.getElementById('f-' + type);
+    if (targetForm) {
+        targetForm.style.display = 'block';
+        targetForm.style.animation = "slideIn 0.4s ease forwards";
+    }
+    
+    // 4. Close the dropdown automatically
+    toggleOptions();
+}
+
+/**
+ * THE SWITCHBOARD: Swaps the Parts
+ */
 function executeSwitch(step) {
     document.querySelectorAll('.setup-stage').forEach(part => {
         part.style.display = 'none';
         part.classList.remove('active-slide');
     });
+
     const target = document.getElementById('part' + step);
     if (target) {
         target.style.display = 'block';
@@ -482,15 +530,13 @@ function executeSwitch(step) {
     }
 }
 
-function showMochearnNotify(message, nextStep) {
+/**
+ * NOTIFICATION & HEADER UTILITIES
+ */
+function showMochearnNotify(message) {
     const bar = document.getElementById('mochearnNotify');
-    // Force a slim, straight-line style
-    bar.style.display = "flex";
-    bar.style.flexDirection = "row";
-    bar.style.alignItems = "center";
-    bar.style.padding = "8px 20px"; // Reduced padding for "Skinny" look
-    
     bar.querySelector('p').innerText = message;
+    bar.classList.add('show');
     bar.style.top = "20px";
 
     if (notifyTimer) clearTimeout(notifyTimer);
