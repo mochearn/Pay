@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochearn Studio | Create Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --emerald: #0e6954; --bg: #fcfcfc; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); padding-bottom: 50px; overflow-x: hidden; max-width: 420px; margin: 0 auto; border: 1px solid #eee; box-shadow: 0 0 50px rgba(0,0,0,0.1); min-height: 100vh; }
+
+        /* HEADER SECTION */
+        .studio-header { background: var(--emerald); color: white; padding: 60px 20px; text-align: center; margin-bottom: 40px; }
+        .studio-header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+        .studio-header p { opacity: 0.8; font-size: 0.9rem; font-weight: 400; }
+
+        /* WIZARD CONTAINER */
+        .wizard-container { width: 100%; padding: 20px; background: #fff; min-height: 500px; }
+
+        /* STEP NAVIGATION */
+        .step-nav { display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .step { font-size: 0.65rem; font-weight: 800; color: #ccc; text-transform: uppercase; text-align: center; }
+        .step.active { color: var(--emerald); border-bottom: 2px solid var(--emerald); padding-bottom: 18px; margin-bottom: -21px; }
+
+        /* FORM STYLING */
+        .setup-stage { display: none; opacity: 0; transition: opacity 0.4s ease; }
+        .setup-stage.active-slide { display: block; opacity: 1; }
+
+        .form-group { margin-bottom: 25px; }
+        label { display: block; font-weight: 800; font-size: 0.85rem; color: #333; margin-bottom: 5px; }
+        .hint { font-size: 0.7rem; color: #999; margin-bottom: 10px; display: block; line-height: 1.3; }
+        
+        input, select { width: 100%; padding: 18px; border: 2px solid #f2f2f2; border-radius: 8px; outline: none; font-size: 1rem; background: #fafafa; transition: 0.3s; }
+        input:focus { border-color: var(--emerald); background: #fff; }
+
+        .btn-next { width: 100%; background: var(--emerald); color: #fff; height: 55px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: 20px; box-shadow: 0 4px 15px rgba(14, 105, 84, 0.3); }
+
+        /* NOTIFICATION BAR */
+        #mochearnNotify { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: rgba(0, 0, 0, 0.85); color: white; padding: 15px 20px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    </style>
+</head>
+<body>
+
+<div id="mochearnNotify">
+    <p id="notifyText" style="font-size: 0.8rem; font-weight: 600;">Please fill the required fields 🛡️</p>
+    <span id="skipBtn" style="color: var(--emerald); font-weight: 900; font-size: 0.75rem; cursor: pointer;">SKIP →</span>
+</div>
+
+<header class="studio-header">
+    <h1>Mochearn Studio 🏗️</h1>
+    <p>The system is built for scale. Let's create your next empire.</p>
+</header>
+
+<div class="wizard-container">
+    <div class="step-nav">
+        <span class="step active" id="s1">1. Identity</span>
+        <span class="step" id="s2">2. Sales Gateway</span>
+        <span class="step" id="s3">3. Academy</span>
+        <span class="step" id="s4">4. Review</span>
+    </div>
+
+    <div id="part1" class="setup-stage active-slide" style="display: block;">
+        <div class="form-group">
+            <label>Product Name</label>
+            <span class="hint">Make it magnetic for Catalysts to push</span>
+            <input type="text" id="pName" placeholder="e.g. Wealth Vault Masterclass">
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <span class="hint">Choose the correct sector</span>
+            <select id="pCat">
+                <option value="">Select Category</option>
+                <option>Affiliate Marketing</option>
+                <option>E-commerce</option>
+                <option>Web Development</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Selling Price (₦)</label>
+            <input type="number" id="pPrice" placeholder="25000">
+        </div>
+        <div class="form-group">
+            <label>Catalyst Commission (%)</label>
+            <input type="number" id="pComm" placeholder="50">
+        </div>
+        <button type="button" class="btn-next" onclick="goTo(2)">CONTINUE TO GATEWAY →</button>
+    </div>
+
+    <div id="part2" class="setup-stage">
+        <h2 style="text-align: center; color: var(--emerald);">Step 2 Loaded</h2>
+        <p style="text-align: center; margin-top: 10px;">The foundation is working! 🚀</p>
+        <button type="button" class="btn-next" style="background: #333;" onclick="goTo(1)">← BACK TO IDENTITY</button>
+    </div>
+</div>
+
+<script>
+    let notifyTimer;
+
+    function goTo(step) {
+        // Validation for Step 1
+        if (step === 2) {
+            const name = document.getElementById('pName').value.trim();
+            if (!name) { 
+                showNotification("Please provide a product name to continue.", 2);
+                return; 
+            }
+        }
+
+        // Execution of Transition
+        document.querySelectorAll('.setup-stage').forEach(part => {
+            part.style.display = 'none';
+            part.classList.remove('active-slide');
+            part.style.opacity = "0";
+        });
+
+        const target = document.getElementById('part' + step);
+        if (target) {
+            target.style.display = 'block';
+            setTimeout(() => {
+                target.classList.add('active-slide');
+                target.style.opacity = "1";
+            }, 50);
+            updateWizardHeader(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function showNotification(message, nextStep) {
+        const bar = document.getElementById('mochearnNotify');
+        document.getElementById('notifyText').innerText = message;
+        bar.style.top = "20px";
+        
+        document.getElementById('skipBtn').onclick = function() {
+            bar.style.top = "-100px";
+            goTo(nextStep);
+        };
+
+        if (notifyTimer) clearTimeout(notifyTimer);
+        notifyTimer = setTimeout(() => { bar.style.top = "-100px"; }, 5000);
+    }
+
+    function updateWizardHeader(step) {
+        const steps = document.querySelectorAll('.step');
+        steps.forEach((s, i) => {
+            if ((i + 1) === step) {
+                s.classList.add('active');
+            } else {
+                s.classList.remove('active');
+            }
+        });
+    }
+</script>
+
+</body>
+  </html>
