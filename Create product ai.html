@@ -95,16 +95,39 @@
     visibility: visible !important;
     opacity: 1 !important;
         }
+        /* 🛡️ THE SMART NOTIFICATION PILL */
+#mochearnNotify {
+    position: fixed; 
+    top: -100px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: auto; 
+    min-width: 280px;
+    background: #111; 
+    color: white; 
+    padding: 10px 25px; 
+    border-radius: 50px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 10000; 
+    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    white-space: nowrap;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+#mochearnNotify p {
+    margin: 0;
+    padding-right: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+        }
     </style>
 </head>
 <body>
-<div id="mochearnNotify" style="position: fixed; top: -100px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 380px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); color: white; padding: 12px 20px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-    <p style="font-size: 0.8rem; font-weight: 600;">Please fill at least one box 🛡️</p>
-    <span onclick="forceGoTo(2)" style="color: var(--emerald); font-weight: 900; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">SKIP →</span>
-    </div>
-<div id="warningBar">
-    <p style="font-size: 0.8rem;">Fill a box to continue 🛡️</p>
-    <button class="skip-btn" onclick="forceSkip()">SKIP</button>
+<div id="mochearnNotify">
+    <p>Product name required to continue 🛡️</p>
+    <span onclick="forceGoTo(2)" style="color: var(--emerald); font-weight: 900; font-size: 0.7rem; cursor: pointer; border-left: 1px solid #333; padding-left: 12px;">SKIP →</span>
 </div>
 
 <header class="studio-header">
