@@ -453,16 +453,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/**/**
- * UPDATED GATEWAY: Handles the "Nothing shows" error for Step 3
+/**
+ * THE REPAIRED GATEWAY: Handles Step 1 Name Check & Step 3 Reveal
  */
 function goTo(step) {
-    // 🛡️ Ensure Part 3 content exists before switching
+    // 🛡️ 1. STEP 1 SECURITY: Check Name before moving to Step 2
+    if (step === 2) {
+        const nameInput = document.getElementById('pName');
+        const nameValue = nameInput ? nameInput.value.trim() : "";
+        
+        if (!nameValue) {
+            showMochearnNotify("Product name required to continue 🛡️");
+            return;
+        }
+    }
+
+    // 🛡️ 2. STEP 3 REVEAL: Ensure Part 3 content exists
     if (step === 3) {
         const p3 = document.getElementById('part3');
-        if (p3) p3.style.display = 'block'; // Force reveal
+        if (p3) p3.style.display = 'block'; 
         
-        // Check if a method was picked (unless skipping)
         const isExtVisible = document.getElementById('f-ext').style.display === 'block';
         const isCustVisible = document.getElementById('f-cust').style.display === 'block';
         
@@ -472,9 +482,9 @@ function goTo(step) {
         }
     }
     
-    window.isSkipping = false; // Reset skip state
+    window.isSkipping = false; 
     executeSwitch(step);
-}
+     }
 
 /**
  * THE SKIP REPAIR: Fixes the Step 2 Skip Button
