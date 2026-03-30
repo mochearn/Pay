@@ -452,7 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
 /**
  * THE REPAIRED GATEWAY: Handles Step 1 Name Check & Step 3 Reveal
  */
@@ -484,7 +483,7 @@ function goTo(step) {
     
     window.isSkipping = false; 
     executeSwitch(step);
-     }
+}
 
 /**
  * THE SKIP REPAIR: Fixes the Step 2 Skip Button
@@ -524,24 +523,6 @@ function selectGate(element, type) {
     
     // 4. Close the dropdown automatically
     toggleOptions();
-}
-
-/**
- * THE SWITCHBOARD: Swaps the Parts
- */
-function executeSwitch(step) {
-    document.querySelectorAll('.setup-stage').forEach(part => {
-        part.style.display = 'none';
-        part.classList.remove('active-slide');
-    });
-
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        setTimeout(() => { target.classList.add('active-slide'); }, 10);
-        updateHeader(step);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 }
 
 /**
