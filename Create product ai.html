@@ -444,26 +444,11 @@
 let notifyTimer;
 window.isSkipping = false;
 
-// 1. THE SWITCHBOARD: Forces the pages to swap
-function executeSwitch(step) {
-    console.log("Switching to Part " + step);
-    document.querySelectorAll('.setup-stage').forEach(part => {
-        part.style.display = 'none';
-        part.classList.remove('active-slide');
-    });
-
-    const target = document.getElementById('part' + step);
-    if (target) {
-        target.style.display = 'block';
-        setTimeout(() => { target.classList.add('active-slide'); }, 50);
-        updateHeader(step);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-}
-
-// 2. THE GATEWAY: The "Brain" that checks inputs
+/**
+ * THE NUCLEAR GATEWAY: This stops Step 2 Leaks and Forces Step 3 to show
+ */
 function goTo(step) {
-    // 🛡️ From 1 to 2
+    // 🛡️ 1. STEP 1 -> 2: Name Check
     if (step === 2) {
         const pName = document.getElementById('pName').value.trim();
         if (!pName) {
@@ -472,21 +457,56 @@ function goTo(step) {
         }
     }
 
-    // 🛡️ From 2 to 3
+    // 🛡️ 2. STEP 2 -> 3: Selection Check (The Leak Fix)
     if (step === 3 && !window.isSkipping) {
-        const fExt = document.getElementById('f-ext');
-        const fCust = document.getElementById('f-cust');
-        const hasPicked = (fExt && fExt.style.display === 'block') || (fCust && fCust.style.display === 'block');
+        const extForm = document.getElementById('f-ext');
+        const custForm = document.getElementById('f-cust');
         
-        if (!hasPicked) {
+        // We check if the style is EXPLICITLY "block". If not, they haven't picked.
+        const isExtOn = extForm && extForm.style.display === 'block';
+        const isCustOn = custForm && custForm.style.display === 'block';
+
+        if (!isExtOn && !isCustOn) {
             showMochearnNotify("Please select a deployment method 🛡️");
             return;
         }
     }
-
-    window.isSkipping = false;
+    
+    window.isSkipping = false; 
     executeSwitch(step);
 }
+
+/**
+ * THE "FORCE REVEAL" ENGINE: Kills the Step 3 Black Screen Error
+ */
+function executeSwitch(step) {
+    // 1. Hide every single part first
+    document.querySelectorAll('.setup-stage').forEach(part => {
+        part.style.display = 'none';
+        part.style.opacity = '0'; // Ensure it's ready to fade in
+        part.classList.remove('active-slide');
+    });
+
+    // 2. Target the new part
+    const target = document.getElementById('part' + step);
+    if (target) {
+        // NUCLEAR FORCE: We use !important level logic here
+        target.setAttribute('style', 'display: block !important; opacity: 1 !important;');
+        
+        // 3. Special initialization for Step 3 content
+        if (step === 3) {
+            console.log("Activating Step 3 Academy Protocols...");
+            if (typeof switchHosting === "function") switchHosting();
+        }
+
+        setTimeout(() => { 
+            target.classList.add('active-slide'); 
+        }, 10);
+
+        updateHeader(step);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+     }
 
 // 3. THE SKIPPER
 function forceGoTo(step) {
