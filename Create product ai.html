@@ -558,6 +558,24 @@ function updateHeader(step) {
         else s.classList.remove('active');
     });
      }
+     /**
+ * STEP 3 ACADEMY SWITCHER: Prevents the "Blank Screen"
+ */
+function switchHosting() {
+    const type = document.getElementById('hostType').value;
+    // Hide all hosting sections
+    document.querySelectorAll('.hosting-section').forEach(sec => {
+        sec.style.display = 'none';
+    });
+    // Show selected one
+    const target = document.getElementById('section-' + type);
+    if (target) target.style.display = 'block';
+}
+
+// Ensure the first option is visible by default
+document.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('part3')) switchHosting();
+});
  </script>
 </body>
     </html>
