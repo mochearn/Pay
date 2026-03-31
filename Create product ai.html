@@ -440,32 +440,30 @@
     </div>
     </div>
  <script>
-// 🛡️ MOCHEARN MASTER ENGINE: REBUILT & STABLE
+   // 🛡️ MOCHEARN UNIVERSAL ENGINE (VIVO-READY)
 let notifyTimer;
 window.isSkipping = false;
-/**
- * THE UNIVERSAL GATEWAY: Bulletproof logic for any mobile browser
- */
+
 function goTo(step) {
     // 🛡️ SECURITY 1: Name Check
     if (step === 2) {
-        const pName = document.getElementById('pName');
+        var pName = document.getElementById('pName');
         if (!pName || pName.value.trim() === "") {
             showMochearnNotify("Product name required to continue 🛡️");
             return;
         }
     }
 
-    // 🛡️ SECURITY 2: Selection Check (Universal Method)
+    // 🛡️ SECURITY 2: Gateway Check
     if (step === 3 && !window.isSkipping) {
-        const extForm = document.getElementById('f-ext');
-        const custForm = document.getElementById('f-cust');
+        var fExt = document.getElementById('f-ext');
+        var fCust = document.getElementById('f-cust');
         
-        // We check if the box is actually visible to the user's eye
-        const isExtOn = extForm && (extForm.offsetWidth > 0 || extForm.offsetHeight > 0);
-        const isCustOn = custForm && (custForm.offsetWidth > 0 || custForm.offsetHeight > 0);
+        // UNIVERSAL CHECK: Does the box have a height?
+        var isExtVisible = (fExt && fExt.offsetHeight > 0);
+        var isCustVisible = (fCust && fCust.offsetHeight > 0);
 
-        if (!isExtOn && !isCustOn) {
+        if (!isExtVisible && !isCustVisible) {
             showMochearnNotify("Please select a deployment method 🛡️");
             return;
         }
@@ -475,84 +473,82 @@ function goTo(step) {
     executeSwitch(step);
 }
 
-/**
- * THE UNIVERSAL SWITCH: Force-reveals Part 3 on all phones
- */
 function executeSwitch(step) {
-    // 1. Find all parts and force them to vanish
-    const allParts = document.getElementsByClassName('setup-stage');
-    for (let i = 0; i < allParts.length; i++) {
-        allParts[i].style.setProperty('display', 'none', 'important');
-        allParts[i].classList.remove('active-slide');
+    // 1. Force hide all parts using a standard loop
+    var stages = document.getElementsByClassName('setup-stage');
+    for (var i = 0; i < stages.length; i++) {
+        stages[i].style.display = 'none';
+        stages[i].classList.remove('active-slide');
     }
 
-    // 2. Force the target part to show up
-    const target = document.getElementById('part' + step);
+    // 2. Target the new part
+    var target = document.getElementById('part' + step);
     if (target) {
-        // We use .style.cssText to override EVERYTHING
-        target.style.cssText = "display: block !important; opacity: 1 !important; visibility: visible !important;";
-        
-        // 3. Kickstart Part 3 Content
-        if (step === 3) {
-            if (typeof switchHosting === "function") {
+        // We use a small timeout to let the phone "Clear" the old screen first
+        setTimeout(function() {
+            target.style.display = 'block';
+            target.style.opacity = '1';
+            target.classList.add('active-slide');
+            
+            if (step === 3 && typeof switchHosting === 'function') {
                 switchHosting();
             }
-        }
-
-        updateHeader(step);
-        window.scrollTo(0, 0); // Universal scroll to top
+            window.scrollTo(0, 0);
+            updateHeader(step);
+        }, 100); // 100ms delay for Vivo processing
     }
-     }
+}
 
-// 3. THE SKIPPER
+function toggleOptions() {
+    var opts = document.getElementById('opts');
+    if (opts) {
+        opts.style.display = (opts.style.display === 'block') ? 'none' : 'block';
+    }
+}
+
+function selectGate(element, type) {
+    // 1. Clear previous
+    var items = document.getElementsByClassName('option-item');
+    for (var i = 0; i < items.length; i++) items[i].classList.remove('selected');
+    
+    var forms = document.getElementsByClassName('sub-form');
+    for (var j = 0; j < forms.length; j++) forms[j].style.display = 'none';
+    
+    // 2. Select new
+    element.classList.add('selected');
+    var target = document.getElementById('f-' + type);
+    if (target) target.style.display = 'block';
+    
+    toggleOptions(); // Close dropdown
+}
+
 function forceGoTo(step) {
     window.isSkipping = true;
     hideMochearnNotify();
     executeSwitch(step);
 }
 
-// 4. STEP 2 DROPDOWN LOGIC
-function toggleOptions() {
-    const opts = document.getElementById('opts');
-    opts.style.display = (opts.style.display === 'block') ? 'none' : 'block';
-}
-
-function selectGate(element, type) {
-    document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected'));
-    document.querySelectorAll('.sub-form').forEach(form => form.style.display = 'none');
-    
-    element.classList.add('selected');
-    document.getElementById('f-' + type).style.display = 'block';
-    toggleOptions(); // Close menu
-}
-
-// 5. NOTIFICATIONS & UI
 function showMochearnNotify(msg) {
-    const bar = document.getElementById('mochearnNotify');
-    bar.querySelector('p').innerText = msg;
-    bar.style.top = "20px";
-    if (notifyTimer) clearTimeout(notifyTimer);
-    notifyTimer = setTimeout(hideMochearnNotify, 4000);
+    var bar = document.getElementById('mochearnNotify');
+    if (bar) {
+        bar.querySelector('p').innerText = msg;
+        bar.style.top = "20px";
+        if (notifyTimer) clearTimeout(notifyTimer);
+        notifyTimer = setTimeout(hideMochearnNotify, 4000);
+    }
 }
 
 function hideMochearnNotify() {
-    document.getElementById('mochearnNotify').style.top = "-100px";
+    var bar = document.getElementById('mochearnNotify');
+    if (bar) bar.style.top = "-100px";
 }
 
 function updateHeader(step) {
-    const steps = document.querySelectorAll('.step');
-    steps.forEach((s, i) => {
-        s.classList.toggle('active', (i + 1) === step);
-    });
-}
-
-// 6. INITIALIZE
-document.addEventListener('DOMContentLoaded', () => {
-    // Fix for Step 1 input "Listening"
-    document.getElementById('pName').addEventListener('input', function() {
-        if (this.value.trim().length > 0) hideMochearnNotify();
-    });
-});
+    var steps = document.getElementsByClassName('step');
+    for (var i = 0; i < steps.length; i++) {
+        steps[i].classList.toggle('active', (i + 1) === step);
+    }
+    }
  </script>
 </body>
     </html>
