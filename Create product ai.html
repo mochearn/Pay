@@ -443,28 +443,27 @@
 // 🛡️ MOCHEARN MASTER ENGINE: REBUILT & STABLE
 let notifyTimer;
 window.isSkipping = false;
-
 /**
- * THE NUCLEAR GATEWAY: This stops Step 2 Leaks and Forces Step 3 to show
+ * THE UNIVERSAL GATEWAY: Bulletproof logic for any mobile browser
  */
 function goTo(step) {
-    // 🛡️ 1. STEP 1 -> 2: Name Check
+    // 🛡️ SECURITY 1: Name Check
     if (step === 2) {
-        const pName = document.getElementById('pName').value.trim();
-        if (!pName) {
+        const pName = document.getElementById('pName');
+        if (!pName || pName.value.trim() === "") {
             showMochearnNotify("Product name required to continue 🛡️");
             return;
         }
     }
 
-    // 🛡️ 2. STEP 2 -> 3: Selection Check (The Leak Fix)
+    // 🛡️ SECURITY 2: Selection Check (Universal Method)
     if (step === 3 && !window.isSkipping) {
         const extForm = document.getElementById('f-ext');
         const custForm = document.getElementById('f-cust');
         
-        // We check if the style is EXPLICITLY "block". If not, they haven't picked.
-        const isExtOn = extForm && extForm.style.display === 'block';
-        const isCustOn = custForm && custForm.style.display === 'block';
+        // We check if the box is actually visible to the user's eye
+        const isExtOn = extForm && (extForm.offsetWidth > 0 || extForm.offsetHeight > 0);
+        const isCustOn = custForm && (custForm.offsetWidth > 0 || custForm.offsetHeight > 0);
 
         if (!isExtOn && !isCustOn) {
             showMochearnNotify("Please select a deployment method 🛡️");
@@ -477,34 +476,31 @@ function goTo(step) {
 }
 
 /**
- * THE "FORCE REVEAL" ENGINE: Kills the Step 3 Black Screen Error
+ * THE UNIVERSAL SWITCH: Force-reveals Part 3 on all phones
  */
 function executeSwitch(step) {
-    // 1. Hide every single part first
-    document.querySelectorAll('.setup-stage').forEach(part => {
-        part.style.display = 'none';
-        part.style.opacity = '0'; // Ensure it's ready to fade in
-        part.classList.remove('active-slide');
-    });
+    // 1. Find all parts and force them to vanish
+    const allParts = document.getElementsByClassName('setup-stage');
+    for (let i = 0; i < allParts.length; i++) {
+        allParts[i].style.setProperty('display', 'none', 'important');
+        allParts[i].classList.remove('active-slide');
+    }
 
-    // 2. Target the new part
+    // 2. Force the target part to show up
     const target = document.getElementById('part' + step);
     if (target) {
-        // NUCLEAR FORCE: We use !important level logic here
-        target.setAttribute('style', 'display: block !important; opacity: 1 !important;');
+        // We use .style.cssText to override EVERYTHING
+        target.style.cssText = "display: block !important; opacity: 1 !important; visibility: visible !important;";
         
-        // 3. Special initialization for Step 3 content
+        // 3. Kickstart Part 3 Content
         if (step === 3) {
-            console.log("Activating Step 3 Academy Protocols...");
-            if (typeof switchHosting === "function") switchHosting();
+            if (typeof switchHosting === "function") {
+                switchHosting();
+            }
         }
 
-        setTimeout(() => { 
-            target.classList.add('active-slide'); 
-        }, 10);
-
         updateHeader(step);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0); // Universal scroll to top
     }
      }
 
