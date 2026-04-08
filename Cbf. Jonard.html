@@ -3,67 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF | Live Status</title>
+    <title>CBF | Elite Showcase</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #ffffff; overflow-x: hidden; }
+        body { background-color: #000; overflow-x: hidden; font-family: Arial, sans-serif; }
 
         /* SLIM STATUS BAR */
         .status-bar {
-            background: #001f3f; /* Deep Bureau Blue */
+            background: #001f3f;
             color: #ffffff;
-            padding: 8px 0;
-            font-size: 11px;
+            padding: 10px 0;
+            font-size: 12px;
             text-align: center;
-            font-family: Arial, sans-serif;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            z-index: 100;
         }
 
-        /* RESTORED PULSE ANIMATION */
         .pulse-dot {
-            height: 8px;
-            width: 8px;
-            background-color: #FF4136;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 6px;
-            box-shadow: 0 0 8px #FF4136;
+            height: 8px; width: 8px; background-color: #FF4136;
+            border-radius: 50%; display: inline-block;
+            margin-right: 6px; box-shadow: 0 0 8px #FF4136;
             animation: pulse-effect 1.5s infinite;
         }
 
         @keyframes pulse-effect {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
+            0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; }
         }
 
-        /* IMAGE SLIDER */
-        .slider-container {
+        /* FULL SCREEN FADING SLIDER */
+        .fading-slider {
+            position: relative;
             width: 100%;
-            height: 180px;
+            height: 400px; /* Adjust height based on your preference */
             overflow: hidden;
             background: #000;
-            border-bottom: 3px solid #FFDC00; /* Bureau Gold */
+            border-bottom: 4px solid #FFDC00;
         }
 
-        .slider-track {
-            display: flex;
-            width: calc(280px * 22); /* 11 images x 2 */
-            animation: scroll 30s linear infinite;
-        }
-
-        .slider-track img {
-            width: 280px;
-            height: 180px;
+        .fading-slider img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-right: 2px solid #fff;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-280px * 11)); }
+        /* Animation Logic for 5 key images (Showing the Future) */
+        .fading-slider img:nth-child(1) { animation: fade 20s infinite 0s; }
+        .fading-slider img:nth-child(2) { animation: fade 20s infinite 4s; }
+        .fading-slider img:nth-child(3) { animation: fade 20s infinite 8s; }
+        .fading-slider img:nth-child(4) { animation: fade 20s infinite 12s; }
+        .fading-slider img:nth-child(5) { animation: fade 20s infinite 16s; }
+
+        @keyframes fade {
+            0% { opacity: 0; }
+            5% { opacity: 1; }
+            20% { opacity: 1; }
+            25% { opacity: 0; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
@@ -74,33 +76,17 @@
         LIVE: CENTRAL BUREAU FUND — APRIL CYCLE IS <span style="color: #FFDC00;">84% CAPACITY</span>
     </div>
 
-    <div class="slider-container">
-        <div class="slider-track">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400" alt="Office">
-            <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=400" alt="Finance">
-            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=400" alt="Luxury">
-            <img src="https://images.unsplash.com/photo-1611974714851-482061384735?q=80&w=400" alt="Analysis">
-            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=400" alt="Dubai">
-            <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=400" alt="Growth">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=400" alt="Real Estate">
-            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=400" alt="Currency">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400" alt="Strategy">
-            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400" alt="Executive">
-            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=400" alt="Success">
-            
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400" alt="Office">
-            <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=400" alt="Finance">
-            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=400" alt="Luxury">
-            <img src="https://images.unsplash.com/photo-1611974714851-482061384735?q=80&w=400" alt="Analysis">
-            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=400" alt="Dubai">
-            <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=400" alt="Growth">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=400" alt="Real Estate">
-            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=400" alt="Currency">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400" alt="Strategy">
-            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=400" alt="Executive">
-            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=400" alt="Success">
-        </div>
+    <div class="fading-slider">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800" alt="Working">
+        
+        <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=800" alt="Result">
+        
+        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800" alt="Shopping">
+        
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800" alt="Freedom">
+        
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=800" alt="Community">
     </div>
 
 </body>
-                </html>
+            </html>
