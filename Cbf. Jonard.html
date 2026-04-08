@@ -6,58 +6,47 @@
     <title>Central Bureau Fund | Private Briefing</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f9; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #ffffff; color: #1a2b3c; overflow-x: hidden; }
 
         :root {
             --bureau-blue: #001f3f;
             --action-blue: #0074D9;
             --bureau-gold: #FFDC00;
-            --emergency-red: #FF4136;
         }
 
-        /* 1. SLIM STATUS BAR */
+        /* SLIM STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
-            padding: 6px 0; /* Shortened height */
+            padding: 8px 0;
             font-size: 11px;
-            letter-spacing: 1px;
-            font-weight: bold;
             text-align: center;
+            font-weight: bold;
             text-transform: uppercase;
+            position: relative;
+            z-index: 10;
         }
 
-        .pulse-dot {
-            height: 7px;
-            width: 7px;
-            background-color: var(--emergency-red);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
-            animation: pulse-animation 1.5s infinite;
-        }
-
-        /* 2. IMAGE LOOPING SLIDER */
+        /* IMAGE SLIDER */
         .slider-container {
             width: 100%;
-            height: 180px; /* Adjust height as needed */
+            height: 160px;
             overflow: hidden;
-            background: #eee;
-            border-bottom: 2px solid var(--bureau-gold);
-            position: relative;
+            background: #000;
+            border-bottom: 3px solid var(--bureau-gold);
         }
 
         .slider-track {
             display: flex;
-            width: calc(250px * 22); /* 11 images x 2 for seamless loop */
-            animation: scroll 40s linear infinite;
+            width: calc(250px * 22); /* 11 images x 2 for loop */
+            animation: scroll 30s linear infinite;
         }
 
         .slider-track img {
             width: 250px;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
-            filter: brightness(0.9);
+            border-right: 2px solid #fff;
         }
 
         @keyframes scroll {
@@ -65,54 +54,90 @@
             100% { transform: translateX(calc(-250px * 11)); }
         }
 
-        @keyframes pulse-animation {
-            0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; }
+        /* HERO CONTENT */
+        .hero-section {
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        /* 3. HERO CONTENT */
-        .hero-section { padding: 40px 20px; text-align: center; }
-        .hero-headline { color: var(--bureau-blue); font-size: 32px; font-weight: 900; margin-bottom: 20px; }
-        .hero-headline span { color: var(--action-blue); }
+        .hero-headline {
+            color: var(--bureau-blue);
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-headline span {
+            color: var(--action-blue);
+        }
+
+        .hero-subtext {
+            color: #5a6a7a;
+            font-size: 18px;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .story-box {
+            background: #f8f9fa;
+            border-left: 6px solid var(--action-blue);
+            padding: 25px;
+            text-align: left;
+            border-radius: 4px;
+            margin: 0 auto;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
 
     <div class="status-bar">
-        <span class="pulse-dot"></span>
         LIVE: CENTRAL BUREAU FUND — APRIL CYCLE IS <span style="color: var(--bureau-gold);">84% CAPACITY</span>
     </div>
 
     <div class="slider-container">
         <div class="slider-track">
-            <img src="https://via.placeholder.com/250x180?text=Security+01" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Growth+02" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Access+03" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Success+04" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Capital+05" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Freedom+06" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Lifestyle+07" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Digital+08" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Elite+09" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Strategy+10" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Payout+11" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_0" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_1" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_2" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_3" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_4" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_5" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_6" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_7" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_8" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_9" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_10" alt="Bureau">
             
-            <img src="https://via.placeholder.com/250x180?text=Security+01" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Growth+02" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Access+03" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Success+04" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Capital+05" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Freedom+06" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Lifestyle+07" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Digital+08" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Elite+09" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Strategy+10" alt="Bureau">
-            <img src="https://via.placeholder.com/250x180?text=Payout+11" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_0" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_1" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_2" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_3" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_4" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_5" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_6" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_7" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_8" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_9" alt="Bureau">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/15969084210939635803_10" alt="Bureau">
         </div>
     </div>
 
     <section class="hero-section">
         <h1 class="hero-headline">The Wealth Migration <br><span>Has Begun.</span> 🏛️</h1>
-        </section>
+        
+        <p class="hero-subtext">
+            The economy isn't broken for everyone—just for those left outside the circle.
+        </p>
+
+        <div class="story-box">
+            <p><i>"While most are trapped in the 9-5 struggle, the <strong>Central Bureau Fund (CBF)</strong> has opened a private window for serious individuals to bypass the noise."</i></p>
+        </div>
+    </section>
 
 </body>
-    </html>
+                </html>
