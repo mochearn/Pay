@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF | Private Bethuel</title>
+    <title>CBF | Private Briefing</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; overflow: hidden; font-family: 'Segoe UI', sans-serif; color: #fff; }
+        body { background-color: #000; overflow: hidden; font-family: 'Arial', sans-serif; color: #fff; }
 
         :root {
             --bureau-blue: #001f3f;
@@ -15,41 +15,43 @@
             --emergency-red: #FF4136;
         }
 
-        /* 1. SLIM STATUS BAR */
+        /* 1. STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
-            padding: 8px 0;
+            padding: 12px 0;
             font-size: 11px;
             text-align: center;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
             position: fixed;
             top: 0; width: 100%; z-index: 1000;
+            border-bottom: 2px solid var(--rich-green);
         }
 
         .pulse-dot {
-            height: 7px; width: 7px; background-color: var(--emergency-red);
+            height: 8px; width: 8px; background-color: var(--emergency-red);
             border-radius: 50%; display: inline-block;
-            margin-right: 5px; animation: pulse-effect 1.5s infinite;
+            margin-right: 6px; box-shadow: 0 0 8px var(--emergency-red);
+            animation: pulse-effect 1.5s infinite;
         }
 
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* 2. FULL SCREEN IMAGERY & OVERLAY */
+        /* 2. HERO SLIDER */
         .hero-container {
             position: relative;
             width: 100%;
             height: 100vh;
-            background: #000;
+            background: #050505;
         }
 
+        /* DARK OVERLAY - Makes the text pop */
         .hero-container::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.6); 
             z-index: 10;
         }
 
@@ -58,44 +60,43 @@
             width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 1s ease-in-out;
         }
 
-        /* "CRAZY" GLITCH TRANSITION */
+        /* CRAZY GLITCH ANIMATION */
         .glitch-transition {
             animation: glitch-scatter 0.8s ease-in-out forwards;
         }
 
         @keyframes glitch-scatter {
-            0% { opacity: 0; transform: scale(1.3) skewX(20deg); filter: blur(20px) hue-rotate(90deg); }
-            40% { opacity: 1; transform: scale(0.85) skewX(-15deg); filter: contrast(180%) brightness(1.5); }
-            70% { transform: scale(1.05) translateX(30px); filter: hue-rotate(-90deg); }
+            0% { opacity: 0; transform: scale(1.2) skewX(15deg); filter: blur(15px); }
+            50% { opacity: 1; transform: scale(0.9) skewX(-10deg); filter: contrast(150%) hue-rotate(45deg); }
             100% { opacity: 1; transform: scale(1) skewX(0); filter: blur(0); }
         }
 
-        /* 3. HERO CONTENT OVERLAY */
+        /* 3. CENTERED CONTENT */
         .hero-content {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 20;
-            width: 90%; max-width: 600px;
+            width: 85%;
         }
 
         .hero-headline {
-            font-size: 36px; font-weight: 900; line-height: 1.1; margin-bottom: 20px;
+            font-size: 34px; font-weight: 900; line-height: 1.1; margin-bottom: 25px;
         }
         .hero-headline span { color: var(--action-green); }
 
         .story-box {
-            border-left: 5px solid var(--action-green);
-            background: rgba(0, 77, 64, 0.35);
+            border-left: 4px solid var(--action-green);
+            background: rgba(0, 77, 64, 0.25);
             backdrop-filter: blur(10px);
-            padding: 25px; text-align: left;
+            padding: 20px; text-align: left;
             border-radius: 4px;
         }
-        .story-box p { font-style: italic; color: #f0f0f0; font-size: 17px; }
+        .story-box p { font-style: italic; color: #eee; font-size: 16px; line-height: 1.5; }
 
     </style>
 </head>
@@ -107,17 +108,17 @@
     </div>
 
     <div class="hero-container">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_0" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_1" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_2" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_3" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_4" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_5" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_6" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_7" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_8" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_9" class="showcase-img">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/6040755482890345020_10" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" class="showcase-img">
 
         <div class="hero-content">
             <h1 class="hero-headline">The Wealth Migration <br><span>Has Begun.</span> 🏛️</h1>
@@ -128,25 +129,21 @@
     </div>
 
     <script>
-        const images = document.querySelectorAll('.showcase-img');
+        const imgs = document.querySelectorAll('.showcase-img');
         let current = 0;
 
-        function startShow() {
-            if(images.length === 0) return;
-            images[0].style.opacity = 1;
-
-            setInterval(() => {
-                images[current].classList.remove('glitch-transition');
-                images[current].style.opacity = 0;
-                
-                current = (current + 1) % images.length;
-                
-                images[current].classList.add('glitch-transition');
-                images[current].style.opacity = 1;
-            }, 6000);
+        function cycle() {
+            imgs[current].classList.remove('glitch-transition');
+            imgs[current].style.opacity = 0;
+            current = (current + 1) % imgs.length;
+            imgs[current].classList.add('glitch-transition');
+            imgs[current].style.opacity = 1;
         }
 
-        window.onload = startShow;
+        if(imgs.length > 0) {
+            imgs[0].style.opacity = 1;
+            setInterval(cycle, 5000); // 5 seconds between crazy transitions
+        }
     </script>
 </body>
-            </html>
+        </html>
