@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF | Private Briefing</title>
+    <title>CBF | Multi-Visual Briefing</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; overflow: hidden; font-family: 'Arial', sans-serif; color: #fff; }
+        body { background-color: #000; overflow: hidden; font-family: sans-serif; }
 
         :root {
             --bureau-blue: #001f3f;
-            --rich-green: #004d40;
             --action-green: #00c853;
             --emergency-red: #FF4136;
         }
 
-        /* 1. STATUS BAR */
+        /* STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
@@ -26,7 +25,7 @@
             text-transform: uppercase;
             position: fixed;
             top: 0; width: 100%; z-index: 1000;
-            border-bottom: 2px solid var(--rich-green);
+            border-bottom: 2px solid #004d40;
         }
 
         .pulse-dot {
@@ -38,65 +37,91 @@
 
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* 2. HERO SLIDER */
+        /* FULL SCREEN IMAGE CONTAINER */
         .hero-container {
             position: relative;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
-            background: #050505;
-        }
-
-        /* DARK OVERLAY - Makes the text pop */
-        .hero-container::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); 
-            z-index: 10;
+            background: #000;
         }
 
         .showcase-img {
             position: absolute;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            transform-origin: center center;
         }
 
-        /* CRAZY GLITCH ANIMATION */
-        .glitch-transition {
-            animation: glitch-scatter 0.8s ease-in-out forwards;
-        }
+        /* ============================== */
+        /* SIX (6) CRAZY TRANSITIONS      */
+        /* ============================== */
 
+        /* 1. GLITCH/SCATTER */
         @keyframes glitch-scatter {
-            0% { opacity: 0; transform: scale(1.2) skewX(15deg); filter: blur(15px); }
-            50% { opacity: 1; transform: scale(0.9) skewX(-10deg); filter: contrast(150%) hue-rotate(45deg); }
-            100% { opacity: 1; transform: scale(1) skewX(0); filter: blur(0); }
+            0% { opacity: 0; transform: scale(1.2) rotate(15deg) skewX(10deg); filter: blur(20px) contrast(200%) hue-rotate(90deg); }
+            50% { opacity: 1; transform: scale(0.95) rotate(-15deg) skewX(-10deg); filter: contrast(150%) hue-rotate(0deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); skewX(0); filter: blur(0); }
         }
 
-        /* 3. CENTERED CONTENT */
-        .hero-content {
+        /* 2. ZOOM OUT & FADE */
+        @keyframes zoom-out {
+            0% { opacity: 0; transform: scale(3); filter: blur(15px); }
+            50% { opacity: 0.8; transform: scale(1.1); filter: contrast(180%); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        /* 3. SLIDE IN FROM CORNER */
+        @keyframes slide-corner {
+            0% { opacity: 0; transform: translate(30%, 30%) scale(0.8) rotate(10deg); filter: blur(5px); }
+            60% { transform: translate(-5%, -5%) scale(1.05); }
+            100% { opacity: 1; transform: translate(0,0) scale(1) rotate(0); filter: blur(0); }
+        }
+
+        /* 4. ROTATE & SCALE */
+        @keyframes rotate-scale {
+            0% { opacity: 0; transform: scale(0.1) rotate(270deg); filter: hue-rotate(180deg) blur(20px); }
+            70% { transform: scale(1.1) rotate(-20deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+        }
+
+        /* 5. FLIP & DARKEN */
+        @keyframes flip-dark {
+            0% { opacity: 0; transform: rotateX(90deg) scale(0.7); filter: brightness(0) blur(5px); }
+            60% { transform: rotateX(-10deg) scale(1.05); }
+            100% { opacity: 1; transform: rotateX(0deg) scale(1); filter: brightness(1) blur(0); }
+        }
+
+        /* 6. STATIC BUZZ */
+        @keyframes static-buzz {
+            0% { opacity: 0; transform: translateX(5%) skewY(15deg); filter: contrast(300%) grayscale(100%) blur(5px); }
+            10% { transform: translateX(-5%); filter: contrast(400%); }
+            30% { transform: translateX(3%); filter: contrast(200%); }
+            50% { transform: translateX(-2%); }
+            60% { transform: translateX(1%); filter: contrast(100%) grayscale(0%); }
+            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+        }
+
+        /* THE HELPER CLASSES */
+        .ani-1 { animation: glitch-scatter 0.8s ease-in-out forwards; }
+        .ani-2 { animation: zoom-out 0.8s ease-in-out forwards; }
+        .ani-3 { animation: slide-corner 0.8s ease-in-out forwards; }
+        .ani-4 { animation: rotate-scale 0.8s ease-in-out forwards; }
+        .ani-5 { animation: flip-dark 0.8s ease-in-out forwards; }
+        .ani-6 { animation: static-buzz 0.8s ease-in-out forwards; }
+
+        /* DARK OVERLAY */
+        .hero-container::after {
+            content: "";
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 20;
-            width: 85%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.35); 
+            z-index: 10;
         }
-
-        .hero-headline {
-            font-size: 34px; font-weight: 900; line-height: 1.1; margin-bottom: 25px;
-        }
-        .hero-headline span { color: var(--action-green); }
-
-        .story-box {
-            border-left: 4px solid var(--action-green);
-            background: rgba(0, 77, 64, 0.25);
-            backdrop-filter: blur(10px);
-            padding: 20px; text-align: left;
-            border-radius: 4px;
-        }
-        .story-box p { font-style: italic; color: #eee; font-size: 16px; line-height: 1.5; }
 
     </style>
 </head>
@@ -108,42 +133,47 @@
     </div>
 
     <div class="hero-container">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" class="showcase-img">
-
-        <div class="hero-content">
-            <h1 class="hero-headline">The Wealth Migration <br><span>Has Begun.</span> 🏛️</h1>
-            <div class="story-box">
-                <p>"While most are trapped in the 9-5 struggle, the <strong>Central Bureau Fund (CBF)</strong> has opened a private window for serious individuals to bypass the noise and secure high-velocity grant slots."</p>
-            </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
     </div>
 
     <script>
-        const imgs = document.querySelectorAll('.showcase-img');
+        const images = document.querySelectorAll('.showcase-img');
         let current = 0;
+        const animationCount = 6;
 
         function cycle() {
-            imgs[current].classList.remove('glitch-transition');
-            imgs[current].style.opacity = 0;
-            current = (current + 1) % imgs.length;
-            imgs[current].classList.add('glitch-transition');
-            imgs[current].style.opacity = 1;
+            // Remove ANY of the 6 animation classes from the PREVIOUS image
+            for (let i = 1; i <= animationCount; i++) {
+                images[current].classList.remove('ani-' + i);
+            }
+            images[current].style.opacity = 0;
+            
+            // Move to the next image
+            current = (current + 1) % images.length;
+            
+            // Randomly select one of the 6 animations for the NEXT image
+            let randomAni = Math.floor(Math.random() * animationCount) + 1;
+            
+            // Apply the random animation class
+            images[current].classList.add('ani-' + randomAni);
+            images[current].style.opacity = 1;
         }
 
-        if(imgs.length > 0) {
-            imgs[0].style.opacity = 1;
-            setInterval(cycle, 5000); // 5 seconds between crazy transitions
+        if(images.length > 0) {
+            // Initialize first image with a simple fade
+            images[0].style.opacity = 1;
+            setInterval(cycle, 5000); // 5 seconds between crazy patterns
         }
     </script>
 </body>
-        </html>
+    </html>
