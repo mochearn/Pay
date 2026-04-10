@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF | High-Velocity Escalation</title>
+    <title>CBF | The Elite 11 Showcase</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; overflow-x: hidden; font-family: sans-serif; }
@@ -14,7 +14,6 @@
             --emergency-red: #FF4136;
         }
 
-        /* STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
@@ -35,7 +34,7 @@
 
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* HERO CONTAINER - HEIGHT 65VH */
+        /* HERO - 65VH HEIGHT */
         .hero-container {
             position: relative;
             width: 100vw;
@@ -49,7 +48,7 @@
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.3); 
+            background: rgba(0, 0, 0, 0.35); 
             z-index: 10;
         }
 
@@ -68,26 +67,23 @@
             z-index: 5 !important;
         }
 
-        /* ANIMATIONS */
-        @keyframes ani-glitch { 0% { transform: scale(1.2) skew(10deg); filter: blur(20px); } 100% { transform: scale(1) skew(0); filter: blur(0); } }
-        @keyframes ani-zoom { 0% { transform: scale(3); filter: blur(15px); } 100% { transform: scale(1); filter: blur(0); } }
-        @keyframes ani-rotate { 0% { transform: scale(0) rotate(360deg); } 100% { transform: scale(1) rotate(0deg); } }
-        @keyframes ani-static { 0% { transform: translateX(-5%); filter: grayscale(1); } 50% { transform: translateX(5%); } 100% { transform: translateX(0); filter: grayscale(0); } }
+        /* ELITE ANIMATIONS */
+        @keyframes ani-glitch { 0% { transform: scale(1.2) skew(5deg); filter: blur(15px); } 100% { transform: scale(1) skew(0); filter: blur(0); } }
+        @keyframes ani-zoom { 0% { transform: scale(2.5); filter: blur(10px); } 100% { transform: scale(1); filter: blur(0); } }
+        @keyframes ani-static { 0% { transform: translateX(-3%); filter: grayscale(1); } 50% { transform: translateX(3%); } 100% { transform: translateX(0); filter: grayscale(0); } }
         
-        /* THE SCATTER ANIMATION */
+        /* THE "SCATTER & SNAP" */
         @keyframes ani-scatter {
-            0% { transform: scale(1.1); clip-path: inset(10% 20% 10% 20%); filter: blur(15px) contrast(2); }
-            20% { clip-path: inset(0% 0% 50% 0%); transform: translateX(-5%); }
-            40% { clip-path: inset(50% 0% 0% 0%); transform: translateX(5%); }
-            60% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%, 0 70%, 100% 70%, 100% 100%, 0 100%); }
-            100% { transform: scale(1); clip-path: inset(0 0 0 0); filter: blur(0); }
+            0% { transform: scale(1.1); clip-path: inset(10% 30% 10% 30%); filter: contrast(3); }
+            30% { clip-path: inset(0% 0% 60% 0%); transform: translateX(-8%); }
+            60% { clip-path: inset(60% 0% 0% 0%); transform: translateX(8%); }
+            100% { transform: scale(1); clip-path: inset(0 0 0 0); filter: contrast(1); }
         }
 
-        .ani-1 { animation: ani-glitch 0.8s ease-in-out forwards; }
-        .ani-2 { animation: ani-zoom 0.8s ease-in-out forwards; }
-        .ani-3 { animation: ani-rotate 0.8s ease-in-out forwards; }
-        .ani-4 { animation: ani-static 0.7s ease-in-out forwards; }
-        .ani-5 { animation: ani-scatter 0.9s steps(4) forwards; } /* SCATTER STEPPED */
+        .ani-1 { animation: ani-glitch 0.8s ease-out forwards; }
+        .ani-2 { animation: ani-zoom 0.8s ease-out forwards; }
+        .ani-3 { animation: ani-static 0.6s linear forwards; }
+        .ani-4 { animation: ani-scatter 0.9s steps(5) forwards; }
 
     </style>
 </head>
@@ -99,12 +95,12 @@
     </div>
 
     <div class="hero-container">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img active-img"> <img src="https://images.unsplash.com/photo-1544650039-22886fbb4323?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1200" class="showcase-img"> </div>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img active-img"> <img src="https://images.unsplash.com/photo-1544650039-22886fbb4323?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1200" class="showcase-img"> </div>
 
     <script>
         const imgs = document.querySelectorAll('.showcase-img');
         let current = 0;
-        const totalAni = 5;
+        const totalAni = 4;
 
         function cycle() {
             let prev = current;
@@ -113,15 +109,12 @@
             let nextImg = imgs[current];
             let prevImg = imgs[prev];
 
-            // Reset animations
             for(let i=1; i<=totalAni; i++) { nextImg.classList.remove('ani-'+i); }
 
-            // Pick random animation (including Scatter)
             let rand = Math.floor(Math.random() * totalAni) + 1;
             nextImg.classList.add('ani-' + rand);
             nextImg.classList.add('active-img');
 
-            // Stacking cleanup
             setTimeout(() => {
                 prevImg.classList.remove('active-img');
             }, 950);
