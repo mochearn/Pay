@@ -124,76 +124,80 @@
 
         setInterval(cycle, 5000);
     </script>
-       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
 
 <style>
-    /* FORCES THE CONTAINER TO BE DARK AND CENTERED */
-    .hero-container {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        height: 65vh !important;
-        position: relative !important;
-        overflow: hidden;
-        background: #000;
-    }
-
-    /* THE ULTRA-DARK OVERLAY (0.8 opacity) */
+    /* 1. DARKNESS FIX: Forces background to 90% black */
     .hero-container::after {
         content: "";
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.8) !important; /* Forces background to be very dark */
-        z-index: 10;
+        background: rgba(0, 0, 0, 0.9) !important; 
+        z-index: 5;
         pointer-events: none;
     }
 
-    /* THE LIVE PULSING WHITE CARD */
+    /* 2. CENTERING FIX: Forces card to absolute center of the 65vh hero */
     .elite-card-live {
-        position: relative;
-        z-index: 1000 !important; /* Stays above everything */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000 !important;
         width: 85%;
         max-width: 480px;
-        background: rgba(255, 255, 255, 0.5); /* 50% Opacity */
-        padding: 45px 25px;
-        border-radius: 12px;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+        background: rgba(255, 255, 255, 0.5); 
+        padding: 40px 20px;
+        border-radius: 15px;
         text-align: center;
-        
-        /* PULSE ANIMATION */
         animation: pulse-live 3s ease-in-out infinite;
     }
 
     @keyframes pulse-live {
-        0% { transform: scale(1); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
-        50% { transform: scale(1.03); box-shadow: 0 30px 60px rgba(0,200,83,0.3); } /* Subtle green glow */
-        100% { transform: scale(1); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+        0%, 100% { transform: translate(-50%, -50%) scale(1); }
+        50% { transform: translate(-50%, -50%) scale(1.04); }
     }
 
-    /* HERMES-STYLE TEXT (BOLD, CLEAN, ELITE) */
+    /* 3. HERMES TEXT STYLE */
     .hermes-text {
         color: #000;
-        font-family: 'Inter', sans-serif; /* High-end bold alternative to Hermes */
-        font-size: 26px;
+        font-family: 'Inter', sans-serif;
+        font-size: 24px;
         font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin: 0;
-        min-height: 90px;
+        letter-spacing: 1px;
+        min-height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
-        line-height: 1.2;
     }
 
-    .cursor {
-        font-weight: 300;
-        margin-left: 5px;
-        animation: blink 0.8s infinite;
+    /* 4. BACK ICON (Middle Left) */
+    .back-nav-btn {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
+    .cursor { animation: blink 0.8s infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 </style>
+
+<div class="back-nav-btn" onclick="goBackText()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+</div>
 
 <div class="elite-card-live">
     <div class="hermes-text">
@@ -216,7 +220,8 @@
         let sIndex = 0;
         let cIndex = 0;
         let isDeleting = false;
-        
+        let typeTimer;
+
         function typeAction() {
             const target = document.getElementById("typed-target");
             const currentSentence = sentences[sIndex];
@@ -229,22 +234,31 @@
                 cIndex++;
             }
 
-            // Typing speed logic
-            let speed = isDeleting ? 30 : 75; // Fast delete, smooth type
+            let speed = isDeleting ? 30 : 75;
 
             if (!isDeleting && cIndex === currentSentence.length) {
                 isDeleting = true;
-                setTimeout(typeAction, 2000); // 2s pause at end
+                typeTimer = setTimeout(typeAction, 2000);
             } else if (isDeleting && cIndex === 0) {
                 isDeleting = false;
                 sIndex = (sIndex + 1) % sentences.length;
-                setTimeout(typeAction, 500);
+                typeTimer = setTimeout(typeAction, 500);
             } else {
-                setTimeout(typeAction, speed);
+                typeTimer = setTimeout(typeAction, speed);
             }
         }
+
+        // BACK BUTTON LOGIC: Jump to previous sentence
+        window.goBackText = function() {
+            clearTimeout(typeTimer);
+            isDeleting = false;
+            cIndex = 0;
+            sIndex = (sIndex - 1 + sentences.length) % sentences.length;
+            typeAction();
+        };
+
         typeAction();
     })();
-</script>
+            </script>
 </body>
 </html>
