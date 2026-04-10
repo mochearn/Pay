@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF | Multi-Visual Briefing</title>
+    <title>CBF | High-Velocity Briefing</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; overflow: hidden; font-family: sans-serif; }
+        body { background-color: #000; overflow-x: hidden; font-family: 'Segoe UI', sans-serif; }
 
         :root {
             --bureau-blue: #001f3f;
@@ -14,7 +14,7 @@
             --emergency-red: #FF4136;
         }
 
-        /* STATUS BAR */
+        /* 1. STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
@@ -37,82 +37,15 @@
 
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* FULL SCREEN IMAGE CONTAINER */
+        /* 2. HERO CONTAINER - REDUCED HEIGHT */
         .hero-container {
             position: relative;
             width: 100vw;
-            height: 100vh;
+            height: 85vh; /* REDUCED HEIGHT PER YOUR REQUEST */
+            margin-top: 40px; /* Space for status bar */
             background: #000;
+            overflow: hidden;
         }
-
-        .showcase-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            transform-origin: center center;
-        }
-
-        /* ============================== */
-        /* SIX (6) CRAZY TRANSITIONS      */
-        /* ============================== */
-
-        /* 1. GLITCH/SCATTER */
-        @keyframes glitch-scatter {
-            0% { opacity: 0; transform: scale(1.2) rotate(15deg) skewX(10deg); filter: blur(20px) contrast(200%) hue-rotate(90deg); }
-            50% { opacity: 1; transform: scale(0.95) rotate(-15deg) skewX(-10deg); filter: contrast(150%) hue-rotate(0deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); skewX(0); filter: blur(0); }
-        }
-
-        /* 2. ZOOM OUT & FADE */
-        @keyframes zoom-out {
-            0% { opacity: 0; transform: scale(3); filter: blur(15px); }
-            50% { opacity: 0.8; transform: scale(1.1); filter: contrast(180%); }
-            100% { opacity: 1; transform: scale(1); filter: blur(0); }
-        }
-
-        /* 3. SLIDE IN FROM CORNER */
-        @keyframes slide-corner {
-            0% { opacity: 0; transform: translate(30%, 30%) scale(0.8) rotate(10deg); filter: blur(5px); }
-            60% { transform: translate(-5%, -5%) scale(1.05); }
-            100% { opacity: 1; transform: translate(0,0) scale(1) rotate(0); filter: blur(0); }
-        }
-
-        /* 4. ROTATE & SCALE */
-        @keyframes rotate-scale {
-            0% { opacity: 0; transform: scale(0.1) rotate(270deg); filter: hue-rotate(180deg) blur(20px); }
-            70% { transform: scale(1.1) rotate(-20deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
-        }
-
-        /* 5. FLIP & DARKEN */
-        @keyframes flip-dark {
-            0% { opacity: 0; transform: rotateX(90deg) scale(0.7); filter: brightness(0) blur(5px); }
-            60% { transform: rotateX(-10deg) scale(1.05); }
-            100% { opacity: 1; transform: rotateX(0deg) scale(1); filter: brightness(1) blur(0); }
-        }
-
-        /* 6. STATIC BUZZ */
-        @keyframes static-buzz {
-            0% { opacity: 0; transform: translateX(5%) skewY(15deg); filter: contrast(300%) grayscale(100%) blur(5px); }
-            10% { transform: translateX(-5%); filter: contrast(400%); }
-            30% { transform: translateX(3%); filter: contrast(200%); }
-            50% { transform: translateX(-2%); }
-            60% { transform: translateX(1%); filter: contrast(100%) grayscale(0%); }
-            100% { opacity: 1; transform: translateX(0); filter: blur(0); }
-        }
-
-        /* THE HELPER CLASSES */
-        .ani-1 { animation: glitch-scatter 0.8s ease-in-out forwards; }
-        .ani-2 { animation: zoom-out 0.8s ease-in-out forwards; }
-        .ani-3 { animation: slide-corner 0.8s ease-in-out forwards; }
-        .ani-4 { animation: rotate-scale 0.8s ease-in-out forwards; }
-        .ani-5 { animation: flip-dark 0.8s ease-in-out forwards; }
-        .ani-6 { animation: static-buzz 0.8s ease-in-out forwards; }
 
         /* DARK OVERLAY */
         .hero-container::after {
@@ -123,6 +56,74 @@
             z-index: 10;
         }
 
+        .showcase-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* FIXES THE "SMALL PHOTO" ISSUE */
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        /* ACTIVE CLASS FOR STACKING LOGIC */
+        .active-img {
+            opacity: 1 !important;
+            z-index: 5 !important;
+        }
+
+        /* ============================== */
+        /* 7 CRAZY ANIMATIONS             */
+        /* ============================== */
+
+        /* 1. GLITCH */
+        @keyframes ani-glitch {
+            0% { transform: scale(1.2) skew(10deg); filter: blur(20px) contrast(200%); }
+            100% { transform: scale(1) skew(0); filter: blur(0); }
+        }
+        /* 2. ZOOM */
+        @keyframes ani-zoom {
+            0% { transform: scale(3); filter: blur(15px); }
+            100% { transform: scale(1); filter: blur(0); }
+        }
+        /* 3. SLIDE */
+        @keyframes ani-slide {
+            0% { transform: translate(30%, 30%) rotate(10deg); filter: blur(10px); }
+            100% { transform: translate(0,0) rotate(0); filter: blur(0); }
+        }
+        /* 4. ROTATE */
+        @keyframes ani-rotate {
+            0% { transform: scale(0) rotate(360deg); filter: hue-rotate(180deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        /* 5. FLIP */
+        @keyframes ani-flip {
+            0% { transform: rotateX(90deg); filter: brightness(0); }
+            100% { transform: rotateX(0deg) brightness(1); }
+        }
+        /* 6. STATIC BUZZ */
+        @keyframes ani-static {
+            0% { transform: translateX(-5%); filter: grayscale(1); }
+            20% { transform: translateX(5%); }
+            100% { transform: translateX(0); filter: grayscale(0); }
+        }
+        /* 7. SCATTER (NEW) */
+        @keyframes ani-scatter {
+            0% { transform: scale(1.1) skewX(20deg) skewY(-10deg); filter: blur(30px) brightness(2); }
+            25% { transform: scale(0.9) skewX(-20deg) skewY(10deg); filter: blur(10px) contrast(3); }
+            50% { transform: scale(1.1) skewX(10deg); filter: blur(5px); }
+            100% { transform: scale(1) skewX(0); filter: blur(0); }
+        }
+
+        .ani-1 { animation: ani-glitch 0.8s ease-in-out forwards; }
+        .ani-2 { animation: ani-zoom 0.8s ease-in-out forwards; }
+        .ani-3 { animation: ani-slide 0.8s ease-in-out forwards; }
+        .ani-4 { animation: ani-rotate 0.8s ease-in-out forwards; }
+        .ani-5 { animation: ani-flip 0.8s ease-in-out forwards; }
+        .ani-6 { animation: ani-static 0.8s ease-in-out forwards; }
+        .ani-7 { animation: ani-scatter 0.9s ease-in-out forwards; }
+
     </style>
 </head>
 <body>
@@ -132,48 +133,40 @@
         LIVE: CENTRAL BUREAU FUND — APRIL CYCLE IS <span style="color: var(--action-green);">84% CAPACITY</span>
     </div>
 
-    <div class="hero-container">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" class="showcase-img">
-    </div>
+    <div class="hero-container" id="slider">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200" class="showcase-img active-img" id="img0"> <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1600607687940-4e7a9935867c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=1200" class="showcase-img"> </div>
 
     <script>
-        const images = document.querySelectorAll('.showcase-img');
+        const imgs = document.querySelectorAll('.showcase-img');
         let current = 0;
-        const animationCount = 6;
+        const totalAni = 7;
 
-        function cycle() {
-            // Remove ANY of the 6 animation classes from the PREVIOUS image
-            for (let i = 1; i <= animationCount; i++) {
-                images[current].classList.remove('ani-' + i);
-            }
-            images[current].style.opacity = 0;
+        function playSlide() {
+            // 1. Identify current and next
+            let prevIndex = current;
+            current = (current + 1) % imgs.length;
+
+            let nextImg = imgs[current];
+            let prevImg = imgs[prevIndex];
+
+            // 2. Remove all old animations from next image
+            for(let i=1; i<=totalAni; i++) { nextImg.classList.remove('ani-'+i); }
+
+            // 3. Pick a random animation and apply it to the NEXT image
+            let rand = Math.floor(Math.random() * totalAni) + 1;
+            nextImg.classList.add('ani-' + rand);
             
-            // Move to the next image
-            current = (current + 1) % images.length;
-            
-            // Randomly select one of the 6 animations for the NEXT image
-            let randomAni = Math.floor(Math.random() * animationCount) + 1;
-            
-            // Apply the random animation class
-            images[current].classList.add('ani-' + randomAni);
-            images[current].style.opacity = 1;
+            // 4. Bring the next image to the front (Stacked on top of old)
+            nextImg.classList.add('active-img');
+
+            // 5. After the animation finishes (0.9s), clean up the old image
+            setTimeout(() => {
+                prevImg.classList.remove('active-img');
+            }, 900);
         }
 
-        if(images.length > 0) {
-            // Initialize first image with a simple fade
-            images[0].style.opacity = 1;
-            setInterval(cycle, 5000); // 5 seconds between crazy patterns
-        }
+        // Start cycling every 5 seconds
+        setInterval(playSlide, 5000);
     </script>
 </body>
-</html>
+    </html>
