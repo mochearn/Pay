@@ -124,59 +124,60 @@
 
         setInterval(cycle, 5000);
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
 
 <style>
-    /* LOCKS HEIGHT & CENTERS CARD */
+    /* RESET CONTAINER - Forces the 65vh and Centering */
     .hero-container {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        height: 65vh !important; /* Forces 65vh height */
-        margin-top: 40px; 
-        position: relative;
+        height: 65vh !important; 
+        position: relative !important;
         background: #000;
         overflow: hidden;
     }
 
-    /* DARKER OVERLAY FOR MAXIMUM POP */
+    /* DARKER OVERLAY - Darkened to 80% to ensure card pops */
     .hero-container::after {
         content: "";
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.75); /* Darkened to 75% */
-        z-index: 10;
+        background: rgba(0, 0, 0, 0.8); 
+        z-index: 10; /* Sits above images */
+        pointer-events: none;
     }
 
-    /* THE WHITE 50% OPACITY CARD */
+    /* THE CENTERED WHITE CARD */
     .elite-card-center {
-        z-index: 20;
+        position: relative;
+        z-index: 999 !important; /* Forces it to the very top */
         width: 85%;
         max-width: 450px;
         background: rgba(255, 255, 255, 0.5); /* 50% Opacity */
-        padding: 35px 20px;
+        padding: 40px 20px;
         border-radius: 15px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         text-align: center;
     }
 
-    /* RICH BOLD POPPINS TEXT */
+    /* BOLD POPPINS TEXT */
     .typer-text {
         color: #000;
         font-family: 'Poppins', sans-serif;
-        font-size: 24px;
+        font-size: 26px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin: 0;
-        min-height: 70px; /* Keeps card steady */
+        min-height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .cursor {
-        color: rgba(0,0,0,0.6);
+        color: #000;
         animation: blink 0.8s infinite;
         margin-left: 3px;
     }
@@ -204,15 +205,11 @@
 
         let i = 0;
         let j = 0;
-        let currentWord = "";
         let isDeleting = false;
-        const typeSpeed = 75;  // Smooth typing
-        const delSpeed = 30;   // Fast deleting
-        const pause = 2000;    // Pause at end of sentence
-
+        
         function type() {
-            currentWord = words[i];
             const target = document.getElementById("typed-content");
+            const currentWord = words[i];
 
             if (isDeleting) {
                 target.textContent = currentWord.substring(0, j - 1);
@@ -222,20 +219,20 @@
                 j++;
             }
 
+            let speed = isDeleting ? 30 : 75; // Fast delete (30ms), Smooth type (75ms)
+
             if (!isDeleting && j === currentWord.length) {
                 isDeleting = true;
-                setTimeout(type, pause);
+                setTimeout(type, 2000); // 2 second pause at end
             } else if (isDeleting && j === 0) {
                 isDeleting = false;
                 i = (i + 1) % words.length;
                 setTimeout(type, 500);
             } else {
-                setTimeout(type, isDeleting ? delSpeed : typeSpeed);
+                setTimeout(type, speed);
             }
         }
-
-        // Initialize typing
-        setTimeout(type, 1000);
+        type();
     })();
 </script>
 </body>
