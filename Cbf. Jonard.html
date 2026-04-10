@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF | High-Velocity Briefing</title>
+    <title>CBF | High-Velocity Escalation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; overflow-x: hidden; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #000; overflow-x: hidden; font-family: sans-serif; }
 
         :root {
             --bureau-blue: #001f3f;
@@ -14,7 +14,7 @@
             --emergency-red: #FF4136;
         }
 
-        /* 1. STATUS BAR */
+        /* STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
@@ -25,34 +25,31 @@
             text-transform: uppercase;
             position: fixed;
             top: 0; width: 100%; z-index: 1000;
-            border-bottom: 2px solid #004d40;
         }
 
         .pulse-dot {
             height: 8px; width: 8px; background-color: var(--emergency-red);
             border-radius: 50%; display: inline-block;
-            margin-right: 6px; box-shadow: 0 0 8px var(--emergency-red);
-            animation: pulse-effect 1.5s infinite;
+            margin-right: 6px; animation: pulse-effect 1.5s infinite;
         }
 
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* 2. HERO CONTAINER - REDUCED HEIGHT */
+        /* HERO CONTAINER - HEIGHT 65VH */
         .hero-container {
             position: relative;
             width: 100vw;
-            height: 85vh; /* REDUCED HEIGHT PER YOUR REQUEST */
-            margin-top: 40px; /* Space for status bar */
+            height: 65vh; 
+            margin-top: 40px;
             background: #000;
             overflow: hidden;
         }
 
-        /* DARK OVERLAY */
         .hero-container::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.35); 
+            background: rgba(0, 0, 0, 0.3); 
             z-index: 10;
         }
 
@@ -61,68 +58,36 @@
             top: 0; left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* FIXES THE "SMALL PHOTO" ISSUE */
+            object-fit: cover;
             opacity: 0;
             z-index: 1;
-            transition: opacity 1.2s ease-in-out;
         }
 
-        /* ACTIVE CLASS FOR STACKING LOGIC */
         .active-img {
             opacity: 1 !important;
             z-index: 5 !important;
         }
 
-        /* ============================== */
-        /* 7 CRAZY ANIMATIONS             */
-        /* ============================== */
-
-        /* 1. GLITCH */
-        @keyframes ani-glitch {
-            0% { transform: scale(1.2) skew(10deg); filter: blur(20px) contrast(200%); }
-            100% { transform: scale(1) skew(0); filter: blur(0); }
-        }
-        /* 2. ZOOM */
-        @keyframes ani-zoom {
-            0% { transform: scale(3); filter: blur(15px); }
-            100% { transform: scale(1); filter: blur(0); }
-        }
-        /* 3. SLIDE */
-        @keyframes ani-slide {
-            0% { transform: translate(30%, 30%) rotate(10deg); filter: blur(10px); }
-            100% { transform: translate(0,0) rotate(0); filter: blur(0); }
-        }
-        /* 4. ROTATE */
-        @keyframes ani-rotate {
-            0% { transform: scale(0) rotate(360deg); filter: hue-rotate(180deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-        /* 5. FLIP */
-        @keyframes ani-flip {
-            0% { transform: rotateX(90deg); filter: brightness(0); }
-            100% { transform: rotateX(0deg) brightness(1); }
-        }
-        /* 6. STATIC BUZZ */
-        @keyframes ani-static {
-            0% { transform: translateX(-5%); filter: grayscale(1); }
-            20% { transform: translateX(5%); }
-            100% { transform: translateX(0); filter: grayscale(0); }
-        }
-        /* 7. SCATTER (NEW) */
+        /* ANIMATIONS */
+        @keyframes ani-glitch { 0% { transform: scale(1.2) skew(10deg); filter: blur(20px); } 100% { transform: scale(1) skew(0); filter: blur(0); } }
+        @keyframes ani-zoom { 0% { transform: scale(3); filter: blur(15px); } 100% { transform: scale(1); filter: blur(0); } }
+        @keyframes ani-rotate { 0% { transform: scale(0) rotate(360deg); } 100% { transform: scale(1) rotate(0deg); } }
+        @keyframes ani-static { 0% { transform: translateX(-5%); filter: grayscale(1); } 50% { transform: translateX(5%); } 100% { transform: translateX(0); filter: grayscale(0); } }
+        
+        /* THE SCATTER ANIMATION */
         @keyframes ani-scatter {
-            0% { transform: scale(1.1) skewX(20deg) skewY(-10deg); filter: blur(30px) brightness(2); }
-            25% { transform: scale(0.9) skewX(-20deg) skewY(10deg); filter: blur(10px) contrast(3); }
-            50% { transform: scale(1.1) skewX(10deg); filter: blur(5px); }
-            100% { transform: scale(1) skewX(0); filter: blur(0); }
+            0% { transform: scale(1.1); clip-path: inset(10% 20% 10% 20%); filter: blur(15px) contrast(2); }
+            20% { clip-path: inset(0% 0% 50% 0%); transform: translateX(-5%); }
+            40% { clip-path: inset(50% 0% 0% 0%); transform: translateX(5%); }
+            60% { clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%, 0 70%, 100% 70%, 100% 100%, 0 100%); }
+            100% { transform: scale(1); clip-path: inset(0 0 0 0); filter: blur(0); }
         }
 
         .ani-1 { animation: ani-glitch 0.8s ease-in-out forwards; }
         .ani-2 { animation: ani-zoom 0.8s ease-in-out forwards; }
-        .ani-3 { animation: ani-slide 0.8s ease-in-out forwards; }
-        .ani-4 { animation: ani-rotate 0.8s ease-in-out forwards; }
-        .ani-5 { animation: ani-flip 0.8s ease-in-out forwards; }
-        .ani-6 { animation: ani-static 0.8s ease-in-out forwards; }
-        .ani-7 { animation: ani-scatter 0.9s ease-in-out forwards; }
+        .ani-3 { animation: ani-rotate 0.8s ease-in-out forwards; }
+        .ani-4 { animation: ani-static 0.7s ease-in-out forwards; }
+        .ani-5 { animation: ani-scatter 0.9s steps(4) forwards; } /* SCATTER STEPPED */
 
     </style>
 </head>
@@ -133,40 +98,36 @@
         LIVE: CENTRAL BUREAU FUND — APRIL CYCLE IS <span style="color: var(--action-green);">84% CAPACITY</span>
     </div>
 
-    <div class="hero-container" id="slider">
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200" class="showcase-img active-img" id="img0"> <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1600607687940-4e7a9935867c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=1200" class="showcase-img"> </div>
+    <div class="hero-container">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img active-img"> <img src="https://images.unsplash.com/photo-1544650039-22886fbb4323?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200" class="showcase-img"> <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1200" class="showcase-img"> </div>
 
     <script>
         const imgs = document.querySelectorAll('.showcase-img');
         let current = 0;
-        const totalAni = 7;
+        const totalAni = 5;
 
-        function playSlide() {
-            // 1. Identify current and next
-            let prevIndex = current;
+        function cycle() {
+            let prev = current;
             current = (current + 1) % imgs.length;
 
             let nextImg = imgs[current];
-            let prevImg = imgs[prevIndex];
+            let prevImg = imgs[prev];
 
-            // 2. Remove all old animations from next image
+            // Reset animations
             for(let i=1; i<=totalAni; i++) { nextImg.classList.remove('ani-'+i); }
 
-            // 3. Pick a random animation and apply it to the NEXT image
+            // Pick random animation (including Scatter)
             let rand = Math.floor(Math.random() * totalAni) + 1;
             nextImg.classList.add('ani-' + rand);
-            
-            // 4. Bring the next image to the front (Stacked on top of old)
             nextImg.classList.add('active-img');
 
-            // 5. After the animation finishes (0.9s), clean up the old image
+            // Stacking cleanup
             setTimeout(() => {
                 prevImg.classList.remove('active-img');
-            }, 900);
+            }, 950);
         }
 
-        // Start cycling every 5 seconds
-        setInterval(playSlide, 5000);
+        setInterval(cycle, 5000);
     </script>
 </body>
     </html>
