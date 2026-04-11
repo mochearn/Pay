@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBF |Wealth Migration</title>
+    <title>CBF | Wealth Migration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; overflow-x: hidden; font-family: sans-serif; }
@@ -14,7 +15,7 @@
             --emergency-red: #FF4136;
         }
 
-        /* STATUS BAR */
+        /* 1. STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
@@ -24,7 +25,7 @@
             font-weight: bold;
             text-transform: uppercase;
             position: fixed;
-            top: 0; width: 100%; z-index: 1000;
+            top: 0; width: 100%; z-index: 2000;
         }
 
         .pulse-dot {
@@ -32,42 +33,42 @@
             border-radius: 50%; display: inline-block;
             margin-right: 6px; animation: pulse-effect 1.5s infinite;
         }
-
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* HERO - 65VH HEIGHT */
+        /* 2. HERO CONTAINER - THE "ROOM" */
         .hero-container {
             position: relative;
             width: 100vw;
-            height: 65vh; 
+            height: 65vh !important; /* HEIGHT LOCKED */
             margin-top: 40px;
             background: #000;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* DARKER OVERLAY FOR TEXT READABILITY */
+        /* THE DEEP DARKNESS OVERLAY (95%) */
         .hero-container::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); 
+            background: rgba(0, 0, 0, 0.95) !important; 
             z-index: 10;
+            pointer-events: none;
         }
 
+        /* THE WALLPAPER (IMAGES) */
         .showcase-img {
             position: absolute;
             top: 0; left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0;
             z-index: 1;
         }
 
-        .active-img {
-            opacity: 1 !important;
-            z-index: 5 !important;
-        }
+        .active-img { opacity: 1 !important; z-index: 5 !important; }
 
         /* SCATTER ANIMATION */
         @keyframes ani-scatter {
@@ -76,9 +77,60 @@
             60% { clip-path: inset(60% 0% 0% 0%); transform: translateX(8%); }
             100% { transform: scale(1); clip-path: inset(0 0 0 0); filter: contrast(1); }
         }
-
         .ani-4 { animation: ani-scatter 0.9s steps(5) forwards; }
 
+        /* 3. THE ELITE CARD - THE "FURNITURE" */
+        .elite-card-v7 {
+            position: relative;
+            z-index: 1000 !important;
+            width: 85%;
+            max-width: 450px;
+            height: 220px; /* FIXED HEIGHT - NO JUMPING */
+            background: rgba(255, 255, 255, 0.5); 
+            border-radius: 15px;
+            padding: 20px 30px 20px 65px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: pulse-v7 3s ease-in-out infinite;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes pulse-v7 {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* BACK ICON (<) */
+        .back-nav-v7 {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border-radius: 50%;
+            z-index: 1001;
+        }
+
+        .back-nav-v7:active { animation: flash-v7 0.3s ease-out; }
+        @keyframes flash-v7 { 0% { background: rgba(0, 0, 0, 0.2); } 100% { background: transparent; } }
+
+        .chevron-left-v7 {
+            width: 14px; height: 14px;
+            border-left: 5px solid #000; border-bottom: 5px solid #000;
+            transform: rotate(45deg); margin-left: 6px;
+        }
+
+        /* HERMES TEXT STYLE */
+        .hermes-v7 {
+            color: #000; font-family: 'Inter', sans-serif;
+            font-size: 24px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; line-height: 1.2;
+        }
+
+        #typed-v7::after { content: "|"; animation: blink-v7 0.8s infinite; margin-left: 2px; }
+        @keyframes blink-v7 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
 <body>
@@ -88,7 +140,8 @@
         LIVE: CENTRAL BUREAU FUND — APRIL CYCLE IS <span style="color: var(--action-green);">84% CAPACITY</span>
     </div>
 
-<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img active-img">
+    <div class="hero-container">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img active-img">
         <img src="https://images.unsplash.com/photo-1544650039-22886fbb4323?q=80&w=1200" class="showcase-img">
         <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200" class="showcase-img">
         <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?q=80&w=1200" class="showcase-img">
@@ -98,190 +151,77 @@
         <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200" class="showcase-img">
         <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1200" class="showcase-img">
         <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200" class="showcase-img">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200" class="showcase-img"> 
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200" class="showcase-img">
+
+        <div class="elite-card-v7">
+            <div class="back-nav-v7" onclick="prevSentence()">
+                <div class="chevron-left-v7"></div>
+            </div>
+            <div class="hermes-v7">
+                <span id="typed-v7"></span>
+            </div>
+        </div>
     </div>
 
     <script>
+        /* 1. TYPING LOGIC */
+        (function() {
+            const sentences = [
+                "The Wealth Migration Has Begun.",
+                "Secure Your Grant Slot Now.",
+                "High Velocity Funding is Live.",
+                "Bypass the noise. Get results.",
+                "Limited private windows are open.",
+                "Elite status requires elite action.",
+                "Join the Central Bureau Fund."
+            ];
+            let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
+            function type() {
+                const target = document.getElementById("typed-v7");
+                const fullText = sentences[sIdx];
+                if (isDeleting) {
+                    target.textContent = fullText.substring(0, cIdx - 1);
+                    cIdx--;
+                } else {
+                    target.textContent = fullText.substring(0, cIdx + 1);
+                    cIdx++;
+                }
+                let speed = isDeleting ? 30 : 75;
+                if (!isDeleting && cIdx === fullText.length) {
+                    isDeleting = true;
+                    timer = setTimeout(type, 2000);
+                } else if (isDeleting && cIdx === 0) {
+                    isDeleting = false;
+                    sIdx = (sIdx + 1) % sentences.length;
+                    timer = setTimeout(type, 500);
+                } else {
+                    timer = setTimeout(type, speed);
+                }
+            }
+            window.prevSentence = function() {
+                clearTimeout(timer);
+                isDeleting = false; cIdx = 0;
+                sIdx = (sIdx - 1 + sentences.length) % sentences.length;
+                type();
+            };
+            type();
+        })();
+
+        /* 2. IMAGE CYCLE LOGIC */
         const imgs = document.querySelectorAll('.showcase-img');
         let current = 0;
-
         function cycle() {
             let prev = current;
             current = (current + 1) % imgs.length;
-
             let nextImg = imgs[current];
             let prevImg = imgs[prev];
-
             nextImg.classList.remove('ani-4');
-            void nextImg.offsetWidth; // Trigger reflow
+            void nextImg.offsetWidth; 
             nextImg.classList.add('ani-4');
             nextImg.classList.add('active-img');
-
-            setTimeout(() => {
-                prevImg.classList.remove('active-img');
-            }, 950);
+            setTimeout(() => { prevImg.classList.remove('active-img'); }, 950);
         }
-
         setInterval(cycle, 5000);
     </script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
-
-<style>
-    /* 1. HEIGHT & CENTER FIX */
-    .hero-container {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        height: 65vh !important; /* LOCKS PICTURE HEIGHT AT 65% */
-        position: relative !important;
-        overflow: hidden;
-        background: #000;
-    }
-
-    /* 2. THE ULTRA-DARKNESS (95% BLACK) */
-    .hero-container::after {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.95) !important; /* DEEP DARKNESS */
-        z-index: 5;
-        pointer-events: none;
-    }
-
-    /* 3. THE FIXED HEIGHT CARD */
-    .elite-card-v7 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1000 !important;
-        width: 85%;
-        max-width: 450px;
-        height: 220px; /* CARD REMAINS STEADY */
-        background: rgba(255, 255, 255, 0.5); 
-        border-radius: 15px;
-        padding: 20px 30px 20px 60px;
-        display: flex;
-        align-items: center;
-        text-align: left;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-        animation: pulse-v7 3s ease-in-out infinite;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    @keyframes pulse-v7 {
-        0%, 100% { transform: translate(-50%, -50%) scale(1); }
-        50% { transform: translate(-50%, -50%) scale(1.02); }
-    }
-
-    /* 4. THE NAV ICON (FLASHING GREY) */
-    .back-nav-v7 {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border-radius: 50%;
-        z-index: 1001;
-    }
-
-    .back-nav-v7:active {
-        animation: flash-v7 0.4s ease-out;
-    }
-
-    @keyframes flash-v7 {
-        0% { background: rgba(0, 0, 0, 0.2); }
-        100% { background: transparent; }
-    }
-
-    /* FAT CHEVRON < */
-    .chevron-left-v7 {
-        width: 14px;
-        height: 14px;
-        border-left: 5px solid #000;
-        border-bottom: 5px solid #000;
-        transform: rotate(45deg);
-        margin-left: 6px;
-    }
-
-    /* 5. TEXT STYLE */
-    .hermes-v7 {
-        color: #000;
-        font-family: 'Inter', sans-serif;
-        font-size: 24px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    #typed-v7::after {
-        content: "|";
-        animation: blink-v7 0.8s infinite;
-        margin-left: 2px;
-    }
-
-    @keyframes blink-v7 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-</style>
-
-<div class="elite-card-v7">
-    <div class="back-nav-v7" onclick="prevSentence()">
-        <div class="chevron-left-v7"></div>
-    </div>
-    <div class="hermes-v7">
-        <span id="typed-v7"></span>
-    </div>
-</div>
-
-<script>
-    (function() {
-        const sentences = [
-            "The Wealth Migration Has Begun.",
-            "Secure Your Grant Slot Now.",
-            "High Velocity Funding is Live.",
-            "Bypass the noise. Get results.",
-            "Limited private windows are open.",
-            "Elite status requires elite action.",
-            "Join the Central Bureau Fund."
-        ];
-
-        let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
-
-        function type() {
-            const target = document.getElementById("typed-v7");
-            const fullText = sentences[sIdx];
-            if (isDeleting) {
-                target.textContent = fullText.substring(0, cIdx - 1);
-                cIdx--;
-            } else {
-                target.textContent = fullText.substring(0, cIdx + 1);
-                cIdx++;
-            }
-            let speed = isDeleting ? 30 : 75;
-            if (!isDeleting && cIdx === fullText.length) {
-                isDeleting = true;
-                timer = setTimeout(type, 2000);
-            } else if (isDeleting && cIdx === 0) {
-                isDeleting = false;
-                sIdx = (sIdx + 1) % sentences.length;
-                timer = setTimeout(type, 500);
-            } else {
-                timer = setTimeout(type, speed);
-            }
-        }
-
-        window.prevSentence = function() {
-            clearTimeout(timer);
-            isDeleting = false; cIdx = 0;
-            sIdx = (sIdx - 1 + sentences.length) % sentences.length;
-            type();
-        };
-        type();
-    })();
-</script>
 </body>
-</html>
+    </html>
