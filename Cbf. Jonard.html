@@ -306,16 +306,18 @@ setInterval(cycle, 5000);
         text-align: center;
     }
 
-    .evidence-container {
-        width: 90%; /* Keeps it away from the edges of the screen */
-        max-width: 400px;
-        margin: 0 auto;
-        background: #111;
-        padding: 15px;
-        border-radius: 15px;
-        border: 1px solid #222;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    }
+.evidence-container {
+    width: 100%; /* CHANGED FROM 90% to 100% (Full Width) */
+    box-sizing: border-box; /* Crucial to keep the internal padding correct */
+    max-width: none; /* Removes any width limit on mobile */
+    
+    margin: 0 auto;
+    background: #111; /* Keep the color you like */
+    padding: 20px; /* Slight extra breathing room inside */
+    border-radius: 15px;
+    border: 1px solid #222;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
 
     .evidence-img {
         width: 100%;
