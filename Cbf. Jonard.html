@@ -124,31 +124,32 @@
 
         setInterval(cycle, 5000);
     </script>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. DARKNESS & CENTERING */
+    /* 1. HEIGHT & CENTER FIX */
     .hero-container {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        height: 65vh !important;
+        height: 65vh !important; /* LOCKS PICTURE HEIGHT AT 65% */
         position: relative !important;
         overflow: hidden;
         background: #000;
     }
 
+    /* 2. THE ULTRA-DARKNESS (95% BLACK) */
     .hero-container::after {
         content: "";
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.9) !important; /* Ultra Dark 90% */
+        background: rgba(0, 0, 0, 0.95) !important; /* DEEP DARKNESS */
         z-index: 5;
         pointer-events: none;
     }
 
-    /* 2. FIXED HEIGHT CARD (Doesn't jump) */
-    .elite-card-v6 {
+    /* 3. THE FIXED HEIGHT CARD */
+    .elite-card-v7 {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -156,26 +157,25 @@
         z-index: 1000 !important;
         width: 85%;
         max-width: 450px;
-        height: 220px; /* FIXED HEIGHT - NO JUMPING */
-        background: rgba(255, 255, 255, 0.5); /* 50% Opacity White */
+        height: 220px; /* CARD REMAINS STEADY */
+        background: rgba(255, 255, 255, 0.5); 
         border-radius: 15px;
-        padding: 20px 30px 20px 60px; /* Space for icon on left */
+        padding: 20px 30px 20px 60px;
         display: flex;
         align-items: center;
-        justify-content: center;
         text-align: left;
         box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-        animation: pulse-v6 3s ease-in-out infinite;
-        -webkit-tap-highlight-color: transparent; /* Removes default blue box */
+        animation: pulse-v7 3s ease-in-out infinite;
+        -webkit-tap-highlight-color: transparent;
     }
 
-    @keyframes pulse-v6 {
+    @keyframes pulse-v7 {
         0%, 100% { transform: translate(-50%, -50%) scale(1); }
         50% { transform: translate(-50%, -50%) scale(1.02); }
     }
 
-    /* 3. THE BACK ICON (< Chevron) */
-    .back-nav-v6 {
+    /* 4. THE NAV ICON (FLASHING GREY) */
+    .back-nav-v7 {
         position: absolute;
         left: 10px;
         top: 50%;
@@ -190,53 +190,50 @@
         z-index: 1001;
     }
 
-    /* THE FLASH EFFECT - Only happens on click/tap */
-    .back-nav-v6:active {
-        animation: flash-grey 0.4s ease-out;
+    .back-nav-v7:active {
+        animation: flash-v7 0.4s ease-out;
     }
 
-    @keyframes flash-grey {
+    @keyframes flash-v7 {
         0% { background: rgba(0, 0, 0, 0.2); }
         100% { background: transparent; }
     }
 
-    /* Custom Chevron < (No middle stroke, fatter width) */
-    .chevron-left {
-        width: 15px;
-        height: 15px;
-        border-left: 4px solid #000;
-        border-bottom: 4px solid #000;
+    /* FAT CHEVRON < */
+    .chevron-left-v7 {
+        width: 14px;
+        height: 14px;
+        border-left: 5px solid #000;
+        border-bottom: 5px solid #000;
         transform: rotate(45deg);
-        margin-left: 5px;
+        margin-left: 6px;
     }
 
-    /* 4. HERMES TEXT & CURSOR */
-    .hermes-v6 {
+    /* 5. TEXT STYLE */
+    .hermes-v7 {
         color: #000;
         font-family: 'Inter', sans-serif;
         font-size: 24px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 1px;
-        line-height: 1.2;
     }
 
-    #typed-v6::after {
+    #typed-v7::after {
         content: "|";
-        animation: blink-v6 0.8s infinite;
+        animation: blink-v7 0.8s infinite;
         margin-left: 2px;
     }
 
-    @keyframes blink-v6 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes blink-v7 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 </style>
 
-<div class="elite-card-v6">
-    <div class="back-nav-v6" onclick="prevSentence()">
-        <div class="chevron-left"></div>
+<div class="elite-card-v7">
+    <div class="back-nav-v7" onclick="prevSentence()">
+        <div class="chevron-left-v7"></div>
     </div>
-
-    <div class="hermes-v6">
-        <span id="typed-v6"></span>
+    <div class="hermes-v7">
+        <span id="typed-v7"></span>
     </div>
 </div>
 
@@ -252,15 +249,11 @@
             "Join the Central Bureau Fund."
         ];
 
-        let sIdx = 0;
-        let cIdx = 0;
-        let isDeleting = false;
-        let timer;
+        let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
 
         function type() {
-            const target = document.getElementById("typed-v6");
+            const target = document.getElementById("typed-v7");
             const fullText = sentences[sIdx];
-
             if (isDeleting) {
                 target.textContent = fullText.substring(0, cIdx - 1);
                 cIdx--;
@@ -268,9 +261,7 @@
                 target.textContent = fullText.substring(0, cIdx + 1);
                 cIdx++;
             }
-
             let speed = isDeleting ? 30 : 75;
-
             if (!isDeleting && cIdx === fullText.length) {
                 isDeleting = true;
                 timer = setTimeout(type, 2000);
@@ -283,15 +274,12 @@
             }
         }
 
-        // GO BACK LOGIC
         window.prevSentence = function() {
             clearTimeout(timer);
-            isDeleting = false;
-            cIdx = 0;
+            isDeleting = false; cIdx = 0;
             sIdx = (sIdx - 1 + sentences.length) % sentences.length;
             type();
         };
-
         type();
     })();
 </script>
