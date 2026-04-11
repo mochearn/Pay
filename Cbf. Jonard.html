@@ -11,7 +11,7 @@
 
         :root {
             --bureau-blue: #001f3f;
-            --action-green: #00c853;
+            --action-green: #00c85 I3;
             --emergency-red: #FF4136;
         }
 
@@ -160,7 +160,7 @@
                 <div class="chevron-left-v7"></div>
             </div>
             <div class="hermes-v7">
-                <span id="typed-v7"></span>
+              <div id="typed-v7"></div>
             </div>
         </div>
     </div>
@@ -173,7 +173,7 @@
     // 2. THE DYNAMIC SENTENCES
     const sentences = [
         `Welcome, ${userName}. Your Migration Begins.`, // First sentence mentions the name
-        "The Wealth Migration Has Begun.",
+  "<span style='color: orange;'>Get Access to </span><span style='color: #00c853;'>₦500,000 — ₦3.2M</span><span style='color: orange;'> Disbursement</span>",
         "Secure Your Grant Slot Now.",
         "High Velocity Funding is Live.",
         "Bypass the noise. Get results.",
@@ -187,13 +187,8 @@
         const target = document.getElementById("typed-v7");
         const fullText = sentences[sIdx];
 
-        if (isDeleting) {
-            target.textContent = fullText.substring(0, cIdx - 1);
-            cIdx--;
-        } else {
-            target.textContent = fullText.substring(0, cIdx + 1);
-            cIdx++;
-        }
+      target.innerHTML = fullText.substring(0, cIdx - 1);
+        target.innerHTML = fullText.substring(0, cIdx + 1);
 
         let speed = isDeleting ? 30 : 75;
 
