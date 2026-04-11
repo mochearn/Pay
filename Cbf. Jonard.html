@@ -300,24 +300,28 @@ function cycle() {
 setInterval(cycle, 5000);
     </script>
 <style>
-    .evidence-section {
-        padding: 40px 20px;
-        background: #000;
-        text-align: center;
-    }
+.evidence-section {
+    padding: 0px !important; /* Removes the gap between ticker and card */
+    background: #000;
+    text-align: center;
+}
 
 .evidence-container {
-    width: 100%; /* CHANGED FROM 90% to 100% (Full Width) */
-    box-sizing: border-box; /* Crucial to keep the internal padding correct */
-    max-width: none; /* Removes any width limit on mobile */
+    width: 100% !important;
+    margin: 0 !important;
+    background: #111;
+    padding: 20px 15px; /* Keep padding inside, but remove it outside */
     
-    margin: 0 auto;
-    background: #111; /* Keep the color you like */
-    padding: 20px; /* Slight extra breathing room inside */
-    border-radius: 15px;
-    border: 1px solid #222;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
+    /* REMOVE TOP CURVES, KEEP BOTTOM CURVES */
+    border-radius: 0 0 15px 15px !important; 
+    
+    border-left: none;
+    border-right: none;
+    border-top: none; /* Removes the line between ticker and card */
+    border-bottom: 1px solid #222;
+    
+    box-sizing: border-box;
+    }
 
     .evidence-img {
         width: 100%;
