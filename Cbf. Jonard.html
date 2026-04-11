@@ -303,69 +303,62 @@ function cycle() {
 }
 setInterval(cycle, 5000);
     </script>
-    <style>
-    /* TICKER STYLES */
-    .ticker-wrap {
+<style>
+    .evidence-section {
+        padding: 40px 20px;
+        background: #000;
+        text-align: center;
+    }
+
+    .evidence-container {
+        width: 90%; /* Keeps it away from the edges of the screen */
+        max-width: 400px;
+        margin: 0 auto;
+        background: #111;
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid #222;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    .evidence-img {
         width: 100%;
-        overflow: hidden;
-        background: #050505; /* Deep black to match your elite theme */
-        border-bottom: 1px solid #1a1a1a;
-        padding: 12px 0;
-        display: flex;
+        height: auto;
+        border-radius: 10px;
+        display: block;
     }
 
-    .ticker-move {
-        display: flex;
-        width: max-content;
-        animation: ticker-slide 25s linear infinite; /* Smooth continuous sliding */
-    }
-
-    .ticker-item {
-        color: #ffffff;
+    .evidence-text {
+        margin-top: 20px;
+        color: #fff;
         font-family: 'Inter', sans-serif;
-        font-size: 13px;
-        font-weight: 600;
-        margin-right: 60px; /* Space between each person's payout */
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
-    .ticker-amount {
-        color: #00ff2d; /* Your signature Action Green */
-        margin-left: 8px;
+    .evidence-title {
+        font-size: 18px;
         font-weight: 900;
+        display: block;
+        margin-bottom: 5px;
     }
 
-    .live-dot-small {
-        height: 7px; 
-        width: 7px;
-        background: #00ff2d;
-        border-radius: 50%;
-        margin-right: 12px;
-        box-shadow: 0 0 8px #00ff2d;
-    }
-
-    @keyframes ticker-slide {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); } /* Loops perfectly */
+    .evidence-sub {
+        font-size: 14px;
+        font-weight: 500;
+        color: #00ff2d; /* Green highlights for "Results" */
     }
 </style>
 
-<div class="ticker-wrap">
-    <div class="ticker-move">
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Oshogbo_Dev <span class="ticker-amount">₦450,000 Payout Confirmed</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Elite_Chief <span class="ticker-amount">₦1,200,000 Disbursement Live</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Mummy_J <span class="ticker-amount">₦85,000 Grant Received</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Victory_01 <span class="ticker-amount">₦2,400,000 Payout Confirmed</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Adetunji_A <span class="ticker-amount">₦310,000 Disbursement Live</span></div>
+<div class="evidence-section">
+    <div class="evidence-container">
+        <img src="https://image2url.com/r2/default/images/1775948821228-497e530b-184a-47d6-ac18-e9bf132f67f0.jpg" alt="Real Results" class="evidence-img">
         
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Oshogbo_Dev <span class="ticker-amount">₦450,000 Payout Confirmed</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Elite_Chief <span class="ticker-amount">₦1,200,000 Disbursement Live</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Mummy_J <span class="ticker-amount">₦85,000 Grant Received</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Victory_01 <span class="ticker-amount">₦2,400,000 Payout Confirmed</span></div>
-        <div class="ticker-item"><span class="live-dot-small"></span> User @Adetunji_A <span class="ticker-amount">₦310,000 Disbursement Live</span></div>
+        <div class="evidence-text">
+            <span class="evidence-title">See What Others Are Saying:</span>
+            <span class="evidence-sub">Real people, real Results</span>
+        </div>
     </div>
-    </div>
+</div>
 </body>
     </html>
