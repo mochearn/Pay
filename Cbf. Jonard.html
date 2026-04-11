@@ -250,27 +250,29 @@ function cycle() {
 setInterval(cycle, 5000);
     </script>
 <style>
+    /* THE ENGINE THAT FIXES EVERYTHING */
     .apply-btn-v7 {
         position: absolute !important;
-        bottom: 10% !important;
+        bottom: 12% !important; /* Forces it onto the picture */
         left: 50% !important;
-        transform: translateX(-50%) !important;
-        z-index: 9999 !important;
+        /* We move the centering inside the animation to stop the clash */
+        z-index: 9999 !important; 
+        
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 12px 28px;
-        border: 3px solid #00c853;
-        border-radius: 50px;
-        background: rgba(0, 0, 0, 0.6);
-        color: #00c853;
+        border: 3px solid #00c853; 
+        border-radius: 50px; 
+        background: rgba(0, 0, 0, 0.7); 
+        color: #00c853; 
         font-family: 'Inter', sans-serif;
         font-size: 17px;
         font-weight: 900;
         text-decoration: none;
         text-transform: uppercase;
         white-space: nowrap;
-        animation: pulse-apply-v7 2s infinite;
+        animation: elite-pulse-fix 2s infinite !important; /* NEW ENGINE */
     }
 
     .bureau-svg-thick {
@@ -284,10 +286,20 @@ setInterval(cycle, 5000);
         stroke-linejoin: round;
     }
 
-    @keyframes pulse-apply-v7 {
-        0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.5); }
-        70% { transform: translateX(-50%) scale(1.06); box-shadow: 0 0 0 15px rgba(0, 200, 83, 0); }
-        100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+    /* THE CORRECT PULSE LOGIC */
+    @keyframes elite-pulse-fix {
+        0% { 
+            transform: translateX(-50%) scale(1); 
+            box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.6); 
+        }
+        70% { 
+            transform: translateX(-50%) scale(1.08); 
+            box-shadow: 0 0 0 15px rgba(0, 200, 83, 0); 
+        }
+        100% { 
+            transform: translateX(-50%) scale(1); 
+            box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); 
+        }
     }
 </style>
 
