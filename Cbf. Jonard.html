@@ -48,15 +48,15 @@
             align-items: center;
         }
 
-        /* THE DEEP DARKNESS OVERLAY (95%) */
-        .hero-container::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95) !important; 
-            z-index: 10;
-            pointer-events: none;
-        }
+       /* LIGHTER DARKNESS OVERLAY (0.8) */
+.hero-container::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.55) !important; /* Changed from 0.95 */
+    z-index: 10;
+    pointer-events: none;
+              }
 
         /* THE WALLPAPER (IMAGES) */
         .showcase-img {
@@ -79,22 +79,23 @@
         }
         .ani-4 { animation: ani-scatter 0.9s steps(5) forwards; }
 
-        /* 3. THE ELITE CARD - THE "FURNITURE" */
-        .elite-card-v7 {
-            position: relative;
-            z-index: 1000 !important;
-            width: 85%;
-            max-width: 450px;
-            height: 220px; /* FIXED HEIGHT - NO JUMPING */
-            background: rgba(255, 255, 255, 0.5); 
-            border-radius: 15px;
-            padding: 20px 30px 20px 65px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            animation: pulse-v7 3s ease-in-out infinite;
-            -webkit-tap-highlight-color: transparent;
-        }
+/* SMALLER FIXED HEIGHT CARD */
+.elite-card-v7 {
+    position: relative;
+    z-index: 1000 !important;
+    width: 85%;
+    max-width: 420px; /* Slimmer */
+    height: 160px; /* SHORTER - Changed from 220px */
+    background: rgba(255, 255, 255, 0.5); 
+    border-radius: 12px;
+    padding: 20px 20px 20px 55px; /* Streamlined Padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    animation: pulse-v7 3s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+}
 
         @keyframes pulse-v7 {
             0%, 100% { transform: scale(1); }
@@ -122,11 +123,12 @@
             transform: rotate(45deg); margin-left: 6px;
         }
 
-        /* HERMES TEXT STYLE */
-        .hermes-v7 {
-            color: #000; font-family: 'Inter', sans-serif;
-            font-size: 24px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 1px; line-height: 1.2;
+/* SMALLER HERMES TEXT STYLE */
+.hermes-v7 {
+    color: #000; font-family: 'Inter', sans-serif;
+    font-size: 19px; /* SMALLER - Changed from 24px */
+    font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.8px; line-height: 1.1;
         }
 
         #typed-v7::after { content: "|"; animation: blink-v7 0.8s infinite; margin-left: 2px; }
