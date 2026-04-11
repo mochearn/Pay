@@ -36,17 +36,17 @@
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         /* 2. HERO CONTAINER - THE "ROOM" */
-        .hero-container {
-            position: relative;
-            width: 100vw;
-            height: 65vh !important; /* HEIGHT LOCKED */
-            margin-top: 40px;
-            background: #000;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+ .hero-container {
+    position: relative; /* THIS IS THE MOST IMPORTANT LINE */
+    width: 100vw;
+    height: 65vh !important;
+    margin-top: 40px;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+            }
 
        /* LIGHTER DARKNESS OVERLAY (0.8) */
 .hero-container::after {
@@ -251,41 +251,35 @@ setInterval(cycle, 5000);
     </script>
 <style>
     .apply-btn-v7 {
-        /* FIXED POSITIONING ON TOP OF IMAGE */
         position: absolute !important;
-        bottom: 12% !important; /* Moved it up slightly to hit your circle */
+        bottom: 10% !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        z-index: 9999 !important; /* Maximum priority to stay on top */
-        
-        /* THE BOLD LOOK */
+        z-index: 9999 !important;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 12px 28px;
-        border: 3px solid #00c853; /* Thicker border */
-        border-radius: 50px; 
-        background: rgba(0, 0, 0, 0.6); /* Darker back for "Pop" */
-        color: #00c853; 
+        border: 3px solid #00c853;
+        border-radius: 50px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #00c853;
         font-family: 'Inter', sans-serif;
         font-size: 17px;
-        font-weight: 900; /* Extra Bold */
+        font-weight: 900;
         text-decoration: none;
         text-transform: uppercase;
         white-space: nowrap;
-        letter-spacing: 1px;
-        animation: pulse-apply-v7 2s infinite; 
-        transition: 0.3s;
+        animation: pulse-apply-v7 2s infinite;
     }
 
-    /* THE THICKER SVG CHECKMARK */
     .bureau-svg-thick {
         width: 20px;
         height: 20px;
         margin-left: 12px;
         fill: none;
         stroke: #00c853;
-        stroke-width: 4; /* THICKER LINE */
+        stroke-width: 4;
         stroke-linecap: round;
         stroke-linejoin: round;
     }
@@ -302,6 +296,6 @@ setInterval(cycle, 5000);
     <svg class="bureau-svg-thick" viewBox="0 0 24 24">
         <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
-    </a>
+</a>
 </body>
     </html>
