@@ -474,6 +474,23 @@ setInterval(cycle, 5000);
         font-weight: 500;
         margin-top: 2px;
     }
+    /* The Animation Blueprint */
+@keyframes proof-pop-in {
+    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Apply it to the cards */
+.proof-grid-card {
+    opacity: 0; /* Start invisible */
+    animation: proof-pop-in 0.8s ease forwards;
+}
+
+/* Delay each card so they pop one by one */
+.proof-grid-card:nth-child(1) { animation-delay: 0.2s; }
+.proof-grid-card:nth-child(2) { animation-delay: 0.4s; }
+.proof-grid-card:nth-child(3) { animation-delay: 0.6s; }
+.proof-grid-card:nth-child(4) { animation-delay: 0.8s; }
 </style>
 
 <div class="proof-gallery-section">
