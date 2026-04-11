@@ -251,22 +251,25 @@ setInterval(cycle, 5000);
     </script>
 <style>
     .apply-btn-v7 {
-        position: absolute;
-        bottom: 8%; /* Adjust this to move it up or down on the picture */
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1500; 
+        /* FIXED POSITIONING ON TOP OF IMAGE */
+        position: absolute !important;
+        bottom: 12% !important; /* Moved it up slightly to hit your circle */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 9999 !important; /* Maximum priority to stay on top */
+        
+        /* THE BOLD LOOK */
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px 25px;
-        border: 2.5px solid #00c853; 
+        padding: 12px 28px;
+        border: 3px solid #00c853; /* Thicker border */
         border-radius: 50px; 
-        background: rgba(0, 0, 0, 0.5); 
+        background: rgba(0, 0, 0, 0.6); /* Darker back for "Pop" */
         color: #00c853; 
         font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-weight: 800;
+        font-size: 17px;
+        font-weight: 900; /* Extra Bold */
         text-decoration: none;
         text-transform: uppercase;
         white-space: nowrap;
@@ -275,24 +278,29 @@ setInterval(cycle, 5000);
         transition: 0.3s;
     }
 
-    .bureau-svg {
-        width: 18px;
-        height: 18px;
-        margin-left: 10px;
-        fill: #00c853;
+    /* THE THICKER SVG CHECKMARK */
+    .bureau-svg-thick {
+        width: 20px;
+        height: 20px;
+        margin-left: 12px;
+        fill: none;
+        stroke: #00c853;
+        stroke-width: 4; /* THICKER LINE */
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
 
     @keyframes pulse-apply-v7 {
-        0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.4); }
-        70% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 0 12px rgba(0, 200, 83, 0); }
+        0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.5); }
+        70% { transform: translateX(-50%) scale(1.06); box-shadow: 0 0 0 15px rgba(0, 200, 83, 0); }
         100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
     }
 </style>
 
 <a href="#" class="apply-btn-v7">
     Apply Now
-    <svg class="bureau-svg" viewBox="0 0 24 24">
-        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+    <svg class="bureau-svg-thick" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
 </a>
 </body>
