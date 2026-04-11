@@ -145,17 +145,19 @@
         #typed-v7::after { content: "|"; animation: blink-v7 0.8s infinite; margin-left: 2px; }
         @keyframes blink-v7 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .apply-btn-v7 {
-    position: fixed !important;
-    bottom: 30% !important; 
+    /* CHANGE THIS FROM FIXED TO ABSOLUTE */
+    position: absolute !important;
+    bottom: 8% !important; 
     left: 50% !important;
-    z-index: 99999 !important;
+    z-index: 1500 !important;
+    
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 12px 28px;
     border: 3.5px solid #00ff2d; 
     border-radius: 50px; 
-    background: rgba(0, 0, 0, 0.8); 
+    background: rgba(0, 0, 0, 0.7); 
     color: #00ff2d; 
     font-family: 'Inter', sans-serif;
     font-size: 17px;
@@ -163,21 +165,15 @@
     text-decoration: none;
     text-transform: uppercase;
     white-space: nowrap;
-    animation: elite-fixed-pulse 2s infinite !important;
+    /* This centering logic is better for absolute */
+    transform: translateX(-50%);
+    animation: sticky-pulse 2s infinite !important;
 }
 
-.bureau-svg-thick {
-    width: 22px; height: 22px;
-    margin-left: 12px;
-    fill: none; stroke: #00ff2d;
-    stroke-width: 5;
-    stroke-linecap: round; stroke-linejoin: round;
-}
-
-@keyframes elite-fixed-pulse {
-    0% { transform: translate(-50%, 0) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0.6); }
-    70% { transform: translate(-50%, 0) scale(1.08); box-shadow: 0 0 0 15px rgba(0, 255, 45, 0); }
-    100% { transform: translate(-50%, 0) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0); }
+@keyframes sticky-pulse {
+    0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0.6); }
+    70% { transform: translateX(-50%) scale(1.08); box-shadow: 0 0 0 15px rgba(0, 255, 45, 0); }
+    100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0); }
         }
     </style>
 </head>
