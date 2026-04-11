@@ -188,28 +188,39 @@ function type() {
         const fullText = sentences[sIdx];
 
         if (isDeleting) {
-            // This pulls the text back
-            target.innerHTML = fullText.substring(0, cIdx - 1);
-            cIdx--; 
+            // If we hit a tag while deleting, skip past it
+            if (fullText.charAt(cIdx - 1) === '>') {
+                cIdx = fullText.lastIndexOf('<', cIdx - 1);
+            } else {
+                cIdx--;
+            }
         } else {
-            // This pushes the text forward
-            target.innerHTML = fullText.substring(0, cIdx + 1);
-            cIdx++;
+            // If we hit a tag while typing, skip past it
+            if (fullText.charAt(cIdx) === '<') {
+                cIdx = fullText.indexOf('>', cIdx) + 1;
+            } else {
+                cIdx++;
+            }
         }
+
+        target.innerHTML = fullText.substring(0, cIdx);
 
         let speed = isDeleting ? 30 : 75;
 
-        if (!isDeleting && cIdx === fullText.length) {
+        // If we are inside a tag, speed up to 0 to make it instant
+        if (!isDeleting && fullText.charAt(cIdx) === '<') speed = 0;
+
+        if (!isDeleting && cIdx >= fullText.length) {
             isDeleting = true;
             timer = setTimeout(type, 2000);
-        } else if (isDeleting && cIdx === 0) {
+        } else if (isDeleting && cIdx <= 0) {
             isDeleting = false;
             sIdx = (sIdx + 1) % sentences.length;
             timer = setTimeout(type, 500);
         } else {
             timer = setTimeout(type, speed);
         }
-    }
+        }
 
     // BACK BUTTON LOGIC
     window.prevSentence = function() {
