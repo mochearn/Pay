@@ -183,12 +183,19 @@
 
     let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
 
-    function type() {
+function type() {
         const target = document.getElementById("typed-v7");
         const fullText = sentences[sIdx];
 
-      target.innerHTML = fullText.substring(0, cIdx - 1);
-        target.innerHTML = fullText.substring(0, cIdx + 1);
+        if (isDeleting) {
+            // This pulls the text back
+            target.innerHTML = fullText.substring(0, cIdx - 1);
+            cIdx--; 
+        } else {
+            // This pushes the text forward
+            target.innerHTML = fullText.substring(0, cIdx + 1);
+            cIdx++;
+        }
 
         let speed = isDeleting ? 30 : 75;
 
