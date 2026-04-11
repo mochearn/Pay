@@ -250,13 +250,12 @@ function cycle() {
 setInterval(cycle, 5000);
     </script>
 <style>
-    /* THE ENGINE THAT FIXES EVERYTHING */
     .apply-btn-v7 {
-        position: absolute !important;
-        bottom: 12% !important; /* Forces it onto the picture */
+        /* THIS FORCES IT TO THE MIDDLE-BOTTOM OF THE SCREEN */
+        position: fixed !important;
+        bottom: 40% !important; /* This hits the middle-lower part of the photo */
         left: 50% !important;
-        /* We move the centering inside the animation to stop the clash */
-        z-index: 9999 !important; 
+        z-index: 99999 !important;
         
         display: flex;
         align-items: center;
@@ -264,7 +263,7 @@ setInterval(cycle, 5000);
         padding: 12px 28px;
         border: 3px solid #00c853; 
         border-radius: 50px; 
-        background: rgba(0, 0, 0, 0.7); 
+        background: rgba(0, 0, 0, 0.8); 
         color: #00c853; 
         font-family: 'Inter', sans-serif;
         font-size: 17px;
@@ -272,34 +271,20 @@ setInterval(cycle, 5000);
         text-decoration: none;
         text-transform: uppercase;
         white-space: nowrap;
-        animation: elite-pulse-fix 2s infinite !important; /* NEW ENGINE */
+        animation: fixed-pulse 2s infinite !important;
     }
 
     .bureau-svg-thick {
-        width: 20px;
-        height: 20px;
+        width: 20px; height: 20px;
         margin-left: 12px;
-        fill: none;
-        stroke: #00c853;
-        stroke-width: 4;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+        fill: none; stroke: #00c853;
+        stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
     }
 
-    /* THE CORRECT PULSE LOGIC */
-    @keyframes elite-pulse-fix {
-        0% { 
-            transform: translateX(-50%) scale(1); 
-            box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.6); 
-        }
-        70% { 
-            transform: translateX(-50%) scale(1.08); 
-            box-shadow: 0 0 0 15px rgba(0, 200, 83, 0); 
-        }
-        100% { 
-            transform: translateX(-50%) scale(1); 
-            box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); 
-        }
+    @keyframes fixed-pulse {
+        0% { transform: translate(-50%, 0) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.6); }
+        70% { transform: translate(-50%, 0) scale(1.08); box-shadow: 0 0 0 15px rgba(0, 200, 83, 0); }
+        100% { transform: translate(-50%, 0) scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
     }
 </style>
 
