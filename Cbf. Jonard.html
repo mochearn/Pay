@@ -166,64 +166,74 @@
     </div>
 
     <script>
-        /* 1. TYPING LOGIC */
-        (function() {
-            const sentences = [
-                "The Wealth Migration Has Begun.",
-                "Secure Your Grant Slot Now.",
-                "High Velocity Funding is Live.",
-                "Bypass the noise. Get results.",
-                "Limited private windows are open.",
-                "Elite status requires elite action.",
-                "Join the Central Bureau Fund."
-            ];
-            let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
-            function type() {
-                const target = document.getElementById("typed-v7");
-                const fullText = sentences[sIdx];
-                if (isDeleting) {
-                    target.textContent = fullText.substring(0, cIdx - 1);
-                    cIdx--;
-                } else {
-                    target.textContent = fullText.substring(0, cIdx + 1);
-                    cIdx++;
-                }
-                let speed = isDeleting ? 30 : 75;
-                if (!isDeleting && cIdx === fullText.length) {
-                    isDeleting = true;
-                    timer = setTimeout(type, 2000);
-                } else if (isDeleting && cIdx === 0) {
-                    isDeleting = false;
-                    sIdx = (sIdx + 1) % sentences.length;
-                    timer = setTimeout(type, 500);
-                } else {
-                    timer = setTimeout(type, speed);
-                }
-            }
-            window.prevSentence = function() {
-                clearTimeout(timer);
-                isDeleting = false; cIdx = 0;
-                sIdx = (sIdx - 1 + sentences.length) % sentences.length;
-                type();
-            };
-            type();
-        })();
+(function() {
+    // 1. THE USER NAME (This is the placeholder for now)
+    let userName = "Soldier"; 
 
-        /* 2. IMAGE CYCLE LOGIC */
-        const imgs = document.querySelectorAll('.showcase-img');
-        let current = 0;
-        function cycle() {
-            let prev = current;
-            current = (current + 1) % imgs.length;
-            let nextImg = imgs[current];
-            let prevImg = imgs[prev];
-            nextImg.classList.remove('ani-4');
-            void nextImg.offsetWidth; 
-            nextImg.classList.add('ani-4');
-            nextImg.classList.add('active-img');
-            setTimeout(() => { prevImg.classList.remove('active-img'); }, 950);
+    // 2. THE DYNAMIC SENTENCES
+    const sentences = [
+        `Welcome, ${userName}. Your Migration Begins.`, // First sentence mentions the name
+        "The Wealth Migration Has Begun.",
+        "Secure Your Grant Slot Now.",
+        "High Velocity Funding is Live.",
+        "Bypass the noise. Get results.",
+        "Elite status requires elite action.",
+        "Join the Central Bureau Fund."
+    ];
+
+    let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
+
+    function type() {
+        const target = document.getElementById("typed-v7");
+        const fullText = sentences[sIdx];
+
+        if (isDeleting) {
+            target.textContent = fullText.substring(0, cIdx - 1);
+            cIdx--;
+        } else {
+            target.textContent = fullText.substring(0, cIdx + 1);
+            cIdx++;
         }
-        setInterval(cycle, 5000);
-    </script>
+
+        let speed = isDeleting ? 30 : 75;
+
+        if (!isDeleting && cIdx === fullText.length) {
+            isDeleting = true;
+            timer = setTimeout(type, 2000);
+        } else if (isDeleting && cIdx === 0) {
+            isDeleting = false;
+            sIdx = (sIdx + 1) % sentences.length;
+            timer = setTimeout(type, 500);
+        } else {
+            timer = setTimeout(type, speed);
+        }
+    }
+
+    // BACK BUTTON LOGIC
+    window.prevSentence = function() {
+        clearTimeout(timer);
+        isDeleting = false; cIdx = 0;
+        sIdx = (sIdx - 1 + sentences.length) % sentences.length;
+        type();
+    };
+
+    type();
+})();
+
+/* IMAGE CYCLE LOGIC (Keep this as is) */
+const imgs = document.querySelectorAll('.showcase-img');
+let current = 0;
+function cycle() {
+    let prev = current;
+    current = (current + 1) % imgs.length;
+    let nextImg = imgs[current];
+    let prevImg = imgs[prev];
+    nextImg.classList.remove('ani-4');
+    void nextImg.offsetWidth; 
+    nextImg.classList.add('ani-4');
+    nextImg.classList.add('active-img');
+    setTimeout(() => { prevImg.classList.remove('active-img'); }, 950);
+}
+setInterval(cycle, 5000);
 </body>
     </html>
