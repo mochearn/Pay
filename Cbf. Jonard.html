@@ -502,5 +502,156 @@ setInterval(cycle, 5000);
         observer.observe(card);
     });
 </script>
+    <style>
+    .steps-section {
+        background: #000000;
+        padding: 60px 20px;
+        font-family: 'Inter', sans-serif;
+        color: #fff;
+    }
+
+    .steps-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .steps-header h2 {
+        font-size: 26px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #ffffff;
+    }
+
+    .steps-header .green-line {
+        width: 50px;
+        height: 4px;
+        background: #00ff2d;
+        margin: 10px auto;
+        border-radius: 2px;
+    }
+
+    .steps-container {
+        position: relative;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    /* Vertical line connecting the steps */
+    .steps-container::before {
+        content: '';
+        position: absolute;
+        left: 25px;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        background: linear-gradient(to bottom, #00ff2d, #111);
+        z-index: 1;
+    }
+
+    .step-item {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 40px;
+        z-index: 2;
+        opacity: 0; /* For the reveal animation */
+        transform: translateX(20px);
+        transition: all 0.6s ease-out;
+    }
+
+    .step-item.reveal {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background: #111;
+        border: 2px solid #00ff2d;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        color: #00ff2d;
+        font-size: 20px;
+        flex-shrink: 0;
+        box-shadow: 0 0 15px rgba(0, 255, 45, 0.2);
+    }
+
+    .step-content {
+        margin-left: 20px;
+        padding-top: 5px;
+    }
+
+    .step-title {
+        display: block;
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .step-desc {
+        display: block;
+        font-size: 14px;
+        color: #888;
+        line-height: 1.5;
+    }
+</style>
+
+<div class="steps-section">
+    <div class="steps-header">
+        <h2>How To Get Started:</h2>
+        <div class="green-line"></div>
+    </div>
+
+    <div class="steps-container">
+        <div class="step-item step-reveal">
+            <div class="step-number">01</div>
+            <div class="step-content">
+                <span class="step-title">Apply for the Program</span>
+                <span class="step-desc">Fill in your details and choose your position to begin the process.</span>
+            </div>
+        </div>
+
+        <div class="step-item step-reveal">
+            <div class="step-number">02</div>
+            <div class="step-content">
+                <span class="step-title">Get Verified</span>
+                <span class="step-desc">Quick verification to confirm your eligibility and secure your spot.</span>
+            </div>
+        </div>
+
+        <div class="step-item step-reveal">
+            <div class="step-number">03</div>
+            <div class="step-content">
+                <span class="step-title">Receive Support</span>
+                <span class="step-desc">Get your rewards and start your new journey with the Elite system.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Adding the specific observer for these steps
+    const stepObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Staggered reveal based on index
+                setTimeout(() => {
+                    entry.target.classList.add('reveal');
+                }, index * 200); 
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.step-reveal').forEach((step) => {
+        stepObserver.observe(step);
+    });
+</script>
 </body>
     </html>
