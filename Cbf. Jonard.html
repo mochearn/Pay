@@ -653,5 +653,209 @@ setInterval(cycle, 5000);
         stepObserver.observe(step);
     });
 </script>
+    <style>
+    .positions-section {
+        background: #ffffff;
+        padding: 60px 15px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .positions-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .positions-header h2 {
+        font-size: 26px;
+        font-weight: 900;
+        color: #000;
+        text-transform: uppercase;
+        line-height: 1.2;
+    }
+
+    .pos-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .pos-card {
+        background: #fcfcfc;
+        border: 1px solid #eee;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+        text-align: center;
+    }
+
+    .pos-image-slot {
+        width: 100%;
+        height: 200px;
+        background: #f0f0f0;
+        overflow: hidden;
+    }
+
+    .pos-image-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .pos-body {
+        padding: 25px 20px;
+    }
+
+    .pos-title {
+        font-size: 22px;
+        font-weight: 900;
+        color: #000;
+        display: block;
+    }
+
+    .pos-price {
+        font-size: 24px;
+        font-weight: 900;
+        color: #00ff2d; /* Action Green */
+        margin: 8px 0 20px 0;
+        display: block;
+    }
+
+    .pos-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 25px 0;
+        text-align: left;
+    }
+
+    .pos-features li {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+        line-height: 1.4;
+    }
+
+    .pos-features li::before {
+        content: '✓';
+        color: #00ff2d;
+        font-weight: 900;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+
+    /* ACTION BUTTONS */
+    .select-btn {
+        width: 100%;
+        padding: 16px;
+        background: #00ff2d;
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-weight: 900;
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .select-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Gold Button for the Top Tier */
+    .btn-state {
+        background: #d4a017 !important;
+        color: #fff !important;
+        box-shadow: 0 5px 15px rgba(212, 160, 23, 0.3);
+    }
+</style>
+
+<div class="positions-section">
+    <div class="positions-header">
+        <h2>Choose Your Position & Unlock Massive Rewards</h2>
+    </div>
+
+    <div class="pos-grid">
+        
+        <div class="pos-card">
+            <div class="pos-image-slot"><img src="PASTE_STARTER_IMG" alt="Starter"></div>
+            <div class="pos-body">
+                <span class="pos-title">Starter</span>
+                <span class="pos-price">₦10,000</span>
+                <ul class="pos-features">
+                    <li>Get ₦20K – ₦50K cash</li>
+                    <li>Or CBF full kit</li>
+                </ul>
+                <button class="select-btn" id="btn-starter">Select Starter</button>
+            </div>
+        </div>
+
+        <div class="pos-card">
+            <div class="pos-image-slot"><img src="PASTE_RECIPIENT_IMG" alt="Recipient"></div>
+            <div class="pos-body">
+                <span class="pos-title">Recipient</span>
+                <span class="pos-price">₦20,000</span>
+                <ul class="pos-features">
+                    <li>Get ₦50K – ₦500K</li>
+                    <li>Or New Laptop (HP ProBook)</li>
+                    <li>Or 18 inches Rechargeable Solar Fan + ₦100K</li>
+                </ul>
+                <button class="select-btn" id="btn-recipient">Select Recipient</button>
+            </div>
+        </div>
+
+        <div class="pos-card">
+            <div class="pos-image-slot"><img src="PASTE_BUNDLE_IMG" alt="Bundle Head"></div>
+            <div class="pos-body">
+                <span class="pos-title">Bundle Head</span>
+                <span class="pos-price">₦50,000</span>
+                <ul class="pos-features">
+                    <li>Get ₦500K – ₦1M</li>
+                    <li>Or Samsung Galaxy Z Fold 5G 256GB</li>
+                    <li>Or Brand New Fireman Generator 240V</li>
+                    <li>Or Luxurious 3 Days weekend in Lekki</li>
+                </ul>
+                <button class="select-btn" id="btn-bundle">Select Bundle Head</button>
+            </div>
+        </div>
+
+        <div class="pos-card">
+            <div class="pos-image-slot"><img src="PASTE_LG_IMG" alt="L.G Coordinator"></div>
+            <div class="pos-body">
+                <span class="pos-title">L.G Coordinator</span>
+                <span class="pos-price">₦100,000</span>
+                <ul class="pos-features">
+                    <li>Get ₦1M – ₦5M</li>
+                    <li>Or iPhone 17 Pro Max 512GB</li>
+                    <li>Or Itel Solar Inverter</li>
+                    <li>Or 75 inches Smart TV + ₦200K</li>
+                    <li>Or Luxurious 7 Days Vacation trip to Ghana</li>
+                </ul>
+                <button class="select-btn" id="btn-lg">Select L.G Coordinator</button>
+            </div>
+        </div>
+
+        <div class="pos-card">
+            <div class="pos-image-slot"><img src="PASTE_STATE_IMG" alt="State Coordinator"></div>
+            <div class="pos-body">
+                <span class="pos-title">State Coordinator</span>
+                <span class="pos-price">₦300,000</span>
+                <ul class="pos-features">
+                    <li>Get ₦5M – ₦30M</li>
+                    <li>Or Toyota Camry 2018</li>
+                    <li>Or A Plot of Land in Lekki</li>
+                    <li>Or 250 bags of Rice</li>
+                    <li>Or Everything in Recipient Position</li>
+                    <li>Or 3 Days Free Vacation to Dubai</li>
+                </ul>
+                <button class="select-btn btn-state" id="btn-state">Select State Coordinator</button>
+            </div>
+        </div>
+
+    </div>
+    </div>
 </body>
     </html>
