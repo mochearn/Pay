@@ -6,12 +6,23 @@
     <title>CBF | Wealth Migration</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
     <style>
+.cbf-logo-top {
+    position: absolute !important;
+    top: 32px !important;
+    left: 46% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1500 !important;
+    width: 140px; /* Adjust size */
+    height: auto;
+    /* This makes the black background disappear if the logo is a PNG */
+    mix-blend-mode: screen; 
+}
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; overflow-x: hidden; font-family: sans-serif; }
 
         :root {
             --bureau-blue: #001f3f;
-            --action-green: #00c853;
+            --action-green: #00c85 I3;
             --emergency-red: #FF4136;
         }
 
@@ -35,39 +46,30 @@
         }
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        .cbf-logo-top {
-            position: absolute !important;
-            top: 55px !important; /* Adjusted to sit below status bar */
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            z-index: 1500 !important;
-            width: 140px;
-            height: auto;
-            mix-blend-mode: screen; 
-        }
+        /* 2. HERO CONTAINER - THE "ROOM" */
+ .hero-container {
+    position: relative; /* THIS IS THE MOST IMPORTANT LINE */
+    width: 100vw;
+    height: 65vh !important;
+    margin-top: 40px;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+            }
 
-        /* 2. HERO CONTAINER */
-        .hero-container {
-            position: relative;
-            width: 100vw;
-            height: 65vh !important;
-            margin-top: 40px;
-            background: #000;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+       /* LIGHTER DARKNESS OVERLAY (0.8) */
+.hero-container::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.55) !important; /* Changed from 0.95 */
+    z-index: 10;
+    pointer-events: none;
+              }
 
-        .hero-container::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.55) !important;
-            z-index: 10;
-            pointer-events: none;
-        }
-
+        /* THE WALLPAPER (IMAGES) */
         .showcase-img {
             position: absolute;
             top: 0; left: 0;
@@ -79,6 +81,7 @@
 
         .active-img { opacity: 1 !important; z-index: 5 !important; }
 
+        /* SCATTER ANIMATION */
         @keyframes ani-scatter {
             0% { transform: scale(1.1); clip-path: inset(10% 30% 10% 30%); filter: contrast(3); }
             30% { clip-path: inset(0% 0% 60% 0%); transform: translateX(-8%); }
@@ -87,27 +90,30 @@
         }
         .ani-4 { animation: ani-scatter 0.9s steps(5) forwards; }
 
-        .elite-card-v7 {
-            position: relative;
-            z-index: 1000 !important;
-            width: 85%;
-            max-width: 420px;
-            height: 160px;
-            background: rgba(255, 255, 255, 0.5); 
-            border-radius: 12px;
-            padding: 20px 20px 20px 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            animation: pulse-v7 3s ease-in-out infinite;
-        }
+/* SMALLER FIXED HEIGHT CARD */
+.elite-card-v7 {
+    position: relative;
+    z-index: 1000 !important;
+    width: 85%;
+    max-width: 420px; /* Slimmer */
+    height: 160px; /* SHORTER - Changed from 220px */
+    background: rgba(255, 255, 255, 0.5); 
+    border-radius: 12px;
+    padding: 20px 20px 20px 55px; /* Streamlined Padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    animation: pulse-v7 3s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+}
 
         @keyframes pulse-v7 {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.02); }
         }
 
+        /* BACK ICON (<) */
         .back-nav-v7 {
             position: absolute;
             left: 10px;
@@ -119,100 +125,59 @@
             z-index: 1001;
         }
 
+        .back-nav-v7:active { animation: flash-v7 0.3s ease-out; }
+        @keyframes flash-v7 { 0% { background: rgba(0, 0, 0, 0.2); } 100% { background: transparent; } }
+
         .chevron-left-v7 {
             width: 14px; height: 14px;
             border-left: 5px solid #000; border-bottom: 5px solid #000;
             transform: rotate(45deg); margin-left: 6px;
         }
 
-        .hermes-v7 {
-            color: #000; font-family: 'Inter', sans-serif;
-            font-size: 19px;
-            font-weight: 800; text-transform: uppercase;
-            letter-spacing: 0.8px; line-height: 1.1;
+/* SMALLER HERMES TEXT STYLE */
+.hermes-v7 {
+    color: #000; font-family: 'Inter', sans-serif;
+    font-size: 19px; /* SMALLER - Changed from 24px */
+    font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.8px; line-height: 1.1;
         }
 
         #typed-v7::after { content: "|"; animation: blink-v7 0.8s infinite; margin-left: 2px; }
         @keyframes blink-v7 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.apply-btn-v7 {
+    /* CHANGE THIS FROM FIXED TO ABSOLUTE */
+    position: absolute !important;
+    bottom: 30% !important; 
+    left: 50% !important;
+    z-index: 1500 !important;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border: 3.5px solid #00ff2d; 
+    border-radius: 50px; 
+    background: rgba(0, 0, 0, 0.7); 
+    color: #00ff2d; 
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    /* This centering logic is better for absolute */
+    transform: translateX(-50%);
+    animation: sticky-pulse 2s infinite !important;
+}
 
-        .apply-btn-v7 {
-            position: absolute !important;
-            bottom: 30% !important; 
-            left: 50% !important;
-            z-index: 1500 !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 28px;
-            border: 3.5px solid #00ff2d; 
-            border-radius: 50px; 
-            background: rgba(0, 0, 0, 0.7); 
-            color: #00ff2d; 
-            font-family: 'Inter', sans-serif;
-            font-size: 17px;
-            font-weight: 900;
-            text-decoration: none;
-            text-transform: uppercase;
-            white-space: nowrap;
-            transform: translateX(-50%);
-            animation: sticky-pulse 2s infinite !important;
+@keyframes sticky-pulse {
+    0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0.6); }
+    70% { transform: translateX(-50%) scale(1.08); box-shadow: 0 0 0 15px rgba(0, 255, 45, 0); }
+    100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0); }
         }
-
-        @keyframes sticky-pulse {
-            0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0.6); }
-            70% { transform: translateX(-50%) scale(1.08); box-shadow: 0 0 0 15px rgba(0, 255, 45, 0); }
-            100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 45, 0); }
-        }
-
-        /* EVIDENCE SECTION */
-        .evidence-section { background: #000; text-align: center; }
-        .evidence-container {
-            width: 100%; background: #111; padding: 20px 15px;
-            border-radius: 0 0 15px 15px; border-bottom: 1px solid #222;
-        }
-        .evidence-img { width: 100%; height: auto; border-radius: 10px; }
-        .evidence-text { margin-top: 20px; color: #fff; font-family: 'Inter', sans-serif; text-transform: uppercase; }
-        .evidence-title { font-size: 18px; font-weight: 900; }
-        .evidence-sub { font-size: 14px; color: #00ff2d; }
-
-        /* PROOF GALLERY */
-        .proof-gallery-section { width: 100%; background: #ffffff; padding: 50px 15px; font-family: 'Inter', sans-serif; overflow: hidden; }
-        .proof-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto; }
-        .proof-grid-card { background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid #f0f0f0; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-        .proof-grid-card.reveal { opacity: 1; transform: translate(0); }
-        .card-1 { transform: translateX(-60px); }
-        .card-2 { transform: scale(0.4) translateY(25px); }
-        .card-3 { transform: translateY(80px) translateX(10px); }
-        .card-4 { transform: rotate(-10deg) translateY(15px); }
-        .proof-grid-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
-        .proof-grid-name { color: #111; font-size: 14px; font-weight: 800; }
-        .proof-grid-earnings { color: #00ff2d; font-size: 16px; font-weight: 900; }
-
-        /* STEPS SECTION */
-        .steps-section { background: #000; padding: 60px 20px; font-family: 'Inter', sans-serif; color: #fff; }
-        .step-item { display: flex; margin-bottom: 40px; opacity: 0; transform: translateX(20px); transition: 0.6s; }
-        .step-item.reveal { opacity: 1; transform: translateX(0); }
-        .step-number { width: 50px; height: 50px; border: 2px solid #00ff2d; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #00ff2d; font-weight: 900; margin-right: 20px; flex-shrink: 0; }
-
-        /* POSITIONS SECTION (ANIMATED) */
-        .positions-section { background: #ffffff; padding: 60px 15px; font-family: 'Inter', sans-serif; text-align: center; }
-        .pos-header { opacity: 0; transition: 0.6s; }
-        .pos-header.reveal { opacity: 1; transform: scale(1); animation: header-pop 0.6s forwards; }
-        @keyframes header-pop { 0% { transform: scale(0.5); } 100% { transform: scale(1); } }
-        .pos-grid { display: flex; flex-direction: column; gap: 30px; max-width: 450px; margin: 30px auto; }
-        .pos-card { background: #fcfcfc; border: 1px solid #eee; border-radius: 20px; overflow: hidden; opacity: 0; transform: translateY(30px); transition: 0.6s; }
-        .pos-card.reveal { opacity: 1; transform: translateY(0); }
-        .pos-img-slot { width: 100%; height: 200px; background: #eee; overflow: hidden; }
-        .pos-img-slot img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 0.8s 0.3s; }
-        .pos-card.reveal img { opacity: 1; transform: translateY(0); }
-        .pos-price { color: #00ff2d; font-size: 24px; font-weight: 900; margin: 10px 0; display: block; }
-        .pos-btn { width: 90%; padding: 15px; background: #00ff2d; border: none; border-radius: 12px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; animation: btn-blink 1.8s infinite; }
-        .btn-gold { background: #d4a017 !important; color: #fff; }
-        @keyframes btn-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
     </style>
 </head>
 <body>
-
     <img src="https://image2url.com/r2/default/images/1775942871729-da32c6ef-6fbf-402f-955b-603cbe856029.jpg" class="cbf-logo-top" alt="CBF Logo">
 
     <div class="status-bar">
@@ -223,73 +188,471 @@
     <div class="hero-container">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200" class="showcase-img active-img">
         <img src="https://images.unsplash.com/photo-1544650039-22886fbb4323?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200" class="showcase-img">
         <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200" class="showcase-img">
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200" class="showcase-img">
+
         <div class="elite-card-v7">
-            <div class="back-nav-v7" onclick="prevSentence()"><div class="chevron-left-v7"></div></div>
-            <div class="hermes-v7"><div id="typed-v7"></div></div>
-        </div>
-    </div>
-
-    <a href="#" class="apply-btn-v7">
-        Apply Now
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="margin-left:10px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    </a>
-
-    <div class="evidence-section">
-        <div class="evidence-container">
-            <img src="https://image2url.com/r2/default/images/1775948821228-497e530b-184a-47d6-ac18-e9bf132f67f0.jpg" alt="Real Results" class="evidence-img">
-            <div class="evidence-text">
-                <span class="evidence-title">See What Others Are Saying:</span><br>
-                <span class="evidence-sub">Real people, real Results</span>
+            <div class="back-nav-v7" onclick="prevSentence()">
+                <div class="chevron-left-v7"></div>
+            </div>
+            <div class="hermes-v7">
+              <div id="typed-v7"></div>
             </div>
         </div>
     </div>
 
-    <div class="proof-gallery-section">
-        <div class="proof-grid">
-            <div class="proof-grid-card card-1"><img src="https://cdn.pixabay.com/photo/2019/11/01/11/24/smiling-woman-4654735_1280.jpg" class="proof-grid-img"><div class="proof-grid-name">HALIMA</div><div class="proof-grid-earnings">₦2,100,000</div></div>
-            <div class="proof-grid-card card-2"><img src="https://cdn.pixabay.com/photo/2019/10/02/21/04/man-4568761_1280.jpg" class="proof-grid-img"><div class="proof-grid-name">CHIDI</div><div class="proof-grid-earnings">₦650,000</div></div>
-        </div>
-    </div>
-
-    <div class="steps-section">
-        <div class="step-item step-reveal"><div class="step-number">01</div><div><b style="display:block">Apply</b>Fill details and choose position.</div></div>
-        <div class="step-item step-reveal"><div class="step-number">02</div><div><b style="display:block">Verify</b>Quick eligibility check.</div></div>
-        <div class="step-item step-reveal"><div class="step-number">03</div><div><b style="display:block">Receive</b>Start your journey.</div></div>
-    </div>
-
-    <div class="positions-section">
-        <h2 class="pos-header reveal-item">Choose Your Position</h2>
-        <div class="pos-grid">
-            <div class="pos-card reveal-item">
-                <div class="pos-img-slot"><img src="https://cdn.pixabay.com/photo/2017/09/07/08/54/money-2724241_1280.jpg"></div>
-                <h3>Starter</h3><span class="pos-price">₦10,000</span>
-                <button class="pos-btn">Select Starter</button>
-            </div>
-            <div class="pos-card reveal-item">
-                <div class="pos-img-slot"><img src="https://cdn.pixabay.com/photo/2015/05/31/15/14/woman-792162_1280.jpg"></div>
-                <h3>State Coordinator</h3><span class="pos-price">₦300,000</span>
-                <button class="pos-btn btn-gold">Select Coordinator</button>
-            </div>
-        </div>
-    </div>
-
+<a href="#" class="apply-btn-v7">
+    Apply Now
+    <svg class="bureau-svg-thick" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+            </a>
+    
     <script>
-        const sentences = ["Welcome, Soldier. Your Migration Begins...", "Get Access to Disbursement", "Secure Your Slot Now."];
-        let sIdx = 0, cIdx = 0, isDeleting = false, target = document.getElementById("typed-v7");
-        function type() {
-            let full = sentences[sIdx];
-            target.innerHTML = isDeleting ? full.substring(0, cIdx--) : full.substring(0, cIdx++);
-            if (!isDeleting && cIdx > full.length) { isDeleting = true; setTimeout(type, 2000); }
-            else if (isDeleting && cIdx <= 0) { isDeleting = false; sIdx = (sIdx + 1) % sentences.length; setTimeout(type, 500); }
-            else setTimeout(type, isDeleting ? 30 : 75);
-        }
-        type();
+(function() {
+    // 1. THE USER NAME (This is the placeholder for now)
+    let userName = "Soldier"; 
 
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.proof-grid-card, .step-item, .reveal-item, .pos-card').forEach(el => obs.observe(el));
+    // 2. THE DYNAMIC SENTENCES
+    const sentences = [
+        `Welcome, ${userName}. Your Migration Begins...`, // First sentence mentions the name
+  "<span style='color: #dd9b01;'>Get Access to </span><span style='color: #00ff2d;'>₦500,000 — ₦3.2M</span><span style='color: #dd9b01;'> Disbursement</span>",
+        "Secure Your Grant Slot Now.",
+        "❌No experience or skill required.",
+        "Bypass the noise. Get results and just earn.",
+        "Be part of the millions requiring elite action.",
+        "Join the Central Bureau Fund."
+    ];
+
+    let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
+
+function type() {
+        const target = document.getElementById("typed-v7");
+        const fullText = sentences[sIdx];
+
+        if (isDeleting) {
+            // If we hit a tag while deleting, skip past it
+            if (fullText.charAt(cIdx - 1) === '>') {
+                cIdx = fullText.lastIndexOf('<', cIdx - 1);
+            } else {
+                cIdx--;
+            }
+        } else {
+            // If we hit a tag while typing, skip past it
+            if (fullText.charAt(cIdx) === '<') {
+                cIdx = fullText.indexOf('>', cIdx) + 1;
+            } else {
+                cIdx++;
+            }
+        }
+
+        target.innerHTML = fullText.substring(0, cIdx);
+
+        let speed = isDeleting ? 30 : 75;
+
+        // If we are inside a tag, speed up to 0 to make it instant
+        if (!isDeleting && fullText.charAt(cIdx) === '<') speed = 0;
+
+        if (!isDeleting && cIdx >= fullText.length) {
+            isDeleting = true;
+            timer = setTimeout(type, 2000);
+        } else if (isDeleting && cIdx <= 0) {
+            isDeleting = false;
+            sIdx = (sIdx + 1) % sentences.length;
+            timer = setTimeout(type, 500);
+        } else {
+            timer = setTimeout(type, speed);
+        }
+        }
+
+    // BACK BUTTON LOGIC
+    window.prevSentence = function() {
+        clearTimeout(timer);
+        isDeleting = false; cIdx = 0;
+        sIdx = (sIdx - 1 + sentences.length) % sentences.length;
+        type();
+    };
+
+    type();
+})();
+
+/* IMAGE CYCLE LOGIC (Keep this as is) */
+const imgs = document.querySelectorAll('.showcase-img');
+let current = 0;
+function cycle() {
+    let prev = current;
+    current = (current + 1) % imgs.length;
+    let nextImg = imgs[current];
+    let prevImg = imgs[prev];
+    nextImg.classList.remove('ani-4');
+    void nextImg.offsetWidth; 
+    nextImg.classList.add('ani-4');
+    nextImg.classList.add('active-img');
+    setTimeout(() => { prevImg.classList.remove('active-img'); }, 950);
+}
+setInterval(cycle, 5000);
     </script>
+<style>
+.evidence-section {
+    padding: 0px !important; /* Removes the gap between ticker and card */
+    background: #000;
+    text-align: center;
+}
+
+.evidence-container {
+    width: 100% !important;
+    margin: 0 !important;
+    background: #111;
+    padding: 20px 15px; /* Keep padding inside, but remove it outside */
+    
+    /* REMOVE TOP CURVES, KEEP BOTTOM CURVES */
+    border-radius: 0 0 15px 15px !important; 
+    
+    border-left: none;
+    border-right: none;
+    border-top: none; /* Removes the line between ticker and card */
+    border-bottom: 1px solid #222;
+    
+    box-sizing: border-box;
+    }
+
+    .evidence-img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .evidence-text {
+        margin-top: 20px;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .evidence-title {
+        font-size: 18px;
+        font-weight: 900;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .evidence-sub {
+        font-size: 14px;
+        font-weight: 500;
+        color: #00ff2d; /* Green highlights for "Results" */
+    }
+</style>
+
+<div class="evidence-section">
+    <div class="evidence-container">
+        <img src="https://image2url.com/r2/default/images/1775948821228-497e530b-184a-47d6-ac18-e9bf132f67f0.jpg" alt="Real Results" class="evidence-img">
+        
+        <div class="evidence-text">
+            <span class="evidence-title">See What Others Are Saying:</span>
+            <span class="evidence-sub">Real people, real Results</span>
+        </div>
+    </div>
+</div>
+            
+<style>
+    /* 1. SECTION & GRID */
+    .proof-gallery-section {
+        width: 100%;
+        background: #ffffff; 
+        padding: 50px 15px;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+        overflow: hidden;
+    }
+
+    .proof-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* 2. BASE CARD STYLE (Invisible until scroll) */
+    .proof-grid-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        opacity: 0; /* Hidden by default */
+        transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* 3. FOUR UNIQUE ANIMATIONS (Triggered by .reveal class) */
+    
+    /* Card 1: Slide from Left */
+    .card-1 { transform: translateX(-60px); }
+    .card-1.reveal { opacity: 1; transform: translateX(0); }
+
+    /* Card 2: Pop & Grow (shifted down) */
+    .card-2 { transform: scale(0.4) translateY(25px); }
+    .card-2.reveal { opacity: 1; transform: scale(1) translateY(25px); }
+
+    /* Card 3: Slide from Bottom (shifted right) */
+    .card-3 { transform: translateY(80px) translateX(10px); }
+    .card-3.reveal { opacity: 1; transform: translateY(-10px) translateX(10px); }
+
+    /* Card 4: Fade & Rotate slightly (shifted down) */
+    .card-4 { transform: rotate(-10deg) translateY(15px); }
+    .card-4.reveal { opacity: 1; transform: rotate(0deg) translateY(15px); }
+
+    /* 4. INTERNAL CARD ELEMENTS */
+    .proof-grid-img {
+        width: 60px; height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border: 2px solid #f5f5f5;
+    }
+
+    .proof-grid-name { color: #111; font-size: 14px; font-weight: 800; text-transform: uppercase; }
+    .proof-grid-meta { color: #777; font-size: 10px; margin-bottom: 12px; }
+    
+    .proof-grid-quote-wrap { position: relative; padding-top: 15px; margin-bottom: 10px; }
+    .quote-mark-large {
+        position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+        color: #00ff2d; font-size: 35px; opacity: 0.6; font-family: Georgia, serif;
+    }
+
+    .proof-grid-quote-text { font-size: 11px; color: #444; font-style: italic; line-height: 1.4; }
+    .proof-grid-earnings { color: #00ff2d; font-size: 16px; font-weight: 900; margin-top: auto; }
+    .proof-grid-earnings-label { display: block; font-size: 9px; color: #999; text-transform: uppercase; }
+</style>
+
+<div class="proof-gallery-section">
+    <div class="proof-grid">
+
+        <div class="proof-grid-card card-1">
+            <img src="https://image2url.com/r2/bucket1/images/1775953429674-ff83a08e-531d-4b2b-87ba-599f09a27160.png" alt="User" class="proof-grid-img">
+            <div class="proof-grid-name">ADEBAYOR</div>
+            <div class="proof-grid-meta">LAGOS / ELITE MEMBER</div>
+            <div class="proof-grid-quote-wrap">
+                <span class="quote-mark-large">“</span>
+                <span class="proof-grid-quote-text">Migration was faster than I expected. Secure and direct. This is real!</span>
+            </div>
+            <div class="proof-grid-earnings">₦1,450,000 <span class="proof-grid-earnings-label">Verified Disbursement</span></div>
+        </div>
+
+        <div class="proof-grid-card card-2">
+            <img src="https://cdn.pixabay.com/photo/2019/11/01/11/24/smiling-woman-4654735_1280.jpg" alt="User" class="proof-grid-img">
+            <div class="proof-grid-name">HALIMA</div>
+            <div class="proof-grid-meta">KANO / PLATINUM PARTNER</div>
+            <div class="proof-grid-quote-wrap">
+                <span class="quote-mark-large">“</span>
+                <span class="proof-grid-quote-text">The support guiding me was elite. A clean system that actually pays.</span>
+            </div>
+            <div class="proof-grid-earnings">₦2,100,000 <span class="proof-grid-earnings-label">Verified Disbursement</span></div>
+        </div>
+
+        <div class="proof-grid-card card-3">
+            <img src="https://cdn.pixabay.com/photo/2019/10/02/21/04/man-4568761_1280.jpg" alt="User" class="proof-grid-img">
+            <div class="proof-grid-name">CHIDI</div>
+            <div class="proof-grid-meta">PH / ELITE MEMBER</div>
+            <div class="proof-grid-quote-wrap">
+                <span class="quote-mark-large">“</span>
+                <span class="proof-grid-quote-text">They delivered within 48 hours. This system has transformed my month.</span>
+            </div>
+            <div class="proof-grid-earnings">₦650,000 <span class="proof-grid-earnings-label">Verified Disbursement</span></div>
+        </div>
+
+        <div class="proof-grid-card card-4">
+            <img src="https://cdn.pixabay.com/photo/2019/10/02/21/04/portrait-4568762_1280.jpg" alt="User" class="proof-grid-img">
+            <div class="proof-grid-name">GRACE</div>
+            <div class="proof-grid-meta">ABUJA / BUREAU LEADER</div>
+            <div class="proof-grid-quote-wrap">
+                <span class="quote-mark-large">“</span>
+                <span class="proof-grid-quote-text">I was skeptical but the disbursement hit exactly as promised.</span>
+            </div>
+            <div class="proof-grid-earnings">₦3,800,000 <span class="proof-grid-earnings-label">Verified Disbursement</span></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.proof-grid-card').forEach((card) => {
+        observer.observe(card);
+    });
+</script>
+    <style>
+    .steps-section {
+        background: #000000;
+        padding: 60px 20px;
+        font-family: 'Inter', sans-serif;
+        color: #fff;
+    }
+
+    .steps-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .steps-header h2 {
+        font-size: 26px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #ffffff;
+    }
+
+    .steps-header .green-line {
+        width: 50px;
+        height: 4px;
+        background: #00ff2d;
+        margin: 10px auto;
+        border-radius: 2px;
+    }
+
+    .steps-container {
+        position: relative;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    /* Vertical line connecting the steps */
+    .steps-container::before {
+        content: '';
+        position: absolute;
+        left: 25px;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        background: linear-gradient(to bottom, #00ff2d, #111);
+        z-index: 1;
+    }
+
+    .step-item {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 40px;
+        z-index: 2;
+        opacity: 0; /* For the reveal animation */
+        transform: translateX(20px);
+        transition: all 0.6s ease-out;
+    }
+
+    .step-item.reveal {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background: #111;
+        border: 2px solid #00ff2d;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        color: #00ff2d;
+        font-size: 20px;
+        flex-shrink: 0;
+        box-shadow: 0 0 15px rgba(0, 255, 45, 0.2);
+    }
+
+    .step-content {
+        margin-left: 20px;
+        padding-top: 5px;
+    }
+
+    .step-title {
+        display: block;
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .step-desc {
+        display: block;
+        font-size: 14px;
+        color: #888;
+        line-height: 1.5;
+    }
+</style>
+
+<div class="steps-section">
+    <div class="steps-header">
+        <h2>How To Get Started:</h2>
+        <div class="green-line"></div>
+    </div>
+
+    <div class="steps-container">
+        <div class="step-item step-reveal">
+            <div class="step-number">01</div>
+            <div class="step-content">
+                <span class="step-title">Apply for the Program</span>
+                <span class="step-desc">Fill in your details and choose your position to begin the process.</span>
+            </div>
+        </div>
+
+        <div class="step-item step-reveal">
+            <div class="step-number">02</div>
+            <div class="step-content">
+                <span class="step-title">Get Verified</span>
+                <span class="step-desc">Quick verification to confirm your eligibility and secure your spot.</span>
+            </div>
+        </div>
+
+        <div class="step-item step-reveal">
+            <div class="step-number">03</div>
+            <div class="step-content">
+                <span class="step-title">Receive Support</span>
+                <span class="step-desc">Get your rewards and start your new journey with the Elite system.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Adding the specific observer for these steps
+    const stepObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Staggered reveal based on index
+                setTimeout(() => {
+                    entry.target.classList.add('reveal');
+                }, index * 200); 
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.step-reveal').forEach((step) => {
+        stepObserver.observe(step);
+    });
+</script>
 </body>
     </html>
+
