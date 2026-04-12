@@ -26,17 +26,22 @@
 
     .cbf-logo-top {
         position: absolute !important;
-        top: 60px !important;
-        left: 46% !important;
+        top: 55px !important; 
+        left: 50% !important; 
         transform: translateX(-50%) !important;
         z-index: 2500 !important;
-        width: 140px; 
-        height: auto;
+        
+        /* LOGO DIMENSIONS */
+        width: 160px !important; 
+        height: 65px !important; 
+        object-fit: contain !important; 
+        
+        /* Ensures any background on the logo blends with the dark theme */
         mix-blend-mode: screen; 
     }
 </style>
 
-<img src="https://i.postimg.cc/C52NkFJT/IMG-20260411-170447-969.jpg"cbf-logo-top" alt="CBF Logo">
+<img src="https://i.postimg.cc/C52NkFJT/IMG-20260411-170447-969.jpg" class="cbf-logo-top" alt="CBF Logo">
     <style>
 /* 1. STATUS BAR */
         .status-bar {
