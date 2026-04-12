@@ -480,26 +480,36 @@ setInterval(cycle, 5000);
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Apply it to the cards */
+/* Base state: Hidden and slightly moved */
 .proof-grid-card {
-    opacity: 0; /* Start invisible */
-    animation: proof-pop-in 0.8s ease forwards;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Delay each card so they pop one by one */
-.proof-grid-card:nth-child(1) { animation-delay: 0.2s; }
-.proof-grid-card:nth-child(2) { animation-delay: 0.4s; }
-.proof-grid-card:nth-child(3) { animation-delay: 0.6s; }
-.proof-grid-card:nth-child(4) { animation-delay: 0.8s; }
+/* Card 1: Slides from Left */
+.card-1.reveal { opacity: 1; transform: translateX(0); }
+.card-1 { transform: translateX(-50px); }
+
+/* Card 2: Pops from Small to Big */
+.card-2.reveal { opacity: 1; transform: scale(1) translateY(25px); }
+.card-2 { transform: scale(0.5) translateY(25px); }
+
+/* Card 3: Slides from Bottom */
+.card-3.reveal { opacity: 1; transform: translateY(-10px) translateX(10px); }
+.card-3 { transform: translateY(50px) translateX(10px); }
+
+/* Card 4: Fades in while Rotating slightly */
+.card-4.reveal { opacity: 1; transform: rotate(0deg) translateY(15px); }
+.card-4 { transform: rotate(-5deg) translateY(15px); }
 </style>
 
 <div class="proof-gallery-section">
     <div class="proof-grid">
 
         <div class="proof-grid-card">
-            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=100&w=100" alt="Adebayor" class="proof-grid-img">
-            <div class="proof-grid-name">ADEBAYOR</div>
-            <div class="proof-grid-meta">LAGOS / ELITE MEMBER</div>
+            <img src="https://pixabay.com/photos/smiling-woman-african-american-woman-4654735/
+            <div class="proof-grid-name">Cynthia Daniel</div>
+            <div class="proof-grid-meta">LAGOS / Bundle head</div>
             
             <div class="proof-grid-quote-wrap">
                 <span class="quote-mark-large">“</span>
@@ -513,9 +523,9 @@ setInterval(cycle, 5000);
         </div>
 
         <div class="proof-grid-card card-2">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=100&w=100" alt="Halima" class="proof-grid-img">
-            <div class="proof-grid-name">HALIMA</div>
-            <div class="proof-grid-meta">KANO / PLATINUM PARTNER</div>
+            <img src="https://image2url.com/r2/bucket1/images/1775953429674-ff83a08e-531d-4b2b-87ba-599f09a27160.png
+            <div class="proof-grid-name">Jonard Bethuel</div>
+            <div class="proof-grid-meta">Osun / State Coordinator</div>
             
             <div class="proof-grid-quote-wrap">
                 <span class="quote-mark-large">“</span>
@@ -562,5 +572,18 @@ setInterval(cycle, 5000);
 
     </div>
     </div>
+    <script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            }
+        });
+    }, { threshold: 0.2 }); // Triggers when 20% of the card is visible
+
+    document.querySelectorAll('.proof-grid-card').forEach((card) => {
+        observer.observe(card);
+    });
+    </script>
 </body>
     </html>
