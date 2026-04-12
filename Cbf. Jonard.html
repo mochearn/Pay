@@ -63,18 +63,30 @@
         }
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* 2. HERO CONTAINER - THE "ROOM" */
- .hero-container {
-    position: relative; /* THIS IS THE MOST IMPORTANT LINE */
+/* 1. UPDATE THE CONTAINER HEIGHT */
+.hero-container {
+    position: relative;
     width: 100vw;
-    height: 65vh !important;
+    height: 70vh !important; /* Change this from 65vh to 70vh */
     margin-top: 40px;
     background: #000;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-            }
+}
+
+/* 2. ENSURE THE PHOTOS FILL THE NEW HEIGHT */
+.showcase-img {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%; /* This keeps them matched to the 70vh container */
+    object-fit: cover; /* This is the "Elite" secret—it crops without stretching */
+    opacity: 0;
+    z-index: 1;
+        }
 
        /* LIGHTER DARKNESS OVERLAY (0.8) */
 .hero-container::after {
@@ -85,16 +97,6 @@
     z-index: 10;
     pointer-events: none;
               }
-
-        /* THE WALLPAPER (IMAGES) */
-        .showcase-img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            z-index: 1;
-        }
 
         .active-img { opacity: 1 !important; z-index: 5 !important; }
 
