@@ -63,11 +63,11 @@
         }
         @keyframes pulse-effect { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-/* 1. UPDATE THE CONTAINER HEIGHT */
+/* 1. STRETCH THE MAIN CONTAINER */
 .hero-container {
     position: relative;
     width: 100vw;
-    height: 70vh !important; /* Change this from 65vh to 70vh */
+    height: 85vh !important; /* Move this to 85vh */
     margin-top: 40px;
     background: #000;
     overflow: hidden;
@@ -76,17 +76,17 @@
     align-items: center;
 }
 
-/* 2. ENSURE THE PHOTOS FILL THE NEW HEIGHT */
+/* 2. SYNC THE IMAGES */
 .showcase-img {
     position: absolute;
     top: 0; 
     left: 0;
     width: 100%; 
-    height: 100%; /* This keeps them matched to the 70vh container */
-    object-fit: cover; /* This is the "Elite" secret—it crops without stretching */
+    height: 100%; /* They will now automatically take up 85vh */
+    object-fit: cover; 
     opacity: 0;
     z-index: 1;
-        }
+            }
 
        /* LIGHTER DARKNESS OVERLAY (0.8) */
 .hero-container::after {
