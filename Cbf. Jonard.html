@@ -6,29 +6,39 @@
     <title>CBF | Wealth Migration</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
     <style>
-.cbf-logo-top {
-    position: absolute !important;
-    .cbf-logo-top {
-    top: 60px !important; /* Move it down so it's not behind the status bar */
-    z-index: 2500 !important; /* Higher than the status bar (2000) */
+        <style>
+    :root {
+        --bureau-blue: #001f3f;
+        --action-green: #00c853;
+        --emergency-red: #FF4136;
     }
-    left: 46% !important;
-    transform: translateX(-50%) !important;
-    width: 140px; /* Adjust size */
-    height: auto;
-    /* This makes the black background disappear if the logo is a PNG */
-    mix-blend-mode: screen; 
-}
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; overflow-x: hidden; font-family: sans-serif; }
 
-        :root {
-            --bureau-blue: #001f3f;
-            --action-green: #00c85 I3;
-            --emergency-red: #FF4136;
-        }
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+    }
 
-        /* 1. STATUS BAR */
+    body { 
+        background-color: #000; 
+        overflow-x: hidden; 
+        font-family: sans-serif; 
+    }
+
+    .cbf-logo-top {
+        position: absolute !important;
+        top: 60px !important;
+        left: 46% !important;
+        transform: translateX(-50%) !important;
+        z-index: 2500 !important;
+        width: 140px; 
+        height: auto;
+        mix-blend-mode: screen; 
+    }
+</style>
+
+<img src="https://image2url.com/r2/bucket3/images/1775980684403-d209fede-d0b5-43a5-a7cb-3f59c5a68ec0.jpg" class="cbf-logo-top" alt="CBF Logo">
+/* 1. STATUS BAR */
         .status-bar {
             background: var(--bureau-blue);
             color: #ffffff;
@@ -180,8 +190,6 @@
     </style>
 </head>
 <body>
-<img src="https://image2url.com/r2/bucket3/images/1775980684403-d209fede-d0b5-43a5-a7cb-3f59c5a68ec0.jpg" class="cbf-logo-top" alt="CBF Logo">
-
     <div class="status-bar">
         <span class="pulse-dot"></span>
         LIVE: CENTRAL BUREAU FUND — APRIL CYCLE IS <span style="color: var(--action-green);">84% CAPACITY</span>
