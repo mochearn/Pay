@@ -800,6 +800,40 @@ setInterval(cycle, 5000);
 @keyframes slide-in-right { from { transform: translateX(30px); } to { transform: translateX(0); } }
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
+
+    /* This kills the zig-zag specifically */
+.positions-section {
+    background-image: none !important; 
+    background-color: #ffffff !important;
+    overflow: hidden !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* This adds the Sample Geometric Circles behind the cards */
+.positions-section::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 255, 45, 0.12) 0%, transparent 70%);
+    top: -50px;
+    right: -100px;
+    z-index: -1;
+}
+
+/* This adds the Rhombus Shape at the bottom */
+.positions-section::after {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 255, 45, 0.04);
+    bottom: -100px;
+    left: -150px;
+    transform: rotate(35deg);
+    z-index: -1;
+                          }
 </style>
     <section class="positions-section">
     <div class="positions-header">
