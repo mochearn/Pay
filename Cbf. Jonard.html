@@ -802,7 +802,39 @@ setInterval(cycle, 5000);
 @keyframes slide-in-right { from { transform: translateX(30px); } to { transform: translateX(0); } }
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
-    </style>
+
+    /* 1. Kill the 'rough' background and zig-zags */
+.positions-section {
+    background: #ffffff !important;
+    background-image: none !important;
+    position: relative !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+}
+
+/* 2. Pushes the Geometric Shapes to the very back */
+.positions-section::before, 
+.positions-section::after {
+    z-index: -1 !important;
+    pointer-events: none !important;
+}
+
+/* 3. Make the Header Bold and 'Professional' */
+.positions-header h2 {
+    font-weight: 900 !important;
+    font-size: 30px !important;
+    text-transform: uppercase !important;
+    color: #000 !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* 4. Force your good cards to stay in front */
+.pos-grid {
+    position: relative !important;
+    z-index: 10 !important;
+    }
+</style>
     <section class="positions-section">
     <div class="positions-header">
         <h2>Choose Your Position & Unlock Massive Rewards</h2>
