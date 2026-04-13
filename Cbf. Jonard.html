@@ -773,51 +773,49 @@ setInterval(cycle, 5000);
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
 
-            /* THE SHARP GREEN SQUARE (Back to the design you liked) */
-.positions-section::before {
+        /* 1. BRING THE SHAPES DIRECTLY TO THE CARDS AREA */
+.pos-grid::before {
     content: "" !important;
     position: absolute !important;
-    width: 320px !important;
-    height: 320px !important;
+    width: 350px !important;
+    height: 350px !important;
     background: rgba(0, 255, 45, 0.12) !important; 
     border: 3px solid rgba(0, 255, 45, 0.25) !important; 
-    top: 20px !important;
-    right: -80px !important;
+    top: -100px !important;
+    right: -120px !important;
     border-radius: 60px !important;
-    transform: rotate(15deg) !important;
-    z-index: 0 !important; /* This is the key layer */
+    transform: rotate(20deg) !important;
+    z-index: -1 !important; /* This sits BEHIND the cards inside the grid */
     display: block !important;
-    pointer-events: none !important;
 }
 
-/* THE SHARP GEOMETRIC CIRCLE (Back to the design you liked) */
-.positions-section::after {
+.pos-grid::after {
     content: "" !important;
     position: absolute !important;
-    width: 250px !important;
-    height: 250px !important;
+    width: 300px !important;
+    height: 300px !important;
     border: 15px solid rgba(0, 255, 45, 0.1) !important; 
-    bottom: 40px !important;
-    left: -60px !important;
+    bottom: -100px !important;
+    left: -120px !important;
     border-radius: 50% !important;
-    z-index: 0 !important; /* This is the key layer */
+    z-index: -1 !important; /* This sits BEHIND the cards inside the grid */
     display: block !important;
-    pointer-events: none !important;
 }
 
-/* THIS PULLS YOUR GOOD CARDS ON TOP OF THE SHAPES */
+/* 2. FIX THE GRID SO IT CAN HOLD THE SHAPES */
 .pos-grid {
     position: relative !important;
+    overflow: visible !important; /* CRITICAL: Allows shapes to peak out */
     z-index: 10 !important;
 }
 
-/* THIS MAKES THE HEADER BOLD & PROFESSIONAL */
+/* 3. BOLD THE HEADER (Professional Look) */
 .positions-header h2 {
     font-weight: 900 !important;
-    font-size: 30px !important;
-    color: #000000 !important;
+    font-size: 32px !important;
+    color: #000 !important;
     text-transform: uppercase !important;
-            }
+}
         </style>
     <section class="positions-section">
     <div class="positions-header">
