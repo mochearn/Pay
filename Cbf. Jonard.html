@@ -673,8 +673,6 @@ setInterval(cycle, 5000);
         <style>
 .positions-section {
     display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
     min-height: 600px !important; 
     width: 100% !important;
     background-color: #ffffff !important;
@@ -683,49 +681,17 @@ setInterval(cycle, 5000);
     padding: 80px 20px !important;
     z-index: 1 !important;
     
-    /* THE SHAPES ARE NOW PART OF THE BACKGROUND SKIN */
+    /* THE SHAPES ARE NOW PAINTED DIRECTLY ON THE SECTION */
     background-image: 
-        radial-gradient(circle at 90% 10%, rgba(0, 255, 45, 0.12) 0%, transparent 40%), /* Top-Right Circle */
-        radial-gradient(circle at 10% 90%, rgba(0, 255, 45, 0.08) 0%, transparent 40%), /* Bottom-Left Circle */
-        linear-gradient(135deg, #00ff2d08 25%, transparent 25%), /* Rhombus Pattern Part 1 */
-        linear-gradient(225deg, #00ff2d08 25%, transparent 25%), /* Rhombus Pattern Part 2 */
-        linear-gradient(45deg, #00ff2d08 25%, transparent 25%),  /* Rhombus Pattern Part 3 */
-        linear-gradient(315deg, #00ff2d08 25%, transparent 25%); /* Rhombus Pattern Part 4 */
+        radial-gradient(circle at 90% 10%, rgba(0, 255, 45, 0.15) 0%, transparent 40%), 
+        radial-gradient(circle at 10% 90%, rgba(0, 255, 45, 0.1) 0%, transparent 40%),
+        linear-gradient(135deg, rgba(0, 255, 45, 0.05) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(0, 255, 45, 0.05) 25%, transparent 25%),
+        linear-gradient(45deg, rgba(0, 255, 45, 0.05) 25%, transparent 25%),
+        linear-gradient(315deg, rgba(0, 255, 45, 0.05) 25%, transparent 25%) !important;
     background-position: 0 0, 0 0, 15px 0, 15px 0, 0 0, 0 0 !important;
     background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px, 30px 30px, 30px 30px !important;
     background-repeat: no-repeat, no-repeat, repeat, repeat, repeat, repeat !important;
-}
-
-/* --- 2. THE GEOMETRIC SHAPES (STAYING BEHIND CARDS) --- */
-
-/* The Sharp Green Square (Top Right) */
-.positions-section::before {
-    content: "" !important;
-    position: absolute !important;
-    width: 350px !important;
-    height: 350px !important;
-    background: rgba(0, 255, 45, 0.1) !important; 
-    border: 3px solid rgba(0, 255, 45, 0.2) !important; 
-    top: -50px !important;
-    right: -80px !important;
-    border-radius: 40px !important;
-    transform: rotate(20deg) !important;
-    z-index: -1 !important; /* FORCED BEHIND */
-    pointer-events: none !important;
-}
-
-/* The Large Geometric Circle (Bottom Left) */
-.positions-section::after {
-    content: "" !important;
-    position: absolute !important;
-    width: 300px !important;
-    height: 300px !important;
-    border: 15px solid rgba(0, 255, 45, 0.08) !important; 
-    bottom: -50px !important;
-    left: -80px !important;
-    border-radius: 50% !important;
-    z-index: -1 !important; /* FORCED BEHIND */
-    pointer-events: none !important;
 }
 
 /* --- 3. BOLD PROFESSIONAL HEADER --- */
@@ -807,37 +773,6 @@ setInterval(cycle, 5000);
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
 
-            /* 1. This gives the section its own 'floor' so the black page doesn't eat it */
-.positions-section {
-    background-color: #ffffff !important; 
-    z-index: 1 !important;
-}
-
-/* 2. BRING SHAPES TO THE FRONT (Changed z-index from -1 to 2) */
-.positions-section::before {
-    content: "" !important;
-    z-index: 2 !important; /* Above the white floor */
-    background: rgba(0, 255, 45, 0.15) !important; /* Made greener to pop against white */
-    border: 3px solid rgba(0, 255, 45, 0.25) !important;
-}
-
-.positions-section::after {
-    content: "" !important;
-    z-index: 2 !important; /* Above the white floor */
-    border: 15px solid rgba(0, 255, 45, 0.12) !important;
-}
-
-/* 3. PUSH CARDS TO THE HIGHEST LEVEL (Must be higher than 2) */
-.pos-grid {
-    position: relative !important;
-    z-index: 20 !important; /* This is the King layer */
-}
-
-/* 4. PUSH HEADER TO THE HIGHEST LEVEL */
-.positions-header {
-    position: relative !important;
-    z-index: 20 !important;
-            }
         </style>
     <section class="positions-section">
     <div class="positions-header">
