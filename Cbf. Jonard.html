@@ -773,30 +773,32 @@ setInterval(cycle, 5000);
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
 
-/* 1. THE WHITE FLOOR */
+/* 1. THE WHITE BACKGROUND BLOCK */
 .positions-section {
     display: block !important;
     width: 100% !important;
-    background-color: #ffffff !important; /* BACK TO WHITE */
+    background-color: #ffffff !important; /* FORCED WHITE */
     position: relative !important;
     overflow: hidden !important;
-    padding: 80px 20px !important; /* Pulls the header down */
+    padding-top: 100px !important; /* THIS BRINGS THE HEADER DOWN */
+    padding-bottom: 80px !important;
+    min-height: 100vh !important; /* FORCES IT TO COVER THE BLACK PAGE */
     z-index: 1 !important;
 }
 
-/* 2. THE GREEN SHAPES (Sharp & Professional) */
+/* 2. THE GREEN SHAPES (STAYING BEHIND CARDS) */
 .positions-section::before {
     content: "" !important;
     position: absolute !important;
-    width: 320px !important;
-    height: 320px !important;
-    background: rgba(0, 255, 45, 0.1) !important; 
-    border: 3px solid rgba(0, 255, 45, 0.2) !important; 
+    width: 350px !important;
+    height: 350px !important;
+    background: rgba(0, 255, 45, 0.12) !important; 
+    border: 4px solid rgba(0, 255, 45, 0.3) !important; 
     top: 20px !important;
     right: -80px !important;
     border-radius: 60px !important;
     transform: rotate(15deg) !important;
-    z-index: 0 !important; /* Sits on the white floor */
+    z-index: 0 !important; /* SITS ON WHITE, UNDER CARDS */
 }
 
 .positions-section::after {
@@ -804,29 +806,33 @@ setInterval(cycle, 5000);
     position: absolute !important;
     width: 280px !important;
     height: 280px !important;
-    border: 12px solid rgba(0, 255, 45, 0.08) !important; 
-    bottom: 20px !important;
+    border: 15px solid rgba(0, 255, 45, 0.1) !important; 
+    bottom: 50px !important;
     left: -80px !important;
     border-radius: 50% !important;
     z-index: 0 !important;
 }
 
-/* 3. THE HEADER (Bold Black Text) */
-.positions-header h2 {
-    font-weight: 900 !important;
-    font-size: 28px !important;
-    color: #000000 !important; /* BACK TO BLACK */
-    text-align: center !important;
-    text-transform: uppercase !important;
+/* 3. THE HEADER (FIXED POSITION) */
+.positions-header {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
     position: relative !important;
     z-index: 10 !important;
+}
+
+.positions-header h2 {
+    font-weight: 900 !important;
+    color: #000000 !important; /* PURE BLACK TEXT */
+    font-size: 28px !important;
+    text-transform: uppercase !important;
 }
 
 /* 4. THE CARDS (FORCED ON TOP) */
 .pos-grid {
     position: relative !important;
-    z-index: 20 !important; /* HIGHEST LAYER: Always stays on top */
-    margin-top: 30px !important;
+    z-index: 20 !important; /* THE HIGHEST LAYER */
+    margin-top: 40px !important;
 }
         </style>
     <section class="positions-section">
