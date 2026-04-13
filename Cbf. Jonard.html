@@ -690,24 +690,7 @@ setInterval(cycle, 5000);
         line-height: 1.2;
     }
 
-    .pos-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        max-width: 450px;
-        margin: 0 auto;
-    }
-
-    .pos-card {
-        background: #fcfcfc;
-        border: 1px solid #eee;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-        text-align: center;
-    }
-
-    .pos-image-slot {
+.pos-image-slot {
         width: 100%;
         height: 200px;
         background: #f0f0f0;
@@ -720,11 +703,7 @@ setInterval(cycle, 5000);
         object-fit: cover;
     }
 
-    .pos-body {
-        padding: 25px 20px;
-    }
-
-    .pos-title {
+ .pos-title {
         font-size: 22px;
         font-weight: 900;
         color: #000;
@@ -788,69 +767,70 @@ setInterval(cycle, 5000);
         color: #fff !important;
         box-shadow: 0 5px 15px rgba(212, 160, 23, 0.3);
     }
-          /* --- THE ELITE HEADER ANIMATION --- */
-.positions-header h2 {
-    opacity: 0;
-    transform: translateY(-30px) scale(0.9);
-    filter: blur(10px);
-    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.animate-trigger.positions-header h2 {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+  /* 1. MAKE CARDS SLIMMER */
+.pos-grid {
+    gap: 20px; /* Tighter gap */
 }
 
-/* --- THE CARD "PERSONALITIES" --- */
+.pos-card {
+    max-width: 340px; /* Smaller width for elite look */
+    margin: 0 auto;
+    opacity: 1; /* Keep visible to prevent "blank" screen */
+    transform: none; 
+    transition: transform 0.4s ease;
+    overflow: hidden;
+}
 
-/* 1. Starter: Drops in from the top with a bounce */
-#btn-starter-parent { transform: translateY(-100px); opacity: 0; }
+.pos-body {
+    padding: 15px 15px; /* Reduced padding to make it compact */
+}
+
+/* 2. THE STABLE ANIMATIONS (No more shrinking to zero) */
+
+/* Starter: Subtle Pop */
 .animate-trigger#btn-starter-parent { 
-    animation: drop-bounce 0.8s forwards; 
+    animation: starter-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
 }
-@keyframes drop-bounce {
-    0% { transform: translateY(-100px); opacity: 0; }
-    70% { transform: translateY(10px); opacity: 1; }
-    100% { transform: translateY(0); }
+@keyframes starter-pop {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
 }
 
-/* 2. Recipient: Swings in from the left like a gate */
-#btn-recipient-parent { transform: rotateY(-90deg); opacity: 0; transform-origin: left; }
+/* Recipient: Gate Swing */
 .animate-trigger#btn-recipient-parent { 
-    animation: gate-swing 0.8s forwards; 
+    animation: gate-swing 0.7s ease-out forwards; 
 }
 @keyframes gate-swing {
-    to { transform: rotateY(0deg); opacity: 1; }
+    0% { transform: rotateX(-20deg) translateY(20px); opacity: 0; }
+    100% { transform: rotateX(0deg) translateY(0); opacity: 1; }
 }
 
-/* 3. Bundle Head: The "Rubber Band" Snaps the whole card */
-#btn-bundle-parent { transform: scale(0); opacity: 0; }
+/* Bundle Head: Smooth Slide */
 .animate-trigger#btn-bundle-parent { 
-    animation: bundle-snap 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; 
+    animation: bundle-slide 0.7s ease-out forwards; 
 }
-@keyframes bundle-snap {
-    to { transform: scale(1); opacity: 1; }
-}
-
-/* 4. L.G Coordinator: Glides in from the right with a wobble */
-#btn-lg-parent { transform: translateX(100px); opacity: 0; }
-.animate-trigger#btn-lg-parent { 
-    animation: glide-wobble 0.8s forwards; 
-}
-@keyframes glide-wobble {
-    0% { transform: translateX(100px); opacity: 0; }
-    50% { transform: translateX(-10px); }
+@keyframes bundle-slide {
+    0% { transform: translateX(-30px); opacity: 0; }
     100% { transform: translateX(0); opacity: 1; }
 }
 
-/* 5. State Coordinator: The "Glitch-Flash" Entrance */
-#btn-state-parent { transform: scale(1.2); filter: brightness(3); opacity: 0; }
-.animate-trigger#btn-state-parent { 
-    animation: state-flash 0.6s steps(4) forwards; 
+/* L.G: Smooth Slide Right */
+.animate-trigger#btn-lg-parent { 
+    animation: lg-slide 0.7s ease-out forwards; 
 }
-@keyframes state-flash {
-    to { transform: scale(1); filter: brightness(1); opacity: 1; }
-        }
+@keyframes lg-slide {
+    0% { transform: translateX(30px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* State: The Flash (Stable) */
+.animate-trigger#btn-state-parent { 
+    animation: state-glitch 0.5s ease-out forwards; 
+}
+@keyframes state-glitch {
+    0% { filter: brightness(2); transform: scale(0.95); opacity: 0; }
+    100% { filter: brightness(1); transform: scale(1); opacity: 1; }
+    }
         </style>
     <div class="positions-header">
     <h2>Choose Your Position & Unlock Massive Rewards</h2>
@@ -934,24 +914,25 @@ setInterval(cycle, 5000);
     </div>
 
                 </div>
-    <script>
+ <script>
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-trigger');
             } else {
+                // To stop the "fighting", we only remove it if it's far away
+                // This keeps it stable while viewing
                 entry.target.classList.remove('animate-trigger');
             }
         });
-    }, { threshold: 0.1 });
+    }, { 
+        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px" // Triggers earlier to prevent blinking
+    });
 
-    // Watch the Header
-    scrollObserver.observe(document.querySelector('.positions-header'));
-    
-    // Watch all the unique cards
     document.querySelectorAll('.pos-card').forEach((card) => {
         scrollObserver.observe(card);
     });
-    </script>
+ </script>
 </body>
     </html>
