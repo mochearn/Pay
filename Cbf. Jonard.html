@@ -889,6 +889,55 @@ setInterval(cycle, 5000);
     position: relative !important;
     z-index: 10 !important; /* Pulls cards to the front */
     }
+    /* 1. PUSH EVERYTHING TO THE BACK & FIX BLUR */
+.positions-section {
+    z-index: 1 !important;
+    background-color: #ffffff !important;
+}
+
+/* THE GREEN SHAPE - Making it sharp, not blur */
+.positions-section::before {
+    content: "";
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    /* Using a solid border and sharper fill to make it 'appear out' */
+    background: rgba(0, 255, 45, 0.08); 
+    border: 2px solid rgba(0, 255, 45, 0.2); 
+    top: 50px;
+    right: -80px;
+    border-radius: 60px; /* Rounded square like the sample */
+    transform: rotate(15deg);
+    z-index: -1 !important; /* Forces it BEHIND the cards */
+}
+
+/* THE SECOND SHAPE - Adding a sharp geometric line look */
+.positions-section::after {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 15px solid rgba(0, 255, 45, 0.05); /* Thick geometric frame */
+    bottom: 100px;
+    left: -50px;
+    border-radius: 50%;
+    z-index: -1 !important; /* Forces it BEHIND the cards */
+}
+
+/* 2. FORCE CARDS TO THE FRONT */
+.pos-grid {
+    position: relative !important;
+    z-index: 10 !important; /* This is the 'Master' layer that stays on top */
+}
+
+/* 3. SUPER BOLD PROFESSIONAL HEADER */
+.positions-header h2 {
+    font-weight: 900 !important;
+    font-size: 30px !important;
+    color: #000 !important;
+    letter-spacing: -1px;
+    text-shadow: none !important; /* Keeps it clean and professional */
+    }
 </style>
     <section class="positions-section">
     <div class="positions-header">
