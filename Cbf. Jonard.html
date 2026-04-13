@@ -796,6 +796,38 @@ setInterval(cycle, 5000);
 @keyframes slide-in-right { from { transform: translateX(30px); } to { transform: translateX(0); } }
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
+
+            /* 1. This gives the section its own 'floor' so the black page doesn't eat it */
+.positions-section {
+    background-color: #ffffff !important; 
+    z-index: 1 !important;
+}
+
+/* 2. BRING SHAPES TO THE FRONT (Changed z-index from -1 to 2) */
+.positions-section::before {
+    content: "" !important;
+    z-index: 2 !important; /* Above the white floor */
+    background: rgba(0, 255, 45, 0.15) !important; /* Made greener to pop against white */
+    border: 3px solid rgba(0, 255, 45, 0.25) !important;
+}
+
+.positions-section::after {
+    content: "" !important;
+    z-index: 2 !important; /* Above the white floor */
+    border: 15px solid rgba(0, 255, 45, 0.12) !important;
+}
+
+/* 3. PUSH CARDS TO THE HIGHEST LEVEL (Must be higher than 2) */
+.pos-grid {
+    position: relative !important;
+    z-index: 20 !important; /* This is the King layer */
+}
+
+/* 4. PUSH HEADER TO THE HIGHEST LEVEL */
+.positions-header {
+    position: relative !important;
+    z-index: 20 !important;
+            }
         </style>
     <section class="positions-section">
     <div class="positions-header">
