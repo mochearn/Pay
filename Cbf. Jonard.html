@@ -773,6 +773,51 @@ setInterval(cycle, 5000);
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
 
+            /* THE SHARP GREEN SQUARE (Back to the design you liked) */
+.positions-section::before {
+    content: "" !important;
+    position: absolute !important;
+    width: 320px !important;
+    height: 320px !important;
+    background: rgba(0, 255, 45, 0.12) !important; 
+    border: 3px solid rgba(0, 255, 45, 0.25) !important; 
+    top: 20px !important;
+    right: -80px !important;
+    border-radius: 60px !important;
+    transform: rotate(15deg) !important;
+    z-index: 0 !important; /* This is the key layer */
+    display: block !important;
+    pointer-events: none !important;
+}
+
+/* THE SHARP GEOMETRIC CIRCLE (Back to the design you liked) */
+.positions-section::after {
+    content: "" !important;
+    position: absolute !important;
+    width: 250px !important;
+    height: 250px !important;
+    border: 15px solid rgba(0, 255, 45, 0.1) !important; 
+    bottom: 40px !important;
+    left: -60px !important;
+    border-radius: 50% !important;
+    z-index: 0 !important; /* This is the key layer */
+    display: block !important;
+    pointer-events: none !important;
+}
+
+/* THIS PULLS YOUR GOOD CARDS ON TOP OF THE SHAPES */
+.pos-grid {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* THIS MAKES THE HEADER BOLD & PROFESSIONAL */
+.positions-header h2 {
+    font-weight: 900 !important;
+    font-size: 30px !important;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+            }
         </style>
     <section class="positions-section">
     <div class="positions-header">
