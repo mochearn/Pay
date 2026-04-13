@@ -670,66 +670,97 @@ setInterval(cycle, 5000);
         stepObserver.observe(step);
     });
 </script>
-    <style>
-        /* --- 1. RESET BACKGROUND & VISIBILITY --- */
+<style>
+    /* --- 1. REPAIRING THE BACKGROUND (Added Rhombus Pattern) --- */
 .positions-section {
-    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image:  linear-gradient(135deg, #00ff2d10 25%, transparent 25%), 
+                       linear-gradient(225deg, #00ff2d10 25%, transparent 25%), 
+                       linear-gradient(45deg, #00ff2d10 25%, transparent 25%), 
+                       linear-gradient(315deg, #00ff2d10 25%, transparent 25%);
+    background-position: 20px 0, 20px 0, 0 0, 0 0;
+    background-size: 40px 40px;
+    background-repeat: repeat;
     padding: 60px 15px;
+}
+
+/* --- 2. REPAIRING THE MISSING HEADER --- */
+.positions-header h2 {
+    color: #000 !important;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    display: block !important;
 }
 
 .pos-grid {
     display: flex;
     flex-direction: column;
     gap: 40px !important; 
-    max-width: 360px !important; /* Slimmer cards */
+    max-width: 340px !important; /* Made slim as requested */
     margin: 0 auto;
 }
 
+/* --- 3. REPAIRING BROKEN IMAGES & LISTS --- */
 .pos-card {
-    background: #fcfcfc;
+    background: #ffffff;
     border: 1px solid #eee;
     border-radius: 20px;
     margin-bottom: 20px;
-    opacity: 1 !important; /* CARDS ARE ALWAYS VISIBLE NOW */
-    transform: none;
+    opacity: 1 !important;
     overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* --- 2. THE ANIMATIONS (Only trigger when scrolling) --- */
+.pos-image-slot { width: 100%; height: 180px; overflow: hidden; }
+.pos-image-slot img { width: 100%; height: 100%; object-fit: cover; opacity: 1; }
 
-/* Image Entrance */
-.animate-trigger .pos-image-slot img {
-    animation: image-shake 0.6s ease-out forwards;
+.pos-body { padding: 20px; text-align: center; }
+.pos-title { font-size: 20px; font-weight: 900; color: #000; display: block; }
+.pos-price { font-size: 22px; font-weight: 900; color: #00ff2d; margin: 5px 0; display: block; }
+
+.pos-features { list-style: none; padding: 0; margin: 15px 0; text-align: left; }
+.pos-features li { 
+    font-size: 13px; 
+    color: #333; 
+    margin-bottom: 8px; 
+    display: flex; 
+    align-items: center; 
 }
+.pos-features li::before { content: '✓'; color: #00ff2d; margin-right: 8px; font-weight: 900; }
 
-/* Price Entrance */
-.animate-trigger .pos-price {
-    animation: price-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+.select-btn {
+    width: 100%; padding: 14px; background: #00ff2d; color: #000;
+    border: none; border-radius: 10px; font-weight: 900; text-transform: uppercase;
 }
+.btn-state { background: #d4a017 !important; color: #fff !important; }
 
-/* Specific Card Moves */
-#btn-starter-parent.animate-trigger { animation: slide-in-left 0.6s forwards; }
-#btn-recipient-parent.animate-trigger { animation: slide-in-right 0.6s forwards; }
+/* --- 4. UNIQUE REPAIRED ANIMATIONS --- */
+
+/* Every card has a different entry move */
+#btn-starter-parent.animate-trigger { animation: pop-bounce 0.6s forwards; }
+#btn-recipient-parent.animate-trigger { animation: slide-in-left 0.6s forwards; }
 #btn-bundle-parent.animate-trigger { animation: zoom-in-stable 0.6s forwards; }
-#btn-lg-parent.animate-trigger { animation: slide-in-left 0.6s forwards; }
+#btn-lg-parent.animate-trigger { animation: slide-in-right 0.6s forwards; }
 #btn-state-parent.animate-trigger { animation: glow-entrance 0.8s forwards; }
 
-@keyframes image-shake {
-    0% { transform: scale(0.8); }
-    50% { transform: scale(1.05) rotate(2deg); }
-    100% { transform: scale(1) rotate(0); }
-}
+/* Internal Elements unique moves */
+.animate-trigger .pos-image-slot img { animation: image-shake 0.6s ease-out forwards; }
+.animate-trigger .pos-features li { animation: list-cascade 0.5s forwards; opacity: 0; }
+.animate-trigger .pos-features li:nth-child(1) { animation-delay: 0.3s; }
+.animate-trigger .pos-features li:nth-child(2) { animation-delay: 0.4s; }
+.animate-trigger .pos-features li:nth-child(3) { animation-delay: 0.5s; }
 
-@keyframes price-pop {
-    0% { transform: scale(0.5); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
+@keyframes list-cascade { from { opacity: 0; transform: translateX(-15px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes pop-bounce { 0% { transform: scale(0.9); } 70% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes image-shake { 0% { transform: scale(0.8); } 50% { transform: rotate(2deg); } 100% { transform: scale(1) rotate(0); } }
 @keyframes slide-in-left { from { transform: translateX(-30px); } to { transform: translateX(0); } }
 @keyframes slide-in-right { from { transform: translateX(30px); } to { transform: translateX(0); } }
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
- </style>
+</style>
     <div class="positions-header">
     <h2>Choose Your Position & Unlock Massive Rewards</h2>
 </div>
