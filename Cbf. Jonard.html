@@ -671,39 +671,81 @@ setInterval(cycle, 5000);
     });
 </script>
 <style>
-    /* --- 1. REPAIRING THE BACKGROUND (Added Rhombus Pattern) --- */
+/* --- 1. THE GEOMETRIC & RHOMBUS BACKGROUND --- */
 .positions-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 500px !important; 
+    width: 100% !important;
     background-color: #ffffff !important;
-    background-image:  linear-gradient(135deg, #00ff2d10 25%, transparent 25%), 
-                       linear-gradient(225deg, #00ff2d10 25%, transparent 25%), 
-                       linear-gradient(45deg, #00ff2d10 25%, transparent 25%), 
-                       linear-gradient(315deg, #00ff2d10 25%, transparent 25%);
-    background-position: 20px 0, 20px 0, 0 0, 0 0;
-    background-size: 40px 40px;
-    background-repeat: repeat;
-    padding: 60px 15px;
+    position: relative !important;
+    overflow: hidden; /* Keeps shapes inside */
+    padding: 80px 20px !important;
+
+    /* THE RHOMBUS PATTERN */
+    background-image:  linear-gradient(135deg, #00ff2d15 25%, transparent 25%), 
+                       linear-gradient(225deg, #00ff2d15 25%, transparent 25%), 
+                       linear-gradient(45deg, #00ff2d15 25%, transparent 25%), 
+                       linear-gradient(315deg, #00ff2d15 25%, transparent 25%) !important;
+    background-position: 10px 0, 10px 0, 0 0, 0 0 !important;
+    background-size: 20px 20px !important;
+    background-repeat: repeat !important;
+    z-index: 1;
 }
 
-/* --- 2. REPAIRING THE MISSING HEADER --- */
-.positions-header h2 {
-    color: #000 !important;
-    text-align: center;
+/* THE SAMPLE GEOMETRIC OVERLAYS (Added these for you) */
+.positions-section::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0, 255, 45, 0.12) 0%, transparent 70%);
+    top: -50px;
+    right: -100px;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.positions-section::after {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 255, 45, 0.04);
+    bottom: -100px;
+    left: -150px;
+    transform: rotate(35deg);
+    z-index: -1;
+}
+
+/* --- 2. THE HEADER FIX --- */
+.positions-header, .positions-header h2 {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #000000 !important;
+    text-align: center !important;
+    margin: 0 auto 40px auto !important;
+    font-family: sans-serif !important;
     font-size: 26px;
     font-weight: 900;
     text-transform: uppercase;
-    margin-bottom: 40px;
-    display: block !important;
+    position: relative;
+    z-index: 10;
 }
 
+/* --- 3. THE SLIM CARDS GRID --- */
 .pos-grid {
     display: flex;
     flex-direction: column;
     gap: 40px !important; 
-    max-width: 340px !important; /* Made slim as requested */
+    max-width: 340px !important; 
     margin: 0 auto;
+    position: relative;
+    z-index: 5;
 }
 
-/* --- 3. REPAIRING BROKEN IMAGES & LISTS --- */
 .pos-card {
     background: #ffffff;
     border: 1px solid #eee;
@@ -711,7 +753,7 @@ setInterval(cycle, 5000);
     margin-bottom: 20px;
     opacity: 1 !important;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.07);
 }
 
 .pos-image-slot { width: 100%; height: 180px; overflow: hidden; }
@@ -734,19 +776,17 @@ setInterval(cycle, 5000);
 .select-btn {
     width: 100%; padding: 14px; background: #00ff2d; color: #000;
     border: none; border-radius: 10px; font-weight: 900; text-transform: uppercase;
+    cursor: pointer;
 }
 .btn-state { background: #d4a017 !important; color: #fff !important; }
 
 /* --- 4. UNIQUE REPAIRED ANIMATIONS --- */
-
-/* Every card has a different entry move */
 #btn-starter-parent.animate-trigger { animation: pop-bounce 0.6s forwards; }
 #btn-recipient-parent.animate-trigger { animation: slide-in-left 0.6s forwards; }
 #btn-bundle-parent.animate-trigger { animation: zoom-in-stable 0.6s forwards; }
 #btn-lg-parent.animate-trigger { animation: slide-in-right 0.6s forwards; }
 #btn-state-parent.animate-trigger { animation: glow-entrance 0.8s forwards; }
 
-/* Internal Elements unique moves */
 .animate-trigger .pos-image-slot img { animation: image-shake 0.6s ease-out forwards; }
 .animate-trigger .pos-features li { animation: list-cascade 0.5s forwards; opacity: 0; }
 .animate-trigger .pos-features li:nth-child(1) { animation-delay: 0.3s; }
@@ -760,37 +800,6 @@ setInterval(cycle, 5000);
 @keyframes slide-in-right { from { transform: translateX(30px); } to { transform: translateX(0); } }
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
-/* --- THE NUCLEAR RESET --- */
-.positions-section {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    min-height: 500px !important; /* Forces the section to have height */
-    width: 100% !important;
-    background-color: #ffffff !important;
-    position: relative !important;
-    
-    /* THE RHOMBUS PATTERN - RE-ENGINEERED */
-    background-image:  linear-gradient(135deg, #00ff2d15 25%, transparent 25%), 
-                       linear-gradient(225deg, #00ff2d15 25%, transparent 25%), 
-                       linear-gradient(45deg, #00ff2d15 25%, transparent 25%), 
-                       linear-gradient(315deg, #00ff2d15 25%, transparent 25%) !important;
-    background-position: 10px 0, 10px 0, 0 0, 0 0 !important;
-    background-size: 20px 20px !important;
-    background-repeat: repeat !important;
-    padding: 80px 20px !important;
-}
-
-/* FORCE HEADER VISIBILITY */
-.positions-header, .positions-header h2 {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: #000000 !important;
-    text-align: center !important;
-    margin: 0 auto 40px auto !important;
-    font-family: sans-serif !important;
-                                       }
 </style>
     <section class="positions-section">
     <div class="positions-header">
