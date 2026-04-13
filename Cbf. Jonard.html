@@ -671,89 +671,93 @@ setInterval(cycle, 5000);
     });
 </script>
 <style>
-/* --- 1. THE GEOMETRIC & RHOMBUS BACKGROUND --- */
+/* --- 1. THE MASTER SECTION (Clean & Professional) --- */
 .positions-section {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    min-height: 500px !important; 
+    min-height: 600px !important; 
     width: 100% !important;
     background-color: #ffffff !important;
     position: relative !important;
-    overflow: hidden; /* Keeps shapes inside */
+    overflow: hidden !important;
     padding: 80px 20px !important;
-
-    /* THE RHOMBUS PATTERN */
-    background-image:  linear-gradient(135deg, #00ff2d15 25%, transparent 25%), 
-                       linear-gradient(225deg, #00ff2d15 25%, transparent 25%), 
-                       linear-gradient(45deg, #00ff2d15 25%, transparent 25%), 
-                       linear-gradient(315deg, #00ff2d15 25%, transparent 25%) !important;
-    background-position: 10px 0, 10px 0, 0 0, 0 0 !important;
-    background-size: 20px 20px !important;
-    background-repeat: repeat !important;
-    z-index: 1;
+    z-index: 1 !important;
+    
+    /* THE SUBTLE RHOMBUS PATTERN */
+    background-image:  linear-gradient(135deg, #00ff2d08 25%, transparent 25%), 
+                       linear-gradient(225deg, #00ff2d08 25%, transparent 25%), 
+                       linear-gradient(45deg, #00ff2d08 25%, transparent 25%), 
+                       linear-gradient(315deg, #00ff2d08 25%, transparent 25%) !important;
+    background-size: 30px 30px !important;
 }
 
-/* THE SAMPLE GEOMETRIC OVERLAYS (Added these for you) */
+/* --- 2. THE GEOMETRIC SHAPES (Fixed to stay BEHIND cards) --- */
+
+/* The Sharp Green Square (Top Right) */
 .positions-section::before {
-    content: "";
-    position: absolute;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(0, 255, 45, 0.12) 0%, transparent 70%);
-    top: -50px;
-    right: -100px;
-    border-radius: 50%;
-    z-index: -1;
+    content: "" !important;
+    position: absolute !important;
+    width: 320px !important;
+    height: 320px !important;
+    background: rgba(0, 255, 45, 0.08) !important; 
+    border: 2px solid rgba(0, 255, 45, 0.2) !important; 
+    top: 50px !important;
+    right: -80px !important;
+    border-radius: 60px !important;
+    transform: rotate(15deg) !important;
+    z-index: -1 !important; /* Pushes it behind cards */
+    pointer-events: none !important;
 }
 
+/* The Large Geometric Circle (Bottom Left) */
 .positions-section::after {
-    content: "";
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    background: rgba(0, 255, 45, 0.04);
-    bottom: -100px;
-    left: -150px;
-    transform: rotate(35deg);
-    z-index: -1;
+    content: "" !important;
+    position: absolute !important;
+    width: 250px !important;
+    height: 250px !important;
+    border: 15px solid rgba(0, 255, 45, 0.05) !important; 
+    bottom: 50px !important;
+    left: -50px !important;
+    border-radius: 50% !important;
+    z-index: -1 !important; /* Pushes it behind cards */
+    pointer-events: none !important;
 }
 
-/* --- 2. THE HEADER FIX --- */
-.positions-header, .positions-header h2 {
+/* --- 3. BOLD PROFESSIONAL HEADER --- */
+.positions-header h2 {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     color: #000000 !important;
     text-align: center !important;
-    margin: 0 auto 40px auto !important;
-    font-family: sans-serif !important;
-    font-size: 26px;
-    font-weight: 900;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 10;
+    margin: 0 auto 50px auto !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 30px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: -1px !important;
+    position: relative !important;
+    z-index: 10 !important;
 }
 
-/* --- 3. THE SLIM CARDS GRID --- */
+/* --- 4. THE SLIM CARDS GRID (Forced to Front) --- */
 .pos-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 40px !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 45px !important; 
     max-width: 340px !important; 
-    margin: 0 auto;
-    position: relative;
-    z-index: 5;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 10 !important; /* Pulls cards to the front */
 }
 
 .pos-card {
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    opacity: 1 !important;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+    background: #ffffff !important;
+    border: 1px solid #eee !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.07) !important;
 }
 
 .pos-image-slot { width: 100%; height: 180px; overflow: hidden; }
@@ -776,18 +780,16 @@ setInterval(cycle, 5000);
 .select-btn {
     width: 100%; padding: 14px; background: #00ff2d; color: #000;
     border: none; border-radius: 10px; font-weight: 900; text-transform: uppercase;
-    cursor: pointer;
 }
 .btn-state { background: #d4a017 !important; color: #fff !important; }
 
-/* --- 4. UNIQUE REPAIRED ANIMATIONS --- */
+/* --- 5. ANIMATIONS --- */
 #btn-starter-parent.animate-trigger { animation: pop-bounce 0.6s forwards; }
 #btn-recipient-parent.animate-trigger { animation: slide-in-left 0.6s forwards; }
 #btn-bundle-parent.animate-trigger { animation: zoom-in-stable 0.6s forwards; }
 #btn-lg-parent.animate-trigger { animation: slide-in-right 0.6s forwards; }
 #btn-state-parent.animate-trigger { animation: glow-entrance 0.8s forwards; }
 
-.animate-trigger .pos-image-slot img { animation: image-shake 0.6s ease-out forwards; }
 .animate-trigger .pos-features li { animation: list-cascade 0.5s forwards; opacity: 0; }
 .animate-trigger .pos-features li:nth-child(1) { animation-delay: 0.3s; }
 .animate-trigger .pos-features li:nth-child(2) { animation-delay: 0.4s; }
@@ -800,145 +802,7 @@ setInterval(cycle, 5000);
 @keyframes slide-in-right { from { transform: translateX(30px); } to { transform: translateX(0); } }
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
-
-    /* This kills the zig-zag specifically */
-.positions-section {
-    background-image: none !important; 
-    background-color: #ffffff !important;
-    overflow: hidden !important;
-    position: relative !important;
-    z-index: 1 !important;
-}
-
-/* This adds the Sample Geometric Circles behind the cards */
-.positions-section::before {
-    content: "";
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0, 255, 45, 0.12) 0%, transparent 70%);
-    top: -50px;
-    right: -100px;
-    z-index: -1;
-}
-
-/* This adds the Rhombus Shape at the bottom */
-.positions-section::after {
-    content: "";
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    background: rgba(0, 255, 45, 0.04);
-    bottom: -100px;
-    left: -150px;
-    transform: rotate(35deg);
-    z-index: -1;
-                          }
-    /* --- 1. FORCE BACKGROUND TO THE BACK --- */
-.positions-section {
-    position: relative !important;
-    background-color: #ffffff !important;
-    background-image: none !important; /* Kills any rough zig-zag */
-    z-index: 1 !important;
-    overflow: hidden !important;
-}
-
-/* Big Green Glow behind everything */
-.positions-section::before {
-    content: "";
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0, 255, 45, 0.12) 0%, transparent 70%);
-    top: -100px;
-    right: -150px;
-    z-index: -1 !important; /* Pushes it BEHIND cards */
-    pointer-events: none;
-}
-
-/* Floating Rhombus behind cards */
-.positions-section::after {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: rgba(0, 255, 45, 0.04);
-    bottom: -100px;
-    left: -150px;
-    transform: rotate(35deg);
-    z-index: -1 !important; /* Pushes it BEHIND cards */
-    pointer-events: none;
-}
-
-/* --- 2. BOLD PROFESSIONAL HEADER --- */
-.positions-header h2 {
-    font-family: 'Inter', sans-serif !important; /* Using a clean, thick font */
-    font-weight: 900 !important; /* Maximum Boldness */
-    font-size: 32px !important;
-    letter-spacing: -1px !important; /* Tightens it for that Pro look */
-    color: #000000 !important;
-    text-align: center !important;
-    text-transform: uppercase !important;
-    margin-bottom: 50px !important;
-    opacity: 1 !important;
-    display: block !important;
-}
-
-/* --- 3. ENSURE CARDS STAY ON TOP --- */
-.pos-grid {
-    position: relative !important;
-    z-index: 10 !important; /* Pulls cards to the front */
-    }
-    /* 1. PUSH EVERYTHING TO THE BACK & FIX BLUR */
-.positions-section {
-    z-index: 1 !important;
-    background-color: #ffffff !important;
-}
-
-/* THE GREEN SHAPE - Making it sharp, not blur */
-.positions-section::before {
-    content: "";
-    position: absolute;
-    width: 320px;
-    height: 320px;
-    /* Using a solid border and sharper fill to make it 'appear out' */
-    background: rgba(0, 255, 45, 0.08); 
-    border: 2px solid rgba(0, 255, 45, 0.2); 
-    top: 50px;
-    right: -80px;
-    border-radius: 60px; /* Rounded square like the sample */
-    transform: rotate(15deg);
-    z-index: -1 !important; /* Forces it BEHIND the cards */
-}
-
-/* THE SECOND SHAPE - Adding a sharp geometric line look */
-.positions-section::after {
-    content: "";
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    border: 15px solid rgba(0, 255, 45, 0.05); /* Thick geometric frame */
-    bottom: 100px;
-    left: -50px;
-    border-radius: 50%;
-    z-index: -1 !important; /* Forces it BEHIND the cards */
-}
-
-/* 2. FORCE CARDS TO THE FRONT */
-.pos-grid {
-    position: relative !important;
-    z-index: 10 !important; /* This is the 'Master' layer that stays on top */
-}
-
-/* 3. SUPER BOLD PROFESSIONAL HEADER */
-.positions-header h2 {
-    font-weight: 900 !important;
-    font-size: 30px !important;
-    color: #000 !important;
-    letter-spacing: -1px;
-    text-shadow: none !important; /* Keeps it clean and professional */
-    }
-</style>
+    </style>
     <section class="positions-section">
     <div class="positions-header">
         <h2>Choose Your Position & Unlock Massive Rewards</h2>
