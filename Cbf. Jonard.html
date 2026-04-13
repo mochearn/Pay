@@ -812,10 +812,33 @@ setInterval(cycle, 5000);
     overflow: hidden !important;
 }
 
-/* 2. Pushes the Geometric Shapes to the very back */
-.positions-section::before, 
+/* 1. This draws the Green Square behind the cards */
+.positions-section::before {
+    content: "" !important;
+    position: absolute !important;
+    width: 350px !important;
+    height: 350px !important;
+    background: rgba(0, 255, 45, 0.1) !important; 
+    border: 3px solid rgba(0, 255, 45, 0.2) !important; 
+    top: -50px !important;
+    right: -80px !important;
+    border-radius: 40px !important;
+    transform: rotate(20deg) !important;
+    z-index: -1 !important; /* Pushes it to the back */
+    pointer-events: none !important;
+}
+
+/* 2. This draws the Green Circle behind the cards */
 .positions-section::after {
-    z-index: -1 !important;
+    content: "" !important;
+    position: absolute !important;
+    width: 300px !important;
+    height: 300px !important;
+    border: 15px solid rgba(0, 255, 45, 0.08) !important; 
+    bottom: -50px !important;
+    left: -80px !important;
+    border-radius: 50% !important;
+    z-index: -1 !important; /* Pushes it to the back */
     pointer-events: none !important;
 }
 
