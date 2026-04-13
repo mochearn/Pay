@@ -834,6 +834,61 @@ setInterval(cycle, 5000);
     transform: rotate(35deg);
     z-index: -1;
                           }
+    /* --- 1. FORCE BACKGROUND TO THE BACK --- */
+.positions-section {
+    position: relative !important;
+    background-color: #ffffff !important;
+    background-image: none !important; /* Kills any rough zig-zag */
+    z-index: 1 !important;
+    overflow: hidden !important;
+}
+
+/* Big Green Glow behind everything */
+.positions-section::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 255, 45, 0.12) 0%, transparent 70%);
+    top: -100px;
+    right: -150px;
+    z-index: -1 !important; /* Pushes it BEHIND cards */
+    pointer-events: none;
+}
+
+/* Floating Rhombus behind cards */
+.positions-section::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(0, 255, 45, 0.04);
+    bottom: -100px;
+    left: -150px;
+    transform: rotate(35deg);
+    z-index: -1 !important; /* Pushes it BEHIND cards */
+    pointer-events: none;
+}
+
+/* --- 2. BOLD PROFESSIONAL HEADER --- */
+.positions-header h2 {
+    font-family: 'Inter', sans-serif !important; /* Using a clean, thick font */
+    font-weight: 900 !important; /* Maximum Boldness */
+    font-size: 32px !important;
+    letter-spacing: -1px !important; /* Tightens it for that Pro look */
+    color: #000000 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    margin-bottom: 50px !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* --- 3. ENSURE CARDS STAY ON TOP --- */
+.pos-grid {
+    position: relative !important;
+    z-index: 10 !important; /* Pulls cards to the front */
+    }
 </style>
     <section class="positions-section">
     <div class="positions-header">
