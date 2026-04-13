@@ -788,51 +788,41 @@ setInterval(cycle, 5000);
         color: #fff !important;
         box-shadow: 0 5px 15px rgba(212, 160, 23, 0.3);
     }
-        /* --- ELITE ANIMATION KEYFRAMES --- */
-
-/* 1. The Card Slide-Up */
-@keyframes elite-rise {
-    from { opacity: 0; transform: translateY(60px); }
-    to { opacity: 1; transform: translateY(0); }
+/* --- FIXED ANIMATION TRIGGER --- */
+.pos-card { 
+    opacity: 0.1; /* Changed from 0 so it's not totally blank */
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease; 
 }
 
-/* 2. The Price Rubber-Band (Snaps like a rubber band) */
+/* The class the JavaScript will add */
+.animate-trigger { 
+    opacity: 1 !important; 
+    transform: translateY(0) !important; 
+}
+
+/* 2. The Price Snap (Rubber Band) */
 @keyframes price-snap {
     0% { transform: scale(1); }
     30% { transform: scaleX(1.25) scaleY(0.75); }
-    40% { transform: scaleX(0.75) scaleY(1.25); }
-    60% { transform: scaleX(1.15) scaleY(0.85); }
+    50% { transform: scaleX(0.75) scaleY(1.25); }
     100% { transform: scale(1); }
 }
 
-/* 3. The Image Vibration (The "Shake") */
-@keyframes image-vibrate {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(2deg) scale(1.05); }
-    75% { transform: rotate(-2deg) scale(1.05); }
+/* 3. The Image Shake */
+@keyframes image-shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
 }
 
-/* 4. The List-Item Slide (Waterflow effect) */
-@keyframes list-slide {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
+.animate-trigger .pos-price { 
+    animation: price-snap 0.8s ease-out forwards; 
 }
 
-/* --- TRIGGER CLASSES --- */
-/* We hide things initially so they can 'appear' on scroll */
-.pos-card { opacity: 0; transition: transform 0.5s ease; }
-
-.animate-trigger .pos-card { animation: elite-rise 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-.animate-trigger .pos-image-slot img { animation: image-vibrate 0.5s ease-in-out 2; }
-.animate-trigger .pos-price { animation: price-snap 1s ease forwards; }
-.animate-trigger .pos-features li { animation: list-slide 0.5s ease forwards; }
-
-/* Staggering the list items so they don't all move at once */
-.pos-features li:nth-child(1) { animation-delay: 0.3s; }
-.pos-features li:nth-child(2) { animation-delay: 0.4s; }
-.pos-features li:nth-child(3) { animation-delay: 0.5s; }
-.pos-features li:nth-child(4) { animation-delay: 0.6s; }
-.pos-features li:nth-child(5) { animation-delay: 0.7s; }
+.animate-trigger .pos-image-slot img { 
+    animation: image-shake 0.4s ease-in-out 2; 
+}
 </style>
 
 <div class="positions-section">
@@ -919,25 +909,24 @@ setInterval(cycle, 5000);
 
     </div>
     </div>
-    <script>
+ <script>
     const posObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // User scrolled IN - Start the show
                 entry.target.classList.add('animate-trigger');
             } else {
-                // User scrolled OUT - Reset the show
+                // This allows the animation to repeat every time you scroll away
                 entry.target.classList.remove('animate-trigger');
             }
         });
     }, { 
-        threshold: 0.2 // Trigger when 20% of the card is visible
+        threshold: 0.05, // Trigger almost immediately
+        rootMargin: "0px 0px -50px 0px" 
     });
 
-    // We target every .pos-card in your grid
     document.querySelectorAll('.pos-card').forEach((card) => {
         posObserver.observe(card);
     });
-    </script>
+                </script>
 </body>
     </html>
