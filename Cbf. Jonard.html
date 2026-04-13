@@ -773,56 +773,60 @@ setInterval(cycle, 5000);
 @keyframes zoom-in-stable { from { transform: scale(0.9); } to { transform: scale(1); } }
 @keyframes glow-entrance { from { filter: brightness(2); } to { filter: brightness(1); } }
 
-/* 1. MAKE THE SECTION BLEND WITH THE DARK PAGE */
+/* 1. THE WHITE FLOOR */
 .positions-section {
     display: block !important;
     width: 100% !important;
-    background: transparent !important; /* Removes the white box */
+    background-color: #ffffff !important; /* BACK TO WHITE */
     position: relative !important;
-    overflow: visible !important; /* Let the shapes breathe */
-    padding: 60px 20px !important; /* Brings the header down to a good level */
+    overflow: hidden !important;
+    padding: 80px 20px !important; /* Pulls the header down */
     z-index: 1 !important;
 }
 
-/* 2. TOP SHARP SHAPE - Pushed down to frame the header */
+/* 2. THE GREEN SHAPES (Sharp & Professional) */
 .positions-section::before {
     content: "" !important;
     position: absolute !important;
-    width: 300px !important;
-    height: 300px !important;
+    width: 320px !important;
+    height: 320px !important;
     background: rgba(0, 255, 45, 0.1) !important; 
-    border: 3px solid rgba(0, 255, 45, 0.3) !important; 
-    top: 40px !important; /* Pulls it down behind the header */
-    right: -60px !important;
+    border: 3px solid rgba(0, 255, 45, 0.2) !important; 
+    top: 20px !important;
+    right: -80px !important;
     border-radius: 60px !important;
-    transform: rotate(20deg) !important;
-    z-index: -1 !important; /* Stays behind everything */
+    transform: rotate(15deg) !important;
+    z-index: 0 !important; /* Sits on the white floor */
 }
 
-/* 3. BOTTOM SHARP CIRCLE - Perfectly placed for mobile */
 .positions-section::after {
     content: "" !important;
     position: absolute !important;
-    width: 200px !important;
-    height: 200px !important;
-    border: 10px solid rgba(0, 255, 45, 0.15) !important; 
+    width: 280px !important;
+    height: 280px !important;
+    border: 12px solid rgba(0, 255, 45, 0.08) !important; 
     bottom: 20px !important;
-    left: -50px !important;
+    left: -80px !important;
     border-radius: 50% !important;
-    z-index: -1 !important;
+    z-index: 0 !important;
 }
 
-/* 4. THE HEADER - Bold and Crisp on Black */
+/* 3. THE HEADER (Bold Black Text) */
 .positions-header h2 {
     font-weight: 900 !important;
-    font-size: 22px !important; /* Better size for mobile view */
-    color: #ffffff !important; /* WHITE text so it shows on black */
+    font-size: 28px !important;
+    color: #000000 !important; /* BACK TO BLACK */
     text-align: center !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    margin-bottom: 40px !important;
     position: relative !important;
     z-index: 10 !important;
+}
+
+/* 4. THE CARDS (FORCED ON TOP) */
+.pos-grid {
+    position: relative !important;
+    z-index: 20 !important; /* HIGHEST LAYER: Always stays on top */
+    margin-top: 30px !important;
 }
         </style>
     <section class="positions-section">
