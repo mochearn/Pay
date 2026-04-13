@@ -671,7 +671,6 @@ setInterval(cycle, 5000);
     });
 </script>
         <style>
-/* --- 1. THE MASTER SECTION (FORCED CLEANUP) --- */
 .positions-section {
     display: block !important;
     visibility: visible !important;
@@ -679,11 +678,22 @@ setInterval(cycle, 5000);
     min-height: 600px !important; 
     width: 100% !important;
     background-color: #ffffff !important;
-    background-image: none !important; /* KILLS THE ZIG-ZAGS */
     position: relative !important;
     overflow: hidden !important;
     padding: 80px 20px !important;
     z-index: 1 !important;
+    
+    /* THE SHAPES ARE NOW PART OF THE BACKGROUND SKIN */
+    background-image: 
+        radial-gradient(circle at 90% 10%, rgba(0, 255, 45, 0.12) 0%, transparent 40%), /* Top-Right Circle */
+        radial-gradient(circle at 10% 90%, rgba(0, 255, 45, 0.08) 0%, transparent 40%), /* Bottom-Left Circle */
+        linear-gradient(135deg, #00ff2d08 25%, transparent 25%), /* Rhombus Pattern Part 1 */
+        linear-gradient(225deg, #00ff2d08 25%, transparent 25%), /* Rhombus Pattern Part 2 */
+        linear-gradient(45deg, #00ff2d08 25%, transparent 25%),  /* Rhombus Pattern Part 3 */
+        linear-gradient(315deg, #00ff2d08 25%, transparent 25%); /* Rhombus Pattern Part 4 */
+    background-position: 0 0, 0 0, 15px 0, 15px 0, 0 0, 0 0 !important;
+    background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px, 30px 30px, 30px 30px !important;
+    background-repeat: no-repeat, no-repeat, repeat, repeat, repeat, repeat !important;
 }
 
 /* --- 2. THE GEOMETRIC SHAPES (STAYING BEHIND CARDS) --- */
