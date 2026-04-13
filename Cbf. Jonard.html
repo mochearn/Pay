@@ -671,166 +671,91 @@ setInterval(cycle, 5000);
     });
 </script>
     <style>
-    .positions-section {
-        background: #ffffff;
-        padding: 60px 15px;
-        font-family: 'Inter', sans-serif;
-    }
+/* --- 1. GLOBAL RESET (White Theme) --- */
+.positions-section {
+    background: #ffffff !important; /* Forces it back to white */
+    color: #000 !important;
+}
 
-    .positions-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .positions-header h2 {
-        font-size: 26px;
-        font-weight: 900;
-        color: #000;
-        text-transform: uppercase;
-        line-height: 1.2;
-    }
-
-.pos-image-slot {
-        width: 100%;
-        height: 200px;
-        background: #f0f0f0;
-        overflow: hidden;
-    }
-
-    .pos-image-slot img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
- .pos-title {
-        font-size: 22px;
-        font-weight: 900;
-        color: #000;
-        display: block;
-    }
-
-    .pos-price {
-        font-size: 24px;
-        font-weight: 900;
-        color: #00ff2d; /* Action Green */
-        margin: 8px 0 20px 0;
-        display: block;
-    }
-
-    .pos-features {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 25px 0;
-        text-align: left;
-    }
-
-    .pos-features li {
-        font-size: 14px;
-        color: #333;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: flex-start;
-        line-height: 1.4;
-    }
-
-    .pos-features li::before {
-        content: '✓';
-        color: #00ff2d;
-        font-weight: 900;
-        margin-right: 12px;
-        flex-shrink: 0;
-    }
-
-    /* ACTION BUTTONS */
-    .select-btn {
-        width: 100%;
-        padding: 16px;
-        background: #00ff2d;
-        color: #000;
-        border: none;
-        border-radius: 12px;
-        font-weight: 900;
-        font-size: 16px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .select-btn:active {
-        transform: scale(0.95);
-    }
-
-    /* Gold Button for the Top Tier */
-    .btn-state {
-        background: #d4a017 !important;
-        color: #fff !important;
-        box-shadow: 0 5px 15px rgba(212, 160, 23, 0.3);
-    }
-  /* 1. MAKE CARDS SLIMMER */
+/* --- 2. ELITE COMPACT GRID & SPACING --- */
 .pos-grid {
-    gap: 20px; /* Tighter gap */
+    display: flex;
+    flex-direction: column;
+    gap: 40px !important; /* Adds clear separation between cards */
+    max-width: 380px !important; /* Slimmer card width */
+    margin: 0 auto;
 }
 
 .pos-card {
-    max-width: 340px; /* Smaller width for elite look */
-    margin: 0 auto;
-    opacity: 1; /* Keep visible to prevent "blank" screen */
-    transform: none; 
-    transition: transform 0.4s ease;
+    background: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    margin: 0 10px; /* Extra side margin for mobile */
     overflow: hidden;
+    
+    /* Initially hidden for entrance */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: none; /* We handle it via JS keyframes */
 }
 
-.pos-body {
-    padding: 15px 15px; /* Reduced padding to make it compact */
+/* Class added by JavaScript to trigger the card entrance */
+.animate-trigger .pos-card {
+    animation: elite-rise 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes elite-rise {
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* 2. THE STABLE ANIMATIONS (No more shrinking to zero) */
+/* --- 3. PHOTO, LIST, BUTTON ANIMATIONS --- */
 
-/* Starter: Subtle Pop */
-.animate-trigger#btn-starter-parent { 
-    animation: starter-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
-}
-@keyframes starter-pop {
-    0% { transform: translateY(30px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
+/* Initially hiding internal elements for sequential entrance */
+.pos-image-slot img,
+.pos-features li,
+.select-btn {
+    opacity: 0;
 }
 
-/* Recipient: Gate Swing */
-.animate-trigger#btn-recipient-parent { 
-    animation: gate-swing 0.7s ease-out forwards; 
-}
-@keyframes gate-swing {
-    0% { transform: rotateX(-20deg) translateY(20px); opacity: 0; }
-    100% { transform: rotateX(0deg) translateY(0); opacity: 1; }
-}
+/* Define common entrance directions */
+@keyframes slideInFromTop { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideInFromLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideInFromRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+@keyframes rotateIn { from { opacity: 0; transform: rotate(-10deg); } to { opacity: 1; transform: rotate(0); } }
 
-/* Bundle Head: Smooth Slide */
-.animate-trigger#btn-bundle-parent { 
-    animation: bundle-slide 0.7s ease-out forwards; 
-}
-@keyframes bundle-slide {
-    0% { transform: translateX(-30px); opacity: 0; }
-    100% { transform: translateX(0); opacity: 1; }
-}
 
-/* L.G: Smooth Slide Right */
-.animate-trigger#btn-lg-parent { 
-    animation: lg-slide 0.7s ease-out forwards; 
-}
-@keyframes lg-slide {
-    0% { transform: translateX(30px); opacity: 0; }
-    100% { transform: translateX(0); opacity: 1; }
-}
+/* === UNIQUE SEQUENCES FOR EACH CARD === */
 
-/* State: The Flash (Stable) */
-.animate-trigger#btn-state-parent { 
-    animation: state-glitch 0.5s ease-out forwards; 
+/* --- CARD 1: STARTER --- (Subtle Pop) */
+#btn-starter-parent.animate-trigger .pos-image-slot img { animation: zoomIn 0.6s 0.2s forwards; }
+#btn-starter-parent.animate-trigger .pos-features li { animation: slideInFromTop 0.5s 0.5s forwards; }
+#btn-starter-parent.animate-trigger .select-btn { animation: slideInFromTop 0.6s 0.8s forwards; }
+
+/* --- CARD 2: RECIPIENT --- (Gate Swing) */
+#btn-recipient-parent.animate-trigger .pos-image-slot img { animation: rotateIn 0.7s 0.2s forwards; }
+#btn-recipient-parent.animate-trigger .pos-features li { animation: slideInFromLeft 0.5s 0.6s forwards; }
+#btn-recipient-parent.animate-trigger .select-btn { animation: slideInFromLeft 0.6s 0.9s forwards; }
+
+/* --- CARD 3: BUNDLE HEAD --- (Wobble) */
+#btn-bundle-parent.animate-trigger .pos-image-slot img { animation: slideInFromLeft 0.6s 0.2s forwards; }
+#btn-bundle-parent.animate-trigger .pos-features li { animation: slideInFromRight 0.5s 0.6s forwards; }
+#btn-bundle-parent.animate-trigger .select-btn { animation: slideInFromLeft 0.6s 0.9s forwards; }
+
+/* --- CARD 4: L.G COORDINATOR --- (Cascade) */
+#btn-lg-parent.animate-trigger .pos-image-slot img { animation: slideInFromTop 0.6s 0.2s forwards; }
+#btn-lg-parent.animate-trigger .pos-features li { animation: slideInFromTop 0.5s 0.6s forwards; }
+#btn-lg-parent.animate-trigger .select-btn { animation: zoomIn 0.6s 0.9s forwards; }
+
+/* --- CARD 5: STATE COORDINATOR --- (The Glitch/Bounce) */
+@keyframes state-pop { to { opacity: 1; transform: scale(1); filter: brightness(1); } }
+#btn-state-parent.animate-trigger .pos-image-slot img { animation: zoomIn 0.7s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+#btn-state-parent.animate-trigger .pos-features li { animation: slideInFromRight 0.5s 0.7s forwards; }
+#btn-state-parent.animate-trigger .select-btn { 
+    opacity: 0;
+    animation: zoomIn 0.6s 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, btn-glow 2s 1.6s infinite;
 }
-@keyframes state-glitch {
-    0% { filter: brightness(2); transform: scale(0.95); opacity: 0; }
-    100% { filter: brightness(1); transform: scale(1); opacity: 1; }
-    }
+@keyframes btn-glow { 0%, 100% { box-shadow: 0 0 5px rgba(212, 160, 23, 0.3); } 50% { box-shadow: 0 0 15px rgba(212, 160, 23, 0.7); } }
         </style>
     <div class="positions-header">
     <h2>Choose Your Position & Unlock Massive Rewards</h2>
@@ -914,25 +839,25 @@ setInterval(cycle, 5000);
     </div>
 
                 </div>
- <script>
-    const scrollObserver = new IntersectionObserver((entries) => {
+<script>
+    // THE SAFE OBSERVER (NO BLINKING)
+    const posObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // We add the trigger, but we DO NOT REMOVE it
+                // This ensures the animation plays once and the card stays stable.
                 entry.target.classList.add('animate-trigger');
-            } else {
-                // To stop the "fighting", we only remove it if it's far away
-                // This keeps it stable while viewing
-                entry.target.classList.remove('animate-trigger');
             }
         });
     }, { 
-        threshold: 0.1,
-        rootMargin: "0px 0px -10% 0px" // Triggers earlier to prevent blinking
+        threshold: 0.1, // Trigger when 10% is visible
+        rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the screen
     });
 
-    document.querySelectorAll('.pos-card').forEach((card) => {
-        scrollObserver.observe(card);
+    // We target all the cards to trigger the sequence
+    document.querySelectorAll('#btn-starter-parent, #btn-recipient-parent, #btn-bundle-parent, #btn-lg-parent, #btn-state-parent').forEach((card) => {
+        posObserver.observe(card);
     });
- </script>
+</script>
 </body>
     </html>
