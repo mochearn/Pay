@@ -712,15 +712,15 @@ setInterval(cycle, 5000);
     position: absolute !important;
     width: 100px !important;
     height: 100px !important;
-    background: rgba(0, 255, 45, 0.06) !important;
-    border: 1px solid rgba(0, 255, 45, 0.15) !important;
+    background: rgba(0, 255, 45, 0.20) !important;
+    border: 1px solid rgba(0, 255, 45, 0.35) !important;
     border-radius: 10px !important;
     z-index: 2 !important;
 }
 .sd-1 { top: 30%; left: -15px; transform: rotate(12deg); }
 .sd-2 { top: 60%; right: -15px; transform: rotate(-10deg); }
 
-/* 3. THE HEADER (Kept exactly as yours) */
+/* --- THE POPPINS BOLD HEADER ONLY --- */
 .positions-header {
     position: relative !important;
     z-index: 10 !important;
@@ -728,23 +728,27 @@ setInterval(cycle, 5000);
     margin-bottom: 50px !important;
 }
 
-/* --- HEADER BOLDNESS & ANIMATION --- */
 .positions-header h2 {
-    font-weight: 900 !important; /* This is maximum boldness */
+    /* FONT & BOLDNESS */
+    font-family: 'Poppins', sans-serif !important; 
+    font-weight: 900 !important; /* Maximum Boldness */
+    font-size: 28px !important;
     color: #000000 !important;
     text-transform: uppercase !important;
+    letter-spacing: -0.5px !important; /* Tight, premium look */
+    line-height: 1.2 !important;
     
-    /* Animation Start Point */
+    /* ANIMATION START POINT */
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.85) translateY(20px);
     transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
-/* When the JS triggers the reveal */
+/* TRIGGERED BY JS ON SCROLL */
 .positions-header.reveal h2 {
     opacity: 1 !important;
-    transform: scale(1) !important;
-}
+    transform: scale(1) translateY(0) !important;
+            }
 
 /* 4. THE GRID & CARDS (Top Layer) */
 .pos-grid {
@@ -816,6 +820,7 @@ setInterval(cycle, 5000);
 
 .btn-state { background: #d4a017 !important; color: #fff !important; }
 </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
     <section class="positions-section">
         <div class="small-decor sd-1"></div>
 <div class="small-decor sd-2"></div>
