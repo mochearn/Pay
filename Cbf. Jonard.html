@@ -685,8 +685,8 @@ setInterval(cycle, 5000);
 /* 2. THE GEOMETRIC DECOR (Kept exactly as yours) */
 .green-square-decor {
     position: absolute !important;
-    width: 320px !important;
-    height: 320px !important;
+    width: 220px !important;
+    height: 220px !important;
     background: rgba(0, 255, 45, 0.12) !important;
     border: 3px solid rgba(0, 255, 45, 0.25) !important;
     top: 20px !important;
@@ -710,8 +710,8 @@ setInterval(cycle, 5000);
 /* ADDED: SMALL SIDE DECOR (Sits at edges as requested) */
 .small-decor {
     position: absolute !important;
-    width: 50px !important;
-    height: 50px !important;
+    width: 100px !important;
+    height: 100px !important;
     background: rgba(0, 255, 45, 0.06) !important;
     border: 1px solid rgba(0, 255, 45, 0.15) !important;
     border-radius: 10px !important;
@@ -728,11 +728,22 @@ setInterval(cycle, 5000);
     margin-bottom: 50px !important;
 }
 
+/* --- HEADER BOLDNESS & ANIMATION --- */
 .positions-header h2 {
+    font-weight: 900 !important; /* This is maximum boldness */
     color: #000000 !important;
-    font-weight: 900 !important;
-    font-size: 26px !important;
     text-transform: uppercase !important;
+    
+    /* Animation Start Point */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* When the JS triggers the reveal */
+.positions-header.reveal h2 {
+    opacity: 1 !important;
+    transform: scale(1) !important;
 }
 
 /* 4. THE GRID & CARDS (Top Layer) */
@@ -812,9 +823,8 @@ setInterval(cycle, 5000);
     <div class="green-square-decor"></div>
     <div class="green-circle-decor"></div>
 
-    <div class="positions-header">
-        <h2>Choose Your Position & Unlock Massive Rewards</h2>
-    </div>
+<div class="positions-header"> <h2>Choose Your Position & Unlock Massive Rewards</h2>
+</div>
     
     <div class="pos-grid">
         <div class="pos-card" id="btn-starter-parent">
@@ -898,12 +908,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Add the class when it enters the screen
                 entry.target.classList.add('reveal');
+            } else {
+                // REMOVE the class when it leaves (so it can animate again)
+                entry.target.classList.remove('reveal');
             }
         });
-    }, { threshold: 0.15 });
+    }, { 
+        threshold: 0.1, // Trigger as soon as 10% of the card shows
+        rootMargin: "0px 0px -50px 0px" // Fine-tune for better mobile feel
+    });
 
-    document.querySelectorAll('.pos-card').forEach(card => observer.observe(card));
+    document.querySelectorAll('.pos-card, .positions-header').forEach(el => observer.observe(el));
 });
 </script>
 </body>
