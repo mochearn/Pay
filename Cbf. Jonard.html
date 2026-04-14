@@ -671,7 +671,7 @@ setInterval(cycle, 5000);
     });
 </script>
         <style>
-/* 1. THE FLOOR */
+            /* --- KEEPING THE FLOOR & SHAPES EXACTLY AS THEY WERE --- */
 .positions-section {
     background-color: #ffffff !important;
     width: 100% !important;
@@ -682,7 +682,6 @@ setInterval(cycle, 5000);
     z-index: 1 !important;
 }
 
-/* 2. THE GEOMETRIC DECOR (Layered correctly) */
 .green-square-decor {
     position: absolute !important;
     width: 320px !important;
@@ -707,57 +706,59 @@ setInterval(cycle, 5000);
     z-index: 2 !important;
 }
 
-/* 3. THE HEADER */
-.positions-header {
-    position: relative !important;
-    z-index: 10 !important;
-    text-align: center !important;
-    margin-bottom: 50px !important;
+/* --- ADDING THE NEW SMALL SQUARES (AS YOU REQUESTED) --- */
+.positions-section::before, .positions-section::after {
+    content: "" !important;
+    position: absolute !important;
+    width: 80px !important;
+    height: 80px !important;
+    background: rgba(0, 255, 45, 0.05) !important;
+    border: 1px solid rgba(0, 255, 45, 0.15) !important;
+    border-radius: 15px !important;
+    z-index: 2 !important;
 }
+.positions-section::before { top: 40%; left: 10%; transform: rotate(-10deg); }
+.positions-section::after { bottom: 15%; right: 15%; transform: rotate(45deg); }
 
-.positions-header h2 {
-    color: #000000 !important;
-    font-weight: 900 !important;
-    font-size: 26px !important;
-    text-transform: uppercase !important;
-}
-
-/* 4. THE GRID & CARDS (Top Layer) */
-.pos-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 40px !important;
-    max-width: 340px !important;
-    margin: 0 auto !important;
-    position: relative !important;
-    z-index: 20 !important; /* Forces cards on top of shapes */
-}
-
+/* --- THE CARDS WITH SHADOWS & ANIMATION READY --- */
 .pos-card {
     background: #ffffff !important;
     border: 1px solid #eee !important;
     border-radius: 20px !important;
     overflow: hidden !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
+    /* ADDED SHADOWS */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important; 
+    /* ANIMATION STARTING POINT */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
 }
 
-.pos-image-slot { width: 100%; height: 180px; }
-.pos-image-slot img { width: 100%; height: 100%; object-fit: cover; }
+/* CLASS ADDED BY JS ON SCROLL */
+.pos-card.reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
 
-.pos-body { padding: 20px; text-align: center; }
-.pos-title { font-size: 20px; font-weight: 900; color: #000; display: block; }
-.pos-price { font-size: 22px; font-weight: 900; color: #00ff2d; margin: 5px 0; display: block; }
-
-.pos-features { list-style: none; padding: 0; margin: 15px 0; text-align: left; }
-.pos-features li { font-size: 13px; color: #333; margin-bottom: 8px; display: flex; align-items: center; }
-.pos-features li::before { content: '✓'; color: #00ff2d; margin-right: 8px; font-weight: 900; }
-
+/* --- THE BUTTON: "LIVE" WHEN TAPPED --- */
 .select-btn {
-    width: 100%; padding: 14px; background: #00ff2d; color: #000;
-    border: none; border-radius: 10px; font-weight: 900; text-transform: uppercase;
+    width: 100% !important;
+    padding: 14px !important;
+    background: #00ff2d !important;
+    color: #000 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    transition: transform 0.1s ease !important; /* Fast snap */
 }
-.btn-state { background: #d4a017 !important; color: #fff !important; }
-    </style>
+
+.select-btn:active {
+    transform: scale(0.92) !important; /* The "Tapped" look */
+    background: #00cc24 !important; /* Slightly darker when pressed */
+    box-shadow: inset 0 4px 8px rgba(0,0,0,0.2) !important;
+            }
+</style>
     <section class="positions-section">
     <div class="green-square-decor"></div>
     <div class="green-circle-decor"></div>
@@ -843,5 +844,26 @@ setInterval(cycle, 5000);
         </div>
     </div>
                 </section>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const cards = document.querySelectorAll('.pos-card');
+
+    const observerOptions = {
+        threshold: 0.2 // Trigger when 20% of the card is visible
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            }
+        });
+    }, observerOptions);
+
+    cards.forEach(card => {
+        scrollObserver.observe(card);
+    });
+});
+    </script>
 </body>
     </html>
