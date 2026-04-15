@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBF | Wealth Migration</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
-<style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+    <style>
     :root {
         --bureau-blue: #001f3f;
         --action-green: #00c853;
@@ -239,7 +240,10 @@
 
     // 2. THE DYNAMIC SENTENCES
     const sentences = [
-        `Welcome, ${userName}. Your Migration Begins...`, // First sentence mentions the name
+       const userName = localStorage.getItem('cbf_user_name') || "SOLDIER";
+
+// Your line stays exactly the same, it will now just pull the real name:
+`Welcome, ${userName}. Your Migration Begins...`,
   "<span style='color: #dd9b01;'>Get Access to </span><span style='color: #00ff2d;'>₦500,000 — ₦3.2M</span><span style='color: #dd9b01;'> Disbursement</span>",
         "Secure Your Grant Slot Now.",
         "❌No experience or skill required.",
@@ -1794,11 +1798,11 @@ document.addEventListener("DOMContentLoaded", function() {
         text-transform: uppercase;
     }
     </style>
-    <div id="entry-popup" class="popup-overlay">
+  <div id="entry-popup" class="popup-overlay">
     <div class="popup-card">
         <div class="popup-header">
             <h3>Before you proceed... 🚀</h3>
-            <p>Enter your details to sync with the CBF Batch.</p>
+            <p>Sync your identity with the CBF Batch.</p>
         </div>
         
         <form id="gateway-form">
@@ -1808,8 +1812,9 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="input-field">
                 <input type="email" id="pop-email" placeholder="Email Address" required>
             </div>
-            <div class="input-field">
-                <input type="tel" id="pop-phone" placeholder="Phone Number (WhatsApp)" required>
+            
+            <div class="input-field phone-wrapper">
+                <input type="tel" id="pop-phone" required>
             </div>
             
             <button type="submit" class="popup-btn">ENTER PORTAL</button>
@@ -1818,80 +1823,90 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <style>
-    /* THE OVERLAY */
-    .popup-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.9); /* Darken everything behind */
-        display: flex; align-items: center; justify-content: center;
-        z-index: 99999; /* Higher than everything else */
-        backdrop-filter: blur(8px);
+    /* ... The original pop-up styles from the previous message ... */
+    
+    /* ADD/UPDATE THIS FOR THE COUNTRY PICKER */
+    .phone-wrapper {
+        text-align: left; /* Necessary for the plugin */
     }
-
-    .popup-card {
-        background: #ffffff; padding: 40px 30px; border-radius: 20px;
-        width: 90%; max-width: 380px; text-align: center;
-        box-shadow: 0 25px 50px rgba(0, 255, 45, 0.2);
-        border: 2px solid #00ff2d;
+    
+    #pop-phone {
+        width: 100%; /* Important */
     }
-
-    .popup-header h3 { font-weight: 900; margin-bottom: 10px; font-size: 20px; color: #000; }
-    .popup-header p { font-size: 13px; color: #666; margin-bottom: 25px; }
-
-    .input-field { margin-bottom: 15px; }
-    .input-field input {
-        width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd;
-        font-family: 'Poppins', sans-serif; font-size: 14px; outline: none;
-    }
-    .input-field input:focus { border-color: #00ff2d; }
-
-    .popup-btn {
-        width: 100%; background: #00ff2d; color: #000; padding: 16px;
-        border: none; border-radius: 10px; font-weight: 900; font-size: 14px;
-        cursor: pointer; transition: 0.3s; margin-top: 10px;
-    }
+    
+    /* Ensure the input styling matches others */
+    .iti { width: 100%; } 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
 
 <script>
     const popup = document.getElementById('entry-popup');
     const gatewayForm = document.getElementById('gateway-form');
+    const phoneInputField = document.querySelector("#pop-phone");
 
-    // 1. CHECK IF USER ALREADY FILLED IT
+    // --- 1. INITIALIZE COUNTRY PICKER (Set to Nigeria default) ---
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+        initialCountry: "ng", // Default to Nigeria 🇳🇬
+        preferredCountries: ["ng", "gh", "gb", "us"],
+        separateDialCode: true // Shows '+234' outside the box
+    });
+
+    // --- 2. CHECK & SYNC ON LOAD (The Name Fix) ---
     window.onload = function() {
         if (localStorage.getItem('cbf_user_name')) {
-            popup.style.display = 'none'; // Don't show if they already registered
+            popup.style.display = 'none'; // Don't show if already done
             syncDataToPage();
         }
     }
 
-    // 2. SAVE DATA & SYNC
+    // --- 3. SAVE DATA & SUBMIT ---
     gatewayForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const name = document.getElementById('pop-name').value;
         const email = document.getElementById('pop-email').value;
-        const phone = document.getElementById('pop-phone').value;
+        
+        // Get full international number (e.g., +23480...)
+        const fullPhone = phoneInput.getNumber(); 
 
-        // Save to LocalStorage
-        localStorage.setItem('cbf_user_name', name);
-        localStorage.setItem('cbf_user_email', email);
-        localStorage.setItem('cbf_user_phone', phone);
+        if (fullPhone) {
+             // 1. Save all data to LocalStorage
+            localStorage.setItem('cbf_user_name', name);
+            localStorage.setItem('cbf_user_email', email);
+            localStorage.setItem('cbf_user_phone', fullPhone);
 
-        popup.style.display = 'none'; // Hide the popup
-        syncDataToPage(); // Update the rest of the site immediately
+            popup.style.display = 'none'; // Hide popup
+            syncDataToPage(); // Update personalized elements immediately
+
+            // 2. --- REDIRECT LOGIC ---
+            // Replace the URL below with the link they give you
+            // (Wait 1 sec to let the data sync first)
+            setTimeout(() => {
+                window.location.href = "YOUR_REDIRECT_LINK_HERE";
+            }, 1000);
+        }
     });
 
-    // 3. THE SYNC FUNCTION
+    // --- 4. THE SYNC FUNCTION (Guarantees Name Personalization) ---
     function syncDataToPage() {
         const savedName = localStorage.getItem('cbf_user_name');
         const savedEmail = localStorage.getItem('cbf_user_email');
 
-        // Update Name Greeting (if you have an ID for it)
-        const nameDisplay = document.getElementById('user-name-greeting');
-        if (nameDisplay) { nameDisplay.innerText = savedName; }
+        if (savedName) {
+             // A. Find your greeting tag (ensure it has this ID)
+            const greeting = document.getElementById('user-greeting');
+            if (greeting) {
+                greeting.innerText = savedName; // Replaces 'Soldier' with 'Chidi'
+            }
+        }
 
-        // Update FAQ Email Field
-        const faqEmailField = document.getElementById('user-email'); 
-        if (faqEmailField) { faqEmailField.value = savedEmail; }
+        if (savedEmail) {
+             // B. Find the email input field in your Question/Contact box
+            const faqEmailField = document.getElementById('user-email'); 
+            if (faqEmailField) { faqEmailField.value = savedEmail; }
+        }
     }
     </script>
 </body>
