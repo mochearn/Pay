@@ -1282,9 +1282,12 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 
     <div id="success-toast" class="toast-popup">
-        <div class="toast-content">
-            <span>✅</span> Message sent! We'll reply shortly.
-        </div>
+    <div class="toast-content">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>Message sent! We'll reply shortly.</span>
+    </div>
     </div>
 
     <div class="faq-container">
@@ -1335,25 +1338,42 @@ document.addEventListener("DOMContentLoaded", function() {
             font-family: 'Poppins', sans-serif !important;
         }
 
-        /* SUCCESS TOAST POPUP */
-        .toast-popup {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000;
-            color: #fff;
-            padding: 15px 25px;
-            border-radius: 50px;
-            z-index: 10000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid #00ff2d;
-            white-space: nowrap;
-        }
-        .toast-popup.show { top: 30px; }
-        .toast-content { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+/* SUCCESS TOAST POPUP */
+.toast-popup {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    z-index: 10000;
+    box-shadow: 0 10px 40px rgba(0, 255, 45, 0.2);
+    transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 255, 45, 0.4);
+    white-space: nowrap;
+}
 
+.toast-popup.show { 
+    top: 25px; 
+}
+
+.toast-content { 
+    font-size: 14px; 
+    font-weight: 700; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+}
+
+/* THE SVG ICON SIZE */
+.toast-icon {
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 45, 0.5));
+        }
+        
         .faq-header { text-align: center; margin-bottom: 40px; }
         .faq-header h2 { font-weight: 900; font-size: 26px; color: #000; text-transform: uppercase; }
         .faq-header span { color: #00ff2d; }
@@ -1385,15 +1405,15 @@ document.addEventListener("DOMContentLoaded", function() {
             transition: max-height 0.4s ease-in-out;
             padding: 0 10px;
         }
-        .faq-answer p { padding-bottom: 20px; color: #666; font-size: 14px; line-height: 1.6; margin: 0; }
+        .faq-answer p { padding-bottom: 20px; color: #666; width: 45%; font-size: 14px; line-height: 1.6; margin: 0; }
         .faq-item.active .faq-answer { max-height: 200px; }
 
         /* CONTACT BAR FIXES */
         .contact-trigger-wrapper { margin-top: 40px; text-align: center; max-width: 500px; margin: 40px auto 0 auto; }
 
         .toggle-btn {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
+            background: #ffffff;
+            border: 1px solid #00ff2d;
             color: #000;
             padding: 14px 24px;
             border-radius: 50px;
