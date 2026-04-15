@@ -1530,137 +1530,195 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     </script>
     </section>
-    <div id="live-pulse-container" class="pulse-card">
-    <div class="pulse-content">
-        <div class="pulse-status-dot"></div>
-        <div class="pulse-text-area">
-            <p id="pulse-msg">Checking live batch...</p>
+<div id="cbf-tracker" class="tracker-card draggable">
+    <div id="tracker-content" class="tracker-body">
+        <div class="live-indicator">
+            <div class="dot"></div>
+            <span id="live-label">LIVE</span>
+        </div>
+        <div id="text-wrap">
+            <p id="tracker-msg">Initializing CBF Batch...</p>
         </div>
     </div>
+    <div id="ticker-box" class="initials-ticker"></div>
 </div>
 
 <style>
-    /* THE CARD STYLE */
-    .pulse-card {
+    /* PREMIUM GLASS CARD */
+    .tracker-card {
         position: fixed;
-        top: 20px;
-        left: 20px;
-        background: #ffffff;
-        padding: 12px 20px;
-        border-radius: 12px;
-        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); /* Deep Shadow to pop */
-        z-index: 9999;
+        top: 30px;
+        left: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 15px 20px;
+        border-radius: 16px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        z-index: 10000;
+        cursor: grab;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        transition: width 0.5s, height 0.5s, border-radius 0.5s, opacity 0.3s;
         display: flex;
         align-items: center;
-        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid #f0f0f0;
-        max-width: 280px;
+        width: 280px;
+        height: auto;
     }
 
-    /* THE TEXT STYLE (TINY & BLACK) */
-    .pulse-text-area p {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-size: 12px; /* Sleek/Tiny */
-        color: #000000;
-        font-weight: 500;
-        line-height: 1.4;
-    }
+    .tracker-card:active { cursor: grabbing; }
 
-    /* THE LIVE DOT */
-    .pulse-status-dot {
-        width: 8px;
-        height: 8px;
-        background: #00ff2d;
-        border-radius: 50%;
-        margin-right: 12px;
-        position: relative;
-        flex-shrink: 0;
-    }
-
-    .pulse-status-dot::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: #00ff2d;
-        border-radius: 50%;
-        animation: pulse-ring 1.5s infinite;
-    }
-
-    @keyframes pulse-ring {
-        0% { transform: scale(1); opacity: 0.8; }
-        100% { transform: scale(2.5); opacity: 0; }
-    }
-
-    /* THE BUBBLE PHASE (COLLAPSED) */
-    .pulse-card.collapsed {
-        top: auto;
-        bottom: 30px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
+    /* COLLAPSED STATE */
+    .tracker-card.collapsed {
+        width: 60px;
+        height: 60px;
         padding: 0;
         border-radius: 50%;
         justify-content: center;
         overflow: hidden;
     }
 
-    .pulse-card.collapsed .pulse-text-area {
-        display: none;
+    .tracker-card.collapsed .tracker-body { display: none; }
+    .tracker-card.collapsed .initials-ticker { display: flex; }
+
+    /* TEXT STYLES */
+    .tracker-body { display: flex; align-items: center; gap: 15px; width: 100%; }
+    .live-indicator { display: flex; flex-direction: column; align-items: center; }
+    .dot { width: 8px; height: 8px; background: #00ff2d; border-radius: 50%; box-shadow: 0 0 10px #00ff2d; animation: pulse 1.5s infinite; }
+    #live-label { font-size: 8px; font-weight: 900; color: #00ff2d; margin-top: 4px; }
+
+    #text-wrap p { 
+        margin: 0; font-size: 13px; color: #000; font-weight: 500; line-height: 1.3; 
+        font-family: 'Poppins', sans-serif;
     }
 
-    .pulse-card.collapsed .pulse-status-dot {
-        margin: 0;
+    /* INITIALS TICKER (RIGHT TO LEFT) */
+    .initials-ticker {
+        display: none;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        color: #000;
+        font-size: 18px;
+        position: relative;
+    }
+
+    .ticker-letter {
+        position: absolute;
+        animation: slideLeft 2s linear infinite;
+        white-space: nowrap;
+    }
+
+    @keyframes slideLeft {
+        0% { transform: translateX(40px); opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { transform: translateX(-40px); opacity: 0; }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.4); opacity: 0.5; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* PAYMENT THEME */
+    .tracker-card.payment-mode {
+        border: 2px solid #00ff2d;
+        background: #fff;
     }
 </style>
 
 <script>
-    const pulseContainer = document.getElementById('live-pulse-container');
-    const pulseMsg = document.getElementById('pulse-msg');
+    const tracker = document.getElementById('cbf-tracker');
+    const msg = document.getElementById('tracker-msg');
+    const ticker = document.getElementById('ticker-box');
     
-    const nigerianNames = ["Chidi", "Tunde", "Amina", "Emeka", "Fatima", "Okon", "Blessing", "Yinka", "Ibrahim", "Nneka"];
-    const nigerianCities = ["Lagos", "Abuja", "Port Harcourt", "Osogbo", "Ibadan", "Enugu", "Kano", "Benin City"];
+    const names = ["Chidi", "Tunde", "Amina", "Emeka", "Fatima", "Okon", "Blessing", "Yinka", "Ibrahim", "Nneka"];
+    const cities = ["Lagos", "Abuja", "PH", "Osogbo", "Ibadan", "Enugu", "Kano"];
+    const positions = ["Standard Slot", "Executive Slot", "VIP Fast-Track"];
 
-    let displayCount = 0;
-    let maxNotifications = 4; // Number of names before it collapses
+    let count = 0;
+    let isPaymentMode = false;
 
-    function showNextNotification() {
-        if (displayCount < maxNotifications) {
-            // Pick random details
-            const name = nigerianNames[Math.floor(Math.random() * nigerianNames.length)];
-            const city = nigerianCities[Math.floor(Math.random() * nigerianCities.length)];
+    // 1. DRAGGABLE LOGIC
+    let isDragging = false;
+    tracker.onmousedown = function(event) {
+        isDragging = true;
+        let shiftX = event.clientX - tracker.getBoundingClientRect().left;
+        let shiftY = event.clientY - tracker.getBoundingClientRect().top;
+
+        function moveAt(pageX, pageY) {
+            // Keep away from center logic (simplified: follow mouse)
+            tracker.style.left = pageX - shiftX + 'px';
+            tracker.style.top = pageY - shiftY + 'px';
+            tracker.style.bottom = 'auto';
+        }
+
+        function onMouseMove(event) { moveAt(event.pageX, event.pageY); }
+        document.addEventListener('mousemove', onMouseMove);
+        tracker.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            isDragging = false;
+        };
+    };
+    tracker.ondragstart = function() { return false; };
+
+    // 2. TICKER LOGIC (INITIALS)
+    function updateTicker() {
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        ticker.innerHTML = `<span class="ticker-letter">${randomName[0]}</span>`;
+    }
+    setInterval(updateTicker, 2000);
+
+    // 3. MAIN SEQUENCE
+    function cycleNotifications() {
+        if (count < 5) {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const city = cities[Math.floor(Math.random() * cities.length)];
             
-            // Slide Out
-            pulseContainer.style.opacity = "0";
-            pulseContainer.style.transform = "translateX(-20px)";
+            if (isPaymentMode) {
+                const pos = positions[Math.floor(Math.random() * positions.length)];
+                msg.innerHTML = `<strong>${name}</strong> from ${city} just paid for <strong>${pos}</strong> 💰`;
+            } else {
+                msg.innerHTML = `<strong>${name}</strong> from ${city} just joined the CBF batch.`;
+            }
 
-            setTimeout(() => {
-                if (displayCount === 2) {
-                    // Show User Shoutout at the 3rd spot
-                    pulseMsg.innerHTML = "You are currently being added to the CBF queue...";
-                } else {
-                    pulseMsg.innerHTML = `<strong>${name}</strong> from ${city} just joined the batch.`;
-                }
-                
-                // Slide In
-                pulseContainer.style.opacity = "1";
-                pulseContainer.style.transform = "translateX(0)";
-                displayCount++;
-            }, 600);
-        } else {
-            // PHASE 3: COLLAPSE TO BUBBLE
-            setTimeout(() => {
-                pulseContainer.classList.add('collapsed');
-            }, 3000);
-            clearInterval(notificationInterval);
+            // After 5 names, collapse
+            count++;
+            if (count === 5) {
+                setTimeout(() => tracker.classList.add('collapsed'), 4000);
+            }
         }
     }
 
-    // Start the cycle
-    const notificationInterval = setInterval(showNextNotification, 5000);
-    // Initial call
-    showNextNotification();
+    // 4. CLICK TO EXPAND
+    tracker.onclick = function() {
+        if (this.classList.contains('collapsed')) {
+            this.classList.remove('collapsed');
+            count = 0; // Restart count to cycle names again
+            setTimeout(() => this.classList.add('collapsed'), 6000);
+        }
+    };
+
+    // 5. PAYMENT TRIGGER ON SCROLL
+    window.onscroll = function() {
+        const secureSection = document.getElementById('secure-your-spot'); // Make sure your section has this ID
+        if (secureSection) {
+            const rect = secureSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                if (!isPaymentMode) {
+                    isPaymentMode = true;
+                    tracker.classList.remove('collapsed');
+                    tracker.classList.add('payment-mode');
+                    count = 0; // Restart alerts for payments
+                }
+            }
+        }
+    };
+
+    setInterval(cycleNotifications, 5000);
+    cycleNotifications();
 </script>
 </body>
     </html>
