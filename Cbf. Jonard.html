@@ -929,96 +929,135 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
     <style>
-    .why-works-section {
-    /* LIGHT GRADIENT BACKGROUND */
-    background: linear-gradient(180deg, #ffffff 0%, #f2fff5 100%) !important;
-    padding: 60px 20px !important;
+.why-works-section {
+    /* BRIGHTER GRADIENT: Vibrant Green-tinted flow */
+    background: linear-gradient(135deg, #e8fff0 0%, #ffffff 50%, #d1ffd9 100%) !important;
+    padding: 40px 20px 80px 20px !important; /* REDUCED TOP PADDING TO BRING HEADER CLOSER */
     font-family: 'Poppins', sans-serif !important;
-    text-align: center;
+    text-align: center !important;
+    overflow: hidden;
 }
 
 .why-header h2, .get-started-header h2 {
     font-weight: 900 !important;
     font-size: 26px !important;
-    color: #000;
-    text-transform: uppercase;
-    margin-bottom: 40px;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 30px !important;
 }
 
 .why-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    max-width: 350px;
-    margin: 0 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    max-width: 350px !important;
+    margin: 0 auto !important;
 }
 
 .why-item {
     background: #ffffff !important;
-    padding: 25px;
-    border-radius: 20px;
-    /* SOFT SHADOW TO MATCH POSITIONS SECTION */
-    box-shadow: 0 10px 30px rgba(0, 255, 45, 0.05) !important;
-    border: 1px solid #f0f0f0;
+    padding: 25px 20px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 255, 45, 0.1) !important;
+    border: 1px solid rgba(0, 255, 45, 0.15) !important;
+    
+    /* ANIMATION START POINT */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+/* REVEAL CLASS FOR JS */
+.why-item.reveal, .get-started-header.reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.why-icon svg {
+    width: 35px;
+    height: 35px;
 }
 
 .why-icon {
-    font-size: 30px;
-    margin-bottom: 15px;
-    background: rgba(0, 255, 45, 0.1);
+    background: rgba(0, 255, 45, 0.1) !important;
     width: 60px;
     height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin: 0 auto 15px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    margin: 0 auto !important;
 }
 
 .why-item h3 {
     font-weight: 700 !important;
     font-size: 18px !important;
-    color: #000;
-    margin-bottom: 10px;
+    color: #000 !important;
+    margin: 15px 0 5px 0 !important;
 }
 
 .why-item p {
-    font-size: 14px;
-    color: #555;
-    line-height: 1.5;
-}
-        </style>
+    font-size: 14px !important;
+    color: #444 !important;
+    line-height: 1.5 !important;
+        }
+                </style>
     <section class="why-works-section">
     <div class="why-header">
         <h2>Why This Program Works:</h2>
     </div>
 
     <div class="why-container">
-        <div class="why-item">
-            <div class="why-icon">✔️</div>
+        <div class="why-item animate-box">
+            <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
             <h3>No prior experience needed</h3>
             <p>Anyone can apply regardless of background or education</p>
         </div>
 
-        <div class="why-item">
-            <div class="why-icon">📍</div>
+        <div class="why-item animate-box">
+            <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
             <h3>Works anywhere in Nigeria</h3>
             <p>Whether you're in Lagos, Kano, or a rural area</p>
         </div>
 
-        <div class="why-item">
-            <div class="why-icon">👤</div>
+        <div class="why-item animate-box">
+            <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
             <h3>Simple & beginner-friendly process</h3>
             <p>Easy steps that anyone can follow</p>
         </div>
 
-        <div class="why-item">
-            <div class="why-icon">📞</div>
+        <div class="why-item animate-box">
+            <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
             <h3>Fast approval & support</h3>
             <p>Quick verification and dedicated support team</p>
         </div>
     </div>
-                </section>
-    
+                    </section>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            } else {
+                // Remove this line if you ONLY want it to animate once
+                entry.target.classList.remove('reveal');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.why-item, .get-started-header').forEach(el => {
+        observer.observe(el);
+    });
+});
+    </script>
 </body>
     </html>
