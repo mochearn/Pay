@@ -1275,6 +1275,215 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 1000);
     })();
     </script>
-</section>
+ </section>
+    <section class="cbf-faq-section">
+    <div class="faq-header">
+        <h2>Got Questions? <br><span>We Have Answers.</span></h2>
+    </div>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <button class="faq-question">Is this for everyone? <span class="arrow">❯</span></button>
+            <div class="faq-answer">
+                <p>Yes! As long as you have a smartphone and a stable internet connection, you can succeed with the CBF system regardless of your background.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How soon can I start? <span class="arrow">❯</span></button>
+            <div class="faq-answer">
+                <p>Immediately! Once your registration is verified, you get instant access to the portal and support materials.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Do I need a laptop? <span class="arrow">❯</span></button>
+            <div class="faq-answer">
+                <p>Not at all. The entire CBF system is optimized for mobile users. You can do everything 100% on your phone.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Is my location a barrier? <span class="arrow">❯</span></button>
+            <div class="faq-answer">
+                <p>No. Whether you are in Lagos, Kano, or a rural area in Nigeria, the system works perfectly as long as you have network.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">What if I get stuck? <span class="arrow">❯</span></button>
+            <div class="faq-answer">
+                <p>We have a dedicated support team and a community of members ready to guide you through any challenge you face.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-trigger-wrapper">
+        <button id="toggle-contact-btn" class="toggle-btn">Question not listed? Click to type ✍️</button>
+        
+        <div id="contact-bar" class="hidden-contact-bar">
+            <form id="cbf-contact-form">
+                <div class="input-group">
+                    <input type="email" id="user-email" placeholder="Your Email" required title="This is your registered email">
+                    <input type="text" id="user-question" placeholder="Type your quick question here..." required>
+                    <button type="submit" class="send-btn">Send</button>
+                </div>
+            </form>
+            <p id="success-msg" class="success-text">Message sent! We will reply to your email shortly.</p>
+        </div>
+    </div>
+
+    <style>
+        .cbf-faq-section {
+            background: #ffffff !important;
+            padding: 60px 20px 100px 20px !important;
+            font-family: 'Poppins', sans-serif !important;
+        }
+        .faq-header { text-align: center; margin-bottom: 40px; }
+        .faq-header h2 { font-weight: 900; font-size: 26px; color: #000; text-transform: uppercase; }
+        .faq-header span { color: #00ff2d; }
+
+        .faq-container { max-width: 500px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #f0f0f0; margin-bottom: 5px; }
+        
+        .faq-question {
+            width: 100%;
+            padding: 20px 10px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: left;
+            cursor: pointer;
+            color: #222;
+        }
+
+        .arrow { color: #00ff2d; transition: transform 0.3s; font-size: 12px; }
+        .faq-item.active .arrow { transform: rotate(90deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 10px;
+        }
+        .faq-answer p { padding-bottom: 20px; color: #666; font-size: 14px; line-height: 1.6; }
+        .faq-item.active .faq-answer { max-height: 200px; }
+
+        /* CONTACT BAR STYLES */
+        .contact-trigger-wrapper {
+            margin-top: 40px;
+            text-align: center;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: 2px dashed #00ff2d;
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover { background: #f0fff4; }
+
+        .hidden-contact-bar {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+            opacity: 0;
+            margin-top: 20px;
+        }
+
+        .hidden-contact-bar.show {
+            max-height: 150px;
+            opacity: 1;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+        }
+
+        #user-email, #user-question {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        #user-email { background: #eee; font-weight: 600; color: #555; }
+
+        .send-btn {
+            background: #00ff2d;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .success-text {
+            color: #008f1a;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+
+    <script>
+        // Toggle Logic for Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Toggle Logic for Contact Bar
+        const toggleBtn = document.getElementById('toggle-contact-btn');
+        const contactBar = document.getElementById('contact-bar');
+        const emailInput = document.getElementById('user-email');
+
+        toggleBtn.addEventListener('click', () => {
+            contactBar.classList.toggle('show');
+            
+            // AUTOFILL LOGIC
+            // Looks for the email saved from our future pop-up
+            const savedEmail = localStorage.getItem('cbf_user_email'); 
+            if (savedEmail) {
+                emailInput.value = savedEmail;
+            }
+        });
+
+        // Form Submission (Simulated)
+        document.getElementById('cbf-contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('success-msg').style.display = 'block';
+            setTimeout(() => {
+                contactBar.classList.remove('show');
+                document.getElementById('cbf-contact-form').reset();
+                document.getElementById('success-msg').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+    </section>
 </body>
     </html>
