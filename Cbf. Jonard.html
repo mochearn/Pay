@@ -1558,7 +1558,7 @@ document.addEventListener("DOMContentLoaded", function() {
     cursor: grab; 
     display: flex; 
     align-items: center; /* This keeps everything centered vertically */
-    width: 200px; 
+    width: 170px; 
     height: 55px; /* THIS IS THE FIXED HEIGHT UPDATE */
     border: 2px solid #00ff2d;
     transition: transform 0.5s ease, opacity 0.4s, left 0.3s ease;
@@ -1572,12 +1572,35 @@ document.addEventListener("DOMContentLoaded", function() {
     .p-icon-box svg { width: 18px; height: 18px; }
 
     .p-content { display: flex; align-items: center; gap: 5px; width: 100%; margin-left: 5px; }
-    
-    .p-msg-box { background: #f9f9f9; padding: 6px 10px; border-radius: 6px; flex-grow: 1; }
-    #p-msg { font-family: 'Poppins', sans-serif; font-size: 10px; color: #000; font-weight: 600; line-height: 1.2; }
+    /* UPDATE THESE SECTIONS IN YOUR CSS */
 
+.p-msg-box { 
+    background: #f9f9f9; 
+    padding: 4px 8px; /* Reduced padding to give text more room */
+    border-radius: 6px; 
+    flex-grow: 1; 
+    display: flex;
+    align-items: center; /* Keeps text centered in its own little box */
+    height: 35px; /* Fixed height for the inner text box too */
+}
+
+#p-msg { 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 9.5px; /* Made it smaller so "L.G Coordinator" fits */
+    color: #000; 
+    font-weight: 600; 
+    line-height: 1.1; /* Tighter line spacing so 2 lines don't overflow */
+    margin: 0;
+}
+
+.p-loc-text { 
+    font-size: 8px; /* Slightly smaller to match the sleek vibe */
+    font-weight: 900; 
+    color: #666; 
+    text-transform: uppercase; 
+    white-space: nowrap; 
+    }
     .p-divider { width: 1.5px; height: 20px; background: #00ff2d; }
-    .p-loc-text { font-size: 9px; font-weight: 900; color: #666; text-transform: uppercase; white-space: nowrap; }
 </style>
 
 <script>
@@ -1586,7 +1609,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const loc = document.getElementById('p-loc');
 
     const cbfPlans = [
-        "Starter (100k)", "Recipient (20k)", "Bundle Head (50k)", 
+        "Starter (10k)", "Recipient (20k)", "Bundle Head (50k)", 
         "L.G Coordinator (100k)", "State Coordinator (300k)"
     ];
     
