@@ -1530,5 +1530,137 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     </script>
     </section>
+    <div id="live-pulse-container" class="pulse-card">
+    <div class="pulse-content">
+        <div class="pulse-status-dot"></div>
+        <div class="pulse-text-area">
+            <p id="pulse-msg">Checking live batch...</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* THE CARD STYLE */
+    .pulse-card {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: #ffffff;
+        padding: 12px 20px;
+        border-radius: 12px;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); /* Deep Shadow to pop */
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #f0f0f0;
+        max-width: 280px;
+    }
+
+    /* THE TEXT STYLE (TINY & BLACK) */
+    .pulse-text-area p {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px; /* Sleek/Tiny */
+        color: #000000;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    /* THE LIVE DOT */
+    .pulse-status-dot {
+        width: 8px;
+        height: 8px;
+        background: #00ff2d;
+        border-radius: 50%;
+        margin-right: 12px;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .pulse-status-dot::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #00ff2d;
+        border-radius: 50%;
+        animation: pulse-ring 1.5s infinite;
+    }
+
+    @keyframes pulse-ring {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* THE BUBBLE PHASE (COLLAPSED) */
+    .pulse-card.collapsed {
+        top: auto;
+        bottom: 30px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .pulse-card.collapsed .pulse-text-area {
+        display: none;
+    }
+
+    .pulse-card.collapsed .pulse-status-dot {
+        margin: 0;
+    }
+</style>
+
+<script>
+    const pulseContainer = document.getElementById('live-pulse-container');
+    const pulseMsg = document.getElementById('pulse-msg');
+    
+    const nigerianNames = ["Chidi", "Tunde", "Amina", "Emeka", "Fatima", "Okon", "Blessing", "Yinka", "Ibrahim", "Nneka"];
+    const nigerianCities = ["Lagos", "Abuja", "Port Harcourt", "Osogbo", "Ibadan", "Enugu", "Kano", "Benin City"];
+
+    let displayCount = 0;
+    let maxNotifications = 4; // Number of names before it collapses
+
+    function showNextNotification() {
+        if (displayCount < maxNotifications) {
+            // Pick random details
+            const name = nigerianNames[Math.floor(Math.random() * nigerianNames.length)];
+            const city = nigerianCities[Math.floor(Math.random() * nigerianCities.length)];
+            
+            // Slide Out
+            pulseContainer.style.opacity = "0";
+            pulseContainer.style.transform = "translateX(-20px)";
+
+            setTimeout(() => {
+                if (displayCount === 2) {
+                    // Show User Shoutout at the 3rd spot
+                    pulseMsg.innerHTML = "You are currently being added to the CBF queue...";
+                } else {
+                    pulseMsg.innerHTML = `<strong>${name}</strong> from ${city} just joined the batch.`;
+                }
+                
+                // Slide In
+                pulseContainer.style.opacity = "1";
+                pulseContainer.style.transform = "translateX(0)";
+                displayCount++;
+            }, 600);
+        } else {
+            // PHASE 3: COLLAPSE TO BUBBLE
+            setTimeout(() => {
+                pulseContainer.classList.add('collapsed');
+            }, 3000);
+            clearInterval(notificationInterval);
+        }
+    }
+
+    // Start the cycle
+    const notificationInterval = setInterval(showNextNotification, 5000);
+    // Initial call
+    showNextNotification();
+</script>
 </body>
     </html>
