@@ -1586,7 +1586,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 #p-msg { 
     font-family: 'Poppins', sans-serif; 
-    font-size: 7.5px; /* Made it smaller so "L.G Coordinator" fits */
+    font-size: 6.5px; /* Made it smaller so "L.G Coordinator" fits */
     color: #000; 
     font-weight: 600; 
     line-height: 1.1; /* Tighter line spacing so 2 lines don't overflow */
@@ -1706,10 +1706,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     setInterval(showPayment, 7000); // 7 seconds per alert
 </script>
-    <footer class="cbf-footer">
-    <div class="footer-container">
-        <h2 class="footer-brand">CENTRAL BUREAU FUND</h2>
-        
+
         <div class="footer-action">
             <p>Ready to start your journey?</p>
             <a href="#secure-your-spot" class="footer-btn">SECURE YOUR SPOT NOW</a>
@@ -1722,16 +1719,42 @@ document.addEventListener("DOMContentLoaded", function() {
 </footer>
 
 <style>
-    .cbf-footer {
-        background: #000000; /* Deep Black for that Elite finish */
-        padding: 80px 20px 40px 20px;
-        text-align: center;
-        color: #ffffff;
-        font-family: 'Poppins', sans-serif;
-        border-top: 2px solid #00ff2d; /* Subtle green line to separate from page */
-    }
+    /* 1. REDUCE FOOTER HEIGHT */
+.cbf-footer {
+    background: #000000;
+    padding: 40px 20px 20px 20px; /* Reduced from 80px to 40px at the top */
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    border-top: 2px solid #00ff2d;
+}
 
-    .footer-container {
+/* 2. MOVE THE BUTTON DOWN */
+.footer-action {
+    margin-top: 20px; /* This pushes the whole action area down from the title */
+}
+
+.footer-btn {
+    display: inline-block;
+    background: #00ff2d;
+    color: #000;
+    padding: 14px 35px; /* Made the button slightly slimmer to match */
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 13px;
+    margin-top: 15px; /* THIS pushes the button specifically away from the text above it */
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 255, 45, 0.3);
+}
+
+/* 3. TIGHTEN THE BOTTOM SPACE */
+.footer-bottom {
+    margin-top: 30px; /* Reduced from 60px to 30px */
+    border-top: 1px solid #222;
+    padding-top: 15px;
+    }
+.footer-container {
         max-width: 800px;
         margin: 0 auto;
     }
@@ -1745,37 +1768,9 @@ document.addEventListener("DOMContentLoaded", function() {
         text-transform: uppercase;
     }
 
-    .footer-action p {
-        font-size: 14px;
-        color: #888;
-        margin-bottom: 15px;
-        font-weight: 500;
-    }
-
-    /* THE PROFESSIONAL ACTION BUTTON */
-    .footer-btn {
-        display: inline-block;
-        background: #00ff2d;
-        color: #000;
-        padding: 18px 40px;
-        border-radius: 50px; /* Capsule shape is more modern/pro */
-        text-decoration: none;
-        font-weight: 900;
-        font-size: 14px;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(0, 255, 45, 0.3);
-    }
-
-    .footer-btn:active {
+.footer-btn:active {
         transform: scale(0.95);
         box-shadow: 0 5px 15px rgba(0, 255, 45, 0.2);
-    }
-
-    .footer-bottom {
-        margin-top: 60px;
-        border-top: 1px solid #222;
-        padding-top: 20px;
     }
 
     .footer-bottom p {
@@ -1783,6 +1778,6 @@ document.addEventListener("DOMContentLoaded", function() {
         color: #555;
         letter-spacing: 1px;
     }
-            </style>
+</style>
 </body>
     </html>
