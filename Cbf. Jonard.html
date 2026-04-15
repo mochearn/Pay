@@ -1059,147 +1059,222 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
     </script>
-    <style>
-    .fomo-section {
-    background: #0a1a0f !important; /* DARK LUXURY GREEN */
-    padding: 80px 20px !important;
-    text-align: center !important;
-    font-family: 'Poppins', sans-serif !important;
-    color: #ffffff !important;
-}
-
-.fomo-badge {
-    background: rgba(0, 255, 45, 0.2) !important;
-    color: #00ff2d !important;
-    padding: 8px 15px !important;
-    border-radius: 50px !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    display: inline-block !important;
-    margin-bottom: 20px !important;
-    border: 1px solid rgba(0, 255, 45, 0.3) !important;
-}
-
-.fomo-section h2 {
-    font-weight: 900 !important;
-    font-size: 28px !important;
-    margin-bottom: 15px !important;
-    line-height: 1.2 !important;
-}
-
-.fomo-section p {
-    color: #a0a0a0 !important;
-    font-size: 15px !important;
-    max-width: 300px !important;
-    margin: 0 auto 40px auto !important;
-}
-
-/* THE TIMER DESIGN */
-.countdown-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 15px !important;
-    margin-bottom: 50px !important;
-}
-
-.time-box {
-    text-align: center !important;
-}
-
-.time-box span {
-    display: block !important;
-    font-size: 35px !important;
-    font-weight: 900 !important;
-    color: #00ff2d !important;
-    text-shadow: 0 0 15px rgba(0, 255, 45, 0.4) !important;
-}
-
-.time-box label {
-    font-size: 10px !important;
-    text-transform: uppercase !important;
-    color: #777 !important;
-    letter-spacing: 1px !important;
-}
-
-.time-divider {
-    font-size: 30px !important;
-    font-weight: 900 !important;
-    color: #333 !important;
-    padding-bottom: 20px !important;
-}
-
-/* THE PULSING BUTTON */
-.secure-btn {
-    width: 100% !important;
-    max-width: 300px !important;
-    padding: 18px !important;
-    background: #00ff2d !important;
-    color: #000 !important;
-    border: none !important;
-    border-radius: 15px !important;
-    font-weight: 900 !important;
-    font-size: 16px !important;
-    text-transform: uppercase !important;
-    cursor: pointer !important;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0, 255, 45, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(0, 255, 45, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 255, 45, 0); }
-}
-
-.pulse-effect {
-    animation: pulse 2s infinite !important;
-}
-    </style>
-    <section class="fomo-section">
-    <div class="fomo-content animate-fomo">
-        <div class="fomo-badge">⚠️ Limited Opportunity</div>
-        <h2>Limited Slots Available for This Batch</h2>
-        <p>Registration is closing fast. Secure your spot before the portal shuts down for this month.</p>
+ <section class="fomo-section">
+    <div class="fomo-content">
+        <div class="fomo-badge">⚠️ Limited Batch Access</div>
+        <h2>Secure Your Spot Before The Portal Closes</h2>
         
-        <div class="countdown-container">
+        <div class="progress-wrapper">
+            <div class="progress-bar" id="fomo-progress"></div>
+        </div>
+
+        <div class="countdown-container" id="timer-display">
             <div class="time-box">
-                <span id="hours">05</span>
+                <span id="days">07</span>
+                <label>Days</label>
+            </div>
+            <div class="time-divider">:</div>
+            <div class="time-box">
+                <span id="hours">00</span>
                 <label>Hours</label>
             </div>
             <div class="time-divider">:</div>
             <div class="time-box">
-                <span id="minutes">42</span>
+                <span id="minutes">00</span>
                 <label>Mins</label>
             </div>
             <div class="time-divider">:</div>
             <div class="time-box">
-                <span id="seconds">18</span>
+                <span id="seconds">00</span>
                 <label>Secs</label>
             </div>
         </div>
 
-        <button class="secure-btn pulse-effect">Secure Your Slots Now</button>
+        <p id="fomo-msg">Your personalized registration window is active. Act now to join the current batch.</p>
+
+        <button id="fomo-btn" class="secure-btn glow-heartbeat">Secure Your Slot Now</button>
     </div>
-    </section>
-    <script>
-function startTimer() {
-    let hours = 5, minutes = 42, seconds = 18;
-    
-    setInterval(() => {
-        seconds--;
-        if (seconds < 0) { seconds = 59; minutes--; }
-        if (minutes < 0) { minutes = 59; hours--; }
-        
-        document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
-        
-        if (hours === 0 && minutes === 0 && seconds === 0) {
-            // Reset to keep fomo alive or show "Expired"
-            hours = 12; 
+
+    <style>
+        .fomo-section {
+            background: #050a06 !important; /* DEEP DARK GREEN */
+            padding: 80px 20px !important;
+            text-align: center !important;
+            font-family: 'Poppins', sans-serif !important;
+            color: #ffffff !important;
+            overflow: hidden;
         }
-    }, 1000);
-}
-startTimer();
+
+        .fomo-badge {
+            background: rgba(0, 255, 45, 0.15) !important;
+            color: #00ff2d !important;
+            padding: 8px 18px !important;
+            border-radius: 50px !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            display: inline-block !important;
+            margin-bottom: 25px !important;
+            border: 1px solid rgba(0, 255, 45, 0.3) !important;
+            letter-spacing: 1px;
+        }
+
+        .fomo-section h2 {
+            font-weight: 900 !important;
+            font-size: 24px !important;
+            margin-bottom: 30px !important;
+            text-transform: uppercase !important;
+            line-height: 1.2 !important;
+        }
+
+        /* PROGRESS BAR STYLES */
+        .progress-wrapper {
+            width: 100%;
+            max-width: 320px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 0 auto 45px auto;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 100%; 
+            height: 100%;
+            background: #00ff2d;
+            box-shadow: 0 0 15px rgba(0, 255, 45, 0.5);
+            transition: width 1s linear;
+        }
+
+        /* THE COUNTDOWN BOXES */
+        .countdown-container {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 10px !important;
+            margin-bottom: 40px !important;
+        }
+
+        .time-box {
+            text-align: center !important;
+            min-width: 60px;
+        }
+
+        .time-box span {
+            display: block !important;
+            font-size: 28px !important;
+            font-weight: 900 !important;
+            color: #00ff2d !important;
+            text-shadow: 0 0 10px rgba(0, 255, 45, 0.3) !important;
+        }
+
+        .time-box label {
+            font-size: 9px !important;
+            color: #888 !important;
+            text-transform: uppercase !important;
+            font-weight: 600;
+        }
+
+        .time-divider {
+            font-size: 24px !important;
+            color: #333 !important;
+            font-weight: 900 !important;
+            padding-bottom: 15px !important;
+        }
+
+        .fomo-section p {
+            color: #a0a0a0 !important;
+            font-size: 14px !important;
+            max-width: 300px !important;
+            margin: 0 auto 40px auto !important;
+            line-height: 1.5;
+        }
+
+        /* THE SOFT HEARTBEAT GLOW BUTTON */
+        .secure-btn {
+            width: 100% !important;
+            max-width: 320px !important;
+            padding: 20px !important;
+            background: #00ff2d !important;
+            color: #000 !important;
+            border-radius: 15px !important;
+            font-weight: 900 !important;
+            font-size: 16px !important;
+            text-transform: uppercase !important;
+            border: none !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes heartbeat {
+            0% { background: #00ff2d; transform: scale(1); box-shadow: 0 0 5px rgba(0, 255, 45, 0.2); }
+            50% { background: #33ff5c; transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 255, 45, 0.4); }
+            100% { background: #00ff2d; transform: scale(1); box-shadow: 0 0 5px rgba(0, 255, 45, 0.2); }
+        }
+
+        .glow-heartbeat {
+            animation: heartbeat 3s infinite ease-in-out !important;
+        }
+
+        .btn-closed {
+            background: #333 !important;
+            color: #777 !important;
+            cursor: not-allowed !important;
+            animation: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+
+    <script>
+    (function init7DayTimer() {
+        const duration = 7 * 24 * 60 * 60 * 1000; 
+        let startTime = localStorage.getItem('jSystemStartTime');
+
+        if (!startTime) {
+            startTime = new Date().getTime();
+            localStorage.setItem('jSystemStartTime', startTime);
+        }
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = (parseInt(startTime) + duration) - now;
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minsEl = document.getElementById('minutes');
+            const secsEl = document.getElementById('seconds');
+            const progressEl = document.getElementById('fomo-progress');
+            const btnEl = document.getElementById('fomo-btn');
+            const msgEl = document.getElementById('fomo-msg');
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('timer-display').innerHTML = "<span style='color:#ff4444; font-size: 24px; font-weight:900;'>BATCH CLOSED</span>";
+                progressEl.style.width = "0%";
+                progressEl.style.background = "#ff4444";
+                msgEl.innerText = "You missed the window for this batch. Wait for the next opening.";
+                btnEl.innerText = "BATCH CLOSED - JOIN WAITLIST";
+                btnEl.classList.add('btn-closed');
+                return;
+            }
+
+            // Time Calculations
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update DOM
+            if(daysEl) daysEl.innerText = d.toString().padStart(2, '0');
+            if(hoursEl) hoursEl.innerText = h.toString().padStart(2, '0');
+            if(minsEl) minsEl.innerText = m.toString().padStart(2, '0');
+            if(secsEl) secsEl.innerText = s.toString().padStart(2, '0');
+
+            // Update Progress Bar
+            const percent = (distance / duration) * 100;
+            if(progressEl) progressEl.style.width = percent + "%";
+        }, 1000);
+    })();
     </script>
+</section>
 </body>
     </html>
