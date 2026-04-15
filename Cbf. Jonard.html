@@ -1530,210 +1530,150 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     </script>
     </section>
-    <div id="cbf-tracker" class="tracker-card">
-    <div id="tracker-main-ui" class="tracker-inner">
-        <div id="icon-box" class="icon-side">
-            <svg id="dynamic-icon" viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="8.5" cy="7" r="4"></circle>
-                <line x1="20" y1="8" x2="20" y2="14"></line>
-                <line x1="23" y1="11" x2="17" y2="11"></line>
-            </svg>
-        </div>
-
-        <div class="content-side">
-            <div id="text-container" class="msg-box">
-                <span id="tracker-msg">Connecting to CBF...</span>
-            </div>
-            <div id="payment-divider" class="v-line"></div>
-            <div id="location-box" class="loc-text"></div>
-        </div>
+<div id="cbf-payment-tracker" class="p-tracker-card hidden">
+    <div class="p-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00ff2d" stroke-width="2.5">
+            <path d="M12 1v22m5-18H7a3 3 0 0 0 0 6h10a3 3 0 0 1 0 6H7"></path>
+        </svg>
     </div>
-
-    <div id="ticker-box" class="initials-ticker"></div>
+    <div class="p-content">
+        <div class="p-msg-box">
+            <span id="p-msg">Awaiting payment...</span>
+        </div>
+        <div class="p-divider"></div>
+        <div id="p-loc" class="p-loc-text">---</div>
+    </div>
 </div>
 
 <style>
-    /* 1. THE MAIN CARD BASE */
-    .tracker-card {
-        position: fixed; top: 40px; left: 20px;
-        background: #ffffff; padding: 12px 18px;
-        border-radius: 14px; box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    .p-tracker-card {
+        position: fixed; top: 100px; left: 15px;
+        background: #ffffff; padding: 10px 15px;
+        border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         z-index: 10000; cursor: grab; display: flex; align-items: center;
-        width: 300px; border: 1px solid #eee;
-        transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s, width 0.4s, height 0.4s;
+        width: 260px; /* Smaller as requested */
+        border: 2px solid #00ff2d;
+        transition: transform 0.5s ease, opacity 0.4s, left 0.3s ease;
+        touch-action: none; /* Prevents screen scrolling on mobile */
     }
 
-    .tracker-card.off-screen { transform: translateX(-400px); opacity: 0; }
-    .tracker-card:active { cursor: grabbing; }
+    .p-tracker-card.hidden { opacity: 0; transform: translateX(-300px); pointer-events: none; }
+    .p-tracker-card:active { cursor: grabbing; scale: 0.98; }
 
-    /* 2. THE INNER LAYOUT */
-    .tracker-inner { display: flex; align-items: center; width: 100%; gap: 12px; }
+    .p-icon-box { width: 30px; height: 30px; background: #e6ffed; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .p-icon-box svg { width: 18px; height: 18px; }
+
+    .p-content { display: flex; align-items: center; gap: 8px; width: 100%; margin-left: 10px; }
     
-    .icon-side { width: 35px; height: 35px; background: #f0fff4; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    #dynamic-icon { width: 20px; height: 20px; }
+    .p-msg-box { background: #f9f9f9; padding: 6px 10px; border-radius: 6px; flex-grow: 1; }
+    #p-msg { font-family: 'Poppins', sans-serif; font-size: 11px; color: #000; font-weight: 600; line-height: 1.2; }
 
-    .content-side { display: flex; align-items: center; gap: 10px; width: 100%; }
-    
-    .msg-box { background: #f5f5f5; padding: 8px 12px; border-radius: 8px; flex-grow: 1; }
-    #tracker-msg { font-family: 'Poppins', sans-serif; font-size: 12px; color: #000; font-weight: 600; }
-
-    /* PAYMENT SPECIFIC STYLES */
-    .v-line { width: 1.5px; height: 25px; background: #00ff2d; display: none; }
-    .loc-text { font-size: 10px; font-weight: 800; color: #666; text-transform: uppercase; display: none; }
-
-    .payment-mode-ui { border: 2px solid #00ff2d !important; }
-    .payment-mode-ui .msg-box { background: #e6ffed; }
-
-    /* 3. COLLAPSED STATE */
-    .tracker-card.collapsed { width: 55px; height: 55px; padding: 0; border-radius: 50%; justify-content: center; }
-    .tracker-card.collapsed .tracker-inner { display: none; }
-    
-    .initials-ticker { 
-        display: none; width: 100%; height: 100%; align-items: center; justify-content: center;
-        font-weight: 900; color: #000; font-size: 18px; overflow: hidden;
-    }
-    
-    .ticker-char { position: absolute; animation: enterWaitExit 3s infinite; opacity: 0; }
-
-    @keyframes enterWaitExit {
-        0% { transform: translateX(30px); opacity: 0; }
-        20% { transform: translateX(0); opacity: 1; }
-        80% { transform: translateX(0); opacity: 1; }
-        100% { transform: translateX(-30px); opacity: 0; }
-    }
-
-    /* 4. DRAG LOGIC POSITIONING */
-    .draggable { touch-action: none; }
+    .p-divider { width: 1.5px; height: 20px; background: #00ff2d; }
+    .p-loc-text { font-size: 9px; font-weight: 900; color: #666; text-transform: uppercase; white-space: nowrap; }
 </style>
 
 <script>
-    const tracker = document.getElementById('cbf-tracker');
-    const msg = document.getElementById('tracker-msg');
-    const ticker = document.getElementById('ticker-box');
-    const iconSide = document.getElementById('icon-box');
-    const vLine = document.getElementById('payment-divider');
-    const locBox = document.getElementById('location-box');
-    const dynamicIcon = document.getElementById('dynamic-icon');
+    const tracker = document.getElementById('cbf-payment-tracker');
+    const msg = document.getElementById('p-msg');
+    const loc = document.getElementById('p-loc');
 
-    const names = ["Chidi", "Tunde", "Amina", "Emeka", "Fatima", "Okon", "Blessing", "Yinka"];
-    const cities = ["Lagos", "Abuja", "PH", "Osogbo", "Kano", "Enugu"];
-    const slots = ["Standard", "Executive", "VIP"];
+    const cbfPlans = [
+        "Starter (100k)", "Recipient (20k)", "Bundle Head (50k)", 
+        "L.G Coordinator (100k)", "State Coordinator (300k)"
+    ];
+    
+    const nigerianNames = ["Abubakar", "Chiamaka", "Damilola", "Efe", "Funke", "Gideon", "Hassan", "Ifeoma", "Jibril", "Kelechi", "Latifat", "Musa", "Ngozi", "Olamide", "Patience", "Quasim", "Rukayat", "Segun", "Titilayo", "Uche", "Victor", "Wale", "Xavier", "Yusuf", "Zainab", "Bose", "Emeka", "Aisha", "Tunde", "Nneka", "Sani", "Bolaji", "Chinelo", "Dayo", "Eniola", "Femi", "Gozie", "Halima", "Idris", "Joy", "Kayode", "Lola", "Mustapha", "Nkiru", "Obinna", "Panshak", "Ronke", "Sikiru", "Tolu", "Umar", "Vivian", "Wasiu", "Yemi", "Zahra", "Kunle", "Amara", "Buchi", "Dada", "Eromosele", "Folake", "Garba", "Hauwa", "Innocent", "Jemila", "Kabiru", "Linda", "Modupe", "Nonso", "Osas", "Precious", "Rahman", "Sade", "Tope", "Usman", "Wura", "Yaro", "Zaka", "Bisi", "Chinedu", "Deola", "Ejiro", "Fadekemi", "Gboyega", "Hammed", "Ikenna", "Jide", "Kemi", "Lucky", "Moji", "Nnamdi", "Oyin", "Paul", "Racheal", "Sesan", "Toyin", "Ufuoma", "Wuraola", "Yakubu", "Zion"];
 
-    let count = 0;
-    let isPaymentMode = false;
-    let isCollapsed = false;
+    const cities = ["Lagos", "Abuja", "PH", "Osogbo", "Ibadan", "Enugu", "Kano", "Jos", "Uyo", "Kaduna"];
 
-    // --- 1. THE IMPROVED DRAG LOGIC ---
-    let offsetX, offsetY;
-    tracker.addEventListener('mousedown', startDrag);
-    tracker.addEventListener('touchstart', startDrag);
+    // 1. SMART NAME ROTATION (Session Storage)
+    let usedNames = JSON.parse(sessionStorage.getItem('cbf_used_names')) || [];
+    
+    function getUniqueName() {
+        let available = nigerianNames.filter(n => !usedNames.includes(n));
+        if (available.length === 0) {
+            usedNames = []; // Reset if all 100 used
+            available = nigerianNames;
+        }
+        let picked = available[Math.floor(Math.random() * available.length)];
+        usedNames.push(picked);
+        sessionStorage.setItem('cbf_used_names', JSON.stringify(usedNames));
+        return picked;
+    }
+
+    // 2. MAGNETIC DRAG LOGIC
+    let isDragging = false;
+    let startX, startY;
 
     function startDrag(e) {
-        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-        offsetX = clientX - tracker.offsetLeft;
-        offsetY = clientY - tracker.offsetTop;
-        document.addEventListener('mousemove', dragMove);
-        document.addEventListener('touchmove', dragMove);
-        document.addEventListener('mouseup', stopDrag);
-        document.addEventListener('touchend', stopDrag);
+        isDragging = true;
+        const event = e.type === 'touchstart' ? e.touches[0] : e;
+        startX = event.clientX - tracker.offsetLeft;
+        startY = event.clientY - tracker.offsetTop;
+        tracker.style.transition = "none"; // Fast movement
     }
 
-    function dragMove(e) {
-        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-        // Logic to keep out of middle could be added here, but following user move:
-        tracker.style.left = (clientX - offsetX) + 'px';
-        tracker.style.top = (clientY - offsetY) + 'px';
-        tracker.style.bottom = 'auto';
+    function doDrag(e) {
+        if (!isDragging) return;
+        e.preventDefault(); // STOPS BACKGROUND SCROLLING
+        const event = e.type === 'touchmove' ? e.touches[0] : e;
+        tracker.style.left = (event.clientX - startX) + 'px';
+        tracker.style.top = (event.clientY - startY) + 'px';
     }
 
-    function stopDrag() {
-        document.removeEventListener('mousemove', dragMove);
-        document.removeEventListener('touchmove', dragMove);
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        tracker.style.transition = "all 0.3s ease";
+        
+        // MAGNETIC EDGES: If dropped in middle, snap to side
+        const screenWidth = window.innerWidth;
+        const trackerPos = tracker.getBoundingClientRect().left + (tracker.offsetWidth / 2);
+        
+        if (trackerPos < screenWidth / 2) {
+            tracker.style.left = "15px";
+        } else {
+            tracker.style.left = (screenWidth - tracker.offsetWidth - 15) + "px";
+        }
     }
 
-    // --- 2. NOTIFICATION SYSTEM (CARD SLIDES IN/OUT) ---
-    function updateNotification() {
-        if (isCollapsed && !isPaymentMode) return; // Wait if collapsed
+    tracker.addEventListener('mousedown', startDrag);
+    tracker.addEventListener('touchstart', startDrag);
+    document.addEventListener('mousemove', doDrag);
+    document.addEventListener('touchmove', doDrag, { passive: false });
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
 
-        tracker.classList.add('off-screen'); // Slide out first
+    // 3. PAYMENT ALERTS LOGIC
+    function showPayment() {
+        tracker.style.opacity = "0";
+        tracker.style.transform = "scale(0.8)";
 
         setTimeout(() => {
-            const name = names[Math.floor(Math.random() * names.length)];
+            const name = getUniqueName();
+            const plan = cbfPlans[Math.floor(Math.random() * cbfPlans.length)];
             const city = cities[Math.floor(Math.random() * cities.length)];
 
-            if (isPaymentMode) {
-                const slot = slots[Math.floor(Math.random() * slots.length)];
-                msg.innerHTML = `<strong>${name}</strong> secured <strong>${slot}</strong>`;
-                locBox.innerText = city;
-                // Payment Mode Design
-                vLine.style.display = "block";
-                locBox.style.display = "block";
-                tracker.classList.add('payment-mode-ui');
-                // Change icon to money/check
-                dynamicIcon.innerHTML = '<path d="M12 1v22m5-18H7a3 3 0 0 0 0 6h10a3 3 0 0 1 0 6H7"></path>';
-            } else {
-                if (count === 2) {
-                    msg.innerHTML = "You are now being queued...";
-                } else {
-                    msg.innerHTML = `<strong>${name}</strong> just joined the batch.`;
-                }
-            }
+            msg.innerHTML = `<strong>${name}</strong> secured <strong>${plan}</strong>`;
+            loc.innerText = city;
 
-            tracker.classList.remove('off-screen'); // Slide back in with new data
-            count++;
-
-            // Handle collapsing logic
-            if (count === 5 && !isPaymentMode) {
-                setTimeout(collapseToCircle, 4000);
-            }
-        }, 600);
+            tracker.style.opacity = "1";
+            tracker.style.transform = "scale(1)";
+        }, 500);
     }
 
-    function collapseToCircle() {
-        tracker.classList.add('collapsed');
-        ticker.style.display = "flex";
-        isCollapsed = true;
-        startInitialsTicker();
-    }
-
-    function startInitialsTicker() {
-        setInterval(() => {
-            const n = names[Math.floor(Math.random() * names.length)];
-            ticker.innerHTML = `<span class="ticker-char">${n[0]}</span>`;
-        }, 3000); // 3 seconds per letter (Enter, Wait, Move)
-    }
-
-    // --- 3. SCROLL & CLICK EVENTS ---
-    window.onscroll = function() {
-        const section = document.getElementById('secure-your-spot');
-        if (section) {
-            const rect = section.getBoundingClientRect();
+    // 4. SCROLL DETECTION
+    window.addEventListener('scroll', () => {
+        const target = document.getElementById('secure-your-spot');
+        if (target) {
+            const rect = target.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                if (!isPaymentMode) {
-                    isPaymentMode = true;
-                    tracker.classList.remove('collapsed');
-                    ticker.style.display = "none";
-                    isCollapsed = false;
-                    count = 0; // Restart for payment alerts
-                }
+                tracker.classList.remove('hidden');
             }
         }
-    };
+    });
 
-    tracker.onclick = () => {
-        if (isCollapsed) {
-            tracker.classList.remove('collapsed');
-            ticker.style.display = "none";
-            isCollapsed = false;
-            setTimeout(collapseToCircle, 6000);
-        }
-    };
-
-    setInterval(updateNotification, 6000);
-    updateNotification();
-    </script>
+    setInterval(showPayment, 7000); // 7 seconds per alert
+</script>
 </body>
     </html>
