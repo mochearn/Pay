@@ -7,6 +7,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
 <style>
+    .action-btn {
+    border-radius: 12px !important; /* Forces the 12px look */
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* The Spinner Animation */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #00ff2d; /* CBF Green */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.dimmed {
+    opacity: 0.7;
+    cursor: not-allowed;
+    }
     :root {
         --bureau-blue: #001f3f;
         --action-green: #00c853;
