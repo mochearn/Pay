@@ -357,67 +357,64 @@
 </section>
 
 <style>
+    /* THE CORE STYLE - CLEAN & BOLD */
     .white-zone {
         background-color: #ffffff;
-        padding: 80px 20px;
+        padding: 60px 20px;
         text-align: center;
-        /* Comic Sans throughout */
-        font-family: "Comic Sans MS", "Comic Sans", cursive;
+        /* Using a clean, heavy font stack for maximum readability */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        color: #000000;
+    }
+
+    .cb-text {
+        /* This makes it thick like the picture */
+        font-weight: 800; 
+        font-size: 1.3rem;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        letter-spacing: -0.5px; /* Keeps words tight and readable */
+    }
+
+    /* HIGHLIGHT STYLE 1: Green Text (Clear & Bold) */
+    .text-highlight {
+        color: #00a000;
+        font-weight: 900;
+    }
+
+    /* HIGHLIGHT STYLE 2: Green Background Box (Solid & Readable) */
+    .bg-highlight {
+        background-color: #00ff2d; 
+        padding: 0px 8px;
+        display: inline-block; /* Makes the green box look solid */
+        color: #000;
+        font-weight: 900;
+    }
+
+    /* BATCH HEADERS - Big and Clear */
+    .batch-header {
+        display: inline-block;
+        background: #000;
+        color: #fff;
+        padding: 10px 20px;
+        font-weight: 900;
+        margin-bottom: 30px;
+        font-size: 1rem;
+        border-radius: 4px;
     }
 
     .directive-block {
-        margin-bottom: 70px; /* Big space between each Batch Directive */
+        margin-bottom: 80px;
         opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.7s ease-out;
+        transform: translateY(20px);
+        transition: all 0.6s ease-in-out;
     }
 
-    /* The Batch Flag Headers */
-    .batch-flag {
-        display: inline-block;
-        font-weight: 900;
-        font-size: 0.9rem;
-        color: white;
-        padding: 8px 15px;
-        border-radius: 5px;
-        margin-bottom: 25px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    /* Specific Colors for Flags (Keeps it clean and professional) */
-    .flag-mission { background-color: #000; }
-    .flag-income { background-color: #008800; }
-    .flag-elite { background-color: #ccaa00; /* Subtle Gold for Elite */ }
-    .flag-action { background-color: #aa0000; /* Serious Red for Action */ }
-
-    .cb-text {
-        font-size: 1.25rem;
-        line-height: 1.7;
-        margin-bottom: 20px; /* One line space */
-        color: #000; /* Black throughout */
-    }
-
-    /* Style 1: Green Highlighted Text */
-    .text-green {
-        color: #00aa00;
-        font-weight: bold;
-    }
-
-    /* Style 2: Green Background Box under Text */
-    .bg-green {
-        background-color: rgba(0, 170, 0, 0.15); /* Light translucent green */
-        border-radius: 4px;
-        padding: 2px 6px;
-        font-weight: bold;
-    }
-
-    /* Animation Class when scrolled */
     .reveal {
         opacity: 1 !important;
         transform: translateY(0) !important;
     }
-</style>
+    </style>
 
 <script>
     // Pure Scroll Reveal logic
