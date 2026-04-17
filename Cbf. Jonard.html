@@ -328,6 +328,65 @@
 
 })(); // This closes the main brain properly
     </script>
+    <section class="white-zone">
+    <p class="cb-text color-blue">The Central Bureau Fund was created to give you the capital you deserve today.</p>
+    <p class="cb-text color-black">We move money from big reserves directly into the hands of the elite participants.</p>
+    
+    <p class="cb-text color-green">Apart from your main disbursement you can withdraw fresh money every single week now.</p>
+    <p class="cb-text color-green">You will enjoy consistent weekly payouts without ever touching your own personal real savings.</p>
+    
+    <p class="cb-text color-purple">You can decide to use your disbursement money to travel abroad to places like Dubai.</p>
+    <p class="cb-text color-purple">Participants also qualify for gifted cars and the brand new latest luxury iPhone seventeen.</p>
+    
+    <p class="cb-text color-red">Our system bypasses the slow bank process to secure your five hundred thousand grant.</p>
+    <p class="cb-text color-red">Take action immediately to ensure your identity is synced with the latest fund release.</p>
+</section>
+
+<style>
+    .white-zone {
+        background-color: #ffffff;
+        padding: 60px 20px;
+        text-align: center;
+        font-family: "Comic Sans MS", "Comic Sans", cursive;
+    }
+
+    .cb-text {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 25px; /* Creates that one-line space */
+        opacity: 0; /* Starts hidden for animation */
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+    }
+
+    /* Colors */
+    .color-blue { color: #0044ff; font-weight: bold; }
+    .color-black { color: #000000; }
+    .color-green { color: #008800; font-weight: bold; }
+    .color-purple { color: #8800ff; }
+    .color-red { color: #ff0000; font-weight: bold; }
+
+    /* Animation Class when scrolled into view */
+    .reveal {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+</style>
+
+<script>
+    // Simple Scroll Animation Logic
+    window.addEventListener('scroll', () => {
+        const texts = document.querySelectorAll('.cb-text');
+        const triggerBottom = window.innerHeight / 5 * 4;
+
+        texts.forEach(text => {
+            const textTop = text.getBoundingClientRect().top;
+            if(textTop < triggerBottom) {
+                text.classList.add('reveal');
+            }
+        });
+    });
+    </script>
 <style>
 .evidence-section {
     padding: 0px !important; /* Removes the gap between ticker and card */
