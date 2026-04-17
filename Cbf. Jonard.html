@@ -1836,55 +1836,51 @@ document.addEventListener("DOMContentLoaded", function() {
     .input-field { margin-bottom: 15px; text-align: left; }
     .input-field input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
     .popup-btn { width: 100%; background: #00ff2d; color: #000; padding: 16px; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; }
-/* Fix for the country list on mobile screens */
-.iti__country-list {
-    z-index: 1000000 !important; 
-    position: absolute !important;
-    max-height: 200px;
-    width: 300px; /* Wider for easy tapping with thumb */
-    overflow-y: auto;
-    background: white;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+/* This forces the country dropdown to the absolute front */
+.iti--allow-dropdown .iti__country-list {
+    z-index: 9999999 !important; 
+    background-color: #ffffff !important;
+    color: #000000 !important;
 }
 
-/* Ensure the popup doesn't jump when the keyboard opens */
-.popup-card {
-    position: relative;
-    margin-bottom: 100px; /* Gives space for the mobile keyboard */
-    }
+/* This fixes the "rotating icon" or loading glitch on mobile */
+.iti__flag-container {
+    z-index: 10 !important;
+}
+
+/* Ensure the popup doesn't block the dropdown */
+#entry-popup {
+    z-index: 99999 !important;
+}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
 <script>
-    // 1. INITIALIZE PHONE INPUT (Mobile Optimized)
     const phoneElement = document.querySelector("#pop-phone");
-    const phoneInput = window.intlTelInput(phoneElement, {
+    const iti = window.intlTelInput(phoneElement, {
         initialCountry: "ng",
         separateDialCode: true,
-        allowDropdown: true, 
-        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js"
+        // This 'dropdownContainer' part is the SECRET. 
+        // It tells the flags to stay INSIDE the popup so they don't get lost behind it.
+        dropdownContainer: document.body, 
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    // 2. FORCE SHOW FOR TESTING (Even if data exists)
-    const popup = document.getElementById('entry-popup');
-    popup.style.setProperty('display', 'flex', 'important');
-
-    // 3. HANDLE FORM SUBMISSION
-    document.getElementById('gateway-form').addEventListener('submit', function(e) {
+    const gatewayForm = document.getElementById('gateway-form');
+    
+    gatewayForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const nameInput = document.getElementById('pop-name').value;
         const emailInput = document.getElementById('pop-email').value;
-        const fullPhone = phoneInput.getNumber();
+        const fullPhone = iti.getNumber(); // Gets the full number with +234
 
-        // Save data to memory (so we can see it in the typewriter)
         localStorage.setItem('cbf_user_name', nameInput);
         localStorage.setItem('cbf_user_email', emailInput);
         localStorage.setItem('cbf_user_phone', fullPhone);
 
-        // Just hide it for now so you can see the page after clicking
-        popup.style.setProperty('display', 'none', 'important');
-        
-        // Refresh to trigger the typewriter with the NEW name
+        // Hide and Refresh
+        document.getElementById('entry-popup').style.display = 'none';
         window.location.reload();
     });
 </script>
