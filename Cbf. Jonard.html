@@ -6,6 +6,7 @@
     <title>CBF | Wealth Migration</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
     <style>
     :root {
         --bureau-blue: #001f3f;
@@ -1836,12 +1837,15 @@ document.addEventListener("DOMContentLoaded", function() {
     .input-field { margin-bottom: 15px; text-align: left; }
     .input-field input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
     .popup-btn { width: 100%; background: #00ff2d; color: #000; padding: 16px; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; }
-/* This forces the country dropdown to the absolute front */
-.iti--allow-dropdown .iti__country-list {
-    z-index: 9999999 !important; 
-    background-color: #ffffff !important;
-    color: #000000 !important;
-}
+/* This ensures the list is visible and on top of the popup */
+.iti { width: 100%; }
+.iti__country-list {
+    z-index: 2000000000 !important; /* Higher than the popup */
+    position: fixed !important; 
+    background: white !important;
+    max-height: 200px;
+    overflow-y: auto;
+    }
 
 /* This fixes the "rotating icon" or loading glitch on mobile */
 .iti__flag-container {
@@ -1854,33 +1858,31 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-
 <script>
     const phoneElement = document.querySelector("#pop-phone");
     const iti = window.intlTelInput(phoneElement, {
         initialCountry: "ng",
         separateDialCode: true,
-        // This 'dropdownContainer' part is the SECRET. 
-        // It tells the flags to stay INSIDE the popup so they don't get lost behind it.
-        dropdownContainer: document.body, 
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    const gatewayForm = document.getElementById('gateway-form');
-    
-    gatewayForm.addEventListener('submit', function(e) {
+    // FORCE SHOW POPUP FOR TESTING
+    const popup = document.getElementById('entry-popup');
+    popup.style.setProperty('display', 'flex', 'important');
+
+    document.getElementById('gateway-form').addEventListener('submit', function(e) {
         e.preventDefault();
         
         const nameInput = document.getElementById('pop-name').value;
         const emailInput = document.getElementById('pop-email').value;
-        const fullPhone = iti.getNumber(); // Gets the full number with +234
+        const fullPhone = iti.getNumber();
 
         localStorage.setItem('cbf_user_name', nameInput);
         localStorage.setItem('cbf_user_email', emailInput);
         localStorage.setItem('cbf_user_phone', fullPhone);
 
-        // Hide and Refresh
-        document.getElementById('entry-popup').style.display = 'none';
+        // Hide and Refresh to update the typewriter
+        popup.style.setProperty('display', 'none', 'important');
         window.location.reload();
     });
 </script>
