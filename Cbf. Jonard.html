@@ -233,7 +233,7 @@
     </svg>
             </a>
     
-    <script>
+<script>
 (function() {
     // 1. PERMANENT TITLE
     const officialTitle = "Elite"; 
@@ -249,24 +249,24 @@
         "Join the Central Bureau Fund."
     ];
 
-    // ... (Your typing animation logic continues here) ...
-})();
+    let sIdx = 0; 
+    let cIdx = 0; 
+    let isDeleting = false; 
+    let timer;
 
-    let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
-
-function type() {
+    function type() {
         const target = document.getElementById("typed-v7");
+        if (!target) return; // Safety check
+        
         const fullText = sentences[sIdx];
 
         if (isDeleting) {
-            // If we hit a tag while deleting, skip past it
             if (fullText.charAt(cIdx - 1) === '>') {
                 cIdx = fullText.lastIndexOf('<', cIdx - 1);
             } else {
                 cIdx--;
             }
         } else {
-            // If we hit a tag while typing, skip past it
             if (fullText.charAt(cIdx) === '<') {
                 cIdx = fullText.indexOf('>', cIdx) + 1;
             } else {
@@ -278,9 +278,6 @@ function type() {
 
         let speed = isDeleting ? 30 : 75;
 
-        // If we are inside a tag, speed up to 0 to make it instant
-        if (!isDeleting && fullText.charAt(cIdx) === '<') speed = 0;
-
         if (!isDeleting && cIdx >= fullText.length) {
             isDeleting = true;
             timer = setTimeout(type, 2000);
@@ -291,34 +288,45 @@ function type() {
         } else {
             timer = setTimeout(type, speed);
         }
-        }
+    }
 
     // BACK BUTTON LOGIC
     window.prevSentence = function() {
         clearTimeout(timer);
-        isDeleting = false; cIdx = 0;
+        isDeleting = false; 
+        cIdx = 0;
         sIdx = (sIdx - 1 + sentences.length) % sentences.length;
         type();
     };
 
+    // Start Typewriter
     type();
-})();
 
-/* IMAGE CYCLE LOGIC (Keep this as is) */
-const imgs = document.querySelectorAll('.showcase-img');
-let current = 0;
-function cycle() {
-    let prev = current;
-    current = (current + 1) % imgs.length;
-    let nextImg = imgs[current];
-    let prevImg = imgs[prev];
-    nextImg.classList.remove('ani-4');
-    void nextImg.offsetWidth; 
-    nextImg.classList.add('ani-4');
-    nextImg.classList.add('active-img');
-    setTimeout(() => { prevImg.classList.remove('active-img'); }, 950);
-}
-setInterval(cycle, 5000);
+    /* IMAGE CYCLE LOGIC */
+    const imgs = document.querySelectorAll('.showcase-img');
+    let current = 0;
+    
+    function cycle() {
+        if (imgs.length === 0) return; // Safety check
+        let prev = current;
+        current = (current + 1) % imgs.length;
+        let nextImg = imgs[current];
+        let prevImg = imgs[prev];
+        
+        nextImg.classList.remove('ani-4');
+        void nextImg.offsetWidth; // Trigger reflow
+        nextImg.classList.add('ani-4');
+        nextImg.classList.add('active-img');
+        
+        setTimeout(() => { 
+            prevImg.classList.remove('active-img'); 
+        }, 950);
+    }
+
+    // Start Image Cycle
+    setInterval(cycle, 5000);
+
+})(); // This closes the main brain properly
     </script>
 <style>
 .evidence-section {
