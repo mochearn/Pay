@@ -268,7 +268,29 @@
 
     <div class="spinner" style="display:none; margin-left:12px;"></div>
             </button>
-    
+    <div id="cbfModal" class="cbf-modal">
+    <div class="modal-content">
+        <div class="modal-header">NODE CONNECTED: REFERRAL VERIFIED</div>
+        <div class="modal-body">
+            This portal has successfully synced your application with the <b>Authorized Officer’s Unique ID</b>. Proceed to the secure checkout ledger.
+        </div>
+        
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="cb1" onchange="validateCheckboxes()">
+                <label for="cb1">I acknowledge this secure referral node handshake.</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="cb2" onchange="validateCheckboxes()">
+                <label for="cb2">I accept all migration terms and compliance risks.</label>
+            </div>
+        </div>
+
+        <button id="finalActionBtn" class="final-btn" onclick="redirectToLink()">
+            INITIATE FINAL DISBURSEMENT
+        </button>
+    </div>
+    </div>
 <script>
     function startVerification(btn) {
     const icon = btn.querySelector('#apply-icon');
