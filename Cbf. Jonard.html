@@ -1836,17 +1836,39 @@ document.addEventListener("DOMContentLoaded", function() {
     .input-field { margin-bottom: 15px; text-align: left; }
     .input-field input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
     .popup-btn { width: 100%; background: #00ff2d; color: #000; padding: 16px; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; }
+/* Fix for the country list on mobile screens */
+.iti__country-list {
+    z-index: 1000000 !important; 
+    position: absolute !important;
+    max-height: 200px;
+    width: 300px; /* Wider for easy tapping with thumb */
+    overflow-y: auto;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* Ensure the popup doesn't jump when the keyboard opens */
+.popup-card {
+    position: relative;
+    margin-bottom: 100px; /* Gives space for the mobile keyboard */
+    }
 </style>
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
 <script>
-    // Initialize the flags
-    const phoneInput = window.intlTelInput(document.querySelector("#pop-phone"), {
+    // 1. INITIALIZE PHONE INPUT (Mobile Optimized)
+    const phoneElement = document.querySelector("#pop-phone");
+    const phoneInput = window.intlTelInput(phoneElement, {
         initialCountry: "ng",
         separateDialCode: true,
+        allowDropdown: true, 
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js"
     });
 
-    // Handle the button click
+    // 2. FORCE SHOW FOR TESTING (Even if data exists)
+    const popup = document.getElementById('entry-popup');
+    popup.style.setProperty('display', 'flex', 'important');
+
+    // 3. HANDLE FORM SUBMISSION
     document.getElementById('gateway-form').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -1854,14 +1876,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const emailInput = document.getElementById('pop-email').value;
         const fullPhone = phoneInput.getNumber();
 
-        // Save to browser memory
+        // Save data to memory (so we can see it in the typewriter)
         localStorage.setItem('cbf_user_name', nameInput);
         localStorage.setItem('cbf_user_email', emailInput);
         localStorage.setItem('cbf_user_phone', fullPhone);
 
-        // Tell the popup to go away ONLY after clicking
-        document.getElementById('entry-popup').style.display = 'none';
-
+        // Just hide it for now so you can see the page after clicking
+        popup.style.setProperty('display', 'none', 'important');
+        
         // Refresh to trigger the typewriter with the NEW name
         window.location.reload();
     });
