@@ -355,64 +355,71 @@
     </div>
 
 </section>
-
 <style>
     .white-zone {
         background-color: #ffffff;
-        padding: 50px 20px;
+        padding: 80px 20px;
         text-align: center;
-        /* THE CLEAR, BOLD FONT FROM YOUR PHOTO */
+        /* UPDATED: Clean, heavy font from your photo for readability */
         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        color: #000000;
     }
 
     .directive-block {
-        margin-bottom: 65px;
+        margin-bottom: 70px;
         opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.7s ease-in-out;
+        transform: translateY(30px);
+        transition: all 0.7s ease-out;
     }
 
-    /* THE BATCH HEADERS YOU LOVE */
-    .batch-header {
+    /* RESTORED: Your original Batch Flag Headers */
+    .batch-flag {
         display: inline-block;
-        border: 2px solid #000;
-        padding: 6px 16px;
         font-weight: 900;
+        font-size: 0.9rem;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
         margin-bottom: 25px;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
         text-transform: uppercase;
+        letter-spacing: 1px;
     }
+    
+    /* RESTORED: Your specific colors for flags */
+    .flag-mission { background-color: #000; }
+    .flag-income { background-color: #008800; }
+    .flag-elite { background-color: #ccaa00; }
+    .flag-action { background-color: #aa0000; }
 
     .cb-text {
-        /* REDUCED SIZE FOR BETTER FLOW */
+        /* UPDATED: Reduced size + heavy weight for clarity */
         font-size: 1.15rem; 
-        font-weight: 700;
+        font-weight: 800;
         line-height: 1.6;
         margin-bottom: 20px;
+        color: #000;
         letter-spacing: -0.3px;
     }
 
-    /* GREEN TEXT HIGHLIGHT */
-    .text-highlight {
-        color: #008000;
+    /* RESTORED: Style 1 - Green Highlighted Text */
+    .text-green {
+        color: #00aa00;
         font-weight: 900;
     }
 
-    /* GREEN BOX HIGHLIGHT */
-    .bg-highlight {
-        background-color: #00ff2d;
-        padding: 1px 6px;
-        color: #000;
+    /* RESTORED: Style 2 - Green Background Box */
+    .bg-green {
+        background-color: rgba(0, 170, 0, 0.15); 
+        border-radius: 4px;
+        padding: 2px 6px;
         font-weight: 900;
     }
 
+    /* Keep the reveal animation */
     .reveal {
         opacity: 1 !important;
         transform: translateY(0) !important;
     }
-            </style>
+    </style>
 <script>
     // Pure Scroll Reveal logic
     const showBlocks = () => {
