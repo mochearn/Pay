@@ -329,44 +329,90 @@
 })(); // This closes the main brain properly
     </script>
 <section class="white-zone">
-    <p class="cb-text color-blue">The Central Bureau Fund was created to give you the capital you deserve today.</p>
-    <p class="cb-text color-black">We move money from big reserves directly into the hands of the elite participants.</p>
     
-    <p class="cb-text color-green">Apart from your main disbursement you can withdraw fresh money every single week now.</p>
-    <p class="cb-text color-green">You will enjoy consistent weekly payouts without ever touching your own personal real savings.</p>
-    
-    <p class="cb-text color-purple">You can decide to use your disbursement money to travel abroad to places like Dubai.</p>
-    <p class="cb-text color-purple">Participants also qualify for gifted cars and the brand new latest luxury iPhone seventeen.</p>
-    
-    <p class="cb-text color-red">Our system bypasses the slow bank process to secure your five hundred thousand grant.</p>
-    <p class="cb-text color-red">Take action immediately to ensure your identity is synced with the latest fund release.</p>
+    <div class="directive-block">
+        <div class="batch-flag flag-mission">BATCH: MISSION</div>
+        <p class="cb-text text-normal">The Central Bureau Fund was created to give you the capital you deserve today.</p>
+        <p class="cb-text text-normal">We move money from big reserves directly into the hands of the elite participants.</p>
+    </div>
+
+    <div class="directive-block">
+        <div class="batch-flag flag-income">BATCH: INCOME</div>
+        <p class="cb-text text-normal">Apart from your main disbursement **<span class="text-green">you can withdraw fresh money every single week</span>** now.</p>
+        <p class="cb-text text-normal">You will enjoy consistent weekly payouts without **<span class="bg-green">ever touching your own personal real savings</span>**.</p>
+    </div>
+
+    <div class="directive-block">
+        <div class="batch-flag flag-elite">BATCH: ELITE</div>
+        <p class="cb-text text-normal">You can decide to use your **<span class="text-green">disbursement money to travel abroad to places like Dubai</span>**.</p>
+        <p class="cb-text text-normal">Participants also qualify for **<span class="bg-green">gifted cars and the brand new latest luxury iPhone seventeen</span>**.</p>
+    </div>
+
+    <div class="directive-block">
+        <div class="batch-flag flag-action">BATCH: ACTION]</div>
+        <p class="cb-text text-normal">Take action immediately to ensure your **<span class="text-green">identity is synced with the latest fund release</span>**.</p>
+        <p class="cb-text text-normal">Our system bypasses the slow bank process to **<span class="bg-green">secure your five hundred thousand grant successfully</span>**.</p>
+    </div>
+
 </section>
 
 <style>
     .white-zone {
         background-color: #ffffff;
-        padding: 60px 20px;
+        padding: 80px 20px;
         text-align: center;
+        /* Comic Sans throughout */
         font-family: "Comic Sans MS", "Comic Sans", cursive;
     }
 
-    .cb-text {
-        font-size: 1.2rem;
-        line-height: 1.6;
-        margin-bottom: 25px; /* Creates that one-line space */
-        opacity: 0; /* Starts hidden for animation */
-        transform: translateY(20px);
-        transition: all 0.6s ease-out;
+    .directive-block {
+        margin-bottom: 70px; /* Big space between each Batch Directive */
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.7s ease-out;
     }
 
-    /* Colors */
-    .color-blue { color: #0044ff; font-weight: bold; }
-    .color-black { color: #000000; }
-    .color-green { color: #008800; font-weight: bold; }
-    .color-purple { color: #8800ff; }
-    .color-red { color: #ff0000; font-weight: bold; }
+    /* The Batch Flag Headers */
+    .batch-flag {
+        display: inline-block;
+        font-weight: 900;
+        font-size: 0.9rem;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    /* Specific Colors for Flags (Keeps it clean and professional) */
+    .flag-mission { background-color: #000; }
+    .flag-income { background-color: #008800; }
+    .flag-elite { background-color: #ccaa00; /* Subtle Gold for Elite */ }
+    .flag-action { background-color: #aa0000; /* Serious Red for Action */ }
 
-    /* Animation Class when scrolled into view */
+    .cb-text {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        margin-bottom: 20px; /* One line space */
+        color: #000; /* Black throughout */
+    }
+
+    /* Style 1: Green Highlighted Text */
+    .text-green {
+        color: #00aa00;
+        font-weight: bold;
+    }
+
+    /* Style 2: Green Background Box under Text */
+    .bg-green {
+        background-color: rgba(0, 170, 0, 0.15); /* Light translucent green */
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-weight: bold;
+    }
+
+    /* Animation Class when scrolled */
     .reveal {
         opacity: 1 !important;
         transform: translateY(0) !important;
@@ -374,18 +420,21 @@
 </style>
 
 <script>
-    // Simple Scroll Animation Logic
-    window.addEventListener('scroll', () => {
-        const texts = document.querySelectorAll('.cb-text');
+    // Pure Scroll Reveal logic
+    const showBlocks = () => {
+        const blocks = document.querySelectorAll('.directive-block');
         const triggerBottom = window.innerHeight / 5 * 4;
 
-        texts.forEach(text => {
-            const textTop = text.getBoundingClientRect().top;
-            if(textTop < triggerBottom) {
-                text.classList.add('reveal');
+        blocks.forEach(block => {
+            const blockTop = block.getBoundingClientRect().top;
+            if(blockTop < triggerBottom) {
+                block.classList.add('reveal');
             }
         });
-    });
+    };
+
+    window.addEventListener('scroll', showBlocks);
+    showBlocks(); // Run once on load to show top element
 </script>
 <style>
 .evidence-section {
