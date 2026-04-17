@@ -235,11 +235,12 @@
     
     <script>
 (function() {
-    // This fetches the name from the gateway data
-    let userName = localStorage.getItem('cbf_user_name') || "SOLDIER"; 
+    // 1. Get name from memory, or use "SOLDIER"
+    let userVal = localStorage.getItem('cbf_user_name') || "SOLDIER"; 
 
+    // 2. The clean list of sentences
     const sentences = [
-        `Welcome, ${userName}. Your Migration Begins...`,
+        `Welcome, ${userVal}. Your Migration Begins...`,
         "<span style='color: #dd9b01;'>Get Access to </span><span style='color: #00ff2d;'>₦500,000 — ₦3.2M</span><span style='color: #dd9b01;'> Disbursement</span>",
         "Secure Your Grant Slot Now.",
         "❌No experience or skill required.",
@@ -247,8 +248,8 @@
         "Be part of the millions requiring elite action.",
         "Join the Central Bureau Fund."
     ];
-    
-    // KEEP your existing typing logic below this (the intervals, etc.)
+
+    // ... (Paste the rest of your typing animation code below this) ...
 })();
 
     let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
@@ -1797,9 +1798,7 @@ document.addEventListener("DOMContentLoaded", function() {
         text-transform: uppercase;
     }
     </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
-
-<div id="entry-popup" class="popup-overlay">
+<div id="entry-popup" class="popup-overlay" style="display: flex !important;">
     <div class="popup-card">
         <div class="popup-header">
             <h3>Before you proceed... 🚀</h3>
@@ -1822,63 +1821,50 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <style>
-.popup-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); 
-    display: none; /* Keep it hidden until JS is ready */
-    align-items: center; justify-content: center;
-    z-index: 99999; backdrop-filter: blur(10px);
-}
+    .popup-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.98); /* Solid black to focus */
+        display: flex; align-items: center; justify-content: center;
+        z-index: 999999; /* Max priority */
+        backdrop-filter: blur(15px);
+    }
     .popup-card {
         background: #ffffff; padding: 35px 25px; border-radius: 20px;
         width: 90%; max-width: 380px; text-align: center; border: 2px solid #00ff2d;
     }
-    .popup-header h3 { font-weight: 900; margin-bottom: 5px; color: #000; }
-    .popup-header p { font-size: 13px; color: #666; margin-bottom: 20px; }
-    .input-field { margin-bottom: 15px; width: 100%; text-align: left; }
-    .input-field input {
-        width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd;
-        font-family: 'Poppins', sans-serif; font-size: 14px; outline: none;
-    }
-    .iti { width: 100%; }
-    .popup-btn {
-        width: 100%; background: #00ff2d; color: #000; padding: 16px;
-        border: none; border-radius: 10px; font-weight: 900; font-size: 14px;
-        cursor: pointer; margin-top: 10px;
-    }
+    /* Rest of the styling stays same as before */
+    .input-field { margin-bottom: 15px; text-align: left; }
+    .input-field input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
+    .popup-btn { width: 100%; background: #00ff2d; color: #000; padding: 16px; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; }
 </style>
-    <script>
-// WAIT FOR PAGE TO LOAD COMPLETELY
-window.addEventListener('DOMContentLoaded', () => {
-    const popup = document.getElementById('entry-popup');
-    const gatewayForm = document.getElementById('gateway-form');
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+<script>
+    // Initialize the flags
     const phoneInput = window.intlTelInput(document.querySelector("#pop-phone"), {
         initialCountry: "ng",
         separateDialCode: true,
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js"
     });
 
-    // Check if name is already in memory
-    if (localStorage.getItem('cbf_user_name')) {
-        popup.style.display = 'none';
-    } else {
-        popup.style.display = 'flex'; // Force show if memory is empty
-    }
-
-    gatewayForm.addEventListener('submit', function(e) {
+    // Handle the button click
+    document.getElementById('gateway-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        const name = document.getElementById('pop-name').value;
-        const email = document.getElementById('pop-email').value;
-        const phone = phoneInput.getNumber();
+        
+        const nameInput = document.getElementById('pop-name').value;
+        const emailInput = document.getElementById('pop-email').value;
+        const fullPhone = phoneInput.getNumber();
 
-        localStorage.setItem('cbf_user_name', name);
-        localStorage.setItem('cbf_user_email', email);
-        localStorage.setItem('cbf_user_phone', phone);
+        // Save to browser memory
+        localStorage.setItem('cbf_user_name', nameInput);
+        localStorage.setItem('cbf_user_email', emailInput);
+        localStorage.setItem('cbf_user_phone', fullPhone);
 
-        // Refresh so the typewriter sees the name immediately
-        window.location.reload(); 
+        // Tell the popup to go away ONLY after clicking
+        document.getElementById('entry-popup').style.display = 'none';
+
+        // Refresh to trigger the typewriter with the NEW name
+        window.location.reload();
     });
-});
-         </script>
+</script>
 </body>
     </html>
