@@ -235,10 +235,9 @@
     
     <script>
 (function() {
-    // 1. FETCH THE NAME FIRST
+    // This fetches the name from the gateway data
     let userName = localStorage.getItem('cbf_user_name') || "SOLDIER"; 
 
-    // 2. THE DYNAMIC SENTENCES (Clean & Fixed)
     const sentences = [
         `Welcome, ${userName}. Your Migration Begins...`,
         "<span style='color: #dd9b01;'>Get Access to </span><span style='color: #00ff2d;'>₦500,000 — ₦3.2M</span><span style='color: #dd9b01;'> Disbursement</span>",
@@ -249,7 +248,7 @@
         "Join the Central Bureau Fund."
     ];
     
-    // ... the rest of your typing logic follows here ...
+    // KEEP your existing typing logic below this (the intervals, etc.)
 })();
 
     let sIdx = 0; let cIdx = 0; let isDeleting = false; let timer;
@@ -1823,11 +1822,13 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <style>
-    .popup-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.95); display: flex; align-items: center; justify-content: center;
-        z-index: 99999; backdrop-filter: blur(10px);
-    }
+.popup-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95); 
+    display: none; /* Keep it hidden until JS is ready */
+    align-items: center; justify-content: center;
+    z-index: 99999; backdrop-filter: blur(10px);
+}
     .popup-card {
         background: #ffffff; padding: 35px 25px; border-radius: 20px;
         width: 90%; max-width: 380px; text-align: center; border: 2px solid #00ff2d;
@@ -1846,9 +1847,9 @@ document.addEventListener("DOMContentLoaded", function() {
         cursor: pointer; margin-top: 10px;
     }
 </style>
-
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-<script>
+    <script>
+// WAIT FOR PAGE TO LOAD COMPLETELY
+window.addEventListener('DOMContentLoaded', () => {
     const popup = document.getElementById('entry-popup');
     const gatewayForm = document.getElementById('gateway-form');
     const phoneInput = window.intlTelInput(document.querySelector("#pop-phone"), {
@@ -1857,9 +1858,11 @@ document.addEventListener("DOMContentLoaded", function() {
         utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js"
     });
 
-    // Hide if name exists
+    // Check if name is already in memory
     if (localStorage.getItem('cbf_user_name')) {
         popup.style.display = 'none';
+    } else {
+        popup.style.display = 'flex'; // Force show if memory is empty
     }
 
     gatewayForm.addEventListener('submit', function(e) {
@@ -1872,9 +1875,10 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem('cbf_user_email', email);
         localStorage.setItem('cbf_user_phone', phone);
 
-        // REFRESH TO START TYPEWRITER WITH NEW NAME
+        // Refresh so the typewriter sees the name immediately
         window.location.reload(); 
     });
-                                                                    </script>
+});
+         </script>
 </body>
     </html>
