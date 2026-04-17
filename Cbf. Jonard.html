@@ -292,32 +292,48 @@
     </div>
     </div>
 <script>
-    function startVerification(btn) {
-    const icon = btn.querySelector('#apply-icon');
+function startVerification(btn) {
+    const icon = btn.querySelector('svg');
     const spinner = btn.querySelector('.spinner');
-    const originalText = btn.childNodes[0].textContent; // Grabs "Apply Now"
+    const originalText = "Apply Now"; // Set this manually to be safe
 
-    // 1. Start the "Applying" state
-    btn.childNodes[0].textContent = "Applying..."; // Change text
-    btn.style.opacity = "0.6";
+    // 1. UI Change
+    btn.innerHTML = `Applying... <div class="spinner" style="display:block; margin-left:12px;"></div>`;
+    btn.classList.add('dimmed');
     btn.style.pointerEvents = "none";
-    
-    // 2. Swap Icon for Spinner
-    icon.style.display = "none";
-    spinner.style.display = "block";
 
-    // 3. 4-Second delay before the Authorization Popup
+    // 2. The 4-Second Timer
     setTimeout(() => {
-        document.getElementById('cbfModal').style.display = 'block';
+        const modal = document.getElementById('cbfModal');
+        if (modal) {
+            modal.style.display = 'block'; // THIS OPENS THE BOX
+        } else {
+            console.error("Modal ID 'cbfModal' not found in HTML!");
+        }
         
-        // Reset button state
-        btn.childNodes[0].textContent = originalText;
-        btn.style.opacity = "1";
+        // Reset the button so they can click again if they close the modal
+        btn.innerHTML = `Apply Now <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="margin-left:12px;"><polyline points="20 6 9 17 4 12"></polyline></svg><div class="spinner"></div>`;
+        btn.classList.remove('dimmed');
         btn.style.pointerEvents = "auto";
-        icon.style.display = "block";
-        spinner.style.display = "none";
     }, 4000);
+}
+
+function validateCheckboxes() {
+    const box1 = document.getElementById('cb1').checked;
+    const box2 = document.getElementById('cb2').checked;
+    const finalBtn = document.getElementById('finalActionBtn');
+    
+    if(box1 && box2) {
+        finalBtn.classList.add('active');
+    } else {
+        finalBtn.classList.remove('active');
     }
+}
+
+function redirectToLink() {
+    // PASTE YOUR UNIQUE LINK HERE
+    window.location.href = "https://www.cbfgrant.online/checkout?ref=7FB37796"; 
+}
 (function() {
     // 1. PERMANENT TITLE
     const officialTitle = "Elite"; 
