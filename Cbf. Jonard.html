@@ -195,30 +195,7 @@
             </div>
         </div>
     </div>
-    
-    <div id="cbfModal" class="cbf-modal">
-    <div class="modal-content">
-        <div class="modal-header">NODE CONNECTED: REFERRAL VERIFIED</div>
-        <div class="modal-body">
-            This portal has successfully synced your application with the <b>Authorized Officer’s Unique ID</b>. Proceed to the secure checkout ledger.
-        </div>
-        
-        <div class="checkbox-group">
-            <div class="checkbox-item">
-                <input type="checkbox" id="cb1" onchange="validateCheckboxes()">
-                <label for="cb1">I acknowledge this secure referral node handshake.</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="cb2" onchange="validateCheckboxes()">
-                <label for="cb2">I accept all migration terms and compliance risks.</label>
-            </div>
-        </div>
 
-        <button id="finalActionBtn" class="final-btn" onclick="redirectToLink()">
-            INITIATE FINAL DISBURSEMENT
-        </button>
-    </div>
-    </div>
 <script>
 (function() {
     // 1. PERMANENT TITLE
@@ -314,8 +291,7 @@
 
 })(); // This closes the main brain properly
     </script>
-    <style>
-/* THE BUTTON UPGRADE */
+<style>
 .apply-btn-v7 {
     position: absolute !important;
     bottom: 15% !important; 
@@ -323,17 +299,20 @@
     z-index: 1500 !important;
     transform: translateX(-50%);
     display: flex;
+    flex-direction: row; 
     align-items: center;
     justify-content: center;
-    padding: 12px 28px;
-    border: 3.5px solid #00ff2d; 
-    border-radius: 12px !important; /* 12px Radius */
-    background: rgba(0, 0, 0, 0.85); 
+    gap: 12px; 
+    padding: 14px 32px;
+    border: 4px solid #00ff2d; 
+    border-radius: 12px !important; /* Your 12px requirement */
+    background: #0a0a0a; 
     color: #00ff2d; 
     font-family: 'Segoe UI', Roboto, sans-serif !important;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 900;
     text-transform: uppercase;
+    white-space: nowrap; 
     cursor: pointer;
     animation: sticky-pulse 2s infinite !important;
     transition: all 0.3s ease;
@@ -347,105 +326,43 @@
     border-radius: 50%;
     border-top-color: #00ff2d; 
     animation: spin 1s linear infinite;
-    display: none; /* Hidden until clicked */
-    margin-left: 12px;
+    display: none; 
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* THE POPUP (MODAL) */
-.cbf-modal {
-    display: none; 
-    position: fixed;
-    z-index: 99999;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(8px);
-}
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 30px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 12px;
-    text-align: center;
-    color: #000;
-    border: 3px solid #00ff2d;
-}
-.final-btn {
-    width: 100%;
-    padding: 15px;
-    background: #555;
-    color: #fff;
-    border-radius: 12px;
-    font-weight: 900;
-    border: none;
-    margin-top: 20px;
-    cursor: not-allowed;
-}
-.final-btn.active {
-    background: #000;
-    color: #00ff2d;
-    cursor: pointer;
+/* DIMMED STATE WHILE SYNCING */
+.apply-btn-v7.syncing {
+    opacity: 0.7;
+    cursor: wait;
+    animation: none !important;
 }
 </style>
 
-<button class="apply-btn-v7" onclick="startVerification(this)">
+<button class="apply-btn-v7" onclick="handleApply(this)">
     Apply Now
-    <svg id="apply-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" style="margin-left:12px;">
+    <svg id="apply-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
     <div class="spinner"></div>
 </button>
 
-<div id="cbfModal" class="cbf-modal">
-    <div class="modal-content">
-        <h2 style="font-weight:900; color:#00aa00;">NODE CONNECTED</h2>
-        <p style="font-size:14px;">Verification successful. Your application is synced to a Verified Officer.</p>
-        <div style="text-align:left; font-size:13px; font-weight:700;">
-            <label><input type="checkbox" class="verify-box" onchange="validateCheckboxes()"> I acknowledge this referral handshake.</label><br><br>
-            <label><input type="checkbox" class="verify-box" onchange="validateCheckboxes()"> I accept all institutional risks.</label>
-        </div>
-        <button id="finalActionBtn" class="final-btn" onclick="redirectToLink()">INITIATE DISBURSEMENT</button>
-    </div>
-</div>
-
 <script>
-function startVerification(btn) {
-    const icon = btn.querySelector('svg');
+function handleApply(btn) {
+    const icon = btn.querySelector('#apply-icon');
     const spinner = btn.querySelector('.spinner');
     
-    // UI Change
-    btn.firstChild.textContent = "Applying... ";
+    // 1. UI Change - Start "Applying" State
+    btn.childNodes[0].textContent = "Applying... ";
+    btn.classList.add('syncing');
     icon.style.display = "none";
     spinner.style.display = "block";
     btn.style.pointerEvents = "none";
 
-    // 4 Second Wait
+    // 2. The 4-Second Wait then Direct Redirect
     setTimeout(() => {
-        document.getElementById('cbfModal').style.display = 'block';
-        
-        // Reset Button
-        btn.firstChild.textContent = "Apply Now ";
-        icon.style.display = "block";
-        spinner.style.display = "none";
-        btn.style.pointerEvents = "auto";
+        // Replace this with your unique affiliate checkout link
+        window.location.href = "https://www.cbfgrant.online/checkout?ref=7FB37796";
     }, 4000);
-}
-
-function validateCheckboxes() {
-    const boxes = document.querySelectorAll('.verify-box');
-    const finalBtn = document.getElementById('finalActionBtn');
-    if(boxes[0].checked && boxes[1].checked) {
-        finalBtn.classList.add('active');
-    } else {
-        finalBtn.classList.remove('active');
-    }
-}
-
-function redirectToLink() {
-    window.location.href = "https://cbfgrant.uwu.ai/?ref=7FB37796";
 }
     </script>
 <section class="white-zone">
@@ -458,7 +375,7 @@ function redirectToLink() {
 
     <div class="directive-block">
         <div class="batch-flag flag-income">BATCH: INCOME</div>
-        <p class="cb-text text-normal">Apart from your main disbursement **<span class="text-green">you can withdraw fresh money every single week</span>** now.</p>
+        <p class="cb-text text-normal">Apart from your main disbursement **<span class="text-green">you can withdraw fresh money every single </span>week** </p>
         <p class="cb-text text-normal">You will enjoy consistent weekly payouts without **<span class="bg-green">ever touching your own personal real savings</span>**.</p>
     </div>
 
@@ -702,19 +619,19 @@ function redirectToLink() {
 
         <div class="proof-grid-card card-1">
             <img src="https://i.postimg.cc/rspzsmjD/FB-IMG-17760824043291659.jpg" alt="User" class="proof-grid-img">
-            <div class="proof-grid-name">ADEBAYOR STEPHEN</div>
+            <div class="proof-grid-name">Adebayo Stephen</div>
             <div class="proof-grid-meta">LAGOS / STATE CORDINATOR</div>
             <div class="proof-grid-quote-wrap">
                 <span class="quote-mark-large">“</span>
-                <span class="proof-grid-quote-text">Migration was faster than I expected. Secure and direct. This is real!</span>
+                <span class="proof-grid-quote-text">I never know this was real until it drop in my account. Secure and direct. This is real!</span>
             </div>
             <div class="proof-grid-earnings">₦1,450,000 <span class="proof-grid-earnings-label">Verified Disbursement</span></div>
         </div>
 
         <div class="proof-grid-card card-2">
-            <img src="https://image2url.com/r2/bucket1/images/1775953429674-ff83a08e-531d-4b2b-87ba-599f09a27160.png" alt="User" class="proof-grid-img">
-            <div class="proof-grid-name">JONARD BETHUEL</div>
-            <div class="proof-grid-meta">OSUN / STATE COORDINATOR</div>
+            <img src="https://i.postimg.cc/ryDtHTvc/FB-IMG-17764664054614992.jpg" alt="User" class="proof-grid-img">
+            <div class="proof-grid-name">Uchechi fiath</div>
+            <div class="proof-grid-meta">ENUGU / STATE COORDINATOR</div>
             <div class="proof-grid-quote-wrap">
                 <span class="quote-mark-large">“</span>
                 <span class="proof-grid-quote-text">The support guiding me was elite. A clean system that actually pays.</span>
@@ -725,7 +642,7 @@ function redirectToLink() {
         <div class="proof-grid-card card-3">
             <img src="https://i.postimg.cc/jd4KmK42/FB-IMG-17760827683555340.jpg" alt="User" class="proof-grid-img">
             <div class="proof-grid-name">CHIDI NNEMSOMA</div>
-            <div class="proof-grid-meta">PH / ELITE MEMBER</div>
+            <div class="proof-grid-meta">ABUJA / BUNDLE HEAD</div>
             <div class="proof-grid-quote-wrap">
                 <span class="quote-mark-large">“</span>
                 <span class="proof-grid-quote-text">They delivered within 48 hours. This system has transformed my month.</span>
@@ -736,7 +653,7 @@ function redirectToLink() {
         <div class="proof-grid-card card-4">
             <img src="https://i.postimg.cc/zGvM71tJ/FB-IMG-17760828449315476.jpg" alt="User" class="proof-grid-img">
             <div class="proof-grid-name">GRACE REGINA</div>
-            <div class="proof-grid-meta">ABUJA / BUNDLE HEAD</div>
+            <div class="proof-grid-meta">ABUJA / L.G CORDINATOR</div>
             <div class="proof-grid-quote-wrap">
                 <span class="quote-mark-large">“</span>
                 <span class="proof-grid-quote-text">I was skeptical but the disbursement hit exactly as promised.</span>
@@ -1082,7 +999,9 @@ function redirectToLink() {
                     <li>Get ₦20K – ₦50K cash</li>
                     <li>Or CBF full kit</li>
                 </ul>
-                <button class="select-btn" id="btn-starter">Select Starter</button>
+    <button class="select-btn" id="btn-starter" onclick="location.href='https://www.cbfgrant.online/checkout?ref=7FB37796'">
+    Select Starter
+    </button>
             </div>
         </div>
 
